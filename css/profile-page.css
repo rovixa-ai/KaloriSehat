@@ -1,14 +1,56 @@
 
-/* ==============================
-   HALAMAN PROFIL
-============================== */
+/* =========================================
+   KALORISEHATKU - HALAMAN PROFIL
+   Modern Fitness | Light & Dark Mode
+========================================= */
+
+/* THEME VARIABLES */
+
+:root {
+  --profile-bg: #ffffff;
+  --profile-bg-soft: #f3f8f5;
+  --profile-bg-highlight: #e5f4eb;
+  --profile-border: #e3ebe5;
+  --profile-text: #263b30;
+  --profile-secondary: #718078;
+  --profile-muted: #929e96;
+  --profile-primary: #16865b;
+  --profile-primary-soft: #e7f5ed;
+  --profile-danger: #dc5b62;
+  --profile-warning-bg: #fff7e8;
+  --profile-warning-text: #a15c00;
+  --profile-shadow: 0 4px 14px rgba(30, 75, 48, 0.05);
+  --profile-modal-overlay: rgba(15, 23, 42, 0.58);
+}
+
+html[data-theme="dark"] {
+  --profile-bg: #19251f;
+  --profile-bg-soft: #202e26;
+  --profile-bg-highlight: #263f31;
+  --profile-border: #34463b;
+  --profile-text: #e5eee8;
+  --profile-secondary: #b0beb5;
+  --profile-muted: #899990;
+  --profile-primary: #55c991;
+  --profile-primary-soft: #263e31;
+  --profile-danger: #f0787e;
+  --profile-warning-bg: #42351f;
+  --profile-warning-text: #f3c779;
+  --profile-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  --profile-modal-overlay: rgba(0, 0, 0, 0.72);
+}
+
+/* =========================================
+   IDENTITAS PROFIL
+========================================= */
 
 .profile-identity {
   display: flex;
   align-items: center;
   gap: 14px;
-  background: #eaf6ee;
-  border-radius: 14px;
+  background: var(--profile-bg-highlight);
+  border: 1px solid var(--profile-border);
+  border-radius: 16px;
   padding: 18px;
   margin: 18px 0;
 }
@@ -21,35 +63,40 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: #16865b;
-  color: white;
+  background: var(--profile-primary);
+  color: #ffffff;
   font-size: 22px;
   font-weight: 700;
 }
 
 .profile-identity h3 {
   margin: 0 0 5px;
-  color: #245b3c;
+  color: var(--profile-text);
 }
 
 .profile-identity p {
   margin: 0;
-  color: #64816e;
+  color: var(--profile-secondary);
   font-size: 13px;
 }
 
+/* =========================================
+   FORMULIR PROFIL
+========================================= */
+
 .profile-section {
-  background: #ffffff;
-  border: 1px solid #e8eee9;
-  border-radius: 13px;
+  background: var(--profile-bg);
+  border: 1px solid var(--profile-border);
+  border-radius: 15px;
   padding: 16px;
   margin-bottom: 14px;
+  box-shadow: var(--profile-shadow);
 }
 
 .profile-section h3 {
   margin: 0 0 16px;
   font-size: 15px;
-  color: #354b3d;
+  color: var(--profile-text);
 }
 
 .profile-form-grid {
@@ -68,7 +115,7 @@
 .profile-field label {
   font-size: 12px;
   font-weight: 600;
-  color: #64746a;
+  color: var(--profile-secondary);
 }
 
 .profile-field input,
@@ -77,95 +124,101 @@
   min-width: 0;
   box-sizing: border-box;
   padding: 11px;
-  border: 1px solid #dce6df;
-  border-radius: 8px;
-  background: #ffffff;
+  border: 1px solid var(--profile-border);
+  border-radius: 10px;
+  background: var(--profile-bg);
   font-family: inherit;
   font-size: 13px;
-  color: #354b3d;
+  color: var(--profile-text);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-field input:focus,
+.profile-field select:focus {
+  border-color: var(--profile-primary);
+  box-shadow: 0 0 0 3px rgba(22, 134, 91, 0.10);
+}
+
+.profile-field input::placeholder {
+  color: var(--profile-muted);
 }
 
 .profile-input-unit {
   display: flex;
   align-items: center;
-  border: 1px solid #dce6df;
-  border-radius: 8px;
+  border: 1px solid var(--profile-border);
+  border-radius: 10px;
   overflow: hidden;
+  background: var(--profile-bg);
+}
+
+.profile-input-unit:focus-within {
+  border-color: var(--profile-primary);
+  box-shadow: 0 0 0 3px rgba(22, 134, 91, 0.10);
 }
 
 .profile-input-unit input {
   border: none;
   border-radius: 0;
   min-width: 0;
+  box-shadow: none;
+}
+
+.profile-input-unit input:focus {
+  box-shadow: none;
 }
 
 .profile-input-unit span {
   padding: 0 10px;
-  color: #849188;
+  color: var(--profile-muted);
   font-size: 12px;
   white-space: nowrap;
 }
 
 .profile-note {
-  color: #929a95;
+  color: var(--profile-muted);
   font-size: 11px;
   line-height: 1.5;
   margin: 12px 0 0;
 }
 
-.profile-save-button {
-  width: 100%;
-  padding: 13px;
-  margin-bottom: 20px;
-  border: none;
-  border-radius: 9px;
-  background: #16865b;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 600;
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-@media (max-width: 420px) {
-  .profile-form-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-/* =================================
+/* =========================================
    SIMULASI TUJUAN BERAT BADAN
-================================= */
+========================================= */
 
 .goal-simulation-card {
-  background: #ffffff;
-  border: 1px solid #e8edf2;
+  background: var(--profile-bg);
+  border: 1px solid var(--profile-border);
   border-radius: 16px;
   padding: 20px;
   margin-top: 18px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--profile-shadow);
 }
 
 .goal-simulation-card h3 {
   font-size: 17px;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--profile-text);
   margin: 0 0 12px;
 }
 
 .goal-simulation-card h4 {
   font-size: 14px;
   font-weight: 700;
-  color: #374151;
+  color: var(--profile-text);
   margin: 18px 0 12px;
 }
 
 #goalSimulationMessage {
   font-size: 13px;
-  line-height: 1.5;
-  color: #6b7280;
+  line-height: 1.6;
+  color: var(--profile-secondary);
   margin: 0;
+}
+
+.goal-simulation-results {
+  min-width: 0;
 }
 
 .goal-result-grid {
@@ -176,7 +229,8 @@
 }
 
 .goal-result-grid > div {
-  background: #f7f9fc;
+  background: var(--profile-bg-soft);
+  border: 1px solid var(--profile-border);
   border-radius: 12px;
   padding: 13px;
   min-width: 0;
@@ -187,7 +241,7 @@
 .goal-calorie-target span {
   display: block;
   font-size: 12px;
-  color: #6b7280;
+  color: var(--profile-secondary);
   margin-bottom: 6px;
 }
 
@@ -195,14 +249,14 @@
 .goal-result-row strong {
   display: block;
   font-size: 15px;
-  color: #1f2937;
+  color: var(--profile-text);
   font-weight: 700;
   overflow-wrap: anywhere;
 }
 
 .goal-result-divider {
   height: 1px;
-  background: #edf0f3;
+  background: var(--profile-border);
   margin: 18px 0;
 }
 
@@ -222,9 +276,11 @@
   text-align: right;
 }
 
+/* TARGET KALORI */
+
 .goal-calorie-target {
-  background: #eef7ff;
-  border: 1px solid #d9ebff;
+  background: var(--profile-bg-highlight);
+  border: 1px solid var(--profile-border);
   border-radius: 12px;
   padding: 15px;
   margin-top: 18px;
@@ -232,25 +288,28 @@
 
 .goal-calorie-target strong {
   display: block;
-  color: #1672c4;
+  color: var(--profile-primary);
   font-size: 22px;
   font-weight: 800;
 }
+
+/* STATUS DAN PERINGATAN */
 
 .goal-status {
   display: inline-block;
   margin-top: 15px;
   padding: 7px 12px;
   border-radius: 20px;
-  background: #e8f5ed;
-  color: #237a46;
+  background: var(--profile-primary-soft);
+  color: var(--profile-primary);
   font-size: 12px;
   font-weight: 700;
 }
 
 .goal-warning {
-  color: #a15c00;
-  background: #fff7e8;
+  color: var(--profile-warning-text);
+  background: var(--profile-warning-bg);
+  border: 1px solid var(--profile-border);
   border-radius: 10px;
   padding: 11px;
   font-size: 12px;
@@ -260,6 +319,207 @@
 
 .goal-warning:empty {
   display: none;
+}
+
+/* =========================================
+   INFORMASI BMR & TDEE
+========================================= */
+
+.goal-info-action {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.goal-info-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 0 5px 8px;
+  border: none;
+  background: transparent;
+  color: var(--profile-secondary);
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.goal-info-button:hover {
+  color: var(--profile-primary);
+}
+
+.goal-info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 19px;
+  height: 19px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================================
+   MODAL INFORMASI BMR & TDEE
+========================================= */
+
+.goal-info-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: var(--profile-modal-overlay);
+  backdrop-filter: blur(3px);
+}
+
+.goal-info-modal[hidden] {
+  display: none !important;
+}
+
+.goal-info-content {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: var(--profile-bg);
+  border: 1px solid var(--profile-border);
+  border-radius: 18px;
+  padding: 24px 20px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+}
+
+.goal-info-content h3 {
+  margin: 0 30px 20px 0;
+  font-size: 19px;
+  color: var(--profile-text);
+}
+
+.goal-info-content h4 {
+  margin: 18px 0 8px;
+  font-size: 14px;
+  color: var(--profile-primary);
+}
+
+.goal-info-content p,
+.goal-info-content li {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--profile-secondary);
+}
+
+.goal-info-content ul {
+  padding-left: 20px;
+}
+
+.goal-info-close {
+  position: absolute;
+  top: 13px;
+  right: 15px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: var(--profile-bg-soft);
+  color: var(--profile-secondary);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.goal-info-close:hover {
+  background: var(--profile-border);
+}
+
+.goal-info-example {
+  margin-top: 16px;
+  padding: 14px;
+  background: var(--profile-bg-highlight);
+  border: 1px solid var(--profile-border);
+  border-radius: 12px;
+}
+
+.goal-info-example strong {
+  font-size: 13px;
+  color: var(--profile-primary);
+}
+
+.goal-info-example p {
+  margin: 7px 0 0;
+}
+
+.goal-info-note {
+  padding-top: 12px;
+  border-top: 1px solid var(--profile-border);
+  font-size: 12px !important;
+}
+
+/* =========================================
+   TOMBOL AKSI PROFIL
+========================================= */
+
+.profile-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.profile-actions .profile-save-button {
+  margin-top: 0;
+}
+
+.profile-save-button {
+  width: 100%;
+  padding: 13px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 10px;
+  background: var(--profile-primary);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.profile-save-button:hover {
+  opacity: 0.9;
+}
+
+.profile-save-button:active {
+  transform: scale(0.99);
+}
+
+.profile-reset-button {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid var(--profile-danger);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--profile-danger);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.profile-reset-button:hover {
+  background: var(--profile-bg-soft);
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 420px) {
+  .profile-form-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 380px) {
@@ -278,160 +538,8 @@
   .goal-result-grid strong {
     font-size: 14px;
   }
-}
 
-
-
-/* =================================
-   TOMBOL INFORMASI BMR & TDEE
-================================= */
-
-.goal-info-action {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 16px;
-}
-
-.goal-info-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 5px 0 5px 8px;
-  border: none;
-  background: transparent;
-  color: #64748b;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.goal-info-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 19px;
-  height: 19px;
-  border: 1.5px solid #64748b;
-  border-radius: 50%;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-/* =================================
-   MODAL INFORMASI BMR & TDEE
-================================= */
-
-.goal-info-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-  background: rgba(15, 23, 42, 0.55);
-}
-
-.goal-info-modal[hidden] {
-  display: none;
-}
-
-.goal-info-content {
-  position: relative;
-  width: 100%;
-  max-width: 480px;
-  max-height: 85vh;
-  overflow-y: auto;
-  background: #ffffff;
-  border-radius: 18px;
-  padding: 24px 20px;
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
-}
-
-.goal-info-content h3 {
-  margin: 0 30px 20px 0;
-  font-size: 19px;
-  color: #1f2937;
-}
-
-.goal-info-content h4 {
-  margin: 18px 0 8px;
-  font-size: 14px;
-  color: #2563a6;
-}
-
-.goal-info-content p,
-.goal-info-content li {
-  font-size: 13px;
-  line-height: 1.65;
-  color: #4b5563;
-}
-
-.goal-info-content ul {
-  padding-left: 20px;
-}
-
-.goal-info-close {
-  position: absolute;
-  top: 13px;
-  right: 15px;
-  width: 32px;
-  height: 32px;
-  border: none;
-  border-radius: 50%;
-  background: #f1f5f9;
-  color: #475569;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-.goal-info-example {
-  margin-top: 16px;
-  padding: 14px;
-  background: #f1f7fd;
-  border-radius: 12px;
-}
-
-.goal-info-example strong {
-  font-size: 13px;
-  color: #2563a6;
-}
-
-.goal-info-example p {
-  margin: 7px 0 0;
-}
-
-.goal-info-note {
-  padding-top: 12px;
-  border-top: 1px solid #e5e7eb;
-  font-size: 12px !important;
-}
-
-/* ==============================
-   TOMBOL AKSI PROFIL
-============================== */
-
-.profile-actions {
-  display: grid;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.profile-actions .profile-save-button {
-  margin-top: 0;
-}
-
-.profile-reset-button {
-  width: 100%;
-  padding: 13px 16px;
-  border: 1px solid #dc3545;
-  border-radius: 10px;
-  background: #fff;
-  color: #dc3545;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.profile-reset-button:hover {
-  background: #fff1f1;
+  .goal-info-content {
+    padding: 20px 16px;
+  }
 }

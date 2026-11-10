@@ -131,17 +131,32 @@ export function updateDashboard() {
     $("fatTargetText").textContent = nutritionTargets.fat;
   }
 
-  // Mengatur panjang progress bar.
-  const setNutritionProgress = (id, consumed, target) => {
-    const bar = $(id);
-    if (!bar) return;
+ 
+// Mengatur circular nutrition progress.
+const setNutritionProgress = (id, consumed, target) => {
+  const ring = $(id);
+  if (!ring) return;
 
-    const progress = target > 0
-      ? Math.min(100, (consumed / target) * 100)
-      : 0;
+  const progress = target > 0
+    ? Math.min(100, Math.max(0, (consumed / target) * 100))
+    : 0;
 
-    bar.style.width = progress + "%";
-  };
+  const circle = ring.querySelector(".ring-fill");
+  const percentage = ring.querySelector(".ring-percent");
+
+  if (!circle || !percentage) return;
+
+  const radius = 42;
+  const circumference = 2 * Math.PI * radius;
+
+  const offset = circumference - (progress / 100) * circumference;
+
+  circle.style.strokeDasharray = circumference;
+  circle.style.strokeDashoffset = offset;
+
+  percentage.textContent = Math.round(progress) + "%";
+};
+
 
   setNutritionProgress(
     "proteinProgress",

@@ -1,0 +1,250 @@
+
+/* =====================================================
+   KALORISEHATKU - MODERN FITNESS UI
+   Navigation Stylesheet
+===================================================== */
+
+/* =====================================================
+   1. BOTTOM NAVIGATION
+===================================================== */
+
+.bottom-nav {
+  position: fixed;
+  z-index: 1000;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 100%;
+  max-width: 600px;
+  min-height: 76px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+
+  padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -5px 20px rgba(20, 50, 35, 0.06);
+
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+/* =====================================================
+   2. NAVIGATION ITEM
+===================================================== */
+
+.nav-item {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  min-width: 0;
+  min-height: 58px;
+
+  padding: 7px 4px;
+
+  border: none;
+  border-radius: 14px;
+  background: transparent;
+
+  color: var(--text-muted);
+  font-family: inherit;
+
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    color 280ms ease,
+    background 350ms ease,
+    transform 180ms ease;
+}
+
+/* =====================================================
+   3. ICON
+===================================================== */
+
+.nav-icon {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 25px;
+
+  font-size: 22px;
+  line-height: 1;
+
+  transition:
+    transform 350ms cubic-bezier(.2, .8, .2, 1),
+    color 280ms ease,
+    filter 280ms ease;
+}
+
+/* =====================================================
+   4. LABEL
+===================================================== */
+
+.nav-label {
+  display: block;
+
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.1px;
+
+  transition:
+    color 280ms ease,
+    font-weight 280ms ease,
+    opacity 280ms ease;
+}
+
+/* =====================================================
+   5. ACTIVE STATE
+===================================================== */
+
+.nav-item.active {
+  color: var(--brand);
+  background: var(--brand-light);
+}
+
+.nav-item.active .nav-icon {
+  transform: translateY(-3px);
+  filter: drop-shadow(0 3px 3px rgba(22, 134, 91, .15));
+}
+
+.nav-item.active .nav-label {
+  color: var(--brand);
+  font-weight: 700;
+}
+
+/* =====================================================
+   6. ACTIVE INDICATOR
+===================================================== */
+
+.nav-indicator {
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  width: 22px;
+  height: 3px;
+
+  border-radius: 0 0 5px 5px;
+  background: var(--brand);
+
+  opacity: 0;
+  transform: translateX(-50%) scaleX(0);
+
+  transition:
+    opacity 300ms ease,
+    transform 400ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.nav-item.active .nav-indicator {
+  opacity: 1;
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* =====================================================
+   7. HOVER & PRESS
+===================================================== */
+
+@media (hover: hover) {
+  .nav-item:hover {
+    color: var(--brand);
+    background: var(--surface-soft);
+  }
+
+  .nav-item:hover .nav-icon {
+    transform: translateY(-2px);
+  }
+
+  .nav-item.active:hover .nav-icon {
+    transform: translateY(-3px);
+  }
+}
+
+.nav-item:active {
+  transform: scale(.97);
+  transition-duration: 100ms;
+}
+
+.nav-item:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: -2px;
+}
+
+/* =====================================================
+   8. DARK MODE
+===================================================== */
+
+html[data-theme="dark"] .bottom-nav {
+  background: var(--surface);
+  border-top-color: var(--border);
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, .2);
+}
+
+html[data-theme="dark"] .nav-item.active {
+  background: var(--brand-light);
+  color: var(--brand);
+}
+
+html[data-theme="dark"] .nav-item.active .nav-icon {
+  filter: drop-shadow(0 3px 4px rgba(66, 214, 140, .18));
+}
+
+/* =====================================================
+   9. RESPONSIVE
+===================================================== */
+
+@media (max-width: 380px) {
+  .bottom-nav {
+    min-height: 70px;
+    padding-inline: 7px;
+  }
+
+  .nav-item {
+    min-height: 54px;
+    gap: 4px;
+  }
+
+  .nav-icon {
+    font-size: 20px;
+  }
+
+  .nav-label {
+    font-size: 9px;
+  }
+}
+
+/* =====================================================
+   10. REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-item,
+  .nav-icon,
+  .nav-label,
+  .nav-indicator {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

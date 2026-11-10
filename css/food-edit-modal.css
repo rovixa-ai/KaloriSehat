@@ -1,4 +1,39 @@
 
+/* =========================================
+   KALORISEHATKU - FOOD EDIT MODAL
+   Modern Fitness | Light & Dark Mode
+========================================= */
+
+:root {
+  --food-modal-bg: #ffffff;
+  --food-modal-bg-soft: #f3f8f5;
+  --food-modal-border: #e3ebe5;
+  --food-modal-text: #263b30;
+  --food-modal-secondary: #718078;
+  --food-modal-muted: #929e96;
+  --food-modal-primary: #16865b;
+  --food-modal-primary-soft: #e7f5ed;
+  --food-modal-danger: #dc5b62;
+  --food-modal-danger-soft: #fff0f0;
+  --food-modal-overlay: rgba(0, 0, 0, 0.55);
+}
+
+html[data-theme="dark"] {
+  --food-modal-bg: #19251f;
+  --food-modal-bg-soft: #202e26;
+  --food-modal-border: #34463b;
+  --food-modal-text: #e5eee8;
+  --food-modal-secondary: #b0beb5;
+  --food-modal-muted: #899990;
+  --food-modal-primary: #55c991;
+  --food-modal-primary-soft: #263e31;
+  --food-modal-danger: #f0787e;
+  --food-modal-danger-soft: #42282a;
+  --food-modal-overlay: rgba(0, 0, 0, 0.72);
+}
+
+/* OVERLAY */
+
 .food-edit-overlay {
   position: fixed;
   inset: 0;
@@ -7,39 +42,54 @@
   align-items: center;
   justify-content: center;
   padding: 16px;
-  background: rgba(0, 0, 0, 0.55);
+  background: var(--food-modal-overlay);
+  backdrop-filter: blur(3px);
 }
+
+/* MODAL */
 
 .food-edit-modal {
   width: 100%;
   max-width: 430px;
   max-height: 90vh;
   overflow-y: auto;
-  background: var(--card-background, #ffffff);
-  color: var(--text-color, #222222);
-  border-radius: 14px;
+  background: var(--food-modal-bg);
+  color: var(--food-modal-text);
+  border: 1px solid var(--food-modal-border);
+  border-radius: 17px;
   box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
 }
+
+/* HEADER */
 
 .food-edit-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 18px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--food-modal-border);
 }
 
 .food-edit-header h3 {
   margin: 0;
   font-size: 18px;
+  color: var(--food-modal-text);
 }
 
 .food-edit-close {
   border: none;
   background: transparent;
+  color: var(--food-modal-secondary);
   font-size: 27px;
   cursor: pointer;
+  transition: color 0.2s ease;
 }
+
+.food-edit-close:hover {
+  color: var(--food-modal-danger);
+}
+
+/* BODY */
 
 .food-edit-body {
   padding: 18px;
@@ -50,39 +100,59 @@
   margin: 14px 0 7px;
   font-size: 13px;
   font-weight: 600;
+  color: var(--food-modal-text);
 }
 
 .food-edit-body input {
   box-sizing: border-box;
   width: 100%;
   padding: 11px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+  border: 1px solid var(--food-modal-border);
+  border-radius: 10px;
+  background: var(--food-modal-bg);
+  color: var(--food-modal-text);
+  font-family: inherit;
   font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
+
+.food-edit-body input:focus {
+  border-color: var(--food-modal-primary);
+  box-shadow: 0 0 0 3px rgba(22, 134, 91, 0.10);
+}
+
+.food-edit-body input::placeholder {
+  color: var(--food-modal-muted);
+}
+
+/* SARAN MAKANAN */
 
 .food-edit-suggestions {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-top: 7px;
+  gap: 7px;
+  margin-top: 8px;
   max-height: 180px;
   overflow-y: auto;
 }
 
 .food-edit-option {
-  padding: 10px;
-  border: 1px solid #e5e7eb;
-  border-radius: 7px;
-  background: transparent;
-  color: inherit;
+  padding: 11px;
+  border: 1px solid var(--food-modal-border);
+  border-radius: 9px;
+  background: var(--food-modal-bg);
+  color: var(--food-modal-text);
   text-align: left;
+  font-family: inherit;
   font-size: 13px;
   cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .food-edit-option:hover {
-  background: #f3f4f6;
+  background: var(--food-modal-primary-soft);
+  border-color: var(--food-modal-primary);
 }
 
 .food-edit-no-result,
@@ -91,10 +161,16 @@
   margin: 5px 0;
 }
 
+.food-edit-no-result {
+  color: var(--food-modal-muted);
+}
+
 .food-edit-selected {
-  color: #16a34a;
+  color: var(--food-modal-primary);
   font-weight: 600;
 }
+
+/* BERAT MAKANAN */
 
 .food-edit-weight {
   display: flex;
@@ -109,40 +185,65 @@
 
 .food-edit-weight span {
   font-size: 13px;
-  color: #6b7280;
+  color: var(--food-modal-secondary);
 }
+
+/* PETUNJUK */
 
 .food-edit-hint {
   margin-top: 10px;
   font-size: 12px;
-  color: #6b7280;
+  line-height: 1.5;
+  color: var(--food-modal-muted);
 }
+
+/* FOOTER */
 
 .food-edit-footer {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 9px;
   padding: 15px 18px;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--food-modal-border);
 }
 
 .food-edit-footer button {
   padding: 10px 13px;
   border: none;
-  border-radius: 8px;
+  border-radius: 9px;
+  font-family: inherit;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
+
+.food-edit-footer button:active {
+  transform: scale(0.98);
+}
+
+/* BATAL */
 
 .food-edit-cancel {
-  background: #e5e7eb;
-  color: #333333;
+  background: var(--food-modal-bg-soft);
+  color: var(--food-modal-secondary);
+  border: 1px solid var(--food-modal-border) !important;
 }
 
+.food-edit-cancel:hover {
+  background: var(--food-modal-border);
+}
+
+/* SIMPAN */
+
 .food-edit-save {
-  background: #16a34a;
-  color: white;
+  background: var(--food-modal-primary);
+  color: #ffffff;
+}
+
+.food-edit-save:hover:not(:disabled) {
+  opacity: 0.9;
 }
 
 .food-edit-save:disabled {
@@ -150,18 +251,46 @@
   cursor: not-allowed;
 }
 
+/* HAPUS */
 
 .food-edit-delete {
   margin-right: auto;
-  background: #fee2e2;
-  color: #dc2626;
-  border: 1px solid #fecaca;
+  background: var(--food-modal-danger-soft);
+  color: var(--food-modal-danger);
+  border: 1px solid var(--food-modal-danger) !important;
   padding: 9px 12px;
-  border-radius: 8px;
+  border-radius: 9px;
   cursor: pointer;
   font-size: 13px;
 }
 
 .food-edit-delete:hover {
-  background: #fecaca;
+  opacity: 0.85;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 380px) {
+  .food-edit-overlay {
+    padding: 10px;
+  }
+
+  .food-edit-modal {
+    max-height: 94vh;
+  }
+
+  .food-edit-header,
+  .food-edit-body {
+    padding: 15px;
+  }
+
+  .food-edit-footer {
+    padding: 13px 15px;
+    gap: 7px;
+  }
+
+  .food-edit-footer button {
+    padding: 10px;
+    font-size: 12px;
+  }
 }

@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="light">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,153 +10,252 @@
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  <header class="topbar">
+  
+<header class="topbar dashboard-header">
+  <div class="brand">
+    <div class="brand-mark">K</div>
     <div>
       <h1>Kalori<span>SehatKu</span></h1>
-      <p>Kenali makananmu, jaga kesehatanmu.</p>
+      <p>Healthy habits, better you.</p>
     </div>
-    <div class="avatar">K</div>
-  </header>
+  </div>
+  <div class="avatar" aria-label="Profil pengguna">K</div>
+</header>
 
-  <main id="homePage">
-    <section class="welcome">
-      <p id="today"></p>
-      <h2>Ringkasan harian</h2>
-      <p>Pantau asupan nutrisi hari ini.</p>
-    </section>
+<main id="homePage" class="dashboard-page">
 
-    <section class="calorie-card">
-      <p>Kalori yang sudah dikonsumsi</p>
-      <div class="calorie-number">
-        <strong id="totalCalories">0</strong>
-        <span>kkal</span>
+  <!-- SAPAAN -->
+  <section class="welcome dashboard-welcome">
+    <div>
+      <p id="today" class="dashboard-date"></p>
+      <h2>Halo, selamat datang! 👋</h2>
+      <p>Yuk, pantau asupan nutrisi dan jaga kesehatanmu hari ini.</p>
+    </div>
+    <span class="welcome-decoration">✦</span>
+  </section>
+
+  <!-- KARTU KALORI UTAMA -->
+  <section class="calorie-card dashboard-calorie">
+    <div class="calorie-card-heading">
+      <div>
+        <span class="eyebrow">DAILY CALORIE INTAKE</span>
+        <p>Kalori yang sudah dikonsumsi</p>
       </div>
-      <div class="progress-track">
-        <div id="progressBar"></div>
-      </div>
-      <div class="calorie-footer">
-  <span>Target: <b id="targetText">0</b> kkal</span>
-  <span>Sisa: <b id="remainingCalories">0</b> kkal</span>
-</div>
-    
-    </section>
+      <span class="calorie-icon">🔥</span>
+    </div>
 
-    <section class="nutrition-section">
-  <h3>Asupan Nutrisi</h3>
+    <div class="calorie-number">
+      <strong id="totalCalories">0</strong>
+      <span>kkal</span>
+    </div>
+
+    <div class="progress-info">
+      <span>Progress harian</span>
+      <span>Target: <b id="targetText">0</b> kkal</span>
+    </div>
+
+    <div class="progress-track">
+      <div id="progressBar"></div>
+    </div>
+
+    <div class="calorie-footer">
+      <span>
+        <span class="footer-dot consumed-dot"></span>
+        Sudah dikonsumsi
+      </span>
+      <span>
+        Sisa <b id="remainingCalories">0</b> kkal
+      </span>
+    </div>
+  </section>
+
+  
+<!-- RINGKASAN NUTRISI -->
+<section class="nutrition-section dashboard-nutrition">
+  <div class="section-heading">
+    <div>
+      <span class="eyebrow">NUTRITION OVERVIEW</span>
+      <h3>Asupan Nutrisi</h3>
+    </div>
+    <span class="section-symbol">◈</span>
+  </div>
 
   <div class="nutrition-grid">
 
     <!-- PROTEIN -->
-    <div class="nutrition-card">
-      <span>Protein</span>
-
-      <strong id="totalProtein">0 g</strong>
-
-      <div class="nutrition-progress-track">
-        <div id="proteinProgress"></div>
+    <div class="nutrition-card protein-card">
+      <div class="nutrition-card-top">
+        <span class="nutrition-icon">🥩</span>
+        <span class="nutrition-label">Protein</span>
       </div>
 
-      <small>
-        Target: <b id="proteinTargetText">0</b> g
-      </small>
+      <div class="nutrition-ring" id="proteinProgress">
+        <svg viewBox="0 0 100 100">
+          <circle class="ring-bg" cx="50" cy="50" r="42"/>
+          <circle class="ring-fill" cx="50" cy="50" r="42"/>
+        </svg>
+        <div class="ring-content">
+          <strong class="ring-percent">0%</strong>
+          <span>Target</span>
+        </div>
+      </div>
+
+      <strong id="totalProtein">0 g</strong>
+      <small>Target: <b id="proteinTargetText">0</b> g</small>
     </div>
 
     <!-- KARBOHIDRAT -->
-    <div class="nutrition-card">
-      <span>Karbohidrat</span>
-
-      <strong id="totalCarbs">0 g</strong>
-
-      <div class="nutrition-progress-track">
-        <div id="carbsProgress"></div>
+    <div class="nutrition-card carbs-card">
+      <div class="nutrition-card-top">
+        <span class="nutrition-icon">🌾</span>
+        <span class="nutrition-label">Karbohidrat</span>
       </div>
 
-      <small>
-        Target: <b id="carbsTargetText">0</b> g
-      </small>
+      <div class="nutrition-ring" id="carbsProgress">
+        <svg viewBox="0 0 100 100">
+          <circle class="ring-bg" cx="50" cy="50" r="42"/>
+          <circle class="ring-fill" cx="50" cy="50" r="42"/>
+        </svg>
+        <div class="ring-content">
+          <strong class="ring-percent">0%</strong>
+          <span>Target</span>
+        </div>
+      </div>
+
+      <strong id="totalCarbs">0 g</strong>
+      <small>Target: <b id="carbsTargetText">0</b> g</small>
     </div>
 
     <!-- LEMAK -->
-    <div class="nutrition-card">
-      <span>Lemak</span>
-
-      <strong id="totalFat">0 g</strong>
-
-      <div class="nutrition-progress-track">
-        <div id="fatProgress"></div>
+    <div class="nutrition-card fat-card">
+      <div class="nutrition-card-top">
+        <span class="nutrition-icon">🥑</span>
+        <span class="nutrition-label">Lemak</span>
       </div>
 
-      <small>
-        Target: <b id="fatTargetText">0</b> g
-      </small>
+      <div class="nutrition-ring" id="fatProgress">
+        <svg viewBox="0 0 100 100">
+          <circle class="ring-bg" cx="50" cy="50" r="42"/>
+          <circle class="ring-fill" cx="50" cy="50" r="42"/>
+        </svg>
+        <div class="ring-content">
+          <strong class="ring-percent">0%</strong>
+          <span>Target</span>
+        </div>
+      </div>
+
+      <strong id="totalFat">0 g</strong>
+      <small>Target: <b id="fatTargetText">0</b> g</small>
     </div>
 
   </div>
 </section>
 
-    <section class="scan-section">
-      <h3>Catat makanan</h3>
-      <p>Ambil foto atau pilih gambar makanan.</p>
 
-      <label for="foodPhoto" class="photo-button">
-        <span>＋</span>
-        Foto makanan
-      </label>
+  
+<!-- CATAT MAKANAN -->
+<section class="scan-section dashboard-scan">
 
-      <input type="file" id="foodPhoto"
-        accept="image/*" capture="environment" hidden>
+  <div class="section-heading">
+    <div>
+      <span class="eyebrow">FOOD TRACKER</span>
+      <h3>Catat Makanan</h3>
+    </div>
+  </div>
 
-      <img id="preview" alt="Preview makanan" hidden>
+  <!-- UPLOAD FOTO AI -->
+  <div class="scan-upload-area">
 
-      <button id="analyzeButton" class="calculate-button" disabled>
-        Analisis makanan
-      </button>
+    <label for="foodPhoto" class="photo-button">
+      <span class="camera-icon">📷</span>
+      <span>Tambah Foto Makanan</span>
+    </label>
 
-      <div id="analysisStatus" role="status"></div>
+    <input type="file" id="foodPhoto"
+      accept="image/*" capture="environment" hidden>
 
-      <div id="analysisResults" hidden>
-        <h4>Hasil identifikasi AI</h4>
-        <div id="detectedFoods"></div>
+    <img id="preview" alt="Preview makanan" hidden>
+
+    <button id="analyzeButton" class="calculate-button" disabled>
+      Analisis Makanan
+    </button>
+
+    <div id="analysisStatus" role="status"></div>
+
+  </div>
+
+  <!-- HASIL IDENTIFIKASI AI -->
+  <div id="analysisResults" class="analysis-results" hidden>
+    <h4>Hasil Identifikasi AI</h4>
+    <div id="detectedFoods"></div>
+  </div>
+
+  <!-- INPUT MANUAL -->
+  <div class="food-manual-card">
+
+    <div class="food-manual-heading">
+      <span class="manual-icon">✎</span>
+      <div>
+        <h4>Input Manual</h4>
+        <p>Catat makanan tanpa menggunakan foto.</p>
       </div>
+    </div>
 
-      <div class="food-form">
-        <label for="foodName">Nama makanan</label>
-        <input id="foodName" type="text"
-          placeholder="Contoh: Nasi putih">
+    <div class="food-form">
 
-        <label for="foodWeight">Berat makanan (gram)</label>
+      <label for="foodName">Nama makanan</label>
+      <input id="foodName" type="text"
+        placeholder="Contoh: Nasi putih">
+
+      <label for="foodWeight">Berat makanan</label>
+      <div class="weight-input-wrap">
         <input id="foodWeight" type="number"
           min="1" value="100">
-
-        <button id="calculateButton" class="calculate-button">
-          Hitung estimasi nutrisi
-        </button>
+        <span>gram</span>
       </div>
 
-      <div id="foodSuggestions" class="food-suggestions" hidden>
-        <p class="suggestion-title">
-          Makanan yang mungkin Anda maksud:
-        </p>
-        <div id="suggestionList"></div>
-      </div>
+      <button id="calculateButton" class="calculate-button">
+        Hitung Nutrisi
+      </button>
 
-      <div id="result" class="result-card" hidden>
-        <h3>Estimasi nutrisi</h3>
-        <p id="resultDetails"></p>
-        <div class="result-actions">
-  <button id="cancelMeal" type="button" class="cancel-button">
-    Batal
-  </button>
+    </div>
+  </div>
 
-  <button id="saveMeal" type="button" class="save-button">
-    Simpan makanan
-  </button>
-</div>
-      </div>
-    </section>
+  <!-- SARAN MAKANAN -->
+  <div id="foodSuggestions" class="food-suggestions" hidden>
+    <p class="suggestion-title">
+      Makanan yang mungkin Anda maksud:
+    </p>
+    <div id="suggestionList"></div>
+  </div>
 
-    
-  </main>
+  <!-- HASIL PERHITUNGAN -->
+  <div id="result" class="result-card" hidden>
+
+    <div class="result-heading">
+      <span>✓</span>
+      <h3>Estimasi Nutrisi</h3>
+    </div>
+
+    <p id="resultDetails"></p>
+
+    <div class="result-actions">
+      <button id="cancelMeal" type="button" class="cancel-button">
+        Batal
+      </button>
+
+      <button id="saveMeal" type="button" class="save-button">
+        Simpan Makanan
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
+
+</main>
+
 
   
 <!-- HALAMAN RIWAYAT -->

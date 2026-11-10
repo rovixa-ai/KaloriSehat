@@ -56,13 +56,23 @@ function initializeNavigation() {
       }
 
       // Tampilkan halaman yang dipilih.
-      availablePages.forEach((id) => {
-        const page = document.getElementById(id);
+availablePages.forEach((id) => {
+  const page = document.getElementById(id);
 
-        if (page) {
-          page.hidden = id !== pageId;
-        }
-      });
+  if (page) {
+    page.hidden = id !== pageId;
+
+    // Animasi halaman yang baru dibuka.
+    if (id === pageId) {
+      page.classList.remove("page-enter");
+
+      // Memulai ulang animasi setiap kali halaman dibuka.
+      void page.offsetWidth;
+
+      page.classList.add("page-enter");
+    }
+  }
+});
 
       // Perbarui status menu aktif.
       navButtons.forEach((item) => {

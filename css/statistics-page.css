@@ -1,75 +1,133 @@
 
-/* ==============================
-   HALAMAN STATISTIK KALORIKU
-============================== */
+/* =========================================
+   KALORISEHATKU - HALAMAN STATISTIK
+   Modern Fitness | Light & Dark Mode
+========================================= */
+
+:root {
+  --stat-bg: #ffffff;
+  --stat-bg-soft: #f3f8f5;
+  --stat-bg-highlight: #e5f4eb;
+  --stat-border: #e3ebe5;
+  --stat-text: #263b30;
+  --stat-secondary: #718078;
+  --stat-muted: #89978e;
+  --stat-primary: #16865b;
+  --stat-primary-soft: #e7f5ed;
+  --stat-track: #eaf1ec;
+  --stat-shadow: 0 3px 12px rgba(30, 75, 48, 0.05);
+  --stat-danger: #dc5b62;
+  --stat-success: #36a879;
+}
+
+html[data-theme="dark"] {
+  --stat-bg: #19251f;
+  --stat-bg-soft: #202e26;
+  --stat-bg-highlight: #263f31;
+  --stat-border: #34463b;
+  --stat-text: #e5eee8;
+  --stat-secondary: #b0beb5;
+  --stat-muted: #899990;
+  --stat-primary: #55c991;
+  --stat-primary-soft: #263e31;
+  --stat-track: #34463b;
+  --stat-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+  --stat-danger: #f0787e;
+  --stat-success: #55c991;
+}
+
+/* SECTION */
 
 .statistics-section {
   margin-top: 24px;
 }
 
+/* FILTER PERIODE */
+
 .statistics-filter {
   display: flex;
   gap: 8px;
+  margin-bottom: 18px;
 }
 
 .statistics-period {
   flex: 1;
+  min-width: 0;
   padding: 11px 8px;
-  border: 1px solid #dce5df;
-  border-radius: 10px;
-  background: white;
-  color: #53645a;
+  border: 1px solid var(--stat-border);
+  border-radius: 11px;
+  background: var(--stat-bg);
+  color: var(--stat-secondary);
+  font-family: inherit;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.statistics-period:hover {
+  border-color: var(--stat-primary);
 }
 
 .statistics-period.active {
-  background: #16865b;
-  border-color: #16865b;
-  color: white;
+  background: var(--stat-primary);
+  border-color: var(--stat-primary);
+  color: #ffffff;
 }
+
+/* RINGKASAN STATISTIK */
 
 .statistics-summary {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
 .statistics-card {
-  background: white;
+  min-width: 0;
+  background: var(--stat-bg);
   padding: 17px;
-  border-radius: 14px;
-  box-shadow: 0 2px 10px #00000008;
+  border: 1px solid var(--stat-border);
+  border-radius: 15px;
+  box-shadow: var(--stat-shadow);
 }
 
 .statistics-card span,
 .statistics-card small {
   display: block;
-  color: #829087;
+  color: var(--stat-muted);
   font-size: 12px;
 }
 
 .statistics-card strong {
   display: block;
-  color: #16865b;
+  color: var(--stat-primary);
   font-size: 25px;
   margin: 9px 0 4px;
+  overflow-wrap: anywhere;
 }
 
+/* GRAFIK */
+
 .statistics-chart {
-  background: white;
+  background: var(--stat-bg);
   padding: 16px;
-  border-radius: 14px;
-  box-shadow: 0 2px 10px #00000008;
+  border: 1px solid var(--stat-border);
+  border-radius: 15px;
+  box-shadow: var(--stat-shadow);
   overflow-x: auto;
 }
 
 .statistics-chart > p {
-  color: #829087;
+  color: var(--stat-muted);
   font-size: 13px;
   text-align: center;
   padding: 25px 0;
+}
+
+.statistics-chart-wrapper {
+  position: relative;
+  padding-top: 10px;
 }
 
 .statistics-chart-bars {
@@ -93,14 +151,14 @@
 
 .statistics-chart-column strong {
   font-size: 10px;
-  color: #53645a;
+  color: var(--stat-secondary);
   white-space: nowrap;
 }
 
 .statistics-bar-track {
   width: 100%;
   height: 115px;
-  background: #edf4ef;
+  background: var(--stat-track);
   border-radius: 7px 7px 0 0;
   display: flex;
   align-items: flex-end;
@@ -109,7 +167,7 @@
 
 .statistics-bar {
   width: 100%;
-  background: #36a879;
+  background: var(--stat-success);
   border-radius: 7px 7px 0 0;
   min-height: 4px;
   transition: height 0.3s ease;
@@ -117,35 +175,199 @@
 
 .statistics-chart-column small {
   font-size: 10px;
-  color: #829087;
+  color: var(--stat-muted);
   white-space: nowrap;
 }
 
+/* GARIS TARGET KALORI */
+
+.statistics-target-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 2px dashed var(--stat-danger);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.statistics-target-line span {
+  position: absolute;
+  right: 0;
+  bottom: 4px;
+  padding: 3px 7px;
+  border-radius: 5px;
+  background: var(--stat-danger);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* STATUS HARIAN */
+
+.statistics-day-status {
+  display: block;
+  margin-top: 5px;
+  font-size: 10px;
+  text-align: center;
+}
+
+.statistics-bar.success {
+  background: var(--stat-success);
+}
+
+.statistics-bar.over-target {
+  background: var(--stat-danger);
+}
+
+/* TREND KALORI */
+
+.statistics-trend {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.statistics-trend.up {
+  color: var(--stat-danger);
+}
+
+.statistics-trend.down {
+  color: var(--stat-primary);
+}
+
+.statistics-trend.neutral {
+  color: var(--stat-muted);
+}
+
+#statCalorieTrend small {
+  display: block;
+  margin-top: 3px;
+  color: var(--stat-muted);
+  font-size: 11px;
+}
+
+/* RINGKASAN NUTRISI */
+
 .statistics-nutrition {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
 }
 
 .statistics-nutrition > div {
-  background: white;
+  min-width: 0;
+  background: var(--stat-bg);
   padding: 15px 8px;
-  border-radius: 12px;
+  border: 1px solid var(--stat-border);
+  border-radius: 13px;
   text-align: center;
-  box-shadow: 0 2px 10px #00000008;
+  box-shadow: var(--stat-shadow);
 }
 
 .statistics-nutrition span {
   display: block;
-  color: #829087;
+  color: var(--stat-muted);
   font-size: 11px;
   margin-bottom: 8px;
 }
 
 .statistics-nutrition strong {
-  color: #16865b;
+  color: var(--stat-primary);
   font-size: 15px;
+  overflow-wrap: anywhere;
 }
+
+/* TARGET BERAT BADAN */
+
+.statistics-goal-card {
+  margin-top: 20px;
+  padding: 18px;
+  background: var(--stat-bg);
+  border: 1px solid var(--stat-border);
+  border-radius: 16px;
+  box-shadow: var(--stat-shadow);
+}
+
+.statistics-goal-header {
+  margin-bottom: 16px;
+}
+
+.statistics-goal-header span {
+  color: var(--stat-muted);
+  font-size: 12px;
+}
+
+.statistics-goal-header h3 {
+  margin: 4px 0 0;
+  color: var(--stat-text);
+}
+
+.statistics-goal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.statistics-goal-item {
+  min-width: 0;
+  padding: 13px;
+  background: var(--stat-bg-soft);
+  border: 1px solid var(--stat-border);
+  border-radius: 11px;
+}
+
+.statistics-goal-item span {
+  display: block;
+  font-size: 11px;
+  color: var(--stat-muted);
+  margin-bottom: 6px;
+}
+
+.statistics-goal-item strong {
+  font-size: 14px;
+  color: var(--stat-text);
+  overflow-wrap: anywhere;
+}
+
+/* TARGET KALORI */
+
+.statistics-goal-calories {
+  margin-top: 15px;
+  padding: 15px;
+  background: var(--stat-bg-highlight);
+  border: 1px solid var(--stat-border);
+  border-radius: 12px;
+}
+
+.statistics-goal-calories span,
+.statistics-goal-calories small {
+  display: block;
+  color: var(--stat-secondary);
+  font-size: 12px;
+}
+
+.statistics-goal-calories strong {
+  display: block;
+  margin: 6px 0;
+  font-size: 22px;
+  color: var(--stat-primary);
+}
+
+.statistics-goal-status {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--stat-secondary);
+}
+
+.statistics-empty-goal {
+  color: var(--stat-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* RESPONSIVE */
 
 @media (max-width: 380px) {
   .statistics-card {
@@ -163,170 +385,12 @@
   .statistics-nutrition strong {
     font-size: 13px;
   }
-}
 
+  .statistics-chart {
+    padding: 12px;
+  }
 
-/* ==============================
-   GRAFIK STATISTIK & TARGET
-============================== */
-
-.statistics-chart-wrapper {
-  position: relative;
-  padding-top: 10px;
-}
-
-/* Garis batas target kalori */
-.statistics-target-line {
-  position: absolute;
-  left: 0;
-  right: 0;
-  border-top: 2px dashed #dc3545;
-  z-index: 5;
-  pointer-events: none;
-}
-
-.statistics-target-line span {
-  position: absolute;
-  right: 0;
-  bottom: 4px;
-  padding: 3px 7px;
-  border-radius: 5px;
-  background: #dc3545;
-  color: white;
-  font-size: 10px;
-  font-weight: bold;
-}
-
-/* Status setiap hari */
-.statistics-day-status {
-  display: block;
-  margin-top: 5px;
-  font-size: 10px;
-  text-align: center;
-}
-
-/* Hari sesuai target */
-.statistics-bar.success {
-  background: #36a879;
-}
-
-/* Hari melebihi target */
-.statistics-bar.over-target {
-  background: #e05d5d;
-}
-
-
-
-/* ==============================
-   TREND RATA-RATA KALORI
-============================== */
-
-.statistics-trend {
-  display: inline-block;
-  margin-top: 8px;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.statistics-trend.up {
-  color: #dc3545;
-}
-
-.statistics-trend.down {
-  color: #16865b;
-}
-
-.statistics-trend.neutral {
-  color: #6b7280;
-}
-
-#statCalorieTrend small {
-  display: block;
-  margin-top: 3px;
-  color: #829087;
-  font-size: 11px;
-}
-
-
-/* ==============================
-   TUJUAN BERAT BADAN
-============================== */
-
-.statistics-goal-card {
-  margin-top: 20px;
-  padding: 18px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 2px 10px #00000008;
-}
-
-.statistics-goal-header {
-  margin-bottom: 16px;
-}
-
-.statistics-goal-header span {
-  color: #829087;
-  font-size: 12px;
-}
-
-.statistics-goal-header h3 {
-  margin: 4px 0 0;
-}
-
-.statistics-goal-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.statistics-goal-item {
-  padding: 12px;
-  background: #f4f7f5;
-  border-radius: 10px;
-}
-
-.statistics-goal-item span {
-  display: block;
-  font-size: 11px;
-  color: #829087;
-  margin-bottom: 5px;
-}
-
-.statistics-goal-item strong {
-  font-size: 14px;
-  color: #24352d;
-}
-
-.statistics-goal-calories {
-  margin-top: 15px;
-  padding: 14px;
-  background: #e3f4eb;
-  border-radius: 10px;
-}
-
-.statistics-goal-calories span,
-.statistics-goal-calories small {
-  display: block;
-  color: #5d7569;
-  font-size: 12px;
-}
-
-.statistics-goal-calories strong {
-  display: block;
-  margin: 5px 0;
-  font-size: 20px;
-  color: #16865b;
-}
-
-.statistics-goal-status {
-  margin-top: 12px;
-  font-size: 13px;
-  line-height: 1.5;
-  color: #526158;
-}
-
-.statistics-empty-goal {
-  color: #829087;
-  font-size: 13px;
-  line-height: 1.6;
+  .statistics-chart-bars {
+    gap: 8px;
+  }
 }

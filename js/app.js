@@ -733,3 +733,36 @@ cancelMealButton?.addEventListener("click", () => {
   $("foodSuggestions").hidden = true;
   $("suggestionList").innerHTML = "";
 });
+
+
+/*
+ * STICKY HEADER ANIMATION
+ */
+
+function initializeStickyHeader() {
+  const topbar = document.querySelector(".topbar");
+
+  if (!topbar) return;
+
+  function updateHeader() {
+    topbar.classList.toggle(
+      "is-scrolled",
+      window.scrollY > 20
+    );
+  }
+
+  window.addEventListener("scroll", updateHeader, {
+    passive: true
+  });
+
+  updateHeader();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener(
+    "DOMContentLoaded",
+    initializeStickyHeader
+  );
+} else {
+  initializeStickyHeader();
+}

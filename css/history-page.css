@@ -1,29 +1,64 @@
 
-/* ==============================
-   HALAMAN RIWAYAT
-============================== */
+/* =========================================
+   KALORISEHATKU - HALAMAN RIWAYAT
+   Modern Fitness | Light & Dark Mode
+========================================= */
+
+/* THEME VARIABLES */
+
+:root {
+  --history-bg: #ffffff;
+  --history-bg-soft: #f5f9f6;
+  --history-bg-summary: #eaf6ee;
+  --history-border: #e3ebe5;
+  --history-text: #263b30;
+  --history-text-secondary: #718078;
+  --history-muted: #929e96;
+  --history-primary: #16865b;
+  --history-primary-soft: #e7f5ed;
+  --history-primary-border: #cce7d7;
+  --history-input-bg: #ffffff;
+  --history-shadow: 0 3px 12px rgba(30, 75, 48, 0.04);
+}
+
+html[data-theme="dark"] {
+  --history-bg: #19251f;
+  --history-bg-soft: #202e26;
+  --history-bg-summary: #203b2d;
+  --history-border: #34463b;
+  --history-text: #e5eee8;
+  --history-text-secondary: #b0beb5;
+  --history-muted: #899990;
+  --history-primary: #55c991;
+  --history-primary-soft: #263e31;
+  --history-primary-border: #3b624b;
+  --history-input-bg: #202e26;
+  --history-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* HALAMAN RIWAYAT */
 
 .history-page-section {
   margin-top: 20px;
 }
 
-
-/* FILTER TANGGAL RIWAYAT */
+/* FILTER TANGGAL */
 
 .history-filter {
-  background: #ffffff;
-  border: 1px solid #e8eee9;
-  border-radius: 12px;
-  padding: 14px;
-  margin-bottom: 18px;
+  background: var(--history-bg);
+  border: 1px solid var(--history-border);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: var(--history-shadow);
 }
 
 .history-filter label {
   display: block;
   font-size: 13px;
   font-weight: 600;
-  margin-bottom: 9px;
-  color: #354b3d;
+  margin-bottom: 10px;
+  color: var(--history-text);
 }
 
 .history-filter-controls {
@@ -34,23 +69,43 @@
 .history-filter-controls input {
   flex: 1;
   min-width: 0;
-  padding: 11px;
-  border: 1px solid #dce6df;
-  border-radius: 8px;
+  padding: 11px 12px;
+  border: 1px solid var(--history-border);
+  border-radius: 10px;
+  background: var(--history-input-bg);
+  color: var(--history-text);
   font-family: inherit;
   font-size: 14px;
+  outline: none;
 }
 
-.history-filter-controls button {
-  border: none;
-  border-radius: 8px;
-  background: #e7f5ed;
-  color: #16865b;
-  padding: 0 16px;
-  font-weight: 600;
+.history-filter-controls input:focus {
+  border-color: var(--history-primary);
+  box-shadow: 0 0 0 3px rgba(22, 134, 91, 0.10);
+}
+
+.history-filter-controls input::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
+.history-filter-controls button {
+  flex-shrink: 0;
+  border: none;
+  border-radius: 10px;
+  background: var(--history-primary-soft);
+  color: var(--history-primary);
+  padding: 0 16px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.history-filter-controls button:hover {
+  background: var(--history-primary-border);
+}
+
+/* HEADER RIWAYAT */
 
 .history-page-header,
 .history-day-header,
@@ -69,44 +124,49 @@
 .history-page-header h3,
 .history-day-header h3 {
   margin: 0;
+  color: var(--history-text);
 }
 
 .history-page-header span,
 .history-day-header span {
-  color: #16865b;
+  color: var(--history-primary);
   font-size: 13px;
   font-weight: 600;
 }
 
 .history-day {
-  margin-bottom: 22px;
+  margin-bottom: 24px;
 }
 
 .history-day-header {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #e5eee8;
+  border-bottom: 1px solid var(--history-border);
 }
 
+/* KARTU CATATAN MAKANAN */
+
 .history-record {
-  background: #ffffff;
-  border: 1px solid #e8eee9;
-  border-radius: 12px;
-  padding: 14px;
-  margin-bottom: 10px;
+  background: var(--history-bg);
+  border: 1px solid var(--history-border);
+  border-radius: 14px;
+  padding: 15px;
+  margin-bottom: 12px;
+  box-shadow: var(--history-shadow);
 }
 
 .history-record-header {
-  padding-bottom: 10px;
-  border-bottom: 1px solid #eef2ef;
+  padding-bottom: 11px;
+  border-bottom: 1px solid var(--history-border);
 }
 
 .history-record-header strong {
   font-size: 14px;
+  color: var(--history-text);
 }
 
 .history-record-header b {
-  color: #16865b;
+  color: var(--history-primary);
   white-space: nowrap;
   font-size: 14px;
 }
@@ -116,58 +176,57 @@
 }
 
 .history-food-item {
-  padding: 7px 0;
+  padding: 8px 0;
   font-size: 13px;
 }
 
 .history-food-item div {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
+  min-width: 0;
+}
+
+.history-food-item div strong {
+  color: var(--history-text);
+  overflow-wrap: anywhere;
 }
 
 .history-food-item small {
-  color: #929a95;
+  color: var(--history-muted);
 }
 
 .history-food-item > span {
   white-space: nowrap;
-  color: #53645a;
+  color: var(--history-text-secondary);
 }
+
+/* RIWAYAT KOSONG */
 
 .history-empty {
   text-align: center;
   padding: 45px 20px;
-  background: #ffffff;
-  border: 1px dashed #d6e4da;
-  border-radius: 14px;
+  background: var(--history-bg);
+  border: 1px dashed var(--history-border);
+  border-radius: 16px;
 }
 
 .history-empty-icon {
   font-size: 38px;
-  color: #16865b;
-  margin-bottom: 10px;
+  color: var(--history-primary);
+  margin-bottom: 12px;
 }
 
 .history-empty h3 {
   margin: 0 0 8px;
+  color: var(--history-text);
 }
 
 .history-empty p {
   margin: 0;
-  color: #929a95;
+  color: var(--history-muted);
   font-size: 13px;
 }
-
-/* Navigasi berbentuk tombol */
-.bottom-nav .nav-item {
-  border: none;
-  background: transparent;
-  font-family: inherit;
-  padding: 8px 4px;
-}
-
-
 
 /* INFO NUTRISI PADA RIWAYAT */
 
@@ -176,81 +235,76 @@
   align-items: center;
   gap: 6px;
   margin-top: 12px;
-  padding: 8px 12px;
-  border: 1px solid #cce7d7;
-  border-radius: 8px;
-  background: #f0f9f3;
-  color: #16865b;
+  padding: 9px 13px;
+  border: 1px solid var(--history-primary-border);
+  border-radius: 9px;
+  background: var(--history-primary-soft);
+  color: var(--history-primary);
   font-family: inherit;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 .history-info-button:hover {
-  background: #e1f3e8;
+  background: var(--history-primary-border);
 }
 
 .history-info-panel {
   margin-top: 12px;
-  padding: 12px;
-  border-radius: 10px;
-  background: #f7faf8;
-  border: 1px solid #e5eee8;
+  padding: 13px;
+  border-radius: 12px;
+  background: var(--history-bg-soft);
+  border: 1px solid var(--history-border);
 }
 
 .history-food-nutrition + .history-food-nutrition {
   margin-top: 16px;
   padding-top: 14px;
-  border-top: 1px solid #dce9e0;
+  border-top: 1px solid var(--history-border);
 }
 
 .history-food-nutrition > strong {
   display: block;
   margin-bottom: 10px;
   font-size: 13px;
-  color: #354b3d;
+  color: var(--history-text);
 }
 
 .history-nutrition-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
+  gap: 9px;
 }
 
 .history-nutrition-item {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 9px;
-  background: #ffffff;
-  border-radius: 8px;
+  gap: 5px;
+  padding: 11px;
+  background: var(--history-bg);
+  border: 1px solid var(--history-border);
+  border-radius: 10px;
 }
 
 .history-nutrition-item span {
-  color: #849188;
+  color: var(--history-muted);
   font-size: 11px;
 }
 
 .history-nutrition-item strong {
-  color: #16865b;
+  color: var(--history-primary);
   font-size: 13px;
 }
 
-
-
 /* RINGKASAN NUTRISI HARIAN */
 
-.history-day-header {
-  margin-bottom: 12px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e5eee8;
-}
-
 .history-daily-summary {
-  background: #eaf6ee;
-  border-radius: 14px;
-  padding: 15px;
+  background: var(--history-bg-summary);
+  border: 1px solid var(--history-border);
+  border-radius: 16px;
+  padding: 16px;
   margin-bottom: 16px;
 }
 
@@ -259,61 +313,65 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  margin-bottom: 14px;
+  margin-bottom: 15px;
 }
 
 .history-summary-header div {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 
 .history-summary-header div span {
   font-size: 11px;
-  color: #64816e;
+  color: var(--history-text-secondary);
 }
 
 .history-summary-header div strong {
   font-size: 15px;
-  color: #245b3c;
+  color: var(--history-text);
 }
 
 .history-meal-count {
   font-size: 11px;
-  color: #16865b;
+  color: var(--history-primary);
   white-space: nowrap;
+  font-weight: 600;
 }
 
 .history-summary-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
+  gap: 9px;
 }
 
 .history-summary-item {
-  background: #ffffff;
-  border-radius: 9px;
-  padding: 11px;
+  background: var(--history-bg);
+  border: 1px solid var(--history-border);
+  border-radius: 11px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 0;
 }
 
 .history-summary-item span {
   font-size: 11px;
-  color: #849188;
+  color: var(--history-muted);
 }
 
 .history-summary-item strong {
   font-size: 15px;
-  color: #354b3d;
+  color: var(--history-text);
   overflow-wrap: anywhere;
 }
 
 .history-summary-item.main-nutrient {
   grid-column: 1 / -1;
-  background: #16865b;
-  padding: 15px;
+  background: var(--history-primary);
+  border-color: var(--history-primary);
+  padding: 16px;
 }
 
 .history-summary-item.main-nutrient span,
@@ -322,8 +380,19 @@
 }
 
 .history-summary-item.main-nutrient strong {
-  font-size: 25px;
+  font-size: 27px;
 }
+
+/* NAVIGASI BAWAH */
+
+.bottom-nav .nav-item {
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  padding: 8px 4px;
+}
+
+/* RESPONSIVE */
 
 @media (min-width: 600px) {
   .history-summary-grid {
@@ -332,5 +401,32 @@
 
   .history-summary-item.main-nutrient {
     grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 420px) {
+  .history-filter {
+    padding: 13px;
+  }
+
+  .history-filter-controls {
+    gap: 7px;
+  }
+
+  .history-filter-controls button {
+    padding: 0 11px;
+    font-size: 12px;
+  }
+
+  .history-record {
+    padding: 12px;
+  }
+
+  .history-daily-summary {
+    padding: 13px;
+  }
+
+  .history-summary-item {
+    padding: 10px;
   }
 }
