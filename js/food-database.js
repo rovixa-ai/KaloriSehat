@@ -152,8 +152,8 @@ export function findFood(name, database, aliases = {}) {
   return null;
 }
 
-// Memberikan beberapa saran makanan
-export function findFoodSuggestions(name, database, limit = 5) {
+// Memberikan semua saran makanan yang cocok
+export function findFoodSuggestions(name, database) {
   const query = normalizeFoodName(name);
 
   if (!query) return [];
@@ -181,8 +181,7 @@ export function findFoodSuggestions(name, database, limit = 5) {
       };
     })
     .filter(item => item.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, limit);
+    .sort((a, b) => b.score - a.score);
 }
 
 
