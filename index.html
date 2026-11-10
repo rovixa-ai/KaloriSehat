@@ -13,13 +13,18 @@
   
 <header class="topbar dashboard-header">
   <div class="brand">
-    <div class="brand-mark">K</div>
+    <div class="brand-mark">
+  <img src="./assets/rovixa-icon.png" alt="Rovixa" />
+</div>
     <div>
       <h1>Kalori<span>SehatKu</span></h1>
       <p>Healthy habits, better you.</p>
     </div>
   </div>
-  <div class="avatar" aria-label="Profil pengguna">K</div>
+  <div class="avatar" id="dashboardAvatar" aria-label="Profil pengguna">
+  <span id="dashboardAvatarInitial">K</span>
+  <img id="dashboardAvatarPhoto" alt="Foto pengguna" hidden>
+</div>
 </header>
 
 <main id="homePage" class="dashboard-page">
@@ -28,7 +33,7 @@
   <section class="welcome dashboard-welcome">
     <div>
       <p id="today" class="dashboard-date"></p>
-      <h2>Halo, selamat datang! 👋</h2>
+      <h2 id="welcomeGreeting">Halo, selamat datang! 👋</h2>
       <p>Yuk, pantau asupan nutrisi dan jaga kesehatanmu hari ini.</p>
     </div>
     <span class="welcome-decoration">✦</span>
@@ -407,7 +412,24 @@
 
   <!-- KARTU PROFIL -->
   <section class="profile-identity">
-    <div class="profile-avatar">K</div>
+    <button
+  type="button"
+  class="profile-avatar"
+  id="profilePhotoButton"
+  aria-label="Unggah foto profil"
+  title="Klik untuk mengganti foto profil"
+>
+  <span id="profileAvatarInitial">K</span>
+  <img id="profilePhotoPreview" alt="Foto profil" hidden>
+  <span class="profile-avatar-edit">📷</span>
+</button>
+
+<input
+  type="file"
+  id="profilePhotoInput"
+  accept="image/*"
+  hidden
+>
     <div>
       <h3>Profil Pengguna</h3>
       <p>Lengkapi data dirimu</p>

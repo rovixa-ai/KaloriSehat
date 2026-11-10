@@ -766,3 +766,64 @@ if (document.readyState === "loading") {
 } else {
   initializeStickyHeader();
 }
+
+// Memperbarui sapaan berdasarkan profil tersimpan.
+function updateWelcomeGreeting() {
+  const greeting = document.getElementById("welcomeGreeting");
+  if (!greeting) return;
+
+  let profile = {};
+
+  try {
+    profile = JSON.parse(
+      localStorage.getItem("kaloriku_profile") || "{}"
+    );
+  } catch (error) {
+    console.error("Gagal membaca profil:", error);
+  }
+
+  const name = profile.name?.trim();
+
+  greeting.textContent = name
+    ? `Halo, ${name}! 👋`
+    : "Halo, selamat datang! 👋";
+}
+
+updateWelcomeGreeting();
+
+window.addEventListener("profileUpdated", updateWelcomeGreeting);
+
+// Menampilkan foto profil pada header Dashboard.
+function updateDashboardAvatar() {
+  const avatar = document.getElementById("dashboardAvatar");
+  const photo = document.getElementById("dashboardAvatarPhoto");
+  const initial = document.getElementById("dashboardAvatarInitial");
+
+  if (!avatar || !photo || !initial) return;
+
+  let profile = {};
+
+  try {
+    profile = JSON.parse(
+      localStorage.getItem("kaloriku_profile") || "{}"
+    );
+  } catch (error) {
+    console.error("Gagal membaca profil:", error);
+  }
+
+  if (profile.photo) {
+    photo.src = profile.photo;
+    photo.hidden = false;
+    initial.hidden = true;
+  } else {
+    photo.removeAttribute("src");
+    photo.hidden = true;
+    initial.hidden = false;
+    initial.textContent =
+      profile.name?.trim().charAt(0).toUpperCase() || "K";
+  }
+}
+
+updateDashboardAvatar();
+
+window.addEventListener("profileUpdated", updateDashboardAvatar);

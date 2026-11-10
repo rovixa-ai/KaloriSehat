@@ -41,6 +41,97 @@ const fields = {
   goalDuration: profilePage.querySelector("#profileGoalDuration")
 };
 
+// =====================================
+// FOTO PROFIL
+// =====================================
+
+const photoButton = profilePage.querySelector("#profilePhotoButton");
+const photoInput = profilePage.querySelector("#profilePhotoInput");
+const photoPreview = profilePage.querySelector("#profilePhotoPreview");
+const avatarInitial = profilePage.querySelector("#profileAvatarInitial");
+
+function renderProfilePhoto() {
+  const profile = loadProfile();
+  const photo = profile.photo || "";
+
+  if (photo && photoPreview) {
+    photoPreview.src = photo;
+    photoPreview.hidden = false;
+
+    if (avatarInitial) {
+      avatarInitial.hidden = true;
+    }
+  } else {
+    if (photoPreview) {
+      photoPreview.removeAttribute("src");
+      photoPreview.hidden = true;
+    }
+
+    if (avatarInitial) {
+      avatarInitial.hidden = false;
+      avatarInitial.textContent =
+        profile.name?.trim().charAt(0).toUpperCase() || "K";
+    }
+  }
+}
+
+// Klik avatar untuk memilih foto.
+photoButton?.addEventListener("click", () => {
+  photoInput?.click();
+});
+
+// Proses foto yang dipilih.
+photoInput?.addEventListener("change", (event) => {
+  const file = event.target.files[0];
+
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    alert("Silakan pilih file gambar.");
+    photoInput.value = "";
+    return;
+  }
+
+  // Batasi ukuran foto maksimal 1,5 MB.
+  if (file.size > 1.5 * 1024 * 1024) {
+    alert("Ukuran foto maksimal 1,5 MB.");
+    photoInput.value = "";
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    const profile = loadProfile();
+
+    profile.photo = reader.result;
+
+    try {
+      saveProfile(profile);
+renderProfilePhoto();
+
+window.dispatchEvent(new Event("profileUpdated"));
+
+alert("Foto profil berhasil diperbarui.");
+    } catch (error) {
+      console.error("Gagal menyimpan foto:", error);
+      alert("Foto gagal disimpan. Silakan gunakan foto yang lebih kecil.");
+    }
+
+    photoInput.value = "";
+  };
+
+  reader.onerror = () => {
+    alert("Gagal membaca foto.");
+    photoInput.value = "";
+  };
+
+  reader.readAsDataURL(file);
+});
+
+// Tampilkan foto yang sudah tersimpan.
+renderProfilePhoto();
+
   function updateGoalSimulation() {
     const message = profilePage.querySelector("#goalSimulationMessage");
     const results = profilePage.querySelector(".goal-simulation-results");
@@ -279,6 +370,7 @@ if (resetDataButton) {
 
     // Hapus data aplikasi
     localStorage.removeItem("kaloriku_profile");
+    renderProfilePhoto();
     localStorage.removeItem("kaloriku_meals");
     localStorage.removeItem("kaloriku_target");
     localStorage.removeItem("kaloriku_food_aliases");
@@ -422,9 +514,20 @@ if (infoButton && infoModal && infoClose) {
     }
 
     try {
-            saveProfile(updatedProfile);
-      updateGoalSimulation();
-      alert("Profil berhasil disimpan.");
+           const currentProfile = loadProfile();
+
+saveProfile({
+  ...currentProfile,
+  ...updatedProfile
+});
+
+updateGoalSimulation();
+renderProfilePhoto();
+window.dispatchEvent(new Event("profileUpdated"));
+
+alert("Profil berhasil disimpan.");
+
+
     } catch (error) {
       console.error("Gagal menyimpan profil:", error);
       alert("Profil gagal disimpan.");
@@ -442,3 +545,5 @@ if (document.readyState === "loading") {
 } else {
   initializeProfilePage();
 }
+
+

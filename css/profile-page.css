@@ -55,18 +55,110 @@ html[data-theme="dark"] {
   margin: 18px 0;
 }
 
+/* =====================================
+   PROFILE AVATAR / FOTO PENGGUNA
+===================================== */
+
 .profile-avatar {
-  width: 54px;
-  height: 54px;
-  flex-shrink: 0;
+  position: relative;
+  width: 112px;
+  height: 112px;
+  min-width: 112px;
+  border: 3px solid var(--border-color);
+  border-radius: 50%;
+  padding: 0;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background: var(--profile-primary);
-  color: #ffffff;
-  font-size: 22px;
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+  font-size: 38px;
   font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* Foto pengguna */
+.profile-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Ikon kamera */
+.profile-avatar-edit {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--bg-primary);
+  border-radius: 50%;
+  background: var(--accent-color);
+  color: white;
+  font-size: 15px;
+  z-index: 2;
+  transition: transform 0.25s ease;
+}
+
+/* Efek hover */
+@media (hover: hover) {
+  .profile-avatar:hover {
+    transform: scale(1.04);
+    border-color: var(--accent-color);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+  }
+
+  .profile-avatar:hover .profile-avatar-edit {
+    transform: scale(1.12);
+  }
+}
+
+/* Efek ketika ditekan */
+.profile-avatar:active {
+  transform: scale(0.96);
+}
+
+/* Fokus keyboard */
+.profile-avatar:focus-visible {
+  outline: 3px solid var(--accent-color);
+  outline-offset: 4px;
+}
+
+/* Dark mode */
+html[data-theme="dark"] .profile-avatar {
+  border-color: var(--border-color);
+  background: var(--surface-secondary);
+}
+
+html[data-theme="dark"] .profile-avatar-edit {
+  border-color: var(--bg-primary);
+}
+
+/* Tampilan mobile */
+@media (max-width: 480px) {
+  .profile-avatar {
+    width: 96px;
+    height: 96px;
+    min-width: 96px;
+    font-size: 32px;
+  }
+
+  .profile-avatar-edit {
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
+  }
 }
 
 .profile-identity h3 {

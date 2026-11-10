@@ -124,6 +124,13 @@
   box-shadow: 0 5px 14px rgba(0, 0, 0, .12);
 }
 
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 .brand h1 {
   margin: 0;
   color: #fff;
@@ -144,24 +151,28 @@
 
 .avatar {
   position: relative;
-  z-index: 1;
-
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-
   width: 42px;
   height: 42px;
-
-  border-radius: 14px;
-  background: #c1f36c;
-  color: #105c40;
-
+  min-width: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-secondary);
+  color: var(--text-primary);
   font-size: 17px;
-  font-weight: 850;
+  font-weight: 700;
+  border: 1px solid var(--border-color);
+}
 
-  box-shadow: 0 5px 14px rgba(0, 0, 0, .12);
-  transition: transform .3s ease;
+.avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .topbar.is-scrolled .avatar {
