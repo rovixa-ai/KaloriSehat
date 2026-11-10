@@ -198,10 +198,10 @@
 
 .welcome h2 {
   margin: 7px 0;
-  color: var(--text-primary);
+  color: rgb(16, 61, 43);
 
   font-size: clamp(23px, 5vw, 28px);
-  font-weight: 850;
+  font-weight: 700;
   letter-spacing: -.8px;
 }
 
