@@ -1,5 +1,5 @@
 
-const API_URL = "http://localhost:3000";
+const API_URL = "https://kalori-sehat.vercel.app";
 
 // Kompres foto sebelum dikirim ke backend
 async function compressFoodPhoto(file) {

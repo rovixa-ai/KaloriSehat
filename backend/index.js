@@ -17,7 +17,9 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
 
-app.use(cors());
+app.use(cors({
+  origin: "https://rovixa-ai.github.io"
+}));
 app.use(express.json());
 
 app.get("/", (req, res) => {
