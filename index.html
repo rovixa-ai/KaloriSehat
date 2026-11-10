@@ -650,33 +650,44 @@
     <small>Hasil perhitungan merupakan estimasi.</small>
   </footer>
 
-  <!-- MENU NAVIGASI BAWAH -->
- 
+
+<!-- MENU NAVIGASI BAWAH -->
 <nav class="bottom-nav" aria-label="Menu utama">
-  <button type="button" class="nav-item active"
-    data-page="homePage">
+
+  <!-- Indikator aktif yang bergerak -->
+  <span class="nav-indicator" aria-hidden="true"></span>
+
+  <button type="button"
+    class="nav-item active"
+    data-page="homePage"
+    aria-current="page">
     <span class="nav-icon">⌂</span>
-    <span>Beranda</span>
+    <span class="nav-label">Beranda</span>
   </button>
 
-  <button type="button" class="nav-item"
+  <button type="button"
+    class="nav-item"
     data-page="historyPage">
     <span class="nav-icon">▤</span>
-    <span>Riwayat</span>
+    <span class="nav-label">Riwayat</span>
   </button>
 
-  <button type="button" class="nav-item"
+  <button type="button"
+    class="nav-item"
     data-page="statisticsPage">
     <span class="nav-icon">▥</span>
-    <span>Statistik</span>
+    <span class="nav-label">Statistik</span>
   </button>
 
-  <button type="button" class="nav-item"
+  <button type="button"
+    class="nav-item"
     data-page="profilePage">
     <span class="nav-icon">♙</span>
-    <span>Profil</span>
+    <span class="nav-label">Profil</span>
   </button>
+
 </nav>
+
 
 
 <script type="module" src="./js/app.js"></script>

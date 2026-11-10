@@ -1,7 +1,7 @@
 
 /*
  * NAVIGATION
- * Mengatur perpindahan antarhalaman KaloriKu.
+ * Mengatur perpindahan halaman dan Liquid Motion Indicator.
  */
 
 const availablePages = [
@@ -12,7 +12,39 @@ const availablePages = [
 ];
 
 function initializeNavigation() {
+  const nav = document.querySelector(".bottom-nav");
   const navButtons = document.querySelectorAll(".nav-item");
+  const indicator = nav?.querySelector(".nav-indicator");
+
+  if (!nav || !navButtons.length) return;
+
+  // Memindahkan indikator ke menu yang aktif.
+  function updateIndicator(button, animate = true) {
+    const index = Array.from(navButtons).indexOf(button);
+
+    if (index < 0) return;
+
+    if (animate && indicator) {
+      nav.classList.add("is-moving");
+    }
+
+    nav.style.setProperty("--active-index", index);
+
+    if (indicator && animate) {
+      indicator.addEventListener("transitionend", function handler(event) {
+        if (event.propertyName === "transform") {
+          nav.classList.remove("is-moving");
+          indicator.removeEventListener("transitionend", handler);
+        }
+      });
+    }
+  }
+
+  // Tentukan posisi awal berdasarkan menu aktif.
+  const initialActive =
+    document.querySelector(".nav-item.active") || navButtons[0];
+
+  updateIndicator(initialActive, false);
 
   navButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -42,6 +74,9 @@ function initializeNavigation() {
           item.removeAttribute("aria-current");
         }
       });
+
+      // Jalankan Liquid Motion Indicator.
+      updateIndicator(button);
 
       // Beri tahu modul halaman bahwa halaman telah dibuka.
       document.dispatchEvent(
