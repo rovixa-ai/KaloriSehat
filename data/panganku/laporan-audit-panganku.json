@@ -1,0 +1,23 @@
+{
+  "namaDatabase": "KaloriKu - Panganku",
+  "tanggalAudit": "2026-11-08T15:28:59.257Z",
+  "totalData": 5288,
+  "totalGagal": 0,
+  "totalAnomali": 1,
+  "statusKelengkapan": "LENGKAP",
+  "statusValidasi": "ADA ANOMALI SUMBER",
+  "anomali": [
+    {
+      "kode": "AP0425",
+      "nama": "Kue ampas terigu",
+      "nutrisi": "air_g",
+      "nilai": -59,
+      "jenis": "Nilai negatif dari sumber"
+    }
+  ],
+  "kebijakanPenggunaan": {
+    "pertahankanNilaiAsli": true,
+    "nilaiNegatifUntukPerhitungan": null,
+    "catatan": "Nilai anomali tidak diubah pada database sumber. Untuk perhitungan aplikasi, nilai negatif diperlakukan sebagai tidak tersedia."
+  }
+}

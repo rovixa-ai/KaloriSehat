@@ -1,0 +1,336 @@
+
+/* ==============================
+   HALAMAN RIWAYAT
+============================== */
+
+.history-page-section {
+  margin-top: 20px;
+}
+
+
+/* FILTER TANGGAL RIWAYAT */
+
+.history-filter {
+  background: #ffffff;
+  border: 1px solid #e8eee9;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 18px;
+}
+
+.history-filter label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 9px;
+  color: #354b3d;
+}
+
+.history-filter-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.history-filter-controls input {
+  flex: 1;
+  min-width: 0;
+  padding: 11px;
+  border: 1px solid #dce6df;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.history-filter-controls button {
+  border: none;
+  border-radius: 8px;
+  background: #e7f5ed;
+  color: #16865b;
+  padding: 0 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+.history-page-header,
+.history-day-header,
+.history-record-header,
+.history-food-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.history-page-header {
+  margin-bottom: 16px;
+}
+
+.history-page-header h3,
+.history-day-header h3 {
+  margin: 0;
+}
+
+.history-page-header span,
+.history-day-header span {
+  color: #16865b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.history-day {
+  margin-bottom: 22px;
+}
+
+.history-day-header {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5eee8;
+}
+
+.history-record {
+  background: #ffffff;
+  border: 1px solid #e8eee9;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+.history-record-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eef2ef;
+}
+
+.history-record-header strong {
+  font-size: 14px;
+}
+
+.history-record-header b {
+  color: #16865b;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.history-food-list {
+  padding-top: 8px;
+}
+
+.history-food-item {
+  padding: 7px 0;
+  font-size: 13px;
+}
+
+.history-food-item div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.history-food-item small {
+  color: #929a95;
+}
+
+.history-food-item > span {
+  white-space: nowrap;
+  color: #53645a;
+}
+
+.history-empty {
+  text-align: center;
+  padding: 45px 20px;
+  background: #ffffff;
+  border: 1px dashed #d6e4da;
+  border-radius: 14px;
+}
+
+.history-empty-icon {
+  font-size: 38px;
+  color: #16865b;
+  margin-bottom: 10px;
+}
+
+.history-empty h3 {
+  margin: 0 0 8px;
+}
+
+.history-empty p {
+  margin: 0;
+  color: #929a95;
+  font-size: 13px;
+}
+
+/* Navigasi berbentuk tombol */
+.bottom-nav .nav-item {
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  padding: 8px 4px;
+}
+
+
+
+/* INFO NUTRISI PADA RIWAYAT */
+
+.history-info-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 8px 12px;
+  border: 1px solid #cce7d7;
+  border-radius: 8px;
+  background: #f0f9f3;
+  color: #16865b;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.history-info-button:hover {
+  background: #e1f3e8;
+}
+
+.history-info-panel {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #f7faf8;
+  border: 1px solid #e5eee8;
+}
+
+.history-food-nutrition + .history-food-nutrition {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #dce9e0;
+}
+
+.history-food-nutrition > strong {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #354b3d;
+}
+
+.history-nutrition-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.history-nutrition-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 9px;
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+.history-nutrition-item span {
+  color: #849188;
+  font-size: 11px;
+}
+
+.history-nutrition-item strong {
+  color: #16865b;
+  font-size: 13px;
+}
+
+
+
+/* RINGKASAN NUTRISI HARIAN */
+
+.history-day-header {
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5eee8;
+}
+
+.history-daily-summary {
+  background: #eaf6ee;
+  border-radius: 14px;
+  padding: 15px;
+  margin-bottom: 16px;
+}
+
+.history-summary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.history-summary-header div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.history-summary-header div span {
+  font-size: 11px;
+  color: #64816e;
+}
+
+.history-summary-header div strong {
+  font-size: 15px;
+  color: #245b3c;
+}
+
+.history-meal-count {
+  font-size: 11px;
+  color: #16865b;
+  white-space: nowrap;
+}
+
+.history-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.history-summary-item {
+  background: #ffffff;
+  border-radius: 9px;
+  padding: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.history-summary-item span {
+  font-size: 11px;
+  color: #849188;
+}
+
+.history-summary-item strong {
+  font-size: 15px;
+  color: #354b3d;
+  overflow-wrap: anywhere;
+}
+
+.history-summary-item.main-nutrient {
+  grid-column: 1 / -1;
+  background: #16865b;
+  padding: 15px;
+}
+
+.history-summary-item.main-nutrient span,
+.history-summary-item.main-nutrient strong {
+  color: #ffffff;
+}
+
+.history-summary-item.main-nutrient strong {
+  font-size: 25px;
+}
+
+@media (min-width: 600px) {
+  .history-summary-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .history-summary-item.main-nutrient {
+    grid-column: 1 / -1;
+  }
+}

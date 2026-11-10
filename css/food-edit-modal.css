@@ -1,0 +1,167 @@
+
+.food-edit-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.food-edit-modal {
+  width: 100%;
+  max-width: 430px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--card-background, #ffffff);
+  color: var(--text-color, #222222);
+  border-radius: 14px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+}
+
+.food-edit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.food-edit-header h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.food-edit-close {
+  border: none;
+  background: transparent;
+  font-size: 27px;
+  cursor: pointer;
+}
+
+.food-edit-body {
+  padding: 18px;
+}
+
+.food-edit-body label {
+  display: block;
+  margin: 14px 0 7px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.food-edit-body input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.food-edit-suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 7px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.food-edit-option {
+  padding: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 7px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.food-edit-option:hover {
+  background: #f3f4f6;
+}
+
+.food-edit-no-result,
+.food-edit-selected {
+  font-size: 12px;
+  margin: 5px 0;
+}
+
+.food-edit-selected {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.food-edit-weight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.food-edit-weight input {
+  flex: 1;
+  min-width: 0;
+}
+
+.food-edit-weight span {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.food-edit-hint {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.food-edit-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 9px;
+  padding: 15px 18px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.food-edit-footer button {
+  padding: 10px 13px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.food-edit-cancel {
+  background: #e5e7eb;
+  color: #333333;
+}
+
+.food-edit-save {
+  background: #16a34a;
+  color: white;
+}
+
+.food-edit-save:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+
+.food-edit-delete {
+  margin-right: auto;
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  padding: 9px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.food-edit-delete:hover {
+  background: #fecaca;
+}

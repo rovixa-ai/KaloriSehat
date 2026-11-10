@@ -1,0 +1,332 @@
+
+/* ==============================
+   HALAMAN STATISTIK KALORIKU
+============================== */
+
+.statistics-section {
+  margin-top: 24px;
+}
+
+.statistics-filter {
+  display: flex;
+  gap: 8px;
+}
+
+.statistics-period {
+  flex: 1;
+  padding: 11px 8px;
+  border: 1px solid #dce5df;
+  border-radius: 10px;
+  background: white;
+  color: #53645a;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.statistics-period.active {
+  background: #16865b;
+  border-color: #16865b;
+  color: white;
+}
+
+.statistics-summary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.statistics-card {
+  background: white;
+  padding: 17px;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px #00000008;
+}
+
+.statistics-card span,
+.statistics-card small {
+  display: block;
+  color: #829087;
+  font-size: 12px;
+}
+
+.statistics-card strong {
+  display: block;
+  color: #16865b;
+  font-size: 25px;
+  margin: 9px 0 4px;
+}
+
+.statistics-chart {
+  background: white;
+  padding: 16px;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px #00000008;
+  overflow-x: auto;
+}
+
+.statistics-chart > p {
+  color: #829087;
+  font-size: 13px;
+  text-align: center;
+  padding: 25px 0;
+}
+
+.statistics-chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  min-height: 190px;
+  padding-top: 20px;
+}
+
+.statistics-chart-column {
+  flex: 1;
+  min-width: 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+  height: 170px;
+}
+
+.statistics-chart-column strong {
+  font-size: 10px;
+  color: #53645a;
+  white-space: nowrap;
+}
+
+.statistics-bar-track {
+  width: 100%;
+  height: 115px;
+  background: #edf4ef;
+  border-radius: 7px 7px 0 0;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.statistics-bar {
+  width: 100%;
+  background: #36a879;
+  border-radius: 7px 7px 0 0;
+  min-height: 4px;
+  transition: height 0.3s ease;
+}
+
+.statistics-chart-column small {
+  font-size: 10px;
+  color: #829087;
+  white-space: nowrap;
+}
+
+.statistics-nutrition {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.statistics-nutrition > div {
+  background: white;
+  padding: 15px 8px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 10px #00000008;
+}
+
+.statistics-nutrition span {
+  display: block;
+  color: #829087;
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+
+.statistics-nutrition strong {
+  color: #16865b;
+  font-size: 15px;
+}
+
+@media (max-width: 380px) {
+  .statistics-card {
+    padding: 13px;
+  }
+
+  .statistics-card strong {
+    font-size: 21px;
+  }
+
+  .statistics-nutrition {
+    gap: 6px;
+  }
+
+  .statistics-nutrition strong {
+    font-size: 13px;
+  }
+}
+
+
+/* ==============================
+   GRAFIK STATISTIK & TARGET
+============================== */
+
+.statistics-chart-wrapper {
+  position: relative;
+  padding-top: 10px;
+}
+
+/* Garis batas target kalori */
+.statistics-target-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 2px dashed #dc3545;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.statistics-target-line span {
+  position: absolute;
+  right: 0;
+  bottom: 4px;
+  padding: 3px 7px;
+  border-radius: 5px;
+  background: #dc3545;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* Status setiap hari */
+.statistics-day-status {
+  display: block;
+  margin-top: 5px;
+  font-size: 10px;
+  text-align: center;
+}
+
+/* Hari sesuai target */
+.statistics-bar.success {
+  background: #36a879;
+}
+
+/* Hari melebihi target */
+.statistics-bar.over-target {
+  background: #e05d5d;
+}
+
+
+
+/* ==============================
+   TREND RATA-RATA KALORI
+============================== */
+
+.statistics-trend {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.statistics-trend.up {
+  color: #dc3545;
+}
+
+.statistics-trend.down {
+  color: #16865b;
+}
+
+.statistics-trend.neutral {
+  color: #6b7280;
+}
+
+#statCalorieTrend small {
+  display: block;
+  margin-top: 3px;
+  color: #829087;
+  font-size: 11px;
+}
+
+
+/* ==============================
+   TUJUAN BERAT BADAN
+============================== */
+
+.statistics-goal-card {
+  margin-top: 20px;
+  padding: 18px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px #00000008;
+}
+
+.statistics-goal-header {
+  margin-bottom: 16px;
+}
+
+.statistics-goal-header span {
+  color: #829087;
+  font-size: 12px;
+}
+
+.statistics-goal-header h3 {
+  margin: 4px 0 0;
+}
+
+.statistics-goal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.statistics-goal-item {
+  padding: 12px;
+  background: #f4f7f5;
+  border-radius: 10px;
+}
+
+.statistics-goal-item span {
+  display: block;
+  font-size: 11px;
+  color: #829087;
+  margin-bottom: 5px;
+}
+
+.statistics-goal-item strong {
+  font-size: 14px;
+  color: #24352d;
+}
+
+.statistics-goal-calories {
+  margin-top: 15px;
+  padding: 14px;
+  background: #e3f4eb;
+  border-radius: 10px;
+}
+
+.statistics-goal-calories span,
+.statistics-goal-calories small {
+  display: block;
+  color: #5d7569;
+  font-size: 12px;
+}
+
+.statistics-goal-calories strong {
+  display: block;
+  margin: 5px 0;
+  font-size: 20px;
+  color: #16865b;
+}
+
+.statistics-goal-status {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #526158;
+}
+
+.statistics-empty-goal {
+  color: #829087;
+  font-size: 13px;
+  line-height: 1.6;
+}

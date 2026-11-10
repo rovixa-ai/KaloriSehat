@@ -1,0 +1,437 @@
+
+/* ==============================
+   HALAMAN PROFIL
+============================== */
+
+.profile-identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #eaf6ee;
+  border-radius: 14px;
+  padding: 18px;
+  margin: 18px 0;
+}
+
+.profile-avatar {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #16865b;
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.profile-identity h3 {
+  margin: 0 0 5px;
+  color: #245b3c;
+}
+
+.profile-identity p {
+  margin: 0;
+  color: #64816e;
+  font-size: 13px;
+}
+
+.profile-section {
+  background: #ffffff;
+  border: 1px solid #e8eee9;
+  border-radius: 13px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.profile-section h3 {
+  margin: 0 0 16px;
+  font-size: 15px;
+  color: #354b3d;
+}
+
+.profile-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.profile-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.profile-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64746a;
+}
+
+.profile-field input,
+.profile-field select {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 11px;
+  border: 1px solid #dce6df;
+  border-radius: 8px;
+  background: #ffffff;
+  font-family: inherit;
+  font-size: 13px;
+  color: #354b3d;
+}
+
+.profile-input-unit {
+  display: flex;
+  align-items: center;
+  border: 1px solid #dce6df;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.profile-input-unit input {
+  border: none;
+  border-radius: 0;
+  min-width: 0;
+}
+
+.profile-input-unit span {
+  padding: 0 10px;
+  color: #849188;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.profile-note {
+  color: #929a95;
+  font-size: 11px;
+  line-height: 1.5;
+  margin: 12px 0 0;
+}
+
+.profile-save-button {
+  width: 100%;
+  padding: 13px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 9px;
+  background: #16865b;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 420px) {
+  .profile-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =================================
+   SIMULASI TUJUAN BERAT BADAN
+================================= */
+
+.goal-simulation-card {
+  background: #ffffff;
+  border: 1px solid #e8edf2;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 18px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.goal-simulation-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 12px;
+}
+
+.goal-simulation-card h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #374151;
+  margin: 18px 0 12px;
+}
+
+#goalSimulationMessage {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #6b7280;
+  margin: 0;
+}
+
+.goal-result-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.goal-result-grid > div {
+  background: #f7f9fc;
+  border-radius: 12px;
+  padding: 13px;
+  min-width: 0;
+}
+
+.goal-result-grid span,
+.goal-result-row span,
+.goal-calorie-target span {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.goal-result-grid strong,
+.goal-result-row strong {
+  display: block;
+  font-size: 15px;
+  color: #1f2937;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.goal-result-divider {
+  height: 1px;
+  background: #edf0f3;
+  margin: 18px 0;
+}
+
+.goal-result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 13px;
+}
+
+.goal-result-row span {
+  margin-bottom: 0;
+}
+
+.goal-result-row strong {
+  text-align: right;
+}
+
+.goal-calorie-target {
+  background: #eef7ff;
+  border: 1px solid #d9ebff;
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 18px;
+}
+
+.goal-calorie-target strong {
+  display: block;
+  color: #1672c4;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.goal-status {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 7px 12px;
+  border-radius: 20px;
+  background: #e8f5ed;
+  color: #237a46;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.goal-warning {
+  color: #a15c00;
+  background: #fff7e8;
+  border-radius: 10px;
+  padding: 11px;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 12px 0 0;
+}
+
+.goal-warning:empty {
+  display: none;
+}
+
+@media (max-width: 380px) {
+  .goal-simulation-card {
+    padding: 15px;
+  }
+
+  .goal-result-grid {
+    gap: 8px;
+  }
+
+  .goal-result-grid > div {
+    padding: 10px;
+  }
+
+  .goal-result-grid strong {
+    font-size: 14px;
+  }
+}
+
+
+
+/* =================================
+   TOMBOL INFORMASI BMR & TDEE
+================================= */
+
+.goal-info-action {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.goal-info-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 0 5px 8px;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.goal-info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 19px;
+  height: 19px;
+  border: 1.5px solid #64748b;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =================================
+   MODAL INFORMASI BMR & TDEE
+================================= */
+
+.goal-info-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.goal-info-modal[hidden] {
+  display: none;
+}
+
+.goal-info-content {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 24px 20px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+}
+
+.goal-info-content h3 {
+  margin: 0 30px 20px 0;
+  font-size: 19px;
+  color: #1f2937;
+}
+
+.goal-info-content h4 {
+  margin: 18px 0 8px;
+  font-size: 14px;
+  color: #2563a6;
+}
+
+.goal-info-content p,
+.goal-info-content li {
+  font-size: 13px;
+  line-height: 1.65;
+  color: #4b5563;
+}
+
+.goal-info-content ul {
+  padding-left: 20px;
+}
+
+.goal-info-close {
+  position: absolute;
+  top: 13px;
+  right: 15px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.goal-info-example {
+  margin-top: 16px;
+  padding: 14px;
+  background: #f1f7fd;
+  border-radius: 12px;
+}
+
+.goal-info-example strong {
+  font-size: 13px;
+  color: #2563a6;
+}
+
+.goal-info-example p {
+  margin: 7px 0 0;
+}
+
+.goal-info-note {
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 12px !important;
+}
+
+/* ==============================
+   TOMBOL AKSI PROFIL
+============================== */
+
+.profile-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.profile-actions .profile-save-button {
+  margin-top: 0;
+}
+
+.profile-reset-button {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid #dc3545;
+  border-radius: 10px;
+  background: #fff;
+  color: #dc3545;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.profile-reset-button:hover {
+  background: #fff1f1;
+}
