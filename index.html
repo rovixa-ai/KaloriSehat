@@ -410,31 +410,45 @@
     <p>Kelola informasi tubuh dan target nutrisi harianmu.</p>
   </section>
 
-  <!-- KARTU PROFIL -->
-  <section class="profile-identity">
-    <button
-  type="button"
-  class="profile-avatar"
-  id="profilePhotoButton"
-  aria-label="Unggah foto profil"
-  title="Klik untuk mengganti foto profil"
->
-  <span id="profileAvatarInitial">K</span>
-  <img id="profilePhotoPreview" alt="Foto profil" hidden>
-  <span class="profile-avatar-edit">📷</span>
-</button>
+  
+<!-- KARTU PROFIL -->
+<section class="profile-identity">
 
-<input
-  type="file"
-  id="profilePhotoInput"
-  accept="image/*"
-  hidden
->
-    <div>
-      <h3>Profil Pengguna</h3>
-      <p>Lengkapi data dirimu</p>
-    </div>
-  </section>
+  <button
+    type="button"
+    class="profile-avatar"
+    id="profilePhotoButton"
+    aria-label="Unggah foto profil"
+    title="Klik untuk mengganti foto profil"
+  >
+    <span id="profileAvatarInitial">K</span>
+    <img id="profilePhotoPreview" alt="Foto profil" hidden>
+    <span class="profile-avatar-edit">📷</span>
+  </button>
+
+  <input
+    type="file"
+    id="profilePhotoInput"
+    accept="image/*"
+    hidden
+  >
+
+  <div class="profile-identity-info">
+    <h3>Profil Pengguna</h3>
+    <p>Lengkapi data dirimu</p>
+  </div>
+
+  <button
+    type="button"
+    class="profile-logout-button"
+    id="logoutButton"
+  >
+    <span aria-hidden="true">↪</span>
+    Keluar
+  </button>
+
+</section>
+
 
   <!-- DATA DIRI -->
   <section class="profile-section">
@@ -810,13 +824,14 @@
 
 </nav>
 
-
+<script type="module" src="./js/auth-guard.js"></script>
 
 <script type="module" src="./js/app.js"></script>
 <script type="module" src="./js/history-page.js"></script>
 <script type="module" src="./js/profile-page.js"></script>
 <script type="module" src="./js/statistics-page.js"></script>
 <script type="module" src="./js/navigation.js"></script>
+<script type="module" src="./js/logout.js"></script>
 
 
 </body>
