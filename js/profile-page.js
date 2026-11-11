@@ -80,8 +80,73 @@ photoButton?.addEventListener("click", () => {
   photoInput?.click();
 });
 
-// Proses foto yang dipilih.
-photoInput?.addEventListener("change", (event) => {
+// =====================================
+// KOMPRES FOTO PROFIL
+// =====================================
+
+function compressProfilePhoto(file) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      image.src = event.target.result;
+    };
+
+    reader.onerror = () => {
+      reject(new Error("Gagal membaca file foto."));
+    };
+
+    image.onload = () => {
+      const MAX_SIZE = 500;
+      let width = image.width;
+      let height = image.height;
+
+      // Mengecilkan foto sambil mempertahankan proporsi.
+      if (width > MAX_SIZE || height > MAX_SIZE) {
+        if (width > height) {
+          height = Math.round(height * (MAX_SIZE / width));
+          width = MAX_SIZE;
+        } else {
+          width = Math.round(width * (MAX_SIZE / height));
+          height = MAX_SIZE;
+        }
+      }
+
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+
+      const context = canvas.getContext("2d");
+
+      // Background putih untuk foto PNG transparan.
+      context.fillStyle = "#ffffff";
+      context.fillRect(0, 0, width, height);
+
+      context.drawImage(image, 0, 0, width, height);
+
+      // Kompres menjadi JPEG kualitas 80%.
+      const compressedPhoto = canvas.toDataURL(
+        "image/jpeg",
+        0.8
+      );
+
+      resolve(compressedPhoto);
+    };
+
+    image.onerror = () => {
+      reject(new Error("File bukan gambar yang valid."));
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
+
+// =====================================
+// UPLOAD FOTO PROFIL
+// =====================================
+
+photoInput?.addEventListener("change", async (event) => {
   const file = event.target.files[0];
 
   if (!file) return;
@@ -92,41 +157,43 @@ photoInput?.addEventListener("change", (event) => {
     return;
   }
 
-  // Batasi ukuran foto maksimal 1,5 MB.
-  if (file.size > 1.5 * 1024 * 1024) {
-    alert("Ukuran foto maksimal 1,5 MB.");
-    photoInput.value = "";
-    return;
-  }
+  try {
+    // Ubah tombol sementara agar pengguna tahu foto diproses.
+    if (photoButton) {
+      photoButton.style.opacity = "0.6";
+      photoButton.style.pointerEvents = "none";
+    }
 
-  const reader = new FileReader();
+    // Kompres foto sebelum disimpan.
+    const compressedPhoto = await compressProfilePhoto(file);
 
-  reader.onload = () => {
     const profile = loadProfile();
 
-    profile.photo = reader.result;
+    profile.photo = compressedPhoto;
 
-    try {
-      saveProfile(profile);
-renderProfilePhoto();
+    saveProfile(profile);
 
-window.dispatchEvent(new Event("profileUpdated"));
+    // Perbarui tampilan foto di halaman profil.
+    renderProfilePhoto();
 
-alert("Foto profil berhasil diperbarui.");
-    } catch (error) {
-      console.error("Gagal menyimpan foto:", error);
-      alert("Foto gagal disimpan. Silakan gunakan foto yang lebih kecil.");
+    // Perbarui avatar Dashboard.
+    window.dispatchEvent(new Event("profileUpdated"));
+
+    alert("Foto profil berhasil diunggah dan dikompresi.");
+
+  } catch (error) {
+    console.error("Gagal memproses foto:", error);
+    alert("Foto gagal diproses. Silakan coba foto lain.");
+
+  } finally {
+    // Aktifkan kembali tombol.
+    if (photoButton) {
+      photoButton.style.opacity = "";
+      photoButton.style.pointerEvents = "";
     }
 
     photoInput.value = "";
-  };
-
-  reader.onerror = () => {
-    alert("Gagal membaca foto.");
-    photoInput.value = "";
-  };
-
-  reader.readAsDataURL(file);
+  }
 });
 
 // Tampilkan foto yang sudah tersimpan.
