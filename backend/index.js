@@ -17,8 +17,22 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
 
+const allowedOrigins = [
+  "https://rovixa-ai.github.io",
+  "https://kalorisehatku.rovixa.web.id"
+];
+
 app.use(cors({
-  origin: "https://rovixa-ai.github.io"
+  origin: function (origin, callback) {
+    // Izinkan request tanpa Origin, misalnya dari server atau alat pengujian.
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(
+      new Error("Origin tidak diizinkan oleh CORS: " + origin)
+    );
+  }
 }));
 app.use(express.json());
 
