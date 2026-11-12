@@ -1,3 +1,7 @@
+import {
+  loadProfileFromCloud,
+  syncProfileToCloud
+} from "./firestore-sync.js";
 
 const PROFILE_STORAGE_KEY = "kaloriku_profile";
 
@@ -15,13 +19,17 @@ function loadProfile() {
 
 
 function saveProfile(profile) {
+  // Simpan lokal terlebih dahulu.
   localStorage.setItem(
     PROFILE_STORAGE_KEY,
     JSON.stringify(profile)
   );
+
+  // Sinkronisasi cloud berjalan di latar belakang.
+  syncProfileToCloud(profile);
 }
 
-function initializeProfilePage() {
+async function initializeProfilePage() {
   const profilePage = document.getElementById("profilePage");
 
   if (!profilePage) {
@@ -29,6 +37,8 @@ function initializeProfilePage() {
     return;
   }
 
+  // Muat profil cloud sebelum mengisi formulir.
+await loadProfileFromCloud();
  
 const fields = {
   name: profilePage.querySelector("#profileName"),
