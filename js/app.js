@@ -18,6 +18,10 @@ import {
 } from "./meal-storage.js";
 
 import {
+  createMealId
+} from "./firestore-meals.js";
+
+import {
   updateDashboard
 } from "./dashboard-render.js";
 
@@ -522,7 +526,8 @@ editButton.addEventListener("click", () => {
     const meals = getMeals();
 
     meals.push({
-      name: "Menu dari foto",
+  id: createMealId(),
+  name: "Menu dari foto",
       foods: foodsToSave,
       foodCount: foodsToSave.length,
       ...groupTotal,
@@ -678,8 +683,9 @@ $("saveMeal").addEventListener("click", () => {
 
   const meals = getMeals();
 
-  meals.push({
-    ...currentResult,
+ meals.push({
+  id: createMealId(),
+  ...currentResult,
     date: new Date().toLocaleDateString("sv-SE"),
     createdAt: Date.now()
   });
