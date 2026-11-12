@@ -9,8 +9,17 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
-// Maksimal catatan dalam satu dokumen Firestore.
+import {
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+// Pengaturan sinkronisasi
 const MAX_MEALS_PER_BATCH = 10;
+const PARTIAL_SYNC_DELAY = 5 * 60 * 1000;
+
+let syncTimer = null;
+let flushPromise = null;
+let syncStarted = false;
 
 // Memastikan pengguna benar-benar login dengan Google.
 function getGoogleUser() {
@@ -41,6 +50,31 @@ function getGoogleUser() {
 // Membuat ID unik untuk setiap catatan.
 export function createMealId() {
   return crypto.randomUUID();
+}
+
+// Key antrean dibuat terpisah untuk setiap akun.
+function getQueueKey(uid) {
+  return `kaloriku_pending_meals_${uid}`;
+}
+
+// Membaca antrean lokal.
+function getPendingMeals(uid) {
+  try {
+    return JSON.parse(
+      localStorage.getItem(getQueueKey(uid)) || "[]"
+    );
+  } catch (error) {
+    console.error("Gagal membaca antrean:", error);
+    return [];
+  }
+}
+
+// Menyimpan antrean lokal.
+function savePendingMeals(uid, meals) {
+  localStorage.setItem(
+    getQueueKey(uid),
+    JSON.stringify(meals)
+  );
 }
 
 // Mengambil hanya field yang diperlukan untuk cloud.
@@ -105,8 +139,7 @@ export function prepareMealForCloud(meal) {
   return result;
 }
 
-// Membuat ID dokumen berdasarkan ID catatan.
-// ID yang sama menghasilkan dokumen yang sama.
+// ID batch tetap berdasarkan catatan pertama dan terakhir.
 function createBatchId(meals) {
   const firstId = meals[0].id;
   const lastId = meals[meals.length - 1].id;
@@ -114,7 +147,7 @@ function createBatchId(meals) {
   return `batch_${firstId}_${lastId}`.replaceAll("/", "_");
 }
 
-// Menyimpan maksimal 10 catatan dalam satu dokumen.
+// Menyimpan batch ke Firestore.
 export async function saveMealBatch(meals) {
   const user = getGoogleUser();
 
@@ -122,18 +155,21 @@ export async function saveMealBatch(meals) {
     throw new Error("Pengguna belum login dengan Google.");
   }
 
-  if (!Array.isArray(meals) || meals.length === 0) {
-    throw new Error("Data makanan kosong.");
-  }
-
-  if (meals.length > MAX_MEALS_PER_BATCH) {
-    throw new Error("Maksimal 10 catatan per batch.");
+  if (
+    !Array.isArray(meals) ||
+    meals.length === 0 ||
+    meals.length > MAX_MEALS_PER_BATCH
+  ) {
+    throw new Error("Jumlah catatan dalam batch tidak valid.");
   }
 
   const preparedMeals = meals.map(prepareMealForCloud);
 
-  if (preparedMeals.some(meal => !meal.id)) {
-    throw new Error("Ada catatan makanan yang belum memiliki ID.");
+  if (
+    preparedMeals.some(meal => !meal.id) ||
+    new Set(preparedMeals.map(meal => meal.id)).size !== preparedMeals.length
+  ) {
+    throw new Error("ID catatan tidak valid atau duplikat.");
   }
 
   const batchId = createBatchId(preparedMeals);
@@ -156,6 +192,172 @@ export async function saveMealBatch(meals) {
   );
 
   return true;
+}
+
+// Mengirim antrean secara bertahap.
+async function flushPendingMeals(partial = false) {
+  const user = getGoogleUser();
+
+  if (!user) return;
+
+  if (flushPromise) return flushPromise;
+
+  flushPromise = (async () => {
+    const uid = user.uid;
+
+    try {
+      while (true) {
+        if (auth.currentUser?.uid !== uid) break;
+
+        const queue = getPendingMeals(uid);
+
+        if (queue.length === 0) break;
+
+        // Batch penuh dikirim langsung.
+        // Batch parsial hanya dikirim saat waktunya tiba.
+        if (queue.length < MAX_MEALS_PER_BATCH && !partial) {
+          break;
+        }
+
+        const batch = queue.slice(0, MAX_MEALS_PER_BATCH);
+
+        await saveMealBatch(batch);
+
+        // Jangan mengubah antrean jika akun berganti.
+        if (auth.currentUser?.uid !== uid) break;
+
+        const sentIds = new Set(
+          batch.map(meal => meal.id)
+        );
+
+        const latestQueue = getPendingMeals(uid);
+
+        savePendingMeals(
+          uid,
+          latestQueue.filter(meal => !sentIds.has(meal.id))
+        );
+
+        console.log(
+          `Antrean tersisa: ${getPendingMeals(uid).length}`
+        );
+      }
+
+    } catch (error) {
+      console.error(
+        "Sinkronisasi gagal. Data tetap dalam antrean:",
+        error
+      );
+    }
+  })();
+
+  try {
+    await flushPromise;
+  } finally {
+    flushPromise = null;
+
+    const currentUser = getGoogleUser();
+
+    if (currentUser) {
+      schedulePartialSync(currentUser.uid);
+    }
+  }
+}
+
+// Menjadwalkan pengiriman catatan yang belum mencapai 10.
+function schedulePartialSync(uid) {
+  clearTimeout(syncTimer);
+  syncTimer = null;
+
+  const queue = getPendingMeals(uid);
+
+  if (queue.length === 0) return;
+
+  if (queue.length >= MAX_MEALS_PER_BATCH) {
+    flushPendingMeals(false);
+    return;
+  }
+
+  syncTimer = setTimeout(() => {
+    const user = getGoogleUser();
+
+    if (user?.uid === uid) {
+      flushPendingMeals(true);
+    }
+  }, PARTIAL_SYNC_DELAY);
+}
+
+// Memasukkan catatan baru ke antrean.
+export async function enqueueMealsForSync(meals) {
+  const user = getGoogleUser();
+
+  // Akun tamu tidak menggunakan sinkronisasi cloud.
+  if (!user) return false;
+
+  if (!Array.isArray(meals) || meals.length === 0) {
+    return false;
+  }
+
+  const uid = user.uid;
+  const queue = getPendingMeals(uid);
+  const existingIds = new Set(queue.map(meal => meal.id));
+
+  for (const meal of meals) {
+    if (!meal.id) {
+      throw new Error("Catatan belum memiliki ID unik.");
+    }
+
+    if (!existingIds.has(meal.id)) {
+      queue.push(prepareMealForCloud(meal));
+      existingIds.add(meal.id);
+    }
+  }
+
+  savePendingMeals(uid, queue);
+
+  console.log(
+    `Antrean sinkronisasi: ${queue.length} catatan.`
+  );
+
+  if (queue.length >= MAX_MEALS_PER_BATCH) {
+    clearTimeout(syncTimer);
+    syncTimer = null;
+
+    await flushPendingMeals(false);
+  } else {
+    schedulePartialSync(uid);
+  }
+
+  return true;
+}
+
+// Memulai sinkronisasi dan melanjutkan antrean lama.
+export function startMealSync() {
+  if (syncStarted) return;
+
+  syncStarted = true;
+
+  onAuthStateChanged(auth, user => {
+    clearTimeout(syncTimer);
+    syncTimer = null;
+
+    if (!user || !getGoogleUser()) return;
+
+    const queue = getPendingMeals(user.uid);
+
+    if (queue.length >= MAX_MEALS_PER_BATCH) {
+      flushPendingMeals(false);
+    } else if (queue.length > 0) {
+      schedulePartialSync(user.uid);
+    }
+  });
+
+  window.addEventListener("online", () => {
+    const user = getGoogleUser();
+
+    if (user) {
+      flushPendingMeals(true);
+    }
+  });
 }
 
 // Mengambil seluruh catatan dari cloud.

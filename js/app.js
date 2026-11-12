@@ -18,7 +18,9 @@ import {
 } from "./meal-storage.js";
 
 import {
-  createMealId
+  createMealId,
+  enqueueMealsForSync,
+  startMealSync
 } from "./firestore-meals.js";
 
 import {
@@ -30,6 +32,8 @@ import {
 } from "./food-analysis.js";
 
 const $ = id => document.getElementById(id);
+// Memulai sinkronisasi riwayat makanan.
+startMealSync();
 
 let currentResult = null;
 let selectedSuggestedFood = null;
@@ -537,7 +541,14 @@ editButton.addEventListener("click", () => {
 
     saveMeals(meals);
 
-    updateDashboard();
+// Masukkan catatan terbaru ke antrean Firestore.
+void enqueueMealsForSync([
+  meals[meals.length - 1]
+]).catch(error => {
+  console.error("Gagal memasukkan scan foto ke antrean:", error);
+});
+
+updateDashboard();
     resetFoodScanner();
 
     alert("Seluruh makanan berhasil disimpan dalam satu kelompok.");
@@ -692,7 +703,14 @@ $("saveMeal").addEventListener("click", () => {
 
   saveMeals(meals);
 
-  updateDashboard();
+// Masukkan catatan terbaru ke antrean Firestore.
+void enqueueMealsForSync([
+  meals[meals.length - 1]
+]).catch(error => {
+  console.error("Gagal memasukkan scan manual ke antrean:", error);
+});
+
+updateDashboard();
 
   resetFoodScanner();
 
