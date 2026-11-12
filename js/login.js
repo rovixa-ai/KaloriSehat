@@ -3,8 +3,7 @@ import { auth } from "./firebase-config.js";
 
 import {
   GoogleAuthProvider,
-  signInWithRedirect,
-  getRedirectResult,
+  signInWithPopup,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
@@ -24,7 +23,7 @@ function saveGoogleUser(user) {
   localStorage.setItem("kaloriku_user", JSON.stringify(userData));
 }
 
-// Login menggunakan akun Google.
+// Login menggunakan akun Google melalui Popup.
 googleLoginButton?.addEventListener("click", async () => {
   try {
     googleLoginButton.disabled = true;
@@ -36,12 +35,26 @@ googleLoginButton?.addEventListener("click", async () => {
       prompt: "select_account"
     });
 
-    await signInWithRedirect(auth, provider);
+    const result = await signInWithPopup(auth, provider);
+
+    saveGoogleUser(result.user);
+
+    window.location.replace("index.html");
 
   } catch (error) {
-    console.error("Login Google gagal:", error);
+    console.error("Login Google gagal:", error.code, error.message);
 
-    alert("Login Google gagal: " + error.message);
+    let message = "Login Google gagal. Silakan coba kembali.";
+
+    if (error.code === "auth/popup-closed-by-user") {
+      message = "Jendela login Google ditutup sebelum proses selesai.";
+    } else if (error.code === "auth/popup-blocked") {
+      message = "Popup Google diblokir browser. Izinkan popup untuk situs ini.";
+    } else if (error.code === "auth/network-request-failed") {
+      message = "Koneksi internet bermasalah. Periksa koneksi lalu coba lagi.";
+    }
+
+    alert(message);
 
     googleLoginButton.disabled = false;
     googleLoginButton.innerHTML =
@@ -49,39 +62,13 @@ googleLoginButton?.addEventListener("click", async () => {
   }
 });
 
-// Periksa hasil login setelah kembali dari Google.
-async function initializeLogin() {
-  try {
-    const result = await getRedirectResult(auth);
-
-    if (result?.user) {
-      saveGoogleUser(result.user);
-      window.location.replace("index.html");
-      return;
-    }
-
-    // Periksa apakah sebelumnya sudah ada sesi login aktif.
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        saveGoogleUser(user);
-        window.location.replace("index.html");
-      }
-    });
-
-  } catch (error) {
-    console.error("Autentikasi Google gagal:", error);
-
-    alert("Autentikasi Google gagal. Silakan coba kembali.");
-
-    if (googleLoginButton) {
-      googleLoginButton.disabled = false;
-      googleLoginButton.innerHTML =
-        '<span class="google-icon">G</span> Lanjutkan dengan Google';
-    }
+// Periksa apakah sebelumnya sudah ada sesi login aktif.
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    saveGoogleUser(user);
+    window.location.replace("index.html");
   }
-}
-
-initializeLogin();
+});
 
 // Login sebagai tamu.
 guestLoginButton?.addEventListener("click", () => {
