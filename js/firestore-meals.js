@@ -2,6 +2,11 @@
 import { auth, db } from "./firebase-config.js";
 
 import {
+  getMeals,
+  saveMeals
+} from "./meal-storage.js";
+
+import {
   collection,
   doc,
   getDocs,
@@ -330,26 +335,95 @@ export async function enqueueMealsForSync(meals) {
   return true;
 }
 
+
+// Menggabungkan riwayat lokal dan cloud berdasarkan ID.
+export async function syncMealsFromCloud() {
+  const user = getGoogleUser();
+
+  if (!user) return false;
+
+  try {
+    const uid = user.uid;
+
+    // Ambil data cloud.
+    const cloudMeals = await loadMealsFromCloud();
+
+    // Pastikan akun tidak berganti selama proses berlangsung.
+    if (auth.currentUser?.uid !== uid) return false;
+
+    // Ambil data lokal.
+    const localMeals = getMeals();
+
+    // Gabungkan berdasarkan ID unik.
+    const mealMap = new Map();
+
+    cloudMeals.forEach(meal => {
+      if (meal.id) {
+        mealMap.set(meal.id, meal);
+      }
+    });
+
+    localMeals.forEach(meal => {
+      if (meal.id) {
+        mealMap.set(meal.id, meal);
+      }
+    });
+
+    const mergedMeals = Array.from(mealMap.values());
+
+    mergedMeals.sort(
+      (a, b) => Number(b.createdAt || 0) -
+                Number(a.createdAt || 0)
+    );
+
+    // Simpan hasil penggabungan ke lokal.
+    saveMeals(mergedMeals);
+
+    // Cari catatan lokal yang belum ada di cloud.
+    const cloudIds = new Set(
+      cloudMeals.map(meal => meal.id)
+    );
+
+    const unsyncedMeals = localMeals.filter(
+      meal => meal.id && !cloudIds.has(meal.id)
+    );
+
+    // Masukkan catatan yang belum tersinkron ke antrean.
+    if (unsyncedMeals.length > 0) {
+      await enqueueMealsForSync(unsyncedMeals);
+    }
+
+    console.log("===== SINKRONISASI RIWAYAT =====");
+    console.log("Data cloud:", cloudMeals.length);
+    console.log("Data lokal:", localMeals.length);
+    console.log("Data gabungan:", mergedMeals.length);
+    console.log("Belum tersinkron:", unsyncedMeals.length);
+    console.log("================================");
+
+    return true;
+
+  } catch (error) {
+    console.error("Gagal menggabungkan riwayat:", error);
+    return false;
+  }
+}
+
+
 // Memulai sinkronisasi dan melanjutkan antrean lama.
 export function startMealSync() {
   if (syncStarted) return;
 
   syncStarted = true;
 
-  onAuthStateChanged(auth, user => {
-    clearTimeout(syncTimer);
-    syncTimer = null;
+ onAuthStateChanged(auth, user => {
+  clearTimeout(syncTimer);
+  syncTimer = null;
 
-    if (!user || !getGoogleUser()) return;
+  if (!user || !getGoogleUser()) return;
 
-    const queue = getPendingMeals(user.uid);
-
-    if (queue.length >= MAX_MEALS_PER_BATCH) {
-      flushPendingMeals(false);
-    } else if (queue.length > 0) {
-      schedulePartialSync(user.uid);
-    }
-  });
+  // Ambil dan gabungkan riwayat cloud dengan lokal.
+  void syncMealsFromCloud();
+});
 
   window.addEventListener("online", () => {
     const user = getGoogleUser();
