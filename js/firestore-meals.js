@@ -481,14 +481,19 @@ export function startMealSync() {
 
   syncStarted = true;
 
- onAuthStateChanged(auth, user => {
+onAuthStateChanged(auth, user => {
   clearTimeout(syncTimer);
   syncTimer = null;
 
   if (!user || !getGoogleUser()) return;
 
-  // Ambil dan gabungkan riwayat cloud dengan lokal.
-  void syncMealsFromCloud();
+  void syncMealsFromCloud().finally(() => {
+    const currentUser = getGoogleUser();
+
+    if (currentUser) {
+      schedulePartialSync(currentUser.uid);
+    }
+  });
 });
 
   window.addEventListener("online", () => {
