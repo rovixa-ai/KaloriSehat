@@ -20,7 +20,7 @@ import {
 
 // Pengaturan sinkronisasi
 const MAX_MEALS_PER_BATCH = 10;
-const PARTIAL_SYNC_DELAY = 5 * 60 * 1000;
+const PARTIAL_SYNC_DELAY = 1 * 60 * 1000;
 
 let syncTimer = null;
 let flushPromise = null;
@@ -60,6 +60,35 @@ export function createMealId() {
 // Key antrean dibuat terpisah untuk setiap akun.
 function getQueueKey(uid) {
   return `kaloriku_pending_meals_${uid}`;
+}
+
+// Key jadwal sinkronisasi untuk setiap akun.
+function getSyncDueKey(uid) {
+  return `kaloriku_sync_due_${uid}`;
+}
+
+// Membaca waktu jatuh tempo.
+function getSyncDueAt(uid) {
+  const value = Number(
+    localStorage.getItem(getSyncDueKey(uid))
+  );
+
+  return Number.isFinite(value) && value > 0
+    ? value
+    : null;
+}
+
+// Menyimpan waktu jatuh tempo.
+function setSyncDueAt(uid, timestamp) {
+  localStorage.setItem(
+    getSyncDueKey(uid),
+    String(timestamp)
+  );
+}
+
+// Menghapus jadwal setelah antrean kosong.
+function clearSyncDueAt(uid) {
+  localStorage.removeItem(getSyncDueKey(uid));
 }
 
 // Membaca antrean lokal.
@@ -248,11 +277,19 @@ async function flushPendingMeals(partial = false) {
       }
 
     } catch (error) {
-      console.error(
-        "Sinkronisasi gagal. Data tetap dalam antrean:",
-        error
-      );
-    }
+  console.error(
+    "Sinkronisasi gagal. Data tetap dalam antrean:",
+    error
+  );
+
+  // Jika gagal, jadwalkan percobaan ulang 1 menit lagi.
+  if (auth.currentUser?.uid === uid) {
+    setSyncDueAt(
+      uid,
+      Date.now() + PARTIAL_SYNC_DELAY
+    );
+  }
+}
   })();
 
   try {
@@ -269,27 +306,56 @@ async function flushPendingMeals(partial = false) {
 }
 
 // Menjadwalkan pengiriman catatan yang belum mencapai 10.
+
 function schedulePartialSync(uid) {
   clearTimeout(syncTimer);
   syncTimer = null;
 
   const queue = getPendingMeals(uid);
 
-  if (queue.length === 0) return;
-
-  if (queue.length >= MAX_MEALS_PER_BATCH) {
-    flushPendingMeals(false);
+  // Tidak ada antrean: hapus jadwal.
+  if (queue.length === 0) {
+    clearSyncDueAt(uid);
     return;
   }
+
+  // Jika batch penuh, langsung kirim.
+  if (queue.length >= MAX_MEALS_PER_BATCH) {
+    clearSyncDueAt(uid);
+    void flushPendingMeals(false);
+    return;
+  }
+
+  // Pertahankan jadwal lama jika sudah tersedia.
+  let dueAt = getSyncDueAt(uid);
+
+  // Jika belum ada jadwal, buat jadwal baru 1 menit.
+  if (!dueAt) {
+    dueAt = Date.now() + PARTIAL_SYNC_DELAY;
+    setSyncDueAt(uid, dueAt);
+  }
+
+  // Hitung sisa waktu berdasarkan jadwal tersimpan.
+  const remainingTime = Math.max(
+    0,
+    dueAt - Date.now()
+  );
+
+  console.log(
+    "Sinkronisasi dijadwalkan dalam:",
+    Math.ceil(remainingTime / 1000),
+    "detik"
+  );
 
   syncTimer = setTimeout(() => {
     const user = getGoogleUser();
 
     if (user?.uid === uid) {
-      flushPendingMeals(true);
+      void flushPendingMeals(true);
     }
-  }, PARTIAL_SYNC_DELAY);
+  }, remainingTime);
 }
+
 
 // Memasukkan catatan baru ke antrean.
 export async function enqueueMealsForSync(meals) {
