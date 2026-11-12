@@ -85,7 +85,7 @@ formData.append("photo", compressedPhoto);
   }
 
   if (!Array.isArray(data.foods) || data.foods.length === 0) {
-    throw new Error("AI tidak menemukan makanan.");
+    throw new Error("Tidak menemukan makanan.");
   }
 
   return data.foods;

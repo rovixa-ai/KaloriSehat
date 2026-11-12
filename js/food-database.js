@@ -152,24 +152,37 @@ export function findFood(name, database, aliases = {}) {
   return null;
 }
 
-// Memberikan semua saran makanan yang cocok
+// Memberikan semua saran makanan yang mengandung semua kata pencarian
 export function findFoodSuggestions(name, database) {
   const query = normalizeFoodName(name);
 
   if (!query) return [];
 
-  const queryWords = query.split(" ");
+  const queryWords = query
+    .split(" ")
+    .filter(word => word.length > 1);
 
   return Object.entries(database)
     .map(([foodName, food]) => {
+      // Pastikan semua kata pencarian ada di nama makanan
+      const containsAllWords = queryWords.every(word =>
+        foodName.includes(word)
+      );
+
+      if (!containsAllWords) {
+        return null;
+      }
+
       let score = 0;
 
+      // Prioritas tertinggi jika seluruh kalimat ditemukan
       if (foodName.includes(query)) {
         score += 10;
       }
 
+      // Beri skor untuk setiap kata yang cocok
       queryWords.forEach(word => {
-        if (word.length > 1 && foodName.includes(word)) {
+        if (foodName.includes(word)) {
           score += 2;
         }
       });
@@ -180,7 +193,7 @@ export function findFoodSuggestions(name, database) {
         score
       };
     })
-    .filter(item => item.score > 0)
+    .filter(item => item !== null)
     .sort((a, b) => b.score - a.score);
 }
 
