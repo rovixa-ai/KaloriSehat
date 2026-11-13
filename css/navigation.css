@@ -1,46 +1,90 @@
 
 /* =====================================================
-   KALORISEHATKU - MODERN FITNESS UI
-   Navigation Stylesheet
-===================================================== */
+   KALORISEHATKU - FLOATING GLASS NAVIGATION
+   ===================================================== */
 
-/* =====================================================
-   1. BOTTOM NAVIGATION
-===================================================== */
-
+/* 1. FLOATING NAVIGATION BAR */
 .bottom-nav {
+  --nav-index: 0;
+
   position: fixed;
   z-index: 1000;
-  bottom: 0;
   left: 50%;
+  bottom: calc(14px + env(safe-area-inset-bottom));
   transform: translateX(-50%);
 
-  width: 100%;
-  max-width: 600px;
-  min-height: 76px;
+  width: min(440px, calc(100% - 32px));
+  height: 76px;
 
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: center;
 
-  padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+  padding: 8px;
+  isolation: isolate;
 
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  box-shadow: 0 -5px 20px rgba(20, 50, 35, 0.06);
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 24px;
+
+  box-shadow:
+    0 12px 35px rgba(20, 50, 35, 0.12),
+    0 3px 10px rgba(20, 50, 35, 0.05);
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
 
   transition:
-    background var(--transition),
-    border-color var(--transition),
-    box-shadow var(--transition);
+    background 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease;
 }
 
-/* =====================================================
-   2. NAVIGATION ITEM
-===================================================== */
+/* 2. MOVING ACTIVE PILL */
+.nav-indicator {
+  position: absolute;
+  z-index: 0;
 
+  top: 8px;
+  bottom: 8px;
+  left: 8px;
+
+  width: calc((100% - 16px) / 4);
+
+  border-radius: 18px;
+
+  background: rgba(22, 160, 105, 0.12);
+  border: 1px solid rgba(22, 160, 105, 0.10);
+
+  transform: translateX(calc(var(--nav-index) * 100%));
+
+  transition:
+    transform 420ms cubic-bezier(.22, 1, .36, 1),
+    background 300ms ease,
+    border-color 300ms ease;
+}
+
+/* Posisi indikator berdasarkan menu aktif */
+.bottom-nav:has(button.nav-item:nth-of-type(1).active) {
+  --nav-index: 0;
+}
+
+.bottom-nav:has(button.nav-item:nth-of-type(2).active) {
+  --nav-index: 1;
+}
+
+.bottom-nav:has(button.nav-item:nth-of-type(3).active) {
+  --nav-index: 2;
+}
+
+.bottom-nav:has(button.nav-item:nth-of-type(4).active) {
+  --nav-index: 3;
+}
+
+/* 3. NAVIGATION BUTTON */
 .nav-item {
   position: relative;
+  z-index: 1;
 
   display: flex;
   flex-direction: column;
@@ -48,13 +92,14 @@
   justify-content: center;
   gap: 5px;
 
+  width: 100%;
   min-width: 0;
-  min-height: 58px;
+  height: 100%;
 
-  padding: 7px 4px;
+  padding: 5px 2px;
 
   border: none;
-  border-radius: 14px;
+  border-radius: 16px;
   background: transparent;
 
   color: var(--text-muted);
@@ -64,38 +109,36 @@
   -webkit-tap-highlight-color: transparent;
 
   transition:
-    color 280ms ease,
-    background 350ms ease,
+    color 250ms ease,
     transform 180ms ease;
 }
 
-/* =====================================================
-   3. ICON
-===================================================== */
-
+/* 4. ICON */
 .nav-icon {
-  position: relative;
-
   display: flex;
   align-items: center;
   justify-content: center;
 
   width: 28px;
-  height: 25px;
+  height: 27px;
 
-  font-size: 22px;
+  font-size: 24px;
   line-height: 1;
 
   transition:
     transform 350ms cubic-bezier(.2, .8, .2, 1),
-    color 280ms ease,
-    filter 280ms ease;
+    filter 250ms ease;
 }
 
-/* =====================================================
-   4. LABEL
-===================================================== */
 
+.nav-icon svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+
+/* 5. LABEL */
 .nav-label {
   display: block;
 
@@ -107,126 +150,85 @@
   font-size: 10px;
   font-weight: 600;
   line-height: 1.2;
-  letter-spacing: 0.1px;
+  letter-spacing: 0.15px;
 
   transition:
-    color 280ms ease,
-    font-weight 280ms ease,
-    opacity 280ms ease;
+    color 250ms ease,
+    font-weight 250ms ease,
+    transform 250ms ease;
 }
 
-/* =====================================================
-   5. ACTIVE STATE
-===================================================== */
-
+/* 6. ACTIVE STATE */
 .nav-item.active {
   color: var(--brand);
-  background: var(--brand-light);
+  background: transparent;
 }
 
 .nav-item.active .nav-icon {
-  transform: translateY(-3px);
-  filter: drop-shadow(0 3px 3px rgba(22, 134, 91, .15));
+  transform: translateY(-2px) scale(1.08);
+  filter: drop-shadow(0 3px 5px rgba(22, 134, 91, .18));
 }
 
 .nav-item.active .nav-label {
   color: var(--brand);
-  font-weight: 700;
+  font-weight: 800;
 }
 
-/* =====================================================
-   6. ACTIVE INDICATOR
-===================================================== */
-
-.nav-indicator {
-  position: absolute;
-  top: 0;
-  left: 50%;
-
-  width: 22px;
-  height: 3px;
-
-  border-radius: 0 0 5px 5px;
-  background: var(--brand);
-
-  opacity: 0;
-  transform: translateX(-50%) scaleX(0);
-
-  transition:
-    opacity 300ms ease,
-    transform 400ms cubic-bezier(.2, .8, .2, 1);
-}
-
-.nav-item.active .nav-indicator {
-  opacity: 1;
-  transform: translateX(-50%) scaleX(1);
-}
-
-/* =====================================================
-   7. HOVER & PRESS
-===================================================== */
-
+/* 7. HOVER */
 @media (hover: hover) {
-  .nav-item:hover {
+  .nav-item:not(.active):hover {
     color: var(--brand);
-    background: var(--surface-soft);
   }
 
-  .nav-item:hover .nav-icon {
+  .nav-item:not(.active):hover .nav-icon {
     transform: translateY(-2px);
   }
-
-  .nav-item.active:hover .nav-icon {
-    transform: translateY(-3px);
-  }
 }
 
+/* 8. PRESS FEEDBACK */
 .nav-item:active {
-  transform: scale(.97);
+  transform: scale(.92);
   transition-duration: 100ms;
 }
 
 .nav-item:focus-visible {
   outline: 2px solid var(--brand);
-  outline-offset: -2px;
+  outline-offset: -3px;
 }
 
-/* =====================================================
-   8. DARK MODE
-===================================================== */
-
+/* 9. DARK MODE */
 html[data-theme="dark"] .bottom-nav {
-  background: var(--surface);
-  border-top-color: var(--border);
-  box-shadow: 0 -5px 20px rgba(0, 0, 0, .2);
+  background: rgba(25, 34, 30, 0.82);
+  border-color: rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.35),
+    0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+html[data-theme="dark"] .nav-indicator {
+  background: rgba(66, 214, 140, 0.15);
+  border-color: rgba(66, 214, 140, 0.12);
 }
 
 html[data-theme="dark"] .nav-item.active {
-  background: var(--brand-light);
   color: var(--brand);
 }
 
 html[data-theme="dark"] .nav-item.active .nav-icon {
-  filter: drop-shadow(0 3px 4px rgba(66, 214, 140, .18));
+  filter: drop-shadow(0 3px 5px rgba(66, 214, 140, .2));
 }
 
-/* =====================================================
-   9. RESPONSIVE
-===================================================== */
-
+/* 10. SMALL SCREEN */
 @media (max-width: 380px) {
   .bottom-nav {
-    min-height: 70px;
-    padding-inline: 7px;
-  }
-
-  .nav-item {
-    min-height: 54px;
-    gap: 4px;
+    width: calc(100% - 24px);
+    height: 70px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
   }
 
   .nav-icon {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .nav-label {
@@ -234,17 +236,13 @@ html[data-theme="dark"] .nav-item.active .nav-icon {
   }
 }
 
-/* =====================================================
-   10. REDUCED MOTION
-===================================================== */
-
+/* 11. REDUCED MOTION */
 @media (prefers-reduced-motion: reduce) {
+  .bottom-nav,
+  .nav-indicator,
   .nav-item,
   .nav-icon,
-  .nav-label,
-  .nav-indicator {
-    animation: none !important;
+  .nav-label {
     transition: none !important;
-    transform: none !important;
   }
 }

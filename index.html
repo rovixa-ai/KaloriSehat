@@ -787,42 +787,90 @@
   </footer>
 
 
+
 <!-- MENU NAVIGASI BAWAH -->
 <nav class="bottom-nav" aria-label="Menu utama">
 
-  <!-- Indikator aktif yang bergerak -->
   <span class="nav-indicator" aria-hidden="true"></span>
 
+  <!-- BERANDA -->
   <button type="button"
     class="nav-item active"
     data-page="homePage"
     aria-current="page">
-    <span class="nav-icon">⌂</span>
+
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round"
+        aria-hidden="true">
+        <path d="m3 10 9-7 9 7"/>
+        <path d="M5 9v11h14V9"/>
+        <path d="M9 20v-6h6v6"/>
+      </svg>
+    </span>
     <span class="nav-label">Beranda</span>
   </button>
 
+  <!-- RIWAYAT -->
   <button type="button"
     class="nav-item"
     data-page="historyPage">
-    <span class="nav-icon">▤</span>
+
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round"
+        aria-hidden="true">
+        <path d="M3 5h18v16H3z"/>
+        <path d="M7 9h10"/>
+        <path d="M7 13h10"/>
+        <path d="M7 17h6"/>
+        <path d="M7 3v4"/>
+        <path d="M17 3v4"/>
+      </svg>
+    </span>
     <span class="nav-label">Riwayat</span>
   </button>
 
+  <!-- STATISTIK -->
   <button type="button"
     class="nav-item"
     data-page="statisticsPage">
-    <span class="nav-icon">▥</span>
+
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round"
+        aria-hidden="true">
+        <path d="M4 20V10"/>
+        <path d="M10 20V4"/>
+        <path d="M16 20v-7"/>
+        <path d="M22 20H2"/>
+      </svg>
+    </span>
     <span class="nav-label">Statistik</span>
   </button>
 
+  <!-- PROFIL -->
   <button type="button"
     class="nav-item"
     data-page="profilePage">
-    <span class="nav-icon">♙</span>
+
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round"
+        aria-hidden="true">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 21a8 8 0 0 1 16 0"/>
+      </svg>
+    </span>
     <span class="nav-label">Profil</span>
   </button>
 
 </nav>
+
 
 <script type="module" src="./js/auth-guard.js"></script>
 

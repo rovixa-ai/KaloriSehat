@@ -6,7 +6,9 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/10.14.1/firebas
 // Konfigurasi Firebase KaloriKu
 const firebaseConfig = {
     apiKey: "AIzaSyBj7322SMN-pCXOgl9DIwQuW0Eq1bQZ52o",
-    authDomain: "gen-lang-client-0589900687.firebaseapp.com",
+    
+authDomain: "auth.rovixa.web.id",
+
     projectId: "gen-lang-client-0589900687",
     storageBucket: "gen-lang-client-0589900687.firebasestorage.app",
     messagingSenderId: "541073457264",
