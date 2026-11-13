@@ -8,9 +8,13 @@ import {
   doc,
   getDoc,
   setDoc,
+  deleteDoc,
   serverTimestamp
 } from
   "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+let profileWriteQueue = Promise.resolve();
+let profileResetInProgress = false;
 
 // Memastikan akun yang digunakan adalah akun Google,
 // bukan mode Tamu.
@@ -179,10 +183,24 @@ export async function loadProfileFromCloud() {
 }
 
 // Menyimpan perubahan profil ke Firestore.
-export async function syncProfileToCloud(profile) {
-  try {
-    const user = getGoogleUser();
+export function syncProfileToCloud(profile) {
+  if (
+    profileResetInProgress ||
+    window.__kalorikuResetInProgress
+  ) {
+    return Promise.resolve(false);
+  }
 
+  const task = profileWriteQueue.then(async () => {
+    // Cek ulang sebelum menulis ke Firestore.
+    if (
+      profileResetInProgress ||
+      window.__kalorikuResetInProgress
+    ) {
+      return false;
+    }
+
+    const user = getGoogleUser();
     if (!user) return false;
 
     const cloudProfile = prepareCloudProfile(profile);
@@ -205,11 +223,50 @@ export async function syncProfileToCloud(profile) {
     );
 
     console.log("Profil berhasil disinkronkan ke Firestore.");
+    return true;
+  });
 
+  profileWriteQueue = task.catch(error => {
+    console.error("Gagal menyinkronkan profil:", error);
+    return false;
+  });
+
+  return profileWriteQueue;
+}
+
+
+// Menghapus profil pengguna dari Firestore.
+export async function deleteProfileFromCloud() {
+  profileResetInProgress = true;
+
+  try {
+    // Tunggu penulisan profil sebelumnya selesai.
+    await profileWriteQueue;
+
+    const user = getGoogleUser();
+
+    if (!user) {
+      throw new Error("Akun Google tidak ditemukan.");
+    }
+
+    const profileRef = doc(
+      db,
+      "users",
+      user.uid,
+      "profile",
+      "main"
+    );
+
+    await deleteDoc(profileRef);
+
+    console.log("Profil berhasil dihapus dari Firestore.");
     return true;
 
   } catch (error) {
-    console.error("Gagal menyinkronkan profil:", error);
-    return false;
+    console.error("Gagal menghapus profil Firestore:", error);
+    throw error;
+
+  } finally {
+    profileResetInProgress = false;
   }
 }

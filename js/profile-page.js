@@ -1,7 +1,12 @@
 import {
   loadProfileFromCloud,
-  syncProfileToCloud
+  syncProfileToCloud,
+  deleteProfileFromCloud
 } from "./firestore-sync.js";
+
+import {
+  resetMealsCloudData
+} from "./firestore-meals.js";
 
 import { auth } from "./firebase-config.js";
 
@@ -26,6 +31,7 @@ function loadProfile() {
 
 function saveProfile(profile) {
   // Simpan lokal terlebih dahulu.
+  if (window.__kalorikuResetInProgress) return;
   localStorage.setItem(
     PROFILE_STORAGE_KEY,
     JSON.stringify(profile)
@@ -598,78 +604,107 @@ updateDailyNutritionTargets();
   );
 
   // Fungsi Reset Semua Data KaloriKu
-const resetDataButton =
-  profilePage.querySelector("#resetDataButton");
+// =========================================
+// RESET SEMUA DATA PENGGUNA
+// =========================================
+
+const resetDataButton = profilePage.querySelector("#resetDataButton");
 
 if (resetDataButton) {
   resetDataButton.addEventListener("click", async () => {
 
     const confirmed = await confirmAppModal({
-  type: "warning",
-  title: "Reset Semua Data?",
-  message: "Profil, riwayat makanan, dan target nutrisi akan dihapus permanen.",
-  confirmText: "Ya, Reset",
-  cancelText: "Batal"
-});
-
-if (!confirmed) return;
-
-    // Hapus data aplikasi
-    localStorage.removeItem("kaloriku_profile");
-    renderProfilePhoto();
-    localStorage.removeItem("kaloriku_meals");
-    localStorage.removeItem("kaloriku_target");
-    localStorage.removeItem("kaloriku_food_aliases");
-
-    // Kosongkan formulir profil
-    Object.values(fields).forEach(input => {
-      if (input) input.value = "";
+      type: "warning",
+      title: "Reset Semua Data?",
+      message:
+        "Profil, riwayat makanan, dan target nutrisi akan dihapus dari perangkat dan cloud. Akun Google tetap login.",
+      confirmText: "Ya, Reset",
+      cancelText: "Batal"
     });
 
-    // Kosongkan tampilan target nutrisi
-profilePage.querySelector("#dailyCalorieTarget").textContent = "—";
-profilePage.querySelector("#dailyProteinTarget").textContent = "—";
-profilePage.querySelector("#dailyCarbTarget").textContent = "—";
-profilePage.querySelector("#dailyFatTarget").textContent = "—";
+    if (!confirmed) return;
 
-    // Kosongkan hasil simulasi
-    const simulationResults = profilePage.querySelector(
-      ".goal-simulation-results"
-    );
+    resetDataButton.disabled = true;
+    window.__kalorikuResetInProgress = true;
 
-    if (simulationResults) {
-      simulationResults.hidden = true;
+    try {
+      // 1. Hapus seluruh data cloud.
+      await Promise.all([
+        resetMealsCloudData(),
+        deleteProfileFromCloud()
+      ]);
+
+      // 2. Hapus seluruh data lokal KaloriKu,
+      // kecuali identitas akun Google.
+      Object.keys(localStorage).forEach(key => {
+        if (
+          key.startsWith("kaloriku_") &&
+          key !== "kaloriku_user"
+        ) {
+          localStorage.removeItem(key);
+        }
+      });
+
+      // 3. Bersihkan tampilan profil.
+      Object.values(fields).forEach(input => {
+        if (input) input.value = "";
+      });
+
+      renderProfilePhoto();
+
+      profilePage.querySelector("#dailyCalorieTarget").textContent = "—";
+      profilePage.querySelector("#dailyProteinTarget").textContent = "—";
+      profilePage.querySelector("#dailyCarbTarget").textContent = "—";
+      profilePage.querySelector("#dailyFatTarget").textContent = "—";
+
+      const simulationResults =
+        profilePage.querySelector(".goal-simulation-results");
+
+      if (simulationResults) {
+        simulationResults.hidden = true;
+      }
+
+      const simulationMessage =
+        profilePage.querySelector("#goalSimulationMessage");
+
+      if (simulationMessage) {
+        simulationMessage.textContent =
+          "Lengkapi profil untuk melihat simulasi.";
+      }
+
+      // 4. Beri tahu komponen lain bahwa data sudah direset.
+      window.dispatchEvent(new Event("profileTargetUpdated"));
+
+      document.dispatchEvent(
+        new CustomEvent("kaloriku:datareset")
+      );
+
+      showAppModal({
+        type: "success",
+        title: "Reset Berhasil",
+        message:
+          "Semua data pengguna berhasil dihapus. Akun Google Anda tetap login."
+      });
+
+      // 5. Kembali ke halaman utama.
+      document.querySelector(
+        '.nav-item[data-page="homePage"]'
+      )?.click();
+
+    } catch (error) {
+      console.error("Reset semua data gagal:", error);
+
+      showAppModal({
+        type: "error",
+        title: "Reset Gagal",
+        message:
+          "Data cloud belum berhasil dihapus seluruhnya. Data lokal tetap dipertahankan. Periksa koneksi internet dan izin Firestore, lalu coba reset kembali."
+      });
+
+    } finally {
+      window.__kalorikuResetInProgress = false;
+      resetDataButton.disabled = false;
     }
-
-    const simulationMessage = profilePage.querySelector(
-      "#goalSimulationMessage"
-    );
-
-    if (simulationMessage) {
-      simulationMessage.textContent =
-        "Lengkapi profil untuk melihat simulasi.";
-    }
-
-    // Beritahu halaman lain
-    window.dispatchEvent(
-      new Event("profileTargetUpdated")
-    );
-
-    document.dispatchEvent(
-      new CustomEvent("kaloriku:datareset")
-    );
-
-    showAppModal({
-  type: "warning",
-  title: "Berhasil",
-  message: "Data Pengguna Berhasil dihapus."
-});
-
-    // Kembali ke Beranda
-    document.querySelector(
-      '.nav-item[data-page="homePage"]'
-    )?.click();
-
   });
 }
 

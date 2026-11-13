@@ -11,6 +11,7 @@ import {
   doc,
   getDocs,
   setDoc,
+  writeBatch,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
@@ -18,15 +19,23 @@ import {
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
-// Pengaturan sinkronisasi
+// =========================================
+// PENGATURAN SINKRONISASI
+// =========================================
+
 const MAX_MEALS_PER_BATCH = 10;
 const PARTIAL_SYNC_DELAY = 1 * 60 * 1000;
 
+let mealResetInProgress = false;
 let syncTimer = null;
 let flushPromise = null;
 let syncStarted = false;
 
-// Memastikan pengguna benar-benar login dengan Google.
+
+// =========================================
+// PEMERIKSAAN AKUN GOOGLE
+// =========================================
+
 function getGoogleUser() {
   const user = auth.currentUser;
 
@@ -52,22 +61,23 @@ function getGoogleUser() {
   }
 }
 
-// Membuat ID unik untuk setiap catatan.
+
+// =========================================
+// ID DAN ANTREAN LOKAL
+// =========================================
+
 export function createMealId() {
   return crypto.randomUUID();
 }
 
-// Key antrean dibuat terpisah untuk setiap akun.
 function getQueueKey(uid) {
   return `kaloriku_pending_meals_${uid}`;
 }
 
-// Key jadwal sinkronisasi untuk setiap akun.
 function getSyncDueKey(uid) {
   return `kaloriku_sync_due_${uid}`;
 }
 
-// Membaca waktu jatuh tempo.
 function getSyncDueAt(uid) {
   const value = Number(
     localStorage.getItem(getSyncDueKey(uid))
@@ -78,7 +88,6 @@ function getSyncDueAt(uid) {
     : null;
 }
 
-// Menyimpan waktu jatuh tempo.
 function setSyncDueAt(uid, timestamp) {
   localStorage.setItem(
     getSyncDueKey(uid),
@@ -86,12 +95,10 @@ function setSyncDueAt(uid, timestamp) {
   );
 }
 
-// Menghapus jadwal setelah antrean kosong.
 function clearSyncDueAt(uid) {
   localStorage.removeItem(getSyncDueKey(uid));
 }
 
-// Membaca antrean lokal.
 function getPendingMeals(uid) {
   try {
     return JSON.parse(
@@ -103,7 +110,6 @@ function getPendingMeals(uid) {
   }
 }
 
-// Menyimpan antrean lokal.
 function savePendingMeals(uid, meals) {
   localStorage.setItem(
     getQueueKey(uid),
@@ -111,7 +117,11 @@ function savePendingMeals(uid, meals) {
   );
 }
 
-// Mengambil hanya field yang diperlukan untuk cloud.
+
+// =========================================
+// PERSIAPAN DATA UNTUK FIRESTORE
+// =========================================
+
 function prepareFoodForCloud(food) {
   const allowedFields = [
     "name",
@@ -138,7 +148,6 @@ function prepareFoodForCloud(food) {
   return result;
 }
 
-// Menyaring data satu catatan makanan.
 export function prepareMealForCloud(meal) {
   const allowedFields = [
     "id",
@@ -173,7 +182,6 @@ export function prepareMealForCloud(meal) {
   return result;
 }
 
-// ID batch tetap berdasarkan catatan pertama dan terakhir.
 function createBatchId(meals) {
   const firstId = meals[0].id;
   const lastId = meals[meals.length - 1].id;
@@ -181,8 +189,19 @@ function createBatchId(meals) {
   return `batch_${firstId}_${lastId}`.replaceAll("/", "_");
 }
 
-// Menyimpan batch ke Firestore.
+
+// =========================================
+// MENYIMPAN BATCH KE FIRESTORE
+// =========================================
+
 export async function saveMealBatch(meals) {
+  if (
+    mealResetInProgress ||
+    window.__kalorikuResetInProgress
+  ) {
+    return false;
+  }
+
   const user = getGoogleUser();
 
   if (!user) {
@@ -216,6 +235,13 @@ export async function saveMealBatch(meals) {
     batchId
   );
 
+  if (
+    mealResetInProgress ||
+    window.__kalorikuResetInProgress
+  ) {
+    return false;
+  }
+
   await setDoc(batchRef, {
     meals: preparedMeals,
     updatedAt: serverTimestamp()
@@ -228,8 +254,19 @@ export async function saveMealBatch(meals) {
   return true;
 }
 
-// Mengirim antrean secara bertahap.
+
+// =========================================
+// MENGIRIM ANTREAN SECARA BERTAHAP
+// =========================================
+
 async function flushPendingMeals(partial = false) {
+  if (
+    mealResetInProgress ||
+    window.__kalorikuResetInProgress
+  ) {
+    return;
+  }
+
   const user = getGoogleUser();
 
   if (!user) return;
@@ -241,15 +278,22 @@ async function flushPendingMeals(partial = false) {
 
     try {
       while (true) {
-        if (auth.currentUser?.uid !== uid) break;
+        if (
+          mealResetInProgress ||
+          window.__kalorikuResetInProgress ||
+          auth.currentUser?.uid !== uid
+        ) {
+          break;
+        }
 
         const queue = getPendingMeals(uid);
 
         if (queue.length === 0) break;
 
-        // Batch penuh dikirim langsung.
-        // Batch parsial hanya dikirim saat waktunya tiba.
-        if (queue.length < MAX_MEALS_PER_BATCH && !partial) {
+        if (
+          queue.length < MAX_MEALS_PER_BATCH &&
+          !partial
+        ) {
           break;
         }
 
@@ -257,8 +301,13 @@ async function flushPendingMeals(partial = false) {
 
         await saveMealBatch(batch);
 
-        // Jangan mengubah antrean jika akun berganti.
-        if (auth.currentUser?.uid !== uid) break;
+        if (
+          mealResetInProgress ||
+          window.__kalorikuResetInProgress ||
+          auth.currentUser?.uid !== uid
+        ) {
+          break;
+        }
 
         const sentIds = new Set(
           batch.map(meal => meal.id)
@@ -277,65 +326,78 @@ async function flushPendingMeals(partial = false) {
       }
 
     } catch (error) {
-  console.error(
-    "Sinkronisasi gagal. Data tetap dalam antrean:",
-    error
-  );
+      console.error(
+        "Sinkronisasi gagal. Data tetap dalam antrean:",
+        error
+      );
 
-  // Jika gagal, jadwalkan percobaan ulang 1 menit lagi.
-  if (auth.currentUser?.uid === uid) {
-    setSyncDueAt(
-      uid,
-      Date.now() + PARTIAL_SYNC_DELAY
-    );
-  }
-}
+      if (
+        auth.currentUser?.uid === uid &&
+        !mealResetInProgress &&
+        !window.__kalorikuResetInProgress
+      ) {
+        setSyncDueAt(
+          uid,
+          Date.now() + PARTIAL_SYNC_DELAY
+        );
+      }
+    }
   })();
 
   try {
     await flushPromise;
+
   } finally {
     flushPromise = null;
 
     const currentUser = getGoogleUser();
 
-    if (currentUser) {
+    if (
+      currentUser &&
+      !mealResetInProgress &&
+      !window.__kalorikuResetInProgress
+    ) {
       schedulePartialSync(currentUser.uid);
     }
   }
 }
 
-// Menjadwalkan pengiriman catatan yang belum mencapai 10.
+
+// =========================================
+// PENJADWALAN SINKRONISASI
+// =========================================
 
 function schedulePartialSync(uid) {
+  if (
+    mealResetInProgress ||
+    window.__kalorikuResetInProgress
+  ) {
+    return;
+  }
+
   clearTimeout(syncTimer);
   syncTimer = null;
 
   const queue = getPendingMeals(uid);
 
-  // Tidak ada antrean: hapus jadwal.
   if (queue.length === 0) {
     clearSyncDueAt(uid);
     return;
   }
 
-  // Jika batch penuh, langsung kirim.
   if (queue.length >= MAX_MEALS_PER_BATCH) {
     clearSyncDueAt(uid);
     void flushPendingMeals(false);
     return;
   }
 
-  // Pertahankan jadwal lama jika sudah tersedia.
   let dueAt = getSyncDueAt(uid);
 
-  // Jika belum ada jadwal, buat jadwal baru 1 menit.
   if (!dueAt) {
     dueAt = Date.now() + PARTIAL_SYNC_DELAY;
     setSyncDueAt(uid, dueAt);
   }
 
-  // Hitung sisa waktu berdasarkan jadwal tersimpan.
   const remainingTime = Math.max(
     0,
     dueAt - Date.now()
@@ -350,18 +412,31 @@ function schedulePartialSync(uid) {
   syncTimer = setTimeout(() => {
     const user = getGoogleUser();
 
-    if (user?.uid === uid) {
+    if (
+      user?.uid === uid &&
+      !mealResetInProgress &&
+      !window.__kalorikuResetInProgress
+    ) {
       void flushPendingMeals(true);
     }
   }, remainingTime);
 }
 
 
-// Memasukkan catatan baru ke antrean.
+// =========================================
+// MEMASUKKAN CATATAN BARU KE ANTREAN
+// =========================================
+
 export async function enqueueMealsForSync(meals) {
+  if (
+    mealResetInProgress ||
+    window.__kalorikuResetInProgress
+  ) {
+    return false;
+  }
+
   const user = getGoogleUser();
 
-  // Akun tamu tidak menggunakan sinkronisasi cloud.
   if (!user) return false;
 
   if (!Array.isArray(meals) || meals.length === 0) {
@@ -383,6 +458,13 @@ export async function enqueueMealsForSync(meals) {
     }
   }
 
+  if (
+    mealResetInProgress ||
+    window.__kalorikuResetInProgress
+  ) {
+    return false;
+  }
+
   savePendingMeals(uid, queue);
 
   console.log(
@@ -394,6 +476,7 @@ export async function enqueueMealsForSync(meals) {
     syncTimer = null;
 
     await flushPendingMeals(false);
+
   } else {
     schedulePartialSync(uid);
   }
@@ -402,8 +485,18 @@ export async function enqueueMealsForSync(meals) {
 }
 
 
-// Menggabungkan riwayat lokal dan cloud berdasarkan ID.
+// =========================================
+// MENGGABUNGKAN RIWAYAT LOKAL DAN CLOUD
+// =========================================
+
 export async function syncMealsFromCloud() {
+  if (
+    mealResetInProgress ||
+    window.__kalorikuResetInProgress
+  ) {
+    return false;
+  }
+
   const user = getGoogleUser();
 
   if (!user) return false;
@@ -411,16 +504,18 @@ export async function syncMealsFromCloud() {
   try {
     const uid = user.uid;
 
-    // Ambil data cloud.
     const cloudMeals = await loadMealsFromCloud();
 
-    // Pastikan akun tidak berganti selama proses berlangsung.
-    if (auth.currentUser?.uid !== uid) return false;
+    if (
+      mealResetInProgress ||
+      window.__kalorikuResetInProgress ||
+      auth.currentUser?.uid !== uid
+    ) {
+      return false;
+    }
 
-    // Ambil data lokal.
     const localMeals = getMeals();
 
-    // Gabungkan berdasarkan ID unik.
     const mealMap = new Map();
 
     cloudMeals.forEach(meal => {
@@ -438,14 +533,20 @@ export async function syncMealsFromCloud() {
     const mergedMeals = Array.from(mealMap.values());
 
     mergedMeals.sort(
-      (a, b) => Number(b.createdAt || 0) -
-                Number(a.createdAt || 0)
+      (a, b) =>
+        Number(b.createdAt || 0) -
+        Number(a.createdAt || 0)
     );
 
-    // Simpan hasil penggabungan ke lokal.
+    if (
+      mealResetInProgress ||
+      window.__kalorikuResetInProgress
+    ) {
+      return false;
+    }
+
     saveMeals(mergedMeals);
 
-    // Cari catatan lokal yang belum ada di cloud.
     const cloudIds = new Set(
       cloudMeals.map(meal => meal.id)
     );
@@ -454,7 +555,6 @@ export async function syncMealsFromCloud() {
       meal => meal.id && !cloudIds.has(meal.id)
     );
 
-    // Masukkan catatan yang belum tersinkron ke antrean.
     if (unsyncedMeals.length > 0) {
       await enqueueMealsForSync(unsyncedMeals);
     }
@@ -475,38 +575,67 @@ export async function syncMealsFromCloud() {
 }
 
 
-// Memulai sinkronisasi dan melanjutkan antrean lama.
+// =========================================
+// MEMULAI SINKRONISASI
+// =========================================
+
 export function startMealSync() {
   if (syncStarted) return;
 
   syncStarted = true;
 
-onAuthStateChanged(auth, user => {
-  clearTimeout(syncTimer);
-  syncTimer = null;
+  onAuthStateChanged(auth, user => {
+    clearTimeout(syncTimer);
+    syncTimer = null;
 
-  if (!user || !getGoogleUser()) return;
-
-  void syncMealsFromCloud().finally(() => {
-    const currentUser = getGoogleUser();
-
-    if (currentUser) {
-      schedulePartialSync(currentUser.uid);
+    if (
+      !user ||
+      !getGoogleUser() ||
+      mealResetInProgress ||
+      window.__kalorikuResetInProgress
+    ) {
+      return;
     }
+
+    void syncMealsFromCloud().finally(() => {
+      const currentUser = getGoogleUser();
+
+      if (
+        currentUser &&
+        !mealResetInProgress &&
+        !window.__kalorikuResetInProgress
+      ) {
+        schedulePartialSync(currentUser.uid);
+      }
+    });
   });
-});
 
   window.addEventListener("online", () => {
     const user = getGoogleUser();
 
-    if (user) {
-      flushPendingMeals(true);
+    if (
+      user &&
+      !mealResetInProgress &&
+      !window.__kalorikuResetInProgress
+    ) {
+      void flushPendingMeals(true);
     }
   });
 }
 
-// Mengambil seluruh catatan dari cloud.
+
+// =========================================
+// MEMUAT SELURUH CATATAN DARI CLOUD
+// =========================================
+
 export async function loadMealsFromCloud() {
+  if (
+    mealResetInProgress ||
+    window.__kalorikuResetInProgress
+  ) {
+    return [];
+  }
+
   const user = getGoogleUser();
 
   if (!user) {
@@ -522,6 +651,13 @@ export async function loadMealsFromCloud() {
 
   const snapshot = await getDocs(batchesRef);
 
+  if (
+    mealResetInProgress ||
+    window.__kalorikuResetInProgress
+  ) {
+    return [];
+  }
+
   const meals = [];
 
   snapshot.forEach(document => {
@@ -533,8 +669,9 @@ export async function loadMealsFromCloud() {
   });
 
   meals.sort(
-    (a, b) => Number(b.createdAt || 0) -
-              Number(a.createdAt || 0)
+    (a, b) =>
+      Number(b.createdAt || 0) -
+      Number(a.createdAt || 0)
   );
 
   console.log(
@@ -542,4 +679,89 @@ export async function loadMealsFromCloud() {
   );
 
   return meals;
+}
+
+
+// =========================================
+// RESET SELURUH RIWAYAT MAKANAN DI FIRESTORE
+// =========================================
+
+export async function resetMealsCloudData() {
+  if (mealResetInProgress) {
+    throw new Error("Reset riwayat makanan sedang berjalan.");
+  }
+
+  mealResetInProgress = true;
+
+  clearTimeout(syncTimer);
+  syncTimer = null;
+
+  try {
+    // Tunggu proses pengiriman batch yang sedang berjalan.
+    if (flushPromise) {
+      await flushPromise;
+    }
+
+    clearTimeout(syncTimer);
+    syncTimer = null;
+
+    const user = getGoogleUser();
+
+    if (!user) {
+      throw new Error("Akun Google tidak ditemukan.");
+    }
+
+    const batchesRef = collection(
+      db,
+      "users",
+      user.uid,
+      "scanBatches"
+    );
+
+    const snapshot = await getDocs(batchesRef);
+
+    const documents = snapshot.docs;
+    const chunkSize = 450;
+
+    for (
+      let i = 0;
+      i < documents.length;
+      i += chunkSize
+    ) {
+      const batch = writeBatch(db);
+
+      documents
+        .slice(i, i + chunkSize)
+        .forEach(document => {
+          batch.delete(document.ref);
+        });
+
+      await batch.commit();
+    }
+
+    if (auth.currentUser?.uid !== user.uid) {
+      throw new Error("Akun berubah selama proses reset.");
+    }
+
+    // Hapus antrean dan jadwal sinkronisasi akun ini.
+    localStorage.removeItem(getQueueKey(user.uid));
+    localStorage.removeItem(getSyncDueKey(user.uid));
+
+    console.log(
+      `${documents.length} batch riwayat berhasil dihapus dari Firestore.`
+    );
+
+    return true;
+
+  } catch (error) {
+    console.error(
+      "Gagal menghapus riwayat makanan Firestore:",
+      error
+    );
+
+    throw error;
+
+  } finally {
+    mealResetInProgress = false;
+  }
 }
