@@ -402,333 +402,443 @@
 </main>
 
 
+
 <!-- HALAMAN PROFIL -->
 <main id="profilePage" hidden>
+
+  <!-- HEADER -->
   <section class="welcome">
     <p>Pengaturan akun</p>
     <h2>Profil Saya</h2>
     <p>Kelola informasi tubuh dan target nutrisi harianmu.</p>
   </section>
 
-  
-<!-- KARTU PROFIL -->
-<section class="profile-identity">
+  <!-- IDENTITAS PROFIL -->
+  <section class="profile-identity">
 
-  <button
-    type="button"
-    class="profile-avatar"
-    id="profilePhotoButton"
-    aria-label="Unggah foto profil"
-    title="Klik untuk mengganti foto profil"
-  >
-    <span id="profileAvatarInitial">K</span>
-    <img id="profilePhotoPreview" alt="Foto profil" hidden>
-    <span class="profile-avatar-edit">📷</span>
-  </button>
-
-  <input
-    type="file"
-    id="profilePhotoInput"
-    accept="image/*"
-    hidden
-  >
-
-  <div class="profile-identity-info">
-    <h3>Profil Pengguna</h3>
-    <p>Lengkapi data dirimu</p>
-  </div>
-
-  <button
-    type="button"
-    class="profile-logout-button"
-    id="logoutButton"
-  >
-    <span aria-hidden="true">↪</span>
-    Keluar
-  </button>
-
-</section>
-
-
-  <!-- DATA DIRI -->
-  <section class="profile-section">
-    <h3>Data Diri</h3>
-
-    <div class="profile-form-grid">
-      <div class="profile-field">
-        <label for="profileName">Nama</label>
-        <input type="text" id="profileName"
-          placeholder="Masukkan nama">
-      </div>
-
-      <div class="profile-field">
-        <label for="profileAge">Usia</label>
-        <input type="number" id="profileAge"
-          placeholder="Contoh: 30">
-      </div>
-
-      <div class="profile-field">
-        <label for="profileGender">Jenis kelamin</label>
-        <select id="profileGender">
-          <option value="">Pilih jenis kelamin</option>
-          <option value="male">Laki-laki</option>
-          <option value="female">Perempuan</option>
-        </select>
-      </div>
-    </div>
-  </section>
-
-  <!-- DATA TUBUH -->
-  <section class="profile-section">
-    <h3>Data Tubuh</h3>
-
-    <div class="profile-form-grid">
-      <div class="profile-field">
-        <label for="profileWeight">Berat badan</label>
-        <div class="profile-input-unit">
-          <input type="number" id="profileWeight"
-            placeholder="Contoh: 70">
-          <span>kg</span>
-        </div>
-      </div>
-
-      <div class="profile-field">
-        <label for="profileHeight">Tinggi badan</label>
-        <div class="profile-input-unit">
-          <input type="number" id="profileHeight"
-            placeholder="Contoh: 170">
-          <span>cm</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AKTIVITAS -->
-  <section class="profile-section">
-    <h3>Aktivitas Harian</h3>
-
-    <div class="profile-field">
-      <label for="profileActivity">Tingkat aktivitas</label>
-      <select id="profileActivity">
-        <option value="">Pilih aktivitas</option>
-        <option value="sedentary">Sangat ringan</option>
-        <option value="light">Ringan</option>
-        <option value="moderate">Sedang</option>
-        <option value="active">Aktif</option>
-        <option value="very_active">Sangat aktif</option>
-      </select>
-    </div>
-  </section>
-
-  
-
-
-<!-- TUJUAN BERAT BADAN -->
-<section class="profile-section">
-  <h3>Tujuan Berat Badan</h3>
-
-  <div class="profile-form-grid">
-
-    <!-- BERAT BADAN TUJUAN -->
-    <div class="profile-field">
-      <label for="profileGoalWeight">
-        Berat badan tujuan
-      </label>
-
-      <div class="profile-input-unit">
-        <input
-          type="number"
-          id="profileGoalWeight"
-          min="1"
-          step="0.1"
-          placeholder="Contoh: 80"
-        >
-        <span>kg</span>
-      </div>
-    </div>
-
-    <!-- TARGET WAKTU -->
-    <div class="profile-field">
-      <label for="profileGoalDuration">
-        Target waktu
-      </label>
-
-      <div class="profile-input-unit">
-        <select id="profileGoalDuration">
-          <option value="">Pilih target waktu</option>
-          <option value="1">1 bulan</option>
-          <option value="2">2 bulan</option>
-          <option value="3">3 bulan</option>
-          <option value="4">4 bulan</option>
-          <option value="5">5 bulan</option>
-          <option value="6">6 bulan</option>
-          <option value="9">9 bulan</option>
-          <option value="12">12 bulan</option>
-          <option value="18">18 bulan</option>
-          <option value="24">24 bulan</option>
-        </select>
-      </div>
-    </div>
-
-  </div>
-
-  <p class="profile-note">
-    Tentukan berat badan yang ingin dicapai dan waktu
-    pencapaiannya. KaloriKu akan menghitung simulasinya.
-  </p>
-</section>
-
-
-<!-- SIMULASI TUJUAN BERAT BADAN -->
-<section class="goal-simulation-card" id="goalSimulation">
-  <h3>Simulasi Tujuan Berat Badan</h3>
-
-  <p id="goalSimulationMessage">
-    Lengkapi profil untuk melihat simulasi.
-  </p>
-
-  <div class="goal-simulation-results" hidden>
-
-    <div class="goal-result-grid">
-      <div>
-        <span>Berat saat ini</span>
-        <strong id="simCurrentWeight">-</strong>
-      </div>
-
-      <div>
-        <span>Berat tujuan</span>
-        <strong id="simGoalWeight">-</strong>
-      </div>
-
-      <div>
-        <span>Selisih berat</span>
-        <strong id="simWeightDifference">-</strong>
-      </div>
-
-      <div>
-        <span>Target waktu</span>
-        <strong id="simDuration">-</strong>
-      </div>
-    </div>
-
-    <div class="goal-result-divider"></div>
-
-    <h4>Kebutuhan Energi</h4>
-
-    <div class="goal-result-row">
-      <span>BMR</span>
-      <strong id="simBMR">-</strong>
-    </div>
-
-    <div class="goal-result-row">
-      <span>TDEE</span>
-      <strong id="simTDEE">-</strong>
-    </div>
-
-    <div class="goal-result-divider"></div>
-
-    <h4>Simulasi Kalori</h4>
-
-    <div class="goal-result-row">
-      <span>Perubahan berat/minggu</span>
-      <strong id="simWeeklyChange">-</strong>
-    </div>
-
-    <div class="goal-result-row">
-      <span>Defisit / surplus harian</span>
-      <strong id="simAdjustment">-</strong>
-    </div>
-
-    <div class="goal-calorie-target">
-      <span>Target konsumsi kalori harian</span>
-      <strong id="simCalorieTarget">-</strong>
-    </div>
-
-    <div id="simGoalStatus" class="goal-status"></div>
-
-    <p id="simGoalWarning" class="goal-warning"></p>
-
-  </div>
-
-  <!-- Tombol informasi -->
-<div class="goal-info-action">
-  <button
-    type="button"
-    id="goalInfoButton"
-    class="goal-info-button"
-    aria-label="Informasi BMR dan TDEE"
-  >
-    <span>Informasi BMR & TDEE</span>
-    <span class="goal-info-icon">i</span>
-  </button>
-</div>
-
-<!-- Modal informasi -->
-<div
-  class="goal-info-modal"
-  id="goalInfoModal"
-  hidden
->
-  <div class="goal-info-content">
     <button
       type="button"
-      class="goal-info-close"
-      id="goalInfoClose"
-      aria-label="Tutup informasi"
+      class="profile-avatar"
+      id="profilePhotoButton"
+      aria-label="Unggah foto profil"
+      title="Klik untuk mengganti foto profil"
     >
-      &times;
+      <span id="profileAvatarInitial">K</span>
+      <img id="profilePhotoPreview" alt="Foto profil" hidden>
+      <span class="profile-avatar-edit">📷</span>
     </button>
 
-    <h3>Mengenal BMR dan TDEE</h3>
+    <input
+      type="file"
+      id="profilePhotoInput"
+      accept="image/*"
+      hidden
+    >
 
-    <h4>1. BMR (Basal Metabolic Rate)</h4>
-    <p>
-      BMR adalah jumlah kalori yang dibutuhkan tubuh
-      saat istirahat untuk menjalankan fungsi dasar,
-      seperti bernapas, memompa darah, menjaga suhu
-      tubuh, dan menjalankan fungsi organ.
-    </p>
+    <div class="profile-identity-info">
+  <h3 id="profileDisplayName">Nama Pengguna</h3>
+  <p id="profileDisplayEmail">email@pengguna.com</p>
+</div>
 
-    <h4>2. TDEE (Total Daily Energy Expenditure)</h4>
-    <p>
-      TDEE adalah perkiraan total kalori yang dibakar
-      tubuh dalam sehari, termasuk aktivitas harian
-      dan olahraga.
-    </p>
+    <button
+      type="button"
+      class="profile-logout-button"
+      id="logoutButton"
+    >
+      <span aria-hidden="true">↪</span>
+      Keluar
+    </button>
 
-    <div class="goal-info-example">
-      <strong>Contoh perhitungan</strong>
-      <p>BMR: 1.800 kkal/hari</p>
-      <p>Faktor aktivitas: 1,55</p>
-      <p>TDEE: 1.800 × 1,55 = 2.790 kkal/hari</p>
+  </section>
+
+  <!-- TOMBOL MULAI PENGISIAN -->
+  <button
+    type="button"
+    class="profile-form-start"
+    id="profileFormStart"
+  >
+    <span>
+      <strong>Data Diri</strong>
+      <small>Lengkapi informasi dan target tubuhmu</small>
+    </span>
+    <span aria-hidden="true">→</span>
+  </button>
+
+  <!-- PROFILE WIZARD -->
+  <div class="profile-wizard" id="profileWizard" hidden>
+
+    <!-- PROGRESS -->
+    <div class="profile-wizard-header">
+      <span id="profileStepLabel">LANGKAH 1 DARI 4</span>
+
+      <div class="profile-wizard-progress">
+        <div id="profileWizardProgress"></div>
+      </div>
     </div>
 
-    <h4>3. Hubungannya dengan berat badan</h4>
-    <ul>
-      <li>Kalori sesuai TDEE: membantu mempertahankan berat badan.</li>
-      <li>Kalori di bawah TDEE: menciptakan defisit energi.</li>
-      <li>Kalori di atas TDEE: menciptakan surplus energi.</li>
-    </ul>
+    <!-- SATU KARTU FORM -->
+    <div class="profile-form-card">
 
-    <p class="goal-info-note">
-      Angka BMR dan TDEE merupakan estimasi. Kebutuhan
-      energi sebenarnya dapat berbeda pada setiap orang.
-    </p>
+      <!-- SLIDE 1: DATA DIRI -->
+      <section
+        class="profile-section profile-step"
+        data-step="0"
+      >
+        <h3>Data Diri</h3>
+
+        <p class="profile-note">
+          Mulai dengan melengkapi informasi dasar dirimu.
+        </p>
+
+        <div class="profile-form-grid">
+
+          <div class="profile-field">
+            <label for="profileName">Nama</label>
+            <input
+              type="text"
+              id="profileName"
+              placeholder="Masukkan nama"
+            >
+          </div>
+
+          <div class="profile-field">
+            <label for="profileAge">Usia</label>
+            <input
+              type="number"
+              id="profileAge"
+              placeholder="Contoh: 30"
+            >
+          </div>
+
+          <div class="profile-field">
+            <label for="profileGender">Jenis kelamin</label>
+            <select id="profileGender">
+              <option value="">Pilih jenis kelamin</option>
+              <option value="male">Laki-laki</option>
+              <option value="female">Perempuan</option>
+            </select>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 2: DATA TUBUH -->
+      <section
+        class="profile-section profile-step"
+        data-step="1"
+        hidden
+      >
+        <h3>Data Tubuh</h3>
+
+        <p class="profile-note">
+          Masukkan ukuran tubuhmu saat ini.
+        </p>
+
+        <div class="profile-form-grid">
+
+          <div class="profile-field">
+            <label for="profileWeight">Berat badan</label>
+
+            <div class="profile-input-unit">
+              <input
+                type="number"
+                id="profileWeight"
+                placeholder="Contoh: 70"
+              >
+              <span>kg</span>
+            </div>
+          </div>
+
+          <div class="profile-field">
+            <label for="profileHeight">Tinggi badan</label>
+
+            <div class="profile-input-unit">
+              <input
+                type="number"
+                id="profileHeight"
+                placeholder="Contoh: 170"
+              >
+              <span>cm</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 3: AKTIVITAS HARIAN -->
+      <section
+        class="profile-section profile-step"
+        data-step="2"
+        hidden
+      >
+        <h3>Aktivitas Harian</h3>
+
+        <p class="profile-note">
+          Pilih tingkat aktivitas yang paling menggambarkan
+          keseharianmu.
+        </p>
+
+        <div class="profile-field">
+          <label for="profileActivity">
+            Tingkat aktivitas
+          </label>
+
+          <select id="profileActivity">
+            <option value="">Pilih aktivitas</option>
+            <option value="sedentary">Sangat ringan</option>
+            <option value="light">Ringan</option>
+            <option value="moderate">Sedang</option>
+            <option value="active">Aktif</option>
+            <option value="very_active">Sangat aktif</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: TUJUAN BERAT BADAN -->
+      <section
+        class="profile-section profile-step"
+        data-step="3"
+        hidden
+      >
+        <h3>Tujuan Berat Badan</h3>
+
+        <p class="profile-note">
+          Tentukan berat badan yang ingin dicapai dan
+          waktu pencapaiannya.
+        </p>
+
+        <div class="profile-form-grid">
+
+          <div class="profile-field">
+            <label for="profileGoalWeight">
+              Berat badan tujuan
+            </label>
+
+            <div class="profile-input-unit">
+              <input
+                type="number"
+                id="profileGoalWeight"
+                min="1"
+                step="0.1"
+                placeholder="Contoh: 80"
+              >
+              <span>kg</span>
+            </div>
+          </div>
+
+          <div class="profile-field">
+            <label for="profileGoalDuration">
+              Target waktu
+            </label>
+
+            <div class="profile-input-unit">
+              <select id="profileGoalDuration">
+                <option value="">Pilih target waktu</option>
+                <option value="1">1 bulan</option>
+                <option value="2">2 bulan</option>
+                <option value="3">3 bulan</option>
+                <option value="4">4 bulan</option>
+                <option value="5">5 bulan</option>
+                <option value="6">6 bulan</option>
+                <option value="9">9 bulan</option>
+                <option value="12">12 bulan</option>
+                <option value="18">18 bulan</option>
+                <option value="24">24 bulan</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- NAVIGASI SLIDE -->
+      <div class="profile-wizard-actions">
+
+        <button
+          type="button"
+          id="profileStepBack"
+          hidden
+        >
+          ← Kembali
+        </button>
+
+        <button
+          type="button"
+          id="profileStepNext"
+        >
+          Lanjut →
+        </button>
+
+      </div>
+
+    </div>
   </div>
-</div>
-</section>
 
+  <!-- SIMULASI TUJUAN BERAT BADAN -->
+  <section
+    class="goal-simulation-card"
+    id="goalSimulation"
+  >
+    <h3>Simulasi Tujuan Berat Badan</h3>
 
+    <p id="goalSimulationMessage">
+      Lengkapi profil untuk melihat simulasi.
+    </p>
+
+    <div class="goal-simulation-results" hidden>
+
+      <div class="goal-result-grid">
+
+        <div>
+          <span>Berat saat ini</span>
+          <strong id="simCurrentWeight">-</strong>
+        </div>
+
+        <div>
+          <span>Berat tujuan</span>
+          <strong id="simGoalWeight">-</strong>
+        </div>
+
+        <div>
+          <span>Selisih berat</span>
+          <strong id="simWeightDifference">-</strong>
+        </div>
+
+        <div>
+          <span>Target waktu</span>
+          <strong id="simDuration">-</strong>
+        </div>
+
+      </div>
+
+      <div class="goal-result-divider"></div>
+
+      <h4>Kebutuhan Energi</h4>
+
+      <div class="goal-result-row">
+        <span>BMR</span>
+        <strong id="simBMR">-</strong>
+      </div>
+
+      <div class="goal-result-row">
+        <span>TDEE</span>
+        <strong id="simTDEE">-</strong>
+      </div>
+
+      <div class="goal-result-divider"></div>
+
+      <h4>Simulasi Kalori</h4>
+
+      <div class="goal-result-row">
+        <span>Perubahan berat/minggu</span>
+        <strong id="simWeeklyChange">-</strong>
+      </div>
+
+      <div class="goal-result-row">
+        <span>Defisit / surplus harian</span>
+        <strong id="simAdjustment">-</strong>
+      </div>
+
+      <div class="goal-calorie-target">
+        <span>Target konsumsi kalori harian</span>
+        <strong id="simCalorieTarget">-</strong>
+      </div>
+
+      <div id="simGoalStatus" class="goal-status"></div>
+
+      <p id="simGoalWarning" class="goal-warning"></p>
+
+    </div>
+
+    <!-- INFORMASI BMR DAN TDEE -->
+    <div class="goal-info-action">
+      <button
+        type="button"
+        id="goalInfoButton"
+        class="goal-info-button"
+        aria-label="Informasi BMR dan TDEE"
+      >
+        <span>Informasi BMR & TDEE</span>
+        <span class="goal-info-icon">i</span>
+      </button>
+    </div>
+
+    <!-- MODAL INFORMASI -->
+    <div
+      class="goal-info-modal"
+      id="goalInfoModal"
+      hidden
+    >
+      <div class="goal-info-content">
+
+        <button
+          type="button"
+          class="goal-info-close"
+          id="goalInfoClose"
+          aria-label="Tutup informasi"
+        >
+          &times;
+        </button>
+
+        <h3>Mengenal BMR dan TDEE</h3>
+
+        <h4>1. BMR (Basal Metabolic Rate)</h4>
+
+        <p>
+          BMR adalah jumlah kalori yang dibutuhkan tubuh
+          saat istirahat untuk menjalankan fungsi dasar,
+          seperti bernapas, memompa darah, menjaga suhu
+          tubuh, dan menjalankan fungsi organ.
+        </p>
+
+        <h4>2. TDEE (Total Daily Energy Expenditure)</h4>
+
+        <p>
+          TDEE adalah perkiraan total kalori yang dibakar
+          tubuh dalam sehari, termasuk aktivitas harian
+          dan olahraga.
+        </p>
+
+        <div class="goal-info-example">
+          <strong>Contoh perhitungan</strong>
+          <p>BMR: 1.800 kkal/hari</p>
+          <p>Faktor aktivitas: 1,55</p>
+          <p>TDEE: 1.800 × 1,55 = 2.790 kkal/hari</p>
+        </div>
+
+        <h4>3. Hubungannya dengan berat badan</h4>
+
+        <ul>
+          <li>Kalori sesuai TDEE: membantu mempertahankan berat badan.</li>
+          <li>Kalori di bawah TDEE: menciptakan defisit energi.</li>
+          <li>Kalori di atas TDEE: menciptakan surplus energi.</li>
+        </ul>
+
+        <p class="goal-info-note">
+          Angka BMR dan TDEE merupakan estimasi. Kebutuhan
+          energi sebenarnya dapat berbeda pada setiap orang.
+        </p>
+
+      </div>
+    </div>
+
+  </section>
 
   <!-- TARGET NUTRISI -->
   <section class="profile-section">
     <h3>Target Harian</h3>
 
     <div class="profile-form-grid">
+
       <div class="profile-field">
         <label>Target kalori</label>
         <div class="profile-input-unit">
-          <input type="number" id="dailyCalorieTarget" placeholder="—" disabled>
+          <input
+            type="number"
+            id="dailyCalorieTarget"
+            placeholder="—"
+            disabled
+          >
           <span>kkal</span>
         </div>
       </div>
@@ -736,7 +846,12 @@
       <div class="profile-field">
         <label>Target protein</label>
         <div class="profile-input-unit">
-          <input type="number" id="dailyProteinTarget" placeholder="—" disabled>
+          <input
+            type="number"
+            id="dailyProteinTarget"
+            placeholder="—"
+            disabled
+          >
           <span>gram</span>
         </div>
       </div>
@@ -744,7 +859,12 @@
       <div class="profile-field">
         <label>Target karbohidrat</label>
         <div class="profile-input-unit">
-          <input type="number" id="dailyCarbTarget" placeholder="—" disabled>
+          <input
+            type="number"
+            id="dailyCarbTarget"
+            placeholder="—"
+            disabled
+          >
           <span>gram</span>
         </div>
       </div>
@@ -752,32 +872,46 @@
       <div class="profile-field">
         <label>Target lemak</label>
         <div class="profile-input-unit">
-          <input type="number" id="dailyFatTarget" placeholder="—" disabled>
+          <input
+            type="number"
+            id="dailyFatTarget"
+            placeholder="—"
+            disabled
+          >
           <span>gram</span>
         </div>
       </div>
+
     </div>
 
     <p class="profile-note">
       Pengaturan target nutrisi akan diaktifkan pada tahap berikutnya.
     </p>
+
   </section>
 
- <div class="profile-actions">
-  <button type="button" class="profile-save-button">
-    Simpan Profil
-  </button>
+  <!-- AKSI PROFIL -->
+  <div class="profile-actions">
 
-  <button
-    type="button"
-    id="resetDataButton"
-    class="profile-reset-button"
-  >
-    Reset Semua Data
-  </button>
-</div>
+    <button
+      type="button"
+      class="profile-save-button"
+    >
+      Simpan Profil
+    </button>
+
+    <button
+      type="button"
+      id="resetDataButton"
+      class="profile-reset-button"
+    >
+      Reset Semua Data
+    </button>
+
+  </div>
 
 </main>
+
 
 
 

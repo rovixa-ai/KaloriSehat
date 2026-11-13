@@ -3,6 +3,12 @@ import {
   syncProfileToCloud
 } from "./firestore-sync.js";
 
+import { auth } from "./firebase-config.js";
+
+import {
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
 const PROFILE_STORAGE_KEY = "kaloriku_profile";
 
 function loadProfile() {
@@ -50,6 +56,153 @@ const fields = {
   goalWeight: profilePage.querySelector("#profileGoalWeight"),
   goalDuration: profilePage.querySelector("#profileGoalDuration")
 };
+
+// =====================================
+// IDENTITAS PENGGUNA FIREBASE
+// =====================================
+
+const displayName = profilePage.querySelector("#profileDisplayName");
+const displayEmail = profilePage.querySelector("#profileDisplayEmail");
+
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    displayName.textContent = "Nama Pengguna";
+    displayEmail.textContent = "Belum login";
+    return;
+  }
+
+  const email = user.email || "";
+
+  displayName.textContent =
+    user.displayName ||
+    fields.name?.value?.trim() ||
+    email.split("@")[0] ||
+    "Nama Pengguna";
+
+  displayEmail.textContent = email || "Email tidak tersedia";
+});
+
+// =====================================
+// PROFILE MULTI-STEP FORM
+// =====================================
+
+const profileWizard = profilePage.querySelector("#profileWizard");
+const profileFormStart = profilePage.querySelector("#profileFormStart");
+
+const profileSteps = [
+  ...profilePage.querySelectorAll(".profile-step")
+];
+
+const stepLabel = profilePage.querySelector("#profileStepLabel");
+const stepProgress = profilePage.querySelector("#profileWizardProgress");
+const stepBack = profilePage.querySelector("#profileStepBack");
+const stepNext = profilePage.querySelector("#profileStepNext");
+
+let currentProfileStep = 0;
+
+const stepNames = [
+  "DATA DIRI",
+  "DATA TUBUH",
+  "AKTIVITAS HARIAN",
+  "TUJUAN BERAT BADAN"
+];
+
+function showProfileStep(index) {
+  if (
+    !profileWizard ||
+    !profileSteps.length ||
+    index < 0 ||
+    index >= profileSteps.length
+  ) return;
+
+  currentProfileStep = index;
+
+  profileSteps.forEach((step, i) => {
+    step.hidden = i !== currentProfileStep;
+  });
+
+  if (stepLabel) {
+    stepLabel.textContent =
+      `LANGKAH ${index + 1} DARI ${profileSteps.length} · ${stepNames[index]}`;
+  }
+
+  if (stepProgress) {
+    stepProgress.style.width =
+      `${((index + 1) / profileSteps.length) * 100}%`;
+  }
+
+  if (stepBack) {
+    stepBack.hidden = index === 0;
+  }
+
+  if (stepNext) {
+    stepNext.textContent =
+      index === profileSteps.length - 1
+        ? "Selesai ✓"
+        : "Lanjut →";
+  }
+}
+
+// Membuka form
+profileFormStart?.addEventListener("click", () => {
+  if (!profileWizard || !profileSteps.length) return;
+
+  profileWizard.hidden = false;
+  profileFormStart.hidden = true;
+
+  showProfileStep(0);
+
+  profileWizard.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+});
+
+// Tombol kembali
+stepBack?.addEventListener("click", () => {
+  showProfileStep(currentProfileStep - 1);
+});
+
+// Tombol lanjut dan selesai
+
+stepNext?.addEventListener("click", () => {
+  // Pindah ke tahap berikutnya
+  if (currentProfileStep < profileSteps.length - 1) {
+    showProfileStep(currentProfileStep + 1);
+
+    profileWizard.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+    return;
+  }
+
+  // Tahap terakhir: simpan profil
+  const saved = saveProfileForm();
+
+  // Jangan tutup form jika penyimpanan gagal
+  if (!saved) return;
+
+  // Tutup wizard setelah berhasil disimpan
+  profileWizard.hidden = true;
+
+  if (profileFormStart) {
+    profileFormStart.hidden = false;
+
+    profileFormStart.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
+});
+
+
+// Pastikan slide pertama menjadi kondisi awal.
+if (profileSteps.length) {
+  showProfileStep(0);
+}
+
 
 // =====================================
 // FOTO PROFIL
@@ -558,8 +711,13 @@ if (infoButton && infoModal && infoClose) {
     return;
   }
 
-  // Mencegah event tersimpan lebih dari satu kali.
-  saveButton.addEventListener("click", () => {
+ 
+ 
+  // =====================================
+  // FUNGSI SIMPAN PROFIL
+  // =====================================
+
+  function saveProfileForm() {
     const updatedProfile = {};
 
     Object.entries(fields).forEach(([key, input]) => {
@@ -568,7 +726,7 @@ if (infoButton && infoModal && infoClose) {
       }
     });
 
-    // Validasi data dasar.
+    // Validasi data dasar
     if (
       !updatedProfile.name ||
       !updatedProfile.age ||
@@ -578,7 +736,7 @@ if (infoButton && infoModal && infoClose) {
       !updatedProfile.activity
     ) {
       alert("Mohon lengkapi seluruh data profil.");
-      return;
+      return false;
     }
 
     if (
@@ -587,32 +745,44 @@ if (infoButton && infoModal && infoClose) {
       Number(updatedProfile.height) <= 0
     ) {
       alert("Usia, berat, dan tinggi harus lebih dari 0.");
-      return;
+      return false;
     }
 
     try {
-           const currentProfile = loadProfile();
+      const currentProfile = loadProfile();
 
-saveProfile({
-  ...currentProfile,
-  ...updatedProfile
-});
+      saveProfile({
+        ...currentProfile,
+        ...updatedProfile
+      });
 
-updateGoalSimulation();
-renderProfilePhoto();
-window.dispatchEvent(new Event("profileUpdated"));
+      updateGoalSimulation();
+      renderProfilePhoto();
 
-alert("Profil berhasil disimpan.");
+      window.dispatchEvent(new Event("profileUpdated"));
 
+      alert("Profil berhasil disimpan.");
+
+      return true;
 
     } catch (error) {
       console.error("Gagal menyimpan profil:", error);
       alert("Profil gagal disimpan.");
+      return false;
     }
+  }
+
+  // Tombol Simpan Profil
+  saveButton.addEventListener("click", () => {
+    saveProfileForm();
   });
 
   console.log("Profile Page berhasil diinisialisasi.");
 }
+
+// =====================================
+// INISIALISASI HALAMAN PROFIL
+// =====================================
 
 if (document.readyState === "loading") {
   document.addEventListener(
@@ -622,5 +792,3 @@ if (document.readyState === "loading") {
 } else {
   initializeProfilePage();
 }
-
-
