@@ -986,6 +986,50 @@
 </nav>
 
 
+<!-- =========================================
+     GLOBAL MODAL / NOTIFICATION
+========================================= -->
+<div
+  class="app-modal"
+  id="appModal"
+  hidden
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="appModalTitle"
+>
+  <div class="app-modal-backdrop"></div>
+
+  <div class="app-modal-card">
+    <div class="app-modal-icon" id="appModalIcon">
+      ℹ️
+    </div>
+
+    <h3 id="appModalTitle">Informasi</h3>
+
+    <p id="appModalMessage"></p>
+
+    <div class="app-modal-actions">
+      <button
+        type="button"
+        class="app-modal-button app-modal-cancel"
+        id="appModalCancel"
+      >
+        Batal
+      </button>
+
+      <button
+        type="button"
+        class="app-modal-button app-modal-confirm"
+        id="appModalConfirm"
+      >
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
 <script type="module" src="./js/auth-guard.js"></script>
 
 <script type="module" src="./js/app.js"></script>
@@ -994,6 +1038,7 @@
 <script type="module" src="./js/statistics-page.js"></script>
 <script type="module" src="./js/navigation.js"></script>
 <script type="module" src="./js/logout.js"></script>
+<script type="module" src="js/notification.js"></script>
 
 
 </body>

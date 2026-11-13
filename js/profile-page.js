@@ -590,14 +590,17 @@ const resetDataButton =
   profilePage.querySelector("#resetDataButton");
 
 if (resetDataButton) {
-  resetDataButton.addEventListener("click", () => {
+  resetDataButton.addEventListener("click", async () => {
 
-    const confirmed = confirm(
-      "Apakah Anda yakin ingin menghapus seluruh data KaloriKu?\n\n" +
-      "Profil, riwayat makanan, dan target nutrisi akan dihapus permanen."
-    );
+    const confirmed = await confirmAppModal({
+  type: "warning",
+  title: "Reset Semua Data?",
+  message: "Profil, riwayat makanan, dan target nutrisi akan dihapus permanen.",
+  confirmText: "Ya, Reset",
+  cancelText: "Batal"
+});
 
-    if (!confirmed) return;
+if (!confirmed) return;
 
     // Hapus data aplikasi
     localStorage.removeItem("kaloriku_profile");
@@ -762,13 +765,19 @@ if (infoButton && infoModal && infoClose) {
 
       window.dispatchEvent(new Event("profileUpdated"));
 
-      alert("Profil berhasil disimpan.");
+      showAppModal({
+  type: "success",
+  message: "Profil berhasil disimpan."
+});
 
       return true;
 
     } catch (error) {
       console.error("Gagal menyimpan profil:", error);
-      alert("Profil gagal disimpan.");
+      showAppModal({
+  type: "error",
+  message: "Profil gagal disimpan."
+});
       return false;
     }
   }
