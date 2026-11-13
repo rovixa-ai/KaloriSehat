@@ -166,7 +166,11 @@ $("foodPhoto").addEventListener("change", event => {
   if (!file) return;
 
   if (!file.type.startsWith("image/")) {
-    alert("Pilih file gambar.");
+    showAppModal({
+  type: "warning",
+  title: "File Belum Dipilih",
+  message: "Silakan pilih file gambar terlebih dahulu."
+});
     event.target.value = "";
     return;
   }
@@ -194,7 +198,11 @@ $("analyzeButton").addEventListener("click", async () => {
   const file = $("foodPhoto").files[0];
 
   if (!file) {
-    alert("Pilih foto makanan terlebih dahulu.");
+    showAppModal({
+  type: "warning",
+  title: "File Belum Dipilih",
+  message: "Silakan pilih file Photo makanan terlebih dahulu."
+});
     return;
   }
 
@@ -507,9 +515,11 @@ editButton.addEventListener("click", () => {
       .filter(Boolean);
 
     if (!foodsToSave.length) {
-      alert(
-        "Belum ada makanan dengan data nutrisi Panganku yang bisa disimpan."
-      );
+      showAppModal({
+  type: "warning",
+  title: "Belum ada data",
+  message: "Belum ada makanan dengan data nutrisi di simpan."
+});
       return;
     }
 
@@ -551,7 +561,11 @@ void enqueueMealsForSync([
 updateDashboard();
     resetFoodScanner();
 
-    alert("Seluruh makanan berhasil disimpan dalam satu kelompok.");
+    showAppModal({
+  type: "success",
+  title: "Berhasil",
+  message: "Makanan Berhasil di simpan."
+});
   });
 
   // Tombol Batal
@@ -641,7 +655,11 @@ $("calculateButton").addEventListener("click", async () => {
   const weight = Number($("foodWeight").value);
 
   if (!name || !weight || weight <= 0) {
-    alert("Isi nama makanan dan berat yang benar.");
+    showAppModal({
+  type: "warning",
+  title: "Isi Data Makanan",
+  message: "Isi Makanan dan berat yang benar."
+});
     return;
   }
 
@@ -656,7 +674,11 @@ $("calculateButton").addEventListener("click", async () => {
   }
 
   if (food.kcal === null) {
-    alert("Data energi makanan ini tidak tersedia di Panganku.");
+    showAppModal({
+  type: "warning",
+  title: "Data Kosong",
+  message: "Data tidak tersedia."
+});
     return;
   }
 
@@ -714,7 +736,11 @@ updateDashboard();
 
   resetFoodScanner();
 
-  alert("Makanan berhasil disimpan.");
+  showAppModal({
+  type: "success",
+  title: "Berhasil",
+  message: "Makanan Berhasil di Simpan."
+});
 });
 
 

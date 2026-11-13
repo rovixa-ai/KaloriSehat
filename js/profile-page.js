@@ -315,7 +315,11 @@ photoInput?.addEventListener("change", async (event) => {
   if (!file) return;
 
   if (!file.type.startsWith("image/")) {
-    alert("Silakan pilih file gambar.");
+    showAppModal({
+  type: "warning",
+  title: "File Belum Dipilih",
+  message: "Silakan pilih file gambar terlebih dahulu."
+});
     photoInput.value = "";
     return;
   }
@@ -342,11 +346,19 @@ photoInput?.addEventListener("change", async (event) => {
     // Perbarui avatar Dashboard.
     window.dispatchEvent(new Event("profileUpdated"));
 
-    alert("Foto profil berhasil diunggah dan dikompresi.");
+    showAppModal({
+  type: "success",
+  title: "Berhasil",
+  message: "Photo Berhasil Diperbaharui."
+});
 
   } catch (error) {
     console.error("Gagal memproses foto:", error);
-    alert("Foto gagal diproses. Silakan coba foto lain.");
+    showAppModal({
+  type: "warning",
+  title: "Gagal",
+  message: "Photo Gagal di perbaharui, Coba Photo Lain."
+});
 
   } finally {
     // Aktifkan kembali tombol.
@@ -647,7 +659,11 @@ profilePage.querySelector("#dailyFatTarget").textContent = "—";
       new CustomEvent("kaloriku:datareset")
     );
 
-    alert("Semua data KaloriKu berhasil dihapus.");
+    showAppModal({
+  type: "warning",
+  title: "Berhasil",
+  message: "Data Pengguna Berhasil dihapus."
+});
 
     // Kembali ke Beranda
     document.querySelector(
@@ -739,7 +755,11 @@ if (infoButton && infoModal && infoClose) {
       !updatedProfile.height ||
       !updatedProfile.activity
     ) {
-      alert("Mohon lengkapi seluruh data profil.");
+      showAppModal({
+  type: "warning",
+  title: "Data belum lengkap",
+  message: "Mohon lengkapi Data Profil pengguna."
+});
       return false;
     }
 
@@ -748,7 +768,11 @@ if (infoButton && infoModal && infoClose) {
       Number(updatedProfile.weight) <= 0 ||
       Number(updatedProfile.height) <= 0
     ) {
-      alert("Usia, berat, dan tinggi harus lebih dari 0.");
+      showAppModal({
+  type: "warning",
+  title: "Masukan Angka yang benar",
+  message: "Data yang dimasukan salah."
+});
       return false;
     }
 

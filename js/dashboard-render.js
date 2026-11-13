@@ -194,7 +194,11 @@ function setupTargetButton() {
     const target = Number(value);
 
     if (!Number.isFinite(target) || target <= 0) {
-      alert("Target harus berupa angka positif.");
+      showAppModal({
+  type: "warning",
+  title: "Error",
+  message: "Target harus berupa angka positif."
+});
       return;
     }
 

@@ -150,19 +150,19 @@
 
 /* Warna berdasarkan jenis modal */
 .app-modal[data-type="success"] .app-modal-icon {
-  background: rgba(22, 134, 91, 0.12);
+  background: rgba(22, 134, 91, 0.422);
 }
 
 .app-modal[data-type="error"] .app-modal-icon {
-  background: rgba(220, 91, 98, 0.12);
+  background: rgba(220, 91, 98, 0.547);
 }
 
 .app-modal[data-type="warning"] .app-modal-icon {
-  background: rgba(245, 158, 11, 0.12);
+  background: rgba(174, 12, 20, 0.36);
 }
 
 .app-modal[data-type="info"] .app-modal-icon {
-  background: rgba(59, 130, 246, 0.12);
+  background: rgba(59, 131, 246, 0.755);
 }
 
 /* Mobile */
