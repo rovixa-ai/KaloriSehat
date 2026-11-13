@@ -539,10 +539,10 @@ function updateDailyNutritionTargets() {
   }
 
   if (calorieTarget <= 0) {
-    calorieInput.value = "";
-    proteinInput.value = "";
-    carbInput.value = "";
-    fatInput.value = "";
+    calorieInput.textContent = "—";
+    proteinInput.textContent = "—";
+    carbInput.textContent = "—";
+    fatInput.textContent = "—";
     return;
   }
 
@@ -560,21 +560,22 @@ function updateDailyNutritionTargets() {
   const carbs = carbCalories / 4;
 
   // Simpan target nutrisi ke profil.
-const savedProfile = loadProfile();
+  const savedProfile = loadProfile();
 
-savedProfile.dailyProteinTarget = Math.round(protein);
-savedProfile.dailyCarbTarget = Math.max(0, Math.round(carbs));
-savedProfile.dailyFatTarget = Math.round(fat);
+  savedProfile.dailyCalorieTarget = Math.round(calorieTarget);
+  savedProfile.dailyProteinTarget = Math.round(protein);
+  savedProfile.dailyCarbTarget = Math.max(0, Math.round(carbs));
+  savedProfile.dailyFatTarget = Math.round(fat);
 
-saveProfile(savedProfile);
+  saveProfile(savedProfile);
 
-// Beritahu Dashboard bahwa target nutrisi sudah diperbarui.
-window.dispatchEvent(new Event("profileTargetUpdated"));
+  window.dispatchEvent(new Event("profileTargetUpdated"));
 
-  calorieInput.value = Math.round(calorieTarget);
-  proteinInput.value = Math.round(protein);
-  fatInput.value = Math.round(fat);
-  carbInput.value = Math.max(0, Math.round(carbs));
+  // Tampilkan hasil sebagai teks, bukan input.
+  calorieInput.textContent = Math.round(calorieTarget).toLocaleString("id-ID");
+  proteinInput.textContent = Math.round(protein).toLocaleString("id-ID");
+  fatInput.textContent = Math.round(fat).toLocaleString("id-ID");
+  carbInput.textContent = Math.max(0, Math.round(carbs)).toLocaleString("id-ID");
 }
 
 updateDailyNutritionTargets();
@@ -610,11 +611,11 @@ if (resetDataButton) {
       if (input) input.value = "";
     });
 
-    // Kosongkan target nutrisi
-    profilePage.querySelector("#dailyCalorieTarget").value = "";
-    profilePage.querySelector("#dailyProteinTarget").value = "";
-    profilePage.querySelector("#dailyCarbTarget").value = "";
-    profilePage.querySelector("#dailyFatTarget").value = "";
+    // Kosongkan tampilan target nutrisi
+profilePage.querySelector("#dailyCalorieTarget").textContent = "—";
+profilePage.querySelector("#dailyProteinTarget").textContent = "—";
+profilePage.querySelector("#dailyCarbTarget").textContent = "—";
+profilePage.querySelector("#dailyFatTarget").textContent = "—";
 
     // Kosongkan hasil simulasi
     const simulationResults = profilePage.querySelector(

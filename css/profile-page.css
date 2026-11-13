@@ -241,6 +241,7 @@ html[data-theme="dark"] .profile-avatar-edit {
   font-size: 13px;
 }
 
+
 /* =========================================
    FORMULIR PROFIL
 ========================================= */
@@ -279,6 +280,8 @@ html[data-theme="dark"] .profile-avatar-edit {
   color: var(--profile-secondary);
 }
 
+/* INPUT FORM PROFIL */
+
 .profile-field input,
 .profile-field select {
   width: 100%;
@@ -305,6 +308,10 @@ html[data-theme="dark"] .profile-avatar-edit {
   color: var(--profile-muted);
 }
 
+/* =========================================
+   INPUT DENGAN SATUAN
+========================================= */
+
 .profile-input-unit {
   display: flex;
   align-items: center;
@@ -312,11 +319,7 @@ html[data-theme="dark"] .profile-avatar-edit {
   border-radius: 10px;
   overflow: hidden;
   background: var(--profile-bg);
-}
-
-.profile-input-unit:focus-within {
-  border-color: var(--profile-primary);
-  box-shadow: 0 0 0 3px rgba(22, 134, 91, 0.10);
+  min-height: 42px;
 }
 
 .profile-input-unit input {
@@ -337,11 +340,70 @@ html[data-theme="dark"] .profile-avatar-edit {
   white-space: nowrap;
 }
 
+/* =========================================
+   TARGET NUTRISI - TAMPILAN INFORMASI
+========================================= */
+
+.profile-section .profile-field:has(.profile-input-unit strong) {
+  padding: 12px;
+  background: var(--profile-bg-soft);
+  border: 1px solid var(--profile-border);
+  border-radius: 11px;
+  gap: 9px;
+}
+
+.profile-input-unit:has(strong) {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border: none;
+  background: transparent;
+  border-radius: 0;
+  min-height: auto;
+  overflow: visible;
+}
+
+.profile-input-unit strong {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--profile-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.profile-input-unit:has(strong) span {
+  padding: 0;
+  font-size: 11px;
+  color: var(--profile-secondary);
+}
+
+/* =========================================
+   CATATAN
+========================================= */
+
 .profile-note {
   color: var(--profile-muted);
   font-size: 11px;
   line-height: 1.5;
   margin: 12px 0 0;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 480px) {
+  .profile-form-grid {
+    gap: 10px;
+  }
+
+  .profile-section .profile-field:has(.profile-input-unit strong) {
+    padding: 10px;
+  }
+
+  .profile-input-unit strong {
+    font-size: 18px;
+  }
 }
 
 /* =========================================
