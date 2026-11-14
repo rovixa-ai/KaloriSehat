@@ -6,6 +6,26 @@ import {
 
 const $ = (id) => document.getElementById(id);
 
+// =========================================
+// SISTEM TERJEMAHAN
+// =========================================
+
+const t = (key) => window.t?.(key) ?? key;
+
+function getLocale() {
+  return window.getLanguage?.() === "en" ? "en-US" : "id-ID";
+}
+
+function numberFormat(value, maximumFractionDigits = 2) {
+  return Number(value).toLocaleString(getLocale(), {
+    maximumFractionDigits
+  });
+}
+
+// =========================================
+// UTILITAS
+// =========================================
+
 function escapeHTML(value) {
   return String(value ?? "").replace(/[&<>"']/g, (char) => ({
     "&": "&amp;",
@@ -17,7 +37,9 @@ function escapeHTML(value) {
 }
 
 function formatDate(dateString) {
-  if (!dateString) return "Tanggal tidak diketahui";
+  if (!dateString) {
+    return t("historyDynamic.unknownDate");
+  }
 
   const date = new Date(`${dateString}T00:00:00`);
 
@@ -25,7 +47,7 @@ function formatDate(dateString) {
     return dateString;
   }
 
-  return date.toLocaleDateString("id-ID", {
+  return date.toLocaleDateString(getLocale(), {
     weekday: "long",
     day: "numeric",
     month: "long",
@@ -41,36 +63,69 @@ function getMealItems(meal) {
   return [meal];
 }
 
-
 function formatNutrient(value, unit) {
   const number = Number(value);
 
-  if (value === null || value === undefined || value === "" ||
-      !Number.isFinite(number)) {
+  if (
+    value === null ||
+    value === undefined ||
+    value === "" ||
+    !Number.isFinite(number)
+  ) {
     return "—";
   }
 
-  return `${number.toLocaleString("id-ID", {
-    maximumFractionDigits: 2
-  })} ${unit}`;
+  return `${numberFormat(number)} ${unit}`;
 }
+
+// =========================================
+// DETAIL NUTRISI MAKANAN
+// =========================================
 
 function renderFoodNutrition(food) {
   const nutrients = [
-    { label: "Kalori", value: food.kcal, unit: "kkal" },
-    { label: "Protein", value: food.protein, unit: "g" },
-    { label: "Karbohidrat", value: food.carbs, unit: "g" },
-    { label: "Lemak", value: food.fat, unit: "g" },
-    { label: "Serat", value: food.fiber, unit: "g" },
-    { label: "Natrium", value: food.sodium, unit: "mg" },
-    { label: "Air", value: food.water, unit: "g" }
+    {
+      label: t("historyDynamic.calories"),
+      value: food.kcal,
+      unit: "kcal"
+    },
+    {
+      label: t("historyDynamic.protein"),
+      value: food.protein,
+      unit: "g"
+    },
+    {
+      label: t("historyDynamic.carbohydrates"),
+      value: food.carbs,
+      unit: "g"
+    },
+    {
+      label: t("historyDynamic.fat"),
+      value: food.fat,
+      unit: "g"
+    },
+    {
+      label: t("historyDynamic.fiber"),
+      value: food.fiber,
+      unit: "g"
+    },
+    {
+      label: t("historyDynamic.sodium"),
+      value: food.sodium,
+      unit: "mg"
+    },
+    {
+      label: t("historyDynamic.water"),
+      value: food.water,
+      unit: "g"
+    }
   ];
 
   return `
     <div class="history-nutrition-grid">
       ${nutrients.map(item => `
         <div class="history-nutrition-item">
-          <span>${item.label}</span>
+          <span>${escapeHTML(item.label)}</span>
           <strong>${formatNutrient(item.value, item.unit)}</strong>
         </div>
       `).join("")}
@@ -78,16 +133,47 @@ function renderFoodNutrition(food) {
   `;
 }
 
+// =========================================
+// PERHITUNGAN NUTRISI HARIAN
+// =========================================
 
 function calculateDailyNutrition(dailyMeals) {
   const nutrients = [
-    { key: "kcal", label: "Kalori", unit: "kkal" },
-    { key: "protein", label: "Protein", unit: "g" },
-    { key: "carbs", label: "Karbohidrat", unit: "g" },
-    { key: "fat", label: "Lemak", unit: "g" },
-    { key: "fiber", label: "Serat", unit: "g" },
-    { key: "sodium", label: "Natrium", unit: "mg" },
-    { key: "water", label: "Air", unit: "g" }
+    {
+      key: "kcal",
+      label: t("historyDynamic.calories"),
+      unit: "kcal"
+    },
+    {
+      key: "protein",
+      label: t("historyDynamic.protein"),
+      unit: "g"
+    },
+    {
+      key: "carbs",
+      label: t("historyDynamic.carbohydrates"),
+      unit: "g"
+    },
+    {
+      key: "fat",
+      label: t("historyDynamic.fat"),
+      unit: "g"
+    },
+    {
+      key: "fiber",
+      label: t("historyDynamic.fiber"),
+      unit: "g"
+    },
+    {
+      key: "sodium",
+      label: t("historyDynamic.sodium"),
+      unit: "mg"
+    },
+    {
+      key: "water",
+      label: t("historyDynamic.water"),
+      unit: "g"
+    }
   ];
 
   // Ambil isi makanan tanpa menjumlahkan total kelompok dua kali
@@ -119,6 +205,9 @@ function calculateDailyNutrition(dailyMeals) {
   });
 }
 
+// =========================================
+// RINGKASAN HARIAN
+// =========================================
 
 function renderDailySummary(dailyMeals) {
   const nutrients = calculateDailyNutrition(dailyMeals);
@@ -135,6 +224,7 @@ function renderDailySummary(dailyMeals) {
   const validTarget = Number.isFinite(target) && target > 0;
 
   const validKcal = kcal !== null && Number.isFinite(kcal);
+
   const progress = validTarget && validKcal
     ? (kcal / target) * 100
     : null;
@@ -170,6 +260,7 @@ function renderDailySummary(dailyMeals) {
     ? (fatCalories / macroTotal) * 100
     : 0;
 
+  // Grafik makronutrisi
   const macroChart = macroValuesValid && macroTotal > 0
     ? `
       <div
@@ -182,47 +273,42 @@ function renderDailySummary(dailyMeals) {
       >
         <div class="history-macro-donut-center">
           <strong>3</strong>
-          <span>Makro</span>
+          <span>${escapeHTML(t("historyDynamic.macro"))}</span>
         </div>
       </div>
 
       <div class="history-macro-legend">
         <div>
           <i class="protein-dot"></i>
-          <span>Protein</span>
-          <strong>${protein.toLocaleString("id-ID", {
-            maximumFractionDigits: 1
-          })} g</strong>
+          <span>${escapeHTML(t("historyDynamic.protein"))}</span>
+          <strong>${numberFormat(protein, 1)} g</strong>
         </div>
 
         <div>
           <i class="carbs-dot"></i>
-          <span>Karbo</span>
-          <strong>${carbs.toLocaleString("id-ID", {
-            maximumFractionDigits: 1
-          })} g</strong>
+          <span>${escapeHTML(t("historyDynamic.carbohydrateShort"))}</span>
+          <strong>${numberFormat(carbs, 1)} g</strong>
         </div>
 
         <div>
           <i class="fat-dot"></i>
-          <span>Lemak</span>
-          <strong>${fat.toLocaleString("id-ID", {
-            maximumFractionDigits: 1
-          })} g</strong>
+          <span>${escapeHTML(t("historyDynamic.fat"))}</span>
+          <strong>${numberFormat(fat, 1)} g</strong>
         </div>
       </div>
     `
     : `
       <p class="history-macro-unavailable">
-        Data makro belum lengkap untuk menampilkan grafik.
+        ${escapeHTML(t("historyDynamic.incompleteMacro"))}
       </p>
     `;
 
+  // Detail nutrisi lainnya
   const summaryItems = nutrients
     .filter(item => item.key !== "kcal")
     .map(item => `
       <div class="history-summary-item">
-        <span>${item.label}</span>
+        <span>${escapeHTML(item.label)}</span>
         <strong>${formatNutrient(item.total, item.unit)}</strong>
       </div>
     `).join("");
@@ -232,12 +318,12 @@ function renderDailySummary(dailyMeals) {
 
       <div class="history-summary-header">
         <div>
-          <span>Nutrition performance</span>
-          <strong>Ringkasan harian</strong>
+          <span>${escapeHTML(t("historyDynamic.nutritionPerformance"))}</span>
+          <strong>${escapeHTML(t("historyDynamic.dailySummary"))}</strong>
         </div>
 
         <span class="history-meal-count">
-          ${dailyMeals.length} catatan
+          ${dailyMeals.length} ${escapeHTML(t("historyPage.recordCount"))}
         </span>
       </div>
 
@@ -245,20 +331,22 @@ function renderDailySummary(dailyMeals) {
 
       <div class="history-calorie-panel">
         <div class="history-calorie-heading">
-          <span>Total asupan kalori</span>
-          <span class="history-calorie-badge">KALORI</span>
+          <span>${escapeHTML(t("historyDynamic.totalCalories"))}</span>
+          <span class="history-calorie-badge">
+            ${escapeHTML(t("historyDynamic.calorieBadge"))}
+          </span>
         </div>
 
         <div class="history-calorie-number">
-          <strong>${formatNutrient(kcal, "kkal")}</strong>
+          <strong>${formatNutrient(kcal, "kcal")}</strong>
         </div>
 
         <div class="history-target-info">
-          <span>Target harian</span>
+          <span>${escapeHTML(t("historyDynamic.dailyTarget"))}</span>
           <strong>
             ${validTarget
-              ? formatNutrient(target, "kkal")
-              : "Belum diatur"}
+              ? formatNutrient(target, "kcal")
+              : escapeHTML(t("historyDynamic.notSet"))}
           </strong>
         </div>
 
@@ -273,14 +361,15 @@ function renderDailySummary(dailyMeals) {
               </div>
 
               <div class="history-progress-caption">
-                <strong>${progress.toLocaleString("id-ID", {
-                  maximumFractionDigits: 1
-                })}% tercapai</strong>
+                <strong>
+                  ${numberFormat(progress, 1)}%
+                  ${escapeHTML(t("historyDynamic.achieved"))}
+                </strong>
 
                 <span>
                   ${remaining >= 0
-                    ? `Sisa ${formatNutrient(remaining, "kkal")}`
-                    : `Melebihi ${formatNutrient(Math.abs(remaining), "kkal")}`}
+                    ? `${escapeHTML(t("historyDynamic.remaining"))} ${formatNutrient(remaining, "kcal")}`
+                    : `${escapeHTML(t("historyDynamic.exceeded"))} ${formatNutrient(Math.abs(remaining), "kcal")}`}
                 </span>
               </div>
             `
@@ -288,8 +377,8 @@ function renderDailySummary(dailyMeals) {
               <p class="history-target-unavailable">
                 ${
                   !validTarget
-                    ? "Atur target kalori di profil untuk melihat progres."
-                    : "Data kalori belum lengkap."
+                    ? escapeHTML(t("historyDynamic.setCalorieTarget"))
+                    : escapeHTML(t("historyDynamic.incompleteCalories"))
                 }
               </p>
             `
@@ -301,8 +390,8 @@ function renderDailySummary(dailyMeals) {
       <div class="history-macro-section">
         <div class="history-macro-heading">
           <div>
-            <span>Komposisi nutrisi</span>
-            <strong>Distribusi makronutrisi</strong>
+            <span>${escapeHTML(t("historyDynamic.nutritionComposition"))}</span>
+            <strong>${escapeHTML(t("historyDynamic.macroDistribution"))}</strong>
           </div>
         </div>
 
@@ -314,8 +403,8 @@ function renderDailySummary(dailyMeals) {
       <!-- NUTRISI LAINNYA -->
 
       <div class="history-summary-heading">
-        <span>Detail nutrisi</span>
-        <strong>Total asupan</strong>
+        <span>${escapeHTML(t("historyDynamic.nutritionDetails"))}</span>
+        <strong>${escapeHTML(t("historyDynamic.totalIntake"))}</strong>
       </div>
 
       <div class="history-summary-grid">
@@ -326,7 +415,9 @@ function renderDailySummary(dailyMeals) {
   `;
 }
 
-
+// =========================================
+// HALAMAN RIWAYAT MAKANAN
+// =========================================
 
 function renderHistoryPage(selectedDate = "") {
   const container = $("fullHistoryList");
@@ -336,38 +427,54 @@ function renderHistoryPage(selectedDate = "") {
 
   let meals = getMeals().slice();
 
-  // Filter berdasarkan satu tanggal
+  // Filter berdasarkan tanggal
   if (selectedDate) {
     meals = meals.filter(meal => meal.date === selectedDate);
   }
 
+  // Urutkan dari terbaru
   meals.sort((a, b) => {
     const dateA = a.createdAt || new Date(a.date || 0).getTime();
     const dateB = b.createdAt || new Date(b.date || 0).getTime();
+
     return dateB - dateA;
   });
 
-  countElement.textContent = `${meals.length} catatan`;
+  countElement.textContent =
+    `${meals.length} ${t("historyPage.recordCount")}`;
 
+  // Tampilan ketika belum ada riwayat
   if (meals.length === 0) {
     container.innerHTML = `
       <div class="history-empty">
         <div class="history-empty-icon">▤</div>
-        <h3>${selectedDate ? "Tidak ada riwayat" : "Belum ada riwayat"}</h3>
+
+        <h3>
+          ${escapeHTML(
+            selectedDate
+              ? t("historyDynamic.noHistory")
+              : t("historyDynamic.emptyHistory")
+          )}
+        </h3>
+
         <p>
-          ${selectedDate
-            ? "Tidak ada makanan yang disimpan pada tanggal ini."
-            : "Makanan yang kamu simpan akan muncul di sini."}
+          ${escapeHTML(
+            selectedDate
+              ? t("historyDynamic.noHistoryDate")
+              : t("historyDynamic.emptyHistoryDescription")
+          )}
         </p>
       </div>
     `;
+
     return;
   }
 
+  // Kelompokkan makanan berdasarkan tanggal
   const groupedMeals = {};
 
   meals.forEach(meal => {
-    const date = meal.date || "Tanggal tidak diketahui";
+    const date = meal.date || t("historyDynamic.unknownDate");
 
     if (!groupedMeals[date]) {
       groupedMeals[date] = [];
@@ -378,102 +485,121 @@ function renderHistoryPage(selectedDate = "") {
 
   container.innerHTML = Object.entries(groupedMeals)
     .map(([date, dailyMeals], dayIndex) => {
-      
-      
-const mealCards = dailyMeals.map((meal, mealIndex) => {
-  const foods = Array.isArray(meal.foods)
-    ? meal.foods
-    : [meal];
 
-  const foodList = foods.map(food => {
-    const name = escapeHTML(food.name || "Makanan");
+      // Kartu makanan
+      const mealCards = dailyMeals.map((meal, mealIndex) => {
+        const foods = Array.isArray(meal.foods)
+          ? meal.foods
+          : [meal];
 
-    const weight = Number(
-      food.weight ?? food.estimatedWeight
-    );
+        const foodList = foods.map(food => {
+          const name = escapeHTML(
+            food.name || t("historyDynamic.food")
+          );
 
-    const kcal = Number(food.kcal) || 0;
+          const weight = Number(
+            food.weight ?? food.estimatedWeight
+          );
 
-    return `
-      <div class="history-food-item">
-        <div>
-          <strong>${name}</strong>
-          <small>
-            ${Number.isFinite(weight) && weight > 0
-              ? `${weight} gram`
-              : "Berat tidak tersedia"}
-          </small>
-        </div>
-        <span>${Math.round(kcal)} kkal</span>
-      </div>
-    `;
-  }).join("");
+          const kcal = Number(food.kcal) || 0;
 
-  const infoId = `history-info-${dayIndex}-${mealIndex}`;
+          return `
+            <div class="history-food-item">
+              <div>
+                <strong>${name}</strong>
 
-  const nutritionDetails = foods.map(food => `
-    <div class="history-food-nutrition">
-      <strong>${escapeHTML(food.name || "Makanan")}</strong>
-      ${renderFoodNutrition(food)}
-    </div>
-  `).join("");
+                <small>
+                  ${Number.isFinite(weight) && weight > 0
+                    ? `${numberFormat(weight)} ${escapeHTML(t("historyDynamic.gram"))}`
+                    : escapeHTML(t("historyDynamic.weightUnavailable"))}
+                </small>
+              </div>
 
-  return `
-    <article class="history-record">
-      <div class="history-record-header">
-        <strong>${escapeHTML(meal.name || "Catatan makanan")}</strong>
-        <b>${Math.round(Number(meal.kcal) || 0)} kkal</b>
-      </div>
+              <span>${numberFormat(Math.round(kcal))} kcal</span>
+            </div>
+          `;
+        }).join("");
 
-      <div class="history-food-list">
-        ${foodList}
-      </div>
+        const infoId = `history-info-${dayIndex}-${mealIndex}`;
 
-      <button
-        type="button"
-        class="history-info-button"
-        data-info-target="${infoId}"
-      >
-        <span>ⓘ</span> Info Nutrisi
-      </button>
+        const nutritionDetails = foods.map(food => `
+          <div class="history-food-nutrition">
+            <strong>
+              ${escapeHTML(food.name || t("historyDynamic.food"))}
+            </strong>
 
-      <div
-        id="${infoId}"
-        class="history-info-panel"
-        hidden
-      >
-        ${nutritionDetails}
-      </div>
-    </article>
-  `;
-}).join("");
+            ${renderFoodNutrition(food)}
+          </div>
+        `).join("");
 
+        return `
+          <article class="history-record">
+
+            <div class="history-record-header">
+              <strong>
+                ${escapeHTML(meal.name || t("historyDynamic.foodRecord"))}
+              </strong>
+
+              <b>
+                ${numberFormat(Math.round(Number(meal.kcal) || 0))} kcal
+              </b>
+            </div>
+
+            <div class="history-food-list">
+              ${foodList}
+            </div>
+
+            <button
+              type="button"
+              class="history-info-button"
+              data-info-target="${infoId}"
+            >
+              <span>ⓘ</span>
+              ${escapeHTML(t("historyDynamic.nutritionInfo"))}
+            </button>
+
+            <div
+              id="${infoId}"
+              class="history-info-panel"
+              hidden
+            >
+              ${nutritionDetails}
+            </div>
+
+          </article>
+        `;
+      }).join("");
 
       return `
         <section class="history-day">
-          <div class="history-day-header">
-  <h3>${escapeHTML(formatDate(date))}</h3>
-</div>
 
-${renderDailySummary(dailyMeals)}
+          <div class="history-day-header">
+            <h3>${escapeHTML(formatDate(date))}</h3>
+          </div>
+
+          ${renderDailySummary(dailyMeals)}
+
           ${mealCards}
+
         </section>
       `;
     }).join("");
 }
 
+// =========================================
+// INISIALISASI HALAMAN
+// =========================================
 
 function initializeHistoryPage() {
-  
-
-  
   const dateInput = $("historyDate");
   const resetButton = $("resetHistoryFilter");
 
+  // Filter tanggal
   dateInput?.addEventListener("change", () => {
     renderHistoryPage(dateInput.value);
   });
 
+  // Reset filter
   resetButton?.addEventListener("click", () => {
     if (dateInput) {
       dateInput.value = "";
@@ -482,34 +608,41 @@ function initializeHistoryPage() {
     renderHistoryPage();
   });
 
-
+  // Ketika halaman riwayat dibuka
   document.addEventListener("kaloriku:pagechange", (event) => {
-  if (event.detail.pageId === "historyPage") {
-    renderHistoryPage();
-  }
-});
+    if (event.detail?.pageId === "historyPage") {
+      renderHistoryPage(dateInput?.value || "");
+    }
+  });
 
-  
-const historyContainer = $("fullHistoryList");
+  // Ketika bahasa diganti
+  window.addEventListener("languageChanged", () => {
+    renderHistoryPage(dateInput?.value || "");
+  });
 
-historyContainer?.addEventListener("click", event => {
-  const button = event.target.closest("[data-info-target]");
+  // Tombol buka/tutup detail nutrisi
+  const historyContainer = $("fullHistoryList");
 
-  if (!button) return;
+  historyContainer?.addEventListener("click", event => {
+    const button = event.target.closest("[data-info-target]");
 
-  const panel = document.getElementById(
-    button.dataset.infoTarget
-  );
+    if (!button) return;
 
-  if (!panel) return;
+    const panel = document.getElementById(
+      button.dataset.infoTarget
+    );
 
-  panel.hidden = !panel.hidden;
+    if (!panel) return;
 
-  button.innerHTML = panel.hidden
-    ? "<span>ⓘ</span> Info Nutrisi"
-    : "<span>⌃</span> Tutup Info";
-});
+    panel.hidden = !panel.hidden;
 
+    button.innerHTML = panel.hidden
+      ? `<span>ⓘ</span> ${escapeHTML(t("historyDynamic.nutritionInfo"))}`
+      : `<span>⌃</span> ${escapeHTML(t("historyDynamic.closeInfo"))}`;
+  });
+
+  // Render awal
+  renderHistoryPage(dateInput?.value || "");
 }
 
 initializeHistoryPage();

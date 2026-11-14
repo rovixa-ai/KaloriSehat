@@ -7,6 +7,205 @@ export const translations = {
       label: "Bahasa / Language"
     },
 
+    dashboard: {
+      welcomeGreeting: "Halo, selamat datang! 👋",
+      welcomeDescription: "Yuk, pantau asupan nutrisi dan jaga kesehatanmu hari ini."
+    },
+
+    calorieCard: {
+      dailyIntake: "ASUPAN KALORI HARIAN",
+      consumed: "Kalori yang sudah dikonsumsi",
+      dailyProgress: "Progress harian",
+      target: "Target",
+      alreadyConsumed: "Sudah dikonsumsi",
+      remaining: "Sisa",
+      kcal: "kkal"
+    },
+
+    nutritionOverview: {
+      title: "Asupan Nutrisi",
+      protein: "Protein",
+      carbs: "Karbohidrat",
+      fat: "Lemak",
+      target: "Target",
+      unit: "g"
+    },
+
+    foodTracker: {
+      title: "Catat Makanan",
+      addPhoto: "Tambah Foto Makanan",
+      previewAlt: "Pratinjau makanan",
+      analyze: "Analisis Makanan",
+      aiResult: "Hasil Identifikasi",
+
+      manualTitle: "Input Manual",
+      manualDescription: "Catat makanan tanpa menggunakan foto.",
+      foodName: "Nama makanan",
+      foodNamePlaceholder: "Contoh: Nasi putih",
+      foodWeight: "Berat makanan",
+      gram: "gram",
+      calculate: "Hitung Nutrisi",
+
+      suggestions: "Makanan yang mungkin Anda maksud:",
+
+      resultTitle: "Estimasi Nutrisi",
+      cancel: "Batal",
+      save: "Simpan Makanan"
+    },
+
+    foodEditModal: {
+      editTitle: "Edit Makanan",
+      addTitle: "Tambah Makanan",
+      foodName: "Nama makanan",
+      foodNamePlaceholder: "Cari nama makanan Panganku...",
+      foodWeight: "Berat makanan",
+      weightPlaceholder: "Berat makanan",
+      gram: "gram",
+      hint: "Pilih makanan dari Panganku sebelum menyimpan.",
+      delete: "Hapus Makanan",
+      cancel: "Batal",
+      saveChanges: "Simpan Perubahan",
+      addFood: "Tambahkan Makanan",
+      notFound: "Makanan tidak ditemukan di Panganku.",
+      selected: "Dipilih:",
+      confirmDelete: "Apakah Anda yakin ingin menghapus",
+      fromAnalysis: "dari hasil analisis?",
+      calories: "kkal",
+      per100g: "100 g"
+    },
+
+    foodHistory: {
+      eyebrow: "Catatan makananmu",
+      title: "Riwayat Makanan",
+      description: "Lihat kembali makanan dan kalori yang sudah dicatat."
+    },
+
+    historyPage: {
+      dateLabel: "Pilih tanggal riwayat",
+      reset: "Reset",
+      allHistory: "Semua riwayat",
+      recordCount: "catatan"
+    },
+
+    historyDynamic: {
+      unknownDate: "Tanggal tidak diketahui",
+      calories: "Kalori",
+      protein: "Protein",
+      carbohydrates: "Karbohidrat",
+      fat: "Lemak",
+      fiber: "Serat",
+      sodium: "Natrium",
+      water: "Air",
+      macro: "Makro",
+      carbohydrateShort: "Karbo",
+      incompleteMacro: "Data makro belum lengkap untuk menampilkan grafik.",
+      nutritionPerformance: "Nutrition performance",
+      dailySummary: "Ringkasan harian",
+      totalCalories: "Total asupan kalori",
+      calorieBadge: "KALORI",
+      dailyTarget: "Target harian",
+      notSet: "Belum diatur",
+      achieved: "tercapai",
+      remaining: "Sisa",
+      exceeded: "Melebihi",
+      setCalorieTarget: "Atur target kalori di profil untuk melihat progres.",
+      incompleteCalories: "Data kalori belum lengkap.",
+      nutritionComposition: "Komposisi nutrisi",
+      macroDistribution: "Distribusi makronutrisi",
+      nutritionDetails: "Detail nutrisi",
+      totalIntake: "Total asupan",
+      food: "Makanan",
+      foodRecord: "Catatan makanan",
+      weightUnavailable: "Berat tidak tersedia",
+      gram: "gram",
+      nutritionInfo: "Info Nutrisi",
+      closeInfo: "Tutup Info",
+      noHistory: "Tidak ada riwayat",
+      noHistoryDate: "Tidak ada makanan yang disimpan pada tanggal ini.",
+      emptyHistory: "Belum ada riwayat",
+      emptyHistoryDescription: "Makanan yang kamu simpan akan muncul di sini."
+    },
+
+    statisticsPage: {
+      eyebrow: "Perkembangan kesehatanmu",
+      title: "Statistik",
+      description: "Pantau pola konsumsi kalori dan nutrisi."
+    },
+
+    statisticsFilter: {
+      title: "Periode Statistik",
+      days7: "7 Hari",
+      days30: "30 Hari",
+      all: "Semua"
+    },
+
+    statisticsSummary: {
+      title: "Ringkasan Konsumsi",
+      totalCalories: "Total Kalori",
+      averageCalories: "Rata-rata Kalori",
+      totalMeals: "Total Makanan",
+      recordedDays: "Hari Tercatat",
+      kcal: "kkal",
+      kcalPerDay: "kkal/hari",
+      records: "catatan",
+      days: "hari"
+    },
+
+    statisticsChart: {
+      calorieTitle: "Grafik Kalori Harian",
+      noData: "Belum ada data statistik."
+    },
+
+    statisticsGoal: {
+      journey: "Perjalanan Anda",
+      title: "Menuju Berat Badan Tujuan",
+      empty: "Lengkapi profil dan tujuan berat badan untuk melihat progres Anda."
+    },
+
+    statisticsNutrition: {
+      title: "Total Asupan Nutrisi",
+      protein: "Protein",
+      carbohydrates: "Karbohidrat",
+      fat: "Lemak"
+    },
+
+    statisticsDynamic: {
+      unknown: "Tidak diketahui",
+      previousPeriodUnavailable: "Belum ada data periode sebelumnya",
+      comparedPrevious: "dibanding periode sebelumnya",
+      increased: "Naik",
+      decreased: "Turun",
+      unchanged: "Tidak berubah",
+
+      completeProfile: "Lengkapi profil dan tujuan berat badan untuk melihat simulasi progres Anda.",
+
+      currentWeight: "Berat saat ini",
+      goalWeight: "Berat tujuan",
+      goalChange: "Perubahan tujuan",
+      lose: "menurunkan",
+      gain: "menaikkan",
+      duration: "Target waktu",
+      months: "bulan",
+
+      averageIntake: "Rata-rata konsumsi",
+      dailyTarget: "Target",
+      perDay: "kkal/hari",
+
+      closeToTarget: "Rata-rata kalori Anda sangat dekat dengan target harian.",
+      aboveTarget: "Rata-rata konsumsi Anda",
+      belowTarget: "Rata-rata konsumsi Anda",
+      aboveTargetEnd: "kkal di atas target.",
+      belowTargetEnd: "kkal di bawah target.",
+
+      noData: "Belum ada data statistik.",
+
+      targetLabel: "Target",
+      successful: "Berhasil memenuhi target",
+      exceededTarget: "Melebihi target",
+      according: "Sesuai",
+      exceeded: "Melebihi"
+    },
+
     profile: {
       settingsTitle: "Pengaturan akun",
       title: "Profil Saya",
@@ -148,14 +347,230 @@ export const translations = {
       yes: "Ya",
       cancel: "Batal",
       ok: "OK"
-    }
+    },
 
+    navigation: {
+      home: "Beranda",
+      history: "Riwayat",
+      statistics: "Statistik",
+      profile: "Profil"
+    },
+
+    footer: {
+      copyright: "KaloriKu © 2026",
+      disclaimer: "Hasil perhitungan merupakan estimasi."
+    },
+
+    appModal: {
+      title: "Informasi",
+      cancel: "Batal",
+      confirm: "OK"
+    }
   },
 
   en: {
 
     language: {
       label: "Language"
+    },
+
+    dashboard: {
+      welcomeGreeting: "Hello, welcome! 👋",
+      welcomeDescription: "Let's track your nutrition intake and stay healthy today."
+    },
+
+    calorieCard: {
+      dailyIntake: "DAILY CALORIE INTAKE",
+      consumed: "Calories consumed",
+      dailyProgress: "Daily progress",
+      target: "Target",
+      alreadyConsumed: "Consumed",
+      remaining: "Remaining",
+      kcal: "kcal"
+    },
+
+    nutritionOverview: {
+      title: "Nutrition Intake",
+      protein: "Protein",
+      carbs: "Carbohydrates",
+      fat: "Fat",
+      target: "Target",
+      unit: "g"
+    },
+
+    foodTracker: {
+      title: "Food Tracker",
+      addPhoto: "Add Food Photo",
+      previewAlt: "Food preview",
+      analyze: "Analyze Food",
+      aiResult: "Identification Results",
+
+      manualTitle: "Manual Entry",
+      manualDescription: "Record food without using a photo.",
+      foodName: "Food Name",
+      foodNamePlaceholder: "Example: White rice",
+      foodWeight: "Food Weight",
+      gram: "grams",
+      calculate: "Calculate Nutrition",
+
+      suggestions: "Foods you may be referring to:",
+
+      resultTitle: "Estimated Nutrition",
+      cancel: "Cancel",
+      save: "Save Food"
+    },
+
+    foodEditModal: {
+      editTitle: "Edit Food",
+      addTitle: "Add Food",
+      foodName: "Food name",
+      foodNamePlaceholder: "Search Panganku foods...",
+      foodWeight: "Food weight",
+      weightPlaceholder: "Food weight",
+      gram: "grams",
+      hint: "Select a food from Panganku before saving.",
+      delete: "Delete Food",
+      cancel: "Cancel",
+      saveChanges: "Save Changes",
+      addFood: "Add Food",
+      notFound: "Food not found in Panganku.",
+      selected: "Selected:",
+      confirmDelete: "Are you sure you want to delete",
+      fromAnalysis: "from the analysis results?",
+      calories: "kcal",
+      per100g: "100 g"
+    },
+
+    foodHistory: {
+      eyebrow: "Your food records",
+      title: "Food History",
+      description: "Review the foods and calories you have recorded."
+    },
+
+    historyPage: {
+      dateLabel: "Select history date",
+      reset: "Reset",
+      allHistory: "All History",
+      recordCount: "records"
+    },
+
+    historyDynamic: {
+      unknownDate: "Unknown date",
+      calories: "Calories",
+      protein: "Protein",
+      carbohydrates: "Carbohydrates",
+      fat: "Fat",
+      fiber: "Fiber",
+      sodium: "Sodium",
+      water: "Water",
+      macro: "Macros",
+      carbohydrateShort: "Carbs",
+      incompleteMacro: "Incomplete macro data. Unable to display the chart.",
+      nutritionPerformance: "Nutrition performance",
+      dailySummary: "Daily summary",
+      totalCalories: "Total calorie intake",
+      calorieBadge: "CALORIES",
+      dailyTarget: "Daily target",
+      notSet: "Not set",
+      achieved: "achieved",
+      remaining: "Remaining",
+      exceeded: "Exceeded by",
+      setCalorieTarget: "Set your calorie target in your profile to view progress.",
+      incompleteCalories: "Incomplete calorie data.",
+      nutritionComposition: "Nutrition composition",
+      macroDistribution: "Macronutrient distribution",
+      nutritionDetails: "Nutrition details",
+      totalIntake: "Total intake",
+      food: "Food",
+      foodRecord: "Food record",
+      weightUnavailable: "Weight unavailable",
+      gram: "grams",
+      nutritionInfo: "Nutrition Info",
+      closeInfo: "Close Info",
+      noHistory: "No history found",
+      noHistoryDate: "No food was saved on this date.",
+      emptyHistory: "No history yet",
+      emptyHistoryDescription: "The food you save will appear here."
+    },
+
+    statisticsPage: {
+      eyebrow: "Your health progress",
+      title: "Statistics",
+      description: "Track your calorie and nutrition intake patterns."
+    },
+
+    statisticsFilter: {
+      title: "Statistics Period",
+      days7: "7 Days",
+      days30: "30 Days",
+      all: "All"
+    },
+
+    statisticsSummary: {
+      title: "Consumption Summary",
+      totalCalories: "Total Calories",
+      averageCalories: "Average Calories",
+      totalMeals: "Total Meals",
+      recordedDays: "Recorded Days",
+      kcal: "kcal",
+      kcalPerDay: "kcal/day",
+      records: "records",
+      days: "days"
+    },
+
+    statisticsChart: {
+      calorieTitle: "Daily Calorie Chart",
+      noData: "No statistical data available yet."
+    },
+
+    statisticsGoal: {
+      journey: "Your Journey",
+      title: "Towards Your Goal Weight",
+      empty: "Complete your profile and weight goal to see your progress."
+    },
+
+    statisticsNutrition: {
+      title: "Total Nutrient Intake",
+      protein: "Protein",
+      carbohydrates: "Carbohydrates",
+      fat: "Fat"
+    },
+
+    statisticsDynamic: {
+      unknown: "Unknown",
+      previousPeriodUnavailable: "No data from the previous period",
+      comparedPrevious: "compared to the previous period",
+      increased: "Increased",
+      decreased: "Decreased",
+      unchanged: "Unchanged",
+
+      completeProfile: "Complete your profile and weight goal to see your progress simulation.",
+
+      currentWeight: "Current Weight",
+      goalWeight: "Goal Weight",
+      goalChange: "Goal Change",
+      lose: "lose",
+      gain: "gain",
+      duration: "Target Duration",
+      months: "months",
+
+      averageIntake: "Average Intake",
+      dailyTarget: "Target",
+      perDay: "kcal/day",
+
+      closeToTarget: "Your average calorie intake is very close to your daily target.",
+      aboveTarget: "Your average intake is",
+      belowTarget: "Your average intake is",
+      aboveTargetEnd: "kcal above your target.",
+      belowTargetEnd: "kcal below your target.",
+
+      noData: "No statistical data available yet.",
+
+      targetLabel: "Target",
+      successful: "Successfully within target",
+      exceededTarget: "Exceeded target",
+      according: "On target",
+      exceeded: "Exceeded"
     },
 
     profile: {
@@ -302,6 +717,24 @@ export const translations = {
       yes: "Yes",
       cancel: "Cancel",
       ok: "OK"
+    },
+
+    navigation: {
+      home: "Home",
+      history: "History",
+      statistics: "Statistics",
+      profile: "Profile"
+    },
+
+    footer: {
+      copyright: "KaloriKu © 2026",
+      disclaimer: "Calculation results are estimates."
+    },
+
+    appModal: {
+      title: "Information",
+      cancel: "Cancel",
+      confirm: "OK"
     }
 
   }

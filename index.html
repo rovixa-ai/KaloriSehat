@@ -30,49 +30,67 @@
 <main id="homePage" class="dashboard-page">
 
   <!-- SAPAAN -->
-  <section class="welcome dashboard-welcome">
-    <div>
-      <p id="today" class="dashboard-date"></p>
-      <h2 id="welcomeGreeting">Halo, selamat datang! 👋</h2>
-      <p>Yuk, pantau asupan nutrisi dan jaga kesehatanmu hari ini.</p>
-    </div>
-    <span class="welcome-decoration"></span>
-  </section>
+<section class="welcome dashboard-welcome">
+  <div>
+    <p id="today" class="dashboard-date"></p>
+    
+    <h2 id="welcomeGreeting" data-i18n="dashboard.welcomeGreeting">
+      Halo, selamat datang! 👋
+    </h2>
+    
+    <p data-i18n="dashboard.welcomeDescription">
+      Yuk, pantau asupan nutrisi dan jaga kesehatanmu hari ini.
+    </p>
+  </div>
+  <span class="welcome-decoration"></span>
+</section>
 
   <!-- KARTU KALORI UTAMA -->
-  <section class="calorie-card dashboard-calorie">
-    <div class="calorie-card-heading">
-      <div>
-        <span class="eyebrow">DAILY CALORIE INTAKE</span>
-        <p>Kalori yang sudah dikonsumsi</p>
-      </div>
-      <span class="calorie-icon">🔥</span>
+<section class="calorie-card dashboard-calorie">
+  <div class="calorie-card-heading">
+    <div>
+      <span class="eyebrow" data-i18n="calorieCard.dailyIntake">
+        ASUPAN KALORI HARIAN
+      </span>
+      <p data-i18n="calorieCard.consumed">
+        Kalori yang sudah dikonsumsi
+      </p>
     </div>
+    <span class="calorie-icon">🔥</span>
+  </div>
 
-    <div class="calorie-number">
-      <strong id="totalCalories">0</strong>
-      <span>kkal</span>
-    </div>
+  <div class="calorie-number">
+    <strong id="totalCalories">0</strong>
+    <span data-i18n="calorieCard.kcal">kkal</span>
+  </div>
 
-    <div class="progress-info">
-      <span>Progress harian</span>
-      <span>Target: <b id="targetText">0</b> kkal</span>
-    </div>
+  <div class="progress-info">
+    <span data-i18n="calorieCard.dailyProgress">Progress harian</span>
+    <span>
+      <span data-i18n="calorieCard.target">Target</span>:
+      <b id="targetText">0</b>
+      <span data-i18n="calorieCard.kcal">kkal</span>
+    </span>
+  </div>
 
-    <div class="progress-track">
-      <div id="progressBar"></div>
-    </div>
+  <div class="progress-track">
+    <div id="progressBar"></div>
+  </div>
 
-    <div class="calorie-footer">
-      <span>
-        <span class="footer-dot consumed-dot"></span>
+  <div class="calorie-footer">
+    <span>
+      <span class="footer-dot consumed-dot"></span>
+      <span data-i18n="calorieCard.alreadyConsumed">
         Sudah dikonsumsi
       </span>
-      <span>
-        Sisa <b id="remainingCalories">0</b> kkal
-      </span>
-    </div>
-  </section>
+    </span>
+    <span>
+      <span data-i18n="calorieCard.remaining">Sisa</span>
+      <b id="remainingCalories">0</b>
+      <span data-i18n="calorieCard.kcal">kkal</span>
+    </span>
+  </div>
+</section>
 
   
 <!-- RINGKASAN NUTRISI -->
@@ -80,7 +98,7 @@
   <div class="section-heading">
     <div>
       <span class="eyebrow">NUTRITION OVERVIEW</span>
-      <h3>Asupan Nutrisi</h3>
+      <h3 data-i18n="nutritionOverview.title">Asupan Nutrisi</h3>
     </div>
     <span class="section-symbol">◈</span>
   </div>
@@ -91,7 +109,7 @@
     <div class="nutrition-card protein-card">
       <div class="nutrition-card-top">
         <span class="nutrition-icon">🥩</span>
-        <span class="nutrition-label">Protein</span>
+        <span class="nutrition-label" data-i18n="nutritionOverview.protein">Protein</span>
       </div>
 
       <div class="nutrition-ring" id="proteinProgress">
@@ -101,19 +119,23 @@
         </svg>
         <div class="ring-content">
           <strong class="ring-percent">0%</strong>
-          <span>Target</span>
+          <span data-i18n="nutritionOverview.target">Target</span>
         </div>
       </div>
 
       <strong id="totalProtein">0 g</strong>
-      <small>Target: <b id="proteinTargetText">0</b> g</small>
+      <small>
+        <span data-i18n="nutritionOverview.target">Target</span>:
+        <b id="proteinTargetText">0</b>
+        <span data-i18n="nutritionOverview.unit">g</span>
+      </small>
     </div>
 
     <!-- KARBOHIDRAT -->
     <div class="nutrition-card carbs-card">
       <div class="nutrition-card-top">
         <span class="nutrition-icon">🌾</span>
-        <span class="nutrition-label">Karbohidrat</span>
+        <span class="nutrition-label" data-i18n="nutritionOverview.carbs">Karbohidrat</span>
       </div>
 
       <div class="nutrition-ring" id="carbsProgress">
@@ -123,19 +145,23 @@
         </svg>
         <div class="ring-content">
           <strong class="ring-percent">0%</strong>
-          <span>Target</span>
+          <span data-i18n="nutritionOverview.target">Target</span>
         </div>
       </div>
 
       <strong id="totalCarbs">0 g</strong>
-      <small>Target: <b id="carbsTargetText">0</b> g</small>
+      <small>
+        <span data-i18n="nutritionOverview.target">Target</span>:
+        <b id="carbsTargetText">0</b>
+        <span data-i18n="nutritionOverview.unit">g</span>
+      </small>
     </div>
 
     <!-- LEMAK -->
     <div class="nutrition-card fat-card">
       <div class="nutrition-card-top">
         <span class="nutrition-icon">🥑</span>
-        <span class="nutrition-label">Lemak</span>
+        <span class="nutrition-label" data-i18n="nutritionOverview.fat">Lemak</span>
       </div>
 
       <div class="nutrition-ring" id="fatProgress">
@@ -145,12 +171,16 @@
         </svg>
         <div class="ring-content">
           <strong class="ring-percent">0%</strong>
-          <span>Target</span>
+          <span data-i18n="nutritionOverview.target">Target</span>
         </div>
       </div>
 
       <strong id="totalFat">0 g</strong>
-      <small>Target: <b id="fatTargetText">0</b> g</small>
+      <small>
+        <span data-i18n="nutritionOverview.target">Target</span>:
+        <b id="fatTargetText">0</b>
+        <span data-i18n="nutritionOverview.unit">g</span>
+      </small>
     </div>
 
   </div>
@@ -164,7 +194,7 @@
   <div class="section-heading">
     <div>
       <span class="eyebrow">FOOD TRACKER</span>
-      <h3>Catat Makanan</h3>
+      <h3 data-i18n="foodTracker.title">Catat Makanan</h3>
     </div>
   </div>
 
@@ -173,16 +203,18 @@
 
     <label for="foodPhoto" class="photo-button">
       <span class="camera-icon">📷</span>
-      <span>Tambah Foto Makanan</span>
+      <span data-i18n="foodTracker.addPhoto">Tambah Foto Makanan</span>
     </label>
 
     <input type="file" id="foodPhoto"
       accept="image/*" capture="environment" hidden>
 
-    <img id="preview" alt="Preview makanan" hidden>
+    <img id="preview"
+      data-i18n-alt="foodTracker.previewAlt"
+      alt="Pratinjau makanan" hidden>
 
     <button id="analyzeButton" class="calculate-button" disabled>
-      Analisis Makanan
+      <span data-i18n="foodTracker.analyze">Analisis Makanan</span>
     </button>
 
     <div id="analysisStatus" role="status"></div>
@@ -191,7 +223,7 @@
 
   <!-- HASIL IDENTIFIKASI AI -->
   <div id="analysisResults" class="analysis-results" hidden>
-    <h4>Hasil Identifikasi AI</h4>
+    <h4 data-i18n="foodTracker.aiResult">Hasil Identifikasi AI</h4>
     <div id="detectedFoods"></div>
   </div>
 
@@ -201,26 +233,35 @@
     <div class="food-manual-heading">
       <span class="manual-icon">✎</span>
       <div>
-        <h4>Input Manual</h4>
-        <p>Catat makanan tanpa menggunakan foto.</p>
+        <h4 data-i18n="foodTracker.manualTitle">Input Manual</h4>
+        <p data-i18n="foodTracker.manualDescription">
+          Catat makanan tanpa menggunakan foto.
+        </p>
       </div>
     </div>
 
     <div class="food-form">
 
-      <label for="foodName">Nama makanan</label>
+      <label for="foodName" data-i18n="foodTracker.foodName">
+        Nama makanan
+      </label>
+
       <input id="foodName" type="text"
+        data-i18n-placeholder="foodTracker.foodNamePlaceholder"
         placeholder="Contoh: Nasi putih">
 
-      <label for="foodWeight">Berat makanan</label>
+      <label for="foodWeight" data-i18n="foodTracker.foodWeight">
+        Berat makanan
+      </label>
+
       <div class="weight-input-wrap">
         <input id="foodWeight" type="number"
           min="1" value="100">
-        <span>gram</span>
+        <span data-i18n="foodTracker.gram">gram</span>
       </div>
 
       <button id="calculateButton" class="calculate-button">
-        Hitung Nutrisi
+        <span data-i18n="foodTracker.calculate">Hitung Nutrisi</span>
       </button>
 
     </div>
@@ -228,7 +269,8 @@
 
   <!-- SARAN MAKANAN -->
   <div id="foodSuggestions" class="food-suggestions" hidden>
-    <p class="suggestion-title">
+    <p class="suggestion-title"
+      data-i18n="foodTracker.suggestions">
       Makanan yang mungkin Anda maksud:
     </p>
     <div id="suggestionList"></div>
@@ -239,17 +281,19 @@
 
     <div class="result-heading">
       <span>✓</span>
-      <h3>Estimasi Nutrisi</h3>
+      <h3 data-i18n="foodTracker.resultTitle">Estimasi Nutrisi</h3>
     </div>
 
     <p id="resultDetails"></p>
 
     <div class="result-actions">
-      <button id="cancelMeal" type="button" class="cancel-button">
+      <button id="cancelMeal" type="button" class="cancel-button"
+        data-i18n="foodTracker.cancel">
         Batal
       </button>
 
-      <button id="saveMeal" type="button" class="save-button">
+      <button id="saveMeal" type="button" class="save-button"
+        data-i18n="foodTracker.save">
         Simpan Makanan
       </button>
     </div>
@@ -266,138 +310,202 @@
 <!-- HALAMAN RIWAYAT -->
 <main id="historyPage" hidden>
   <section class="welcome">
-    <p>Catatan makananmu</p>
-    <h2>Riwayat Makanan</h2>
-    <p>Lihat kembali makanan dan kalori yang sudah dicatat.</p>
-  </section>
+  <p data-i18n="foodHistory.eyebrow">Catatan makananmu</p>
+
+  <h2 data-i18n="foodHistory.title">Riwayat Makanan</h2>
+
+  <p data-i18n="foodHistory.description">
+    Lihat kembali makanan dan kalori yang sudah dicatat.
+  </p>
+</section>
 
   <section class="history-page-section">
-    
-    <div class="history-filter">
-      <label for="historyDate">Pilih tanggal riwayat</label>
 
-      <div class="history-filter-controls">
-        <input type="date" id="historyDate">
+  <div class="history-filter">
+    <label for="historyDate" data-i18n="historyPage.dateLabel">
+      Pilih tanggal riwayat
+    </label>
 
-        <button type="button" id="resetHistoryFilter">
-          Reset
-        </button>
-      </div>
+    <div class="history-filter-controls">
+      <input type="date" id="historyDate">
+
+      <button type="button" id="resetHistoryFilter"
+        data-i18n="historyPage.reset">
+        Reset
+      </button>
     </div>
+  </div>
 
-    <div class="history-page-header">
-      <h3>Semua riwayat</h3>
-      <span id="historyCount">0 catatan</span>
-    </div>
+  <div class="history-page-header">
+    <h3 data-i18n="historyPage.allHistory">Semua riwayat</h3>
+    <span id="historyCount">0 catatan</span>
+  </div>
 
-    <div id="fullHistoryList"></div>
-  </section>
+  <div id="fullHistoryList"></div>
+
+</section>
 </main>
 
 
 <!-- HALAMAN STATISTIK -->
 <main id="statisticsPage" hidden>
 
-  <section class="welcome">
-    <p>Perkembangan kesehatanmu</p>
-    <h2>Statistik</h2>
-    <p>Pantau pola konsumsi kalori dan nutrisi.</p>
-  </section>
+ <section class="welcome">
+  <p data-i18n="statisticsPage.eyebrow">
+    Perkembangan kesehatanmu
+  </p>
+
+  <h2 data-i18n="statisticsPage.title">
+    Statistik
+  </h2>
+
+  <p data-i18n="statisticsPage.description">
+    Pantau pola konsumsi kalori dan nutrisi.
+  </p>
+</section>
 
   <!-- FILTER PERIODE -->
-  <section class="statistics-section">
-    <h3>Periode Statistik</h3>
+<section class="statistics-section">
+  <h3 data-i18n="statisticsFilter.title">
+    Periode Statistik
+  </h3>
 
-    <div class="statistics-filter">
-      <button type="button" class="statistics-period active"
-        data-period="7">7 Hari</button>
+  <div class="statistics-filter">
+    <button
+      type="button"
+      class="statistics-period active"
+      data-period="7"
+      data-i18n="statisticsFilter.days7"
+    >7 Hari</button>
 
-      <button type="button" class="statistics-period"
-        data-period="30">30 Hari</button>
+    <button
+      type="button"
+      class="statistics-period"
+      data-period="30"
+      data-i18n="statisticsFilter.days30"
+    >30 Hari</button>
 
-      <button type="button" class="statistics-period"
-        data-period="all">Semua</button>
-    </div>
-  </section>
+    <button
+      type="button"
+      class="statistics-period"
+      data-period="all"
+      data-i18n="statisticsFilter.all"
+    >Semua</button>
+  </div>
+</section>
 
   <!-- RINGKASAN -->
-  <section class="statistics-section">
-    <h3>Ringkasan Konsumsi</h3>
+<section class="statistics-section">
+  <h3 data-i18n="statisticsSummary.title">
+    Ringkasan Konsumsi
+  </h3>
 
-    <div class="statistics-summary">
-      <div class="statistics-card">
-        <span>Total Kalori</span>
-        <strong id="statTotalCalories">0</strong>
-        <small>kkal</small>
-      </div>
+  <div class="statistics-summary">
 
-      <div class="statistics-card">
-        <span>Rata-rata Kalori</span>
-        <strong id="statAverageCalories">0</strong>
-        <div id="statCalorieTrend"></div>
-        <small>kkal/hari</small>
-      </div>
-
-      <div class="statistics-card">
-        <span>Total Makanan</span>
-        <strong id="statTotalMeals">0</strong>
-        <small>catatan</small>
-      </div>
-
-      <div class="statistics-card">
-        <span>Hari Tercatat</span>
-        <strong id="statRecordedDays">0</strong>
-        <small>hari</small>
-      </div>
+    <div class="statistics-card">
+      <span data-i18n="statisticsSummary.totalCalories">
+        Total Kalori
+      </span>
+      <strong id="statTotalCalories">0</strong>
+      <small data-i18n="statisticsSummary.kcal">kkal</small>
     </div>
-  </section>
+
+    <div class="statistics-card">
+      <span data-i18n="statisticsSummary.averageCalories">
+        Rata-rata Kalori
+      </span>
+      <strong id="statAverageCalories">0</strong>
+      <div id="statCalorieTrend"></div>
+      <small data-i18n="statisticsSummary.kcalPerDay">
+        kkal/hari
+      </small>
+    </div>
+
+    <div class="statistics-card">
+      <span data-i18n="statisticsSummary.totalMeals">
+        Total Makanan
+      </span>
+      <strong id="statTotalMeals">0</strong>
+      <small data-i18n="statisticsSummary.records">catatan</small>
+    </div>
+
+    <div class="statistics-card">
+      <span data-i18n="statisticsSummary.recordedDays">
+        Hari Tercatat
+      </span>
+      <strong id="statRecordedDays">0</strong>
+      <small data-i18n="statisticsSummary.days">hari</small>
+    </div>
+
+  </div>
+</section>
 
   <!-- GRAFIK KALORI -->
-  <section class="statistics-section">
-    <h3>Grafik Kalori Harian</h3>
+<section class="statistics-section">
+  <h3 data-i18n="statisticsChart.calorieTitle">
+    Grafik Kalori Harian
+  </h3>
 
-    <div class="statistics-chart" id="calorieChart">
-      <p>Belum ada data statistik.</p>
-    </div>
-  </section>
+  <div class="statistics-chart" id="calorieChart">
+    <p data-i18n="statisticsChart.noData">
+      Belum ada data statistik.
+    </p>
+  </div>
+</section>
 
   <section class="statistics-goal-card">
   <div class="statistics-goal-header">
     <div>
-      <span>Perjalanan Anda</span>
-      <h3>Menuju Berat Badan Tujuan</h3>
+      <span data-i18n="statisticsGoal.journey">
+        Perjalanan Anda
+      </span>
+
+      <h3 data-i18n="statisticsGoal.title">
+        Menuju Berat Badan Tujuan
+      </h3>
     </div>
   </div>
 
   <div id="goalProgressContent">
-    <p class="statistics-empty-goal">
+    <p
+      class="statistics-empty-goal"
+      data-i18n="statisticsGoal.empty"
+    >
       Lengkapi profil dan tujuan berat badan untuk
-      melihat progress Anda.
+      melihat progres Anda.
     </p>
   </div>
 </section>
 
   <!-- RINCIAN NUTRISI -->
-  <section class="statistics-section">
-    <h3>Total Asupan Nutrisi</h3>
+<section class="statistics-section">
+  <h3 data-i18n="statisticsNutrition.title">
+    Total Asupan Nutrisi
+  </h3>
 
-    <div class="statistics-nutrition">
-      <div>
-        <span>Protein</span>
-        <strong id="statProtein">0 g</strong>
-      </div>
-
-      <div>
-        <span>Karbohidrat</span>
-        <strong id="statCarbs">0 g</strong>
-      </div>
-
-      <div>
-        <span>Lemak</span>
-        <strong id="statFat">0 g</strong>
-      </div>
+  <div class="statistics-nutrition">
+    <div>
+      <span data-i18n="statisticsNutrition.protein">
+        Protein
+      </span>
+      <strong id="statProtein">0 g</strong>
     </div>
-  </section>
+
+    <div>
+      <span data-i18n="statisticsNutrition.carbohydrates">
+        Karbohidrat
+      </span>
+      <strong id="statCarbs">0 g</strong>
+    </div>
+
+    <div>
+      <span data-i18n="statisticsNutrition.fat">
+        Lemak
+      </span>
+      <strong id="statFat">0 g</strong>
+    </div>
+  </div>
+</section>
 
 </main>
 
@@ -876,10 +984,10 @@
 
 
 
-  <footer>
-    <p>KaloriSehatKu © 2026</p>
-    <small>Hasil perhitungan merupakan estimasi.</small>
-  </footer>
+ <footer>
+  <p data-i18n="footer.copyright">KaloriKu © 2026</p>
+  <small data-i18n="footer.disclaimer">Hasil perhitungan merupakan estimasi.</small>
+</footer>
 
 
 
@@ -904,7 +1012,7 @@
         <path d="M9 20v-6h6v6"/>
       </svg>
     </span>
-    <span class="nav-label">Beranda</span>
+    <span class="nav-label" data-i18n="navigation.home">Beranda</span>
   </button>
 
   <!-- RIWAYAT -->
@@ -925,7 +1033,7 @@
         <path d="M17 3v4"/>
       </svg>
     </span>
-    <span class="nav-label">Riwayat</span>
+    <span class="nav-label" data-i18n="navigation.history">Riwayat</span>
   </button>
 
   <!-- STATISTIK -->
@@ -944,7 +1052,7 @@
         <path d="M22 20H2"/>
       </svg>
     </span>
-    <span class="nav-label">Statistik</span>
+    <span class="nav-label" data-i18n="navigation.statistics">Statistik</span>
   </button>
 
   <!-- PROFIL -->
@@ -961,7 +1069,7 @@
         <path d="M4 21a8 8 0 0 1 16 0"/>
       </svg>
     </span>
-    <span class="nav-label">Profil</span>
+    <span class="nav-label" data-i18n="navigation.profile">Profil</span>
   </button>
 
 </nav>
@@ -985,7 +1093,9 @@
       ℹ️
     </div>
 
-    <h3 id="appModalTitle">Informasi</h3>
+    <h3 id="appModalTitle" data-i18n="appModal.title">
+      Informasi
+    </h3>
 
     <p id="appModalMessage"></p>
 
@@ -994,6 +1104,7 @@
         type="button"
         class="app-modal-button app-modal-cancel"
         id="appModalCancel"
+        data-i18n="appModal.cancel"
       >
         Batal
       </button>
@@ -1002,6 +1113,7 @@
         type="button"
         class="app-modal-button app-modal-confirm"
         id="appModalConfirm"
+        data-i18n="appModal.confirm"
       >
         OK
       </button>

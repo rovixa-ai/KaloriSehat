@@ -8,7 +8,37 @@ const $ = (id) => document.getElementById(id);
 
 let selectedPeriod = "7";
 
-// Mengambil isi makanan tanpa menghitung total kelompok dua kali
+// =========================================
+// SISTEM TERJEMAHAN
+// =========================================
+
+const t = (key) => window.t?.(key) ?? key;
+
+function getLocale() {
+  return window.getLanguage?.() === "en" ? "en-US" : "id-ID";
+}
+
+function formatNumber(value, digits = 0) {
+  return Number(value).toLocaleString(getLocale(), {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits
+  });
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[char]);
+}
+
+// =========================================
+// MENGAMBIL DATA MAKANAN
+// =========================================
+
 function getFoodItems(meal) {
   return Array.isArray(meal.foods) && meal.foods.length
     ? meal.foods
@@ -34,9 +64,13 @@ function getMealNutrition(meal) {
   });
 }
 
-// Mengambil data sesuai periode
+// =========================================
+// FILTER PERIODE
+// =========================================
+
 function getFilteredMeals() {
   const meals = getMeals();
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -72,11 +106,9 @@ function getPreviousPeriodMeals() {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  // Periode saat ini
   const currentStart = new Date(today);
   currentStart.setDate(today.getDate() - (days - 1));
 
-  // Periode sebelumnya dengan jumlah hari yang sama
   const previousEnd = new Date(currentStart);
   previousEnd.setDate(previousEnd.getDate() - 1);
 
@@ -93,6 +125,10 @@ function getPreviousPeriodMeals() {
       mealDate <= previousEnd;
   });
 }
+
+// =========================================
+// PROFIL PENGGUNA
+// =========================================
 
 function getUserProfile() {
   try {
@@ -112,13 +148,11 @@ function calculateGoalProgress(stats) {
   const goalWeight = Number(profile.goalWeight);
   const duration = Number(profile.goalDuration);
 
-  const targetCalories = Number(
-    profile.dailyCalorieTarget
-  ) || getTarget();
+  const targetCalories =
+    Number(profile.dailyCalorieTarget) || getTarget();
 
   const tdee = Number(profile.tdee);
 
-  // Pastikan data profil tersedia
   if (
     !currentWeight ||
     !goalWeight ||
@@ -128,22 +162,17 @@ function calculateGoalProgress(stats) {
     return null;
   }
 
-  const weightDifference =
-    goalWeight - currentWeight;
+  const weightDifference = goalWeight - currentWeight;
 
-  // Perubahan berat yang direncanakan per minggu
   const totalWeeks = duration * 4.345;
 
   const plannedWeeklyChange =
     weightDifference / totalWeeks;
 
-  // Estimasi perubahan berdasarkan selisih kalori.
-  // 7.700 kkal kira-kira setara dengan 1 kg perubahan berat.
   let estimatedWeeklyChange = 0;
 
   if (tdee && stats.average > 0) {
-    const dailyDifference =
-      stats.average - tdee;
+    const dailyDifference = stats.average - tdee;
 
     estimatedWeeklyChange =
       (dailyDifference * 7) / 7700;
@@ -161,7 +190,10 @@ function calculateGoalProgress(stats) {
   };
 }
 
-// Menghitung ringkasan statistik
+// =========================================
+// PERHITUNGAN STATISTIK
+// =========================================
+
 function calculateStatistics(meals) {
   const dailyData = {};
 
@@ -209,53 +241,78 @@ function calculateStatistics(meals) {
   };
 }
 
-// Menampilkan angka statistik
+// =========================================
+// MENAMPILKAN STATISTIK
+// =========================================
+
 function renderStatistics() {
   const meals = getFilteredMeals();
   const stats = calculateStatistics(meals);
 
-  // Data periode sebelumnya
   const previousMeals = getPreviousPeriodMeals();
-  const previousStats =
-    calculateStatistics(previousMeals);
+  const previousStats = calculateStatistics(previousMeals);
 
-  // Tampilkan ringkasan utama
-  $("statTotalCalories").textContent =
-    Math.round(stats.total.kcal)
-      .toLocaleString("id-ID");
+  // Ringkasan utama
+  const totalCalories = $("statTotalCalories");
+  const averageCalories = $("statAverageCalories");
+  const totalMeals = $("statTotalMeals");
+  const recordedDays = $("statRecordedDays");
 
-  $("statAverageCalories").textContent =
-    Math.round(stats.average)
-      .toLocaleString("id-ID");
+  if (totalCalories) {
+    totalCalories.textContent =
+      formatNumber(Math.round(stats.total.kcal));
+  }
 
-  $("statTotalMeals").textContent =
-    meals.length.toLocaleString("id-ID");
+  if (averageCalories) {
+    averageCalories.textContent =
+      formatNumber(Math.round(stats.average));
+  }
 
-  $("statRecordedDays").textContent =
-    stats.recordedDays.toLocaleString("id-ID");
+  if (totalMeals) {
+    totalMeals.textContent = formatNumber(meals.length);
+  }
 
-  $("statProtein").textContent =
-    `${stats.total.protein.toFixed(1)} g`;
+  if (recordedDays) {
+    recordedDays.textContent =
+      formatNumber(stats.recordedDays);
+  }
 
-  $("statCarbs").textContent =
-    `${stats.total.carbs.toFixed(1)} g`;
+  // Detail nutrisi
+  const protein = $("statProtein");
+  const carbs = $("statCarbs");
+  const fat = $("statFat");
 
-  $("statFat").textContent =
-    `${stats.total.fat.toFixed(1)} g`;
+  if (protein) {
+    protein.textContent =
+      `${formatNumber(stats.total.protein, 1)} g`;
+  }
 
-  // Bandingkan rata-rata kalori
+  if (carbs) {
+    carbs.textContent =
+      `${formatNumber(stats.total.carbs, 1)} g`;
+  }
+
+  if (fat) {
+    fat.textContent =
+      `${formatNumber(stats.total.fat, 1)} g`;
+  }
+
+  // Tren kalori
   renderCalorieTrend(
     stats.average,
     previousStats.average
   );
 
-  // Progress menuju berat badan tujuan
+  // Progress berat badan
   renderGoalProgress(stats);
 
-  // Grafik
+  // Grafik kalori
   renderCalorieChart(stats.dailyData);
 }
 
+// =========================================
+// TREN KALORI
+// =========================================
 
 function renderCalorieTrend(
   currentAverage,
@@ -265,47 +322,51 @@ function renderCalorieTrend(
 
   if (!trendElement) return;
 
-  // Belum ada data periode sebelumnya
   if (!previousAverage) {
     trendElement.innerHTML = `
       <span class="statistics-trend neutral">
-        Belum ada data periode sebelumnya
+        ${escapeHTML(t("statisticsDynamic.previousPeriodUnavailable"))}
       </span>
     `;
     return;
   }
 
-  const difference =
-    currentAverage - previousAverage;
+  const difference = currentAverage - previousAverage;
 
   if (difference > 0) {
     trendElement.innerHTML = `
       <span class="statistics-trend up">
-        ↑ Naik ${Math.round(difference)
-          .toLocaleString("id-ID")} kkal
+        ↑ ${escapeHTML(t("statisticsDynamic.increased"))}
+        ${formatNumber(Math.round(difference))} kcal
       </span>
+
       <small>
-        dibanding periode sebelumnya
+        ${escapeHTML(t("statisticsDynamic.comparedPrevious"))}
       </small>
     `;
   } else if (difference < 0) {
     trendElement.innerHTML = `
       <span class="statistics-trend down">
-        ↓ Turun ${Math.abs(Math.round(difference))
-          .toLocaleString("id-ID")} kkal
+        ↓ ${escapeHTML(t("statisticsDynamic.decreased"))}
+        ${formatNumber(Math.abs(Math.round(difference)))} kcal
       </span>
+
       <small>
-        dibanding periode sebelumnya
+        ${escapeHTML(t("statisticsDynamic.comparedPrevious"))}
       </small>
     `;
   } else {
     trendElement.innerHTML = `
       <span class="statistics-trend neutral">
-        → Tidak berubah
+        → ${escapeHTML(t("statisticsDynamic.unchanged"))}
       </span>
     `;
   }
 }
+
+// =========================================
+// PROGRESS BERAT BADAN
+// =========================================
 
 function renderGoalProgress(stats) {
   const container = $("goalProgressContent");
@@ -317,8 +378,7 @@ function renderGoalProgress(stats) {
   if (!goal) {
     container.innerHTML = `
       <p class="statistics-empty-goal">
-        Lengkapi profil dan tujuan berat badan untuk
-        melihat simulasi progress Anda.
+        ${escapeHTML(t("statisticsDynamic.completeProfile"))}
       </p>
     `;
     return;
@@ -328,12 +388,10 @@ function renderGoalProgress(stats) {
     goal.goalWeight < goal.currentWeight;
 
   const directionText = isLosingWeight
-    ? "menurunkan"
-    : "menaikkan";
+    ? t("statisticsDynamic.lose")
+    : t("statisticsDynamic.gain");
 
-  const difference = Math.abs(
-    goal.weightDifference
-  );
+  const difference = Math.abs(goal.weightDifference);
 
   const averageDifference =
     goal.averageCalories - goal.targetCalories;
@@ -341,21 +399,19 @@ function renderGoalProgress(stats) {
   let calorieStatus = "";
 
   if (Math.abs(averageDifference) < 50) {
-    calorieStatus = `
-      Rata-rata kalori Anda sangat dekat dengan
-      target harian.
-    `;
+    calorieStatus =
+      t("statisticsDynamic.closeToTarget");
   } else if (averageDifference > 0) {
     calorieStatus = `
-      Rata-rata konsumsi Anda ${Math.round(
-        averageDifference
-      ).toLocaleString("id-ID")} kkal di atas target.
+      ${escapeHTML(t("statisticsDynamic.aboveTarget"))}
+      ${formatNumber(Math.round(averageDifference))}
+      ${escapeHTML(t("statisticsDynamic.aboveTargetEnd"))}
     `;
   } else {
     calorieStatus = `
-      Rata-rata konsumsi Anda ${Math.abs(
-        Math.round(averageDifference)
-      ).toLocaleString("id-ID")} kkal di bawah target.
+      ${escapeHTML(t("statisticsDynamic.belowTarget"))}
+      ${formatNumber(Math.abs(Math.round(averageDifference)))}
+      ${escapeHTML(t("statisticsDynamic.belowTargetEnd"))}
     `;
   }
 
@@ -363,39 +419,47 @@ function renderGoalProgress(stats) {
     <div class="statistics-goal-grid">
 
       <div class="statistics-goal-item">
-        <span>Berat saat ini</span>
-        <strong>${goal.currentWeight} kg</strong>
+        <span>${escapeHTML(t("statisticsDynamic.currentWeight"))}</span>
+        <strong>${formatNumber(goal.currentWeight, 1)} kg</strong>
       </div>
 
       <div class="statistics-goal-item">
-        <span>Berat tujuan</span>
-        <strong>${goal.goalWeight} kg</strong>
+        <span>${escapeHTML(t("statisticsDynamic.goalWeight"))}</span>
+        <strong>${formatNumber(goal.goalWeight, 1)} kg</strong>
       </div>
 
       <div class="statistics-goal-item">
-        <span>Perubahan tujuan</span>
+        <span>${escapeHTML(t("statisticsDynamic.goalChange"))}</span>
         <strong>
-          ${directionText} ${difference.toFixed(1)} kg
+          ${escapeHTML(directionText)}
+          ${formatNumber(difference, 1)} kg
         </strong>
       </div>
 
       <div class="statistics-goal-item">
-        <span>Target waktu</span>
-        <strong>${goal.duration} bulan</strong>
+        <span>${escapeHTML(t("statisticsDynamic.duration"))}</span>
+        <strong>
+          ${formatNumber(goal.duration)}
+          ${escapeHTML(t("statisticsDynamic.months"))}
+        </strong>
       </div>
 
     </div>
 
     <div class="statistics-goal-calories">
-      <span>Rata-rata konsumsi</span>
+      <span>
+        ${escapeHTML(t("statisticsDynamic.averageIntake"))}
+      </span>
+
       <strong>
-        ${Math.round(goal.averageCalories)
-          .toLocaleString("id-ID")} kkal/hari
+        ${formatNumber(Math.round(goal.averageCalories))}
+        ${escapeHTML(t("statisticsDynamic.perDay"))}
       </strong>
 
       <small>
-        Target: ${Math.round(goal.targetCalories)
-          .toLocaleString("id-ID")} kkal/hari
+        ${escapeHTML(t("statisticsDynamic.dailyTarget"))}:
+        ${formatNumber(Math.round(goal.targetCalories))}
+        ${escapeHTML(t("statisticsDynamic.perDay"))}
       </small>
     </div>
 
@@ -405,16 +469,22 @@ function renderGoalProgress(stats) {
   `;
 }
 
+// =========================================
+// GRAFIK KALORI
+// =========================================
+
 function renderCalorieChart(dailyData) {
   const container = $("calorieChart");
 
   if (!container) return;
 
   const dates = Object.keys(dailyData).sort();
-  const target = getTarget();
+  const target = Number(getTarget()) || 0;
 
   if (!dates.length) {
-    container.innerHTML = "<p>Belum ada data statistik.</p>";
+    container.innerHTML = `
+      <p>${escapeHTML(t("statisticsDynamic.noData"))}</p>
+    `;
     return;
   }
 
@@ -423,16 +493,12 @@ function renderCalorieChart(dailyData) {
     kcal: dailyData[date].kcal
   }));
 
-  // Skala grafik harus mempertimbangkan target kalori.
-  // Dengan demikian garis target tetap terlihat meskipun
-  // semua konsumsi kalori berada di bawah target.
   const maxCalories = Math.max(
     ...values.map(item => item.kcal),
     target,
     1
   );
 
-  // Posisi garis target dalam persen.
   const targetPosition = target > 0
     ? (target / maxCalories) * 100
     : 0;
@@ -446,12 +512,14 @@ function renderCalorieChart(dailyData) {
           style="bottom: ${targetPosition}%"
         >
           <span>
-            Target ${Math.round(target).toLocaleString("id-ID")} kkal
+            ${escapeHTML(t("statisticsDynamic.targetLabel"))}
+            ${formatNumber(Math.round(target))} kcal
           </span>
         </div>
       ` : ""}
 
       <div class="statistics-chart-bars">
+
         ${values.map(item => {
           const height = Math.max(
             4,
@@ -462,41 +530,47 @@ function renderCalorieChart(dailyData) {
             `${item.date}T00:00:00`
           );
 
-          // Menentukan status pencapaian target
-          const isSuccess = target > 0 &&
-            item.kcal <= target;
+          const isSuccess =
+            target > 0 && item.kcal <= target;
 
-          const isOverTarget = target > 0 &&
-            item.kcal > target;
+          const isOverTarget =
+            target > 0 && item.kcal > target;
 
           let statusClass = "";
-   
+
           if (isSuccess) {
             statusClass = "success";
           } else if (isOverTarget) {
             statusClass = "over-target";
           }
 
+          const statusText = isSuccess
+            ? t("statisticsDynamic.according")
+            : t("statisticsDynamic.exceeded");
+
+          const titleText = isSuccess
+            ? t("statisticsDynamic.successful")
+            : isOverTarget
+              ? t("statisticsDynamic.exceededTarget")
+              : "";
+
           return `
             <div class="statistics-chart-column">
+
               <strong>
-                ${Math.round(item.kcal).toLocaleString("id-ID")}
+                ${formatNumber(Math.round(item.kcal))}
               </strong>
 
               <div class="statistics-bar-track">
                 <div
                   class="statistics-bar ${statusClass}"
                   style="height: ${height}%"
-                  title="${isSuccess
-                    ? "Berhasil memenuhi target"
-                    : isOverTarget
-                      ? "Melebihi target"
-                      : ""}"
+                  title="${escapeHTML(titleText)}"
                 ></div>
               </div>
 
               <small>
-                ${date.toLocaleDateString("id-ID", {
+                ${date.toLocaleDateString(getLocale(), {
                   day: "numeric",
                   month: "short"
                 })}
@@ -504,18 +578,24 @@ function renderCalorieChart(dailyData) {
 
               ${target > 0 ? `
                 <span class="statistics-day-status">
-                  ${isSuccess ? "✓ Sesuai" : "↑ Melebihi"}
+                  ${isSuccess ? "✓" : "↑"}
+                  ${escapeHTML(statusText)}
                 </span>
               ` : ""}
+
             </div>
           `;
         }).join("")}
+
       </div>
     </div>
   `;
 }
 
-// Filter periode
+// =========================================
+// FILTER PERIODE DAN EVENT
+// =========================================
+
 function initializeStatistics() {
   document.querySelectorAll(".statistics-period")
     .forEach(button => {
@@ -524,18 +604,30 @@ function initializeStatistics() {
 
         document.querySelectorAll(".statistics-period")
           .forEach(item => {
-            item.classList.toggle("active", item === button);
+            item.classList.toggle(
+              "active",
+              item === button
+            );
           });
 
         renderStatistics();
       });
     });
 
+  // Ketika halaman statistik dibuka
   document.addEventListener("kaloriku:pagechange", event => {
-    if (event.detail.pageId === "statisticsPage") {
+    if (event.detail?.pageId === "statisticsPage") {
       renderStatistics();
     }
   });
+
+  // Ketika bahasa diganti
+  window.addEventListener("languageChanged", () => {
+    renderStatistics();
+  });
+
+  // Render awal
+  renderStatistics();
 }
 
 initializeStatistics();

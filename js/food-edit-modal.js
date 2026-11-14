@@ -1,4 +1,3 @@
-
 export function openFoodEditModal({
   mode = "edit",
   food = null,
@@ -7,6 +6,8 @@ export function openFoodEditModal({
   onSave,
   onDelete
 }) {
+  const t = key => window.t?.(`foodEditModal.${key}`) ?? key;
+
   const isEdit = mode === "edit";
 
   const originalName = food
@@ -30,23 +31,23 @@ export function openFoodEditModal({
 
   modal.innerHTML = `
     <div class="food-edit-header">
-      <h3>${isEdit ? "Edit Makanan" : "Tambah Makanan"}</h3>
+      <h3>${isEdit ? t("editTitle") : t("addTitle")}</h3>
       <button type="button" class="food-edit-close">&times;</button>
     </div>
 
     <div class="food-edit-body">
-      <label for="editFoodName">Nama makanan</label>
+      <label for="editFoodName">${t("foodName")}</label>
 
       <input
         type="text"
         id="editFoodName"
-        placeholder="Cari nama makanan Panganku..."
+        placeholder="${t("foodNamePlaceholder")}"
         autocomplete="off"
       >
 
       <div class="food-edit-suggestions"></div>
 
-      <label for="editFoodWeight">Berat makanan</label>
+      <label for="editFoodWeight">${t("foodWeight")}</label>
 
       <div class="food-edit-weight">
         <input
@@ -54,29 +55,29 @@ export function openFoodEditModal({
           id="editFoodWeight"
           min="1"
           step="1"
-          placeholder="Berat makanan"
+          placeholder="${t("weightPlaceholder")}"
         >
-        <span>gram</span>
+        <span>${t("gram")}</span>
       </div>
 
       <p class="food-edit-hint">
-        Pilih makanan dari Panganku sebelum menyimpan.
+        ${t("hint")}
       </p>
     </div>
 
     <div class="food-edit-footer">
       ${isEdit ? `
         <button type="button" class="food-edit-delete">
-          Hapus Makanan
+          ${t("delete")}
         </button>
       ` : ""}
 
       <button type="button" class="food-edit-cancel">
-        Batal
+        ${t("cancel")}
       </button>
 
       <button type="button" class="food-edit-save" disabled>
-        ${isEdit ? "Simpan Perubahan" : "Tambahkan Makanan"}
+        ${isEdit ? t("saveChanges") : t("addFood")}
       </button>
     </div>
   `;
@@ -121,8 +122,7 @@ export function openFoodEditModal({
     if (!suggestions.length) {
       const message = document.createElement("p");
       message.className = "food-edit-no-result";
-      message.textContent =
-        "Makanan tidak ditemukan di Panganku.";
+      message.textContent = t("notFound");
 
       suggestionsBox.appendChild(message);
       return;
@@ -135,7 +135,7 @@ export function openFoodEditModal({
       button.className = "food-edit-option";
 
       button.textContent =
-        `${suggestion.name} — ${suggestion.food.kcal ?? "—"} kkal / 100 g`;
+        `${suggestion.name} — ${suggestion.food.kcal ?? "—"} ${t("calories")} / ${t("per100g")}`;
 
       button.addEventListener("click", () => {
         selectedFood = suggestion.food;
@@ -147,7 +147,7 @@ export function openFoodEditModal({
         const message = document.createElement("p");
         message.className = "food-edit-selected";
         message.textContent =
-          `Dipilih: ${suggestion.name}`;
+          `${t("selected")} ${suggestion.name}`;
 
         suggestionsBox.appendChild(message);
 
@@ -194,7 +194,7 @@ export function openFoodEditModal({
 
     deleteButton.addEventListener("click", () => {
       const confirmed = confirm(
-        `Apakah Anda yakin ingin menghapus "${food.name}" dari hasil analisis?`
+        `${t("confirmDelete")} "${food.name}" ${t("fromAnalysis")}`
       );
 
       if (!confirmed) return;

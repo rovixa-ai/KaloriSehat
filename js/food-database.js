@@ -112,15 +112,7 @@ export async function loadPangankuDatabase() {
     };
   });
 
-  console.log(
-    `Database makanan berhasil dimuat: ${
-      Object.keys(database).length
-    } makanan`
-  );
-
-  console.log(
-    `Panganku: ${pangankuRecords.length} | USDA: ${usdaRecords.length}`
-  );
+ 
 
   return database;
 }
@@ -237,7 +229,7 @@ export function createCompositeFood(database, ingredients) {
 
     if (!food) {
       throw new Error(
-        `Bahan "${item.name}" tidak ditemukan di Panganku.`
+        `Bahan "${item.name}" tidak ditemukan.`
       );
     }
 
