@@ -1,0 +1,7210 @@
+[
+  {
+    "kode": "USDA321358",
+    "nama": "Hummus, commercial",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 58.7,
+      "energi_kcal": 229,
+      "protein_g": 7.35,
+      "lemak_g": 17.1,
+      "karbohidrat_g": 14.9,
+      "serat_g": 5.4,
+      "natrium_mg": 438
+    }
+  },
+  {
+    "kode": "USDA321360",
+    "nama": "Tomatoes, grape, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 92.5,
+      "energi_kcal": 27.0,
+      "protein_g": 0.83,
+      "lemak_g": 0.63,
+      "karbohidrat_g": 5.51,
+      "serat_g": 2.1,
+      "natrium_mg": 6.0
+    }
+  },
+  {
+    "kode": "USDA321611",
+    "nama": "Beans, snap, green, canned, regular pack, drained solids",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 93.6,
+      "energi_kcal": 21.0,
+      "protein_g": 1.04,
+      "lemak_g": 0.39,
+      "karbohidrat_g": 4.11,
+      "serat_g": null,
+      "natrium_mg": 282
+    }
+  },
+  {
+    "kode": "USDA323121",
+    "nama": "Frankfurter, beef, unheated",
+    "kategori": "Daging Olahan",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 54.6,
+      "energi_kcal": 314,
+      "protein_g": 11.7,
+      "lemak_g": 28.0,
+      "karbohidrat_g": 2.89,
+      "serat_g": null,
+      "natrium_mg": 872
+    }
+  },
+  {
+    "kode": "USDA323294",
+    "nama": "Nuts, almonds, dry roasted, with salt added",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 2.2,
+      "energi_kcal": 620,
+      "protein_g": 20.4,
+      "lemak_g": 57.8,
+      "karbohidrat_g": 16.2,
+      "serat_g": 11.0,
+      "natrium_mg": 256
+    }
+  },
+  {
+    "kode": "USDA323505",
+    "nama": "Kale, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 89.6,
+      "energi_kcal": 35.0,
+      "protein_g": 2.92,
+      "lemak_g": 1.49,
+      "karbohidrat_g": 4.42,
+      "serat_g": 4.1,
+      "natrium_mg": 53.0
+    }
+  },
+  {
+    "kode": "USDA323604",
+    "nama": "Egg, whole, raw, frozen, pasteurized",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 75.4,
+      "energi_kcal": 150,
+      "protein_g": 12.3,
+      "lemak_g": 10.3,
+      "karbohidrat_g": 0.91,
+      "serat_g": null,
+      "natrium_mg": 121
+    }
+  },
+  {
+    "kode": "USDA323697",
+    "nama": "Egg, white, raw, frozen, pasteurized",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 88.3,
+      "energi_kcal": 48.0,
+      "protein_g": 10.1,
+      "lemak_g": 0.16,
+      "karbohidrat_g": 0.74,
+      "serat_g": null,
+      "natrium_mg": 144
+    }
+  },
+  {
+    "kode": "USDA323793",
+    "nama": "Egg, white, dried",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 7.98,
+      "energi_kcal": 376,
+      "protein_g": 79.9,
+      "lemak_g": 0.65,
+      "karbohidrat_g": 6.02,
+      "serat_g": null,
+      "natrium_mg": 1250.0
+    }
+  },
+  {
+    "kode": "USDA324317",
+    "nama": "Onion rings, breaded, par fried, frozen, prepared, heated in oven",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 43.4,
+      "energi_kcal": 288,
+      "protein_g": 4.52,
+      "lemak_g": 14.4,
+      "karbohidrat_g": 36.3,
+      "serat_g": 2.4,
+      "natrium_mg": 374
+    }
+  },
+  {
+    "kode": "USDA324653",
+    "nama": "Pickles, cucumber, dill or kosher dill",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 94.7,
+      "energi_kcal": 12.0,
+      "protein_g": 0.48,
+      "lemak_g": 0.43,
+      "karbohidrat_g": 1.99,
+      "serat_g": 1.0,
+      "natrium_mg": 808
+    }
+  },
+  {
+    "kode": "USDA325036",
+    "nama": "Cheese, parmesan, grated",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 22.8,
+      "energi_kcal": 421,
+      "protein_g": 29.6,
+      "lemak_g": 28.0,
+      "karbohidrat_g": 12.4,
+      "serat_g": null,
+      "natrium_mg": 1750.0
+    }
+  },
+  {
+    "kode": "USDA325198",
+    "nama": "Cheese, pasteurized process, American, vitamin D fortified",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 39.6,
+      "energi_kcal": 366,
+      "protein_g": 18.0,
+      "lemak_g": 30.6,
+      "karbohidrat_g": 5.27,
+      "serat_g": null,
+      "natrium_mg": 1660.0
+    }
+  },
+  {
+    "kode": "USDA325287",
+    "nama": "Grapefruit juice, white, canned or bottled, unsweetened",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 90.9,
+      "energi_kcal": 37.0,
+      "protein_g": 0.55,
+      "lemak_g": 0.7,
+      "karbohidrat_g": 7.59,
+      "serat_g": 0.2,
+      "natrium_mg": 1.0
+    }
+  },
+  {
+    "kode": "USDA325430",
+    "nama": "Peaches, yellow, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 88.3,
+      "energi_kcal": 42.0,
+      "protein_g": 0.91,
+      "lemak_g": 0.27,
+      "karbohidrat_g": 10.1,
+      "serat_g": 1.5,
+      "natrium_mg": 13.0
+    }
+  },
+  {
+    "kode": "USDA325524",
+    "nama": "Seeds, sunflower seed kernels, dry roasted, with salt added",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 1.5,
+      "energi_kcal": 612,
+      "protein_g": 21.0,
+      "lemak_g": 56.1,
+      "karbohidrat_g": 17.1,
+      "serat_g": 10.3,
+      "natrium_mg": 532
+    }
+  },
+  {
+    "kode": "USDA326196",
+    "nama": "Kale, frozen, cooked, boiled, drained, without salt",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 89.8,
+      "energi_kcal": 36.0,
+      "protein_g": 2.94,
+      "lemak_g": 1.21,
+      "karbohidrat_g": 5.3,
+      "serat_g": null,
+      "natrium_mg": 16.0
+    }
+  },
+  {
+    "kode": "USDA326698",
+    "nama": "Mustard, prepared, yellow",
+    "kategori": "Bumbu dan Rempah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 83.7,
+      "energi_kcal": 61.0,
+      "protein_g": 4.25,
+      "lemak_g": 3.38,
+      "karbohidrat_g": 5.3,
+      "serat_g": 4.3,
+      "natrium_mg": 1100.0
+    }
+  },
+  {
+    "kode": "USDA327046",
+    "nama": "Kiwifruit, green, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 83.9,
+      "energi_kcal": 58.0,
+      "protein_g": 1.06,
+      "lemak_g": 0.44,
+      "karbohidrat_g": 14.0,
+      "serat_g": 3.0,
+      "natrium_mg": 5.0
+    }
+  },
+  {
+    "kode": "USDA327357",
+    "nama": "Nectarines, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 89.0,
+      "energi_kcal": 39.0,
+      "protein_g": 1.06,
+      "lemak_g": 0.28,
+      "karbohidrat_g": 9.18,
+      "serat_g": 1.5,
+      "natrium_mg": 13.0
+    }
+  },
+  {
+    "kode": "USDA328637",
+    "nama": "Cheese, cheddar",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 36.6,
+      "energi_kcal": 408,
+      "protein_g": 23.3,
+      "lemak_g": 34.0,
+      "karbohidrat_g": 2.44,
+      "serat_g": null,
+      "natrium_mg": 654
+    }
+  },
+  {
+    "kode": "USDA328841",
+    "nama": "Cheese, cottage, lowfat, 2% milkfat",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 81.1,
+      "energi_kcal": 84.0,
+      "protein_g": 11.0,
+      "lemak_g": 2.3,
+      "karbohidrat_g": 4.31,
+      "serat_g": null,
+      "natrium_mg": 321
+    }
+  },
+  {
+    "kode": "USDA329370",
+    "nama": "Cheese, mozzarella, low moisture, part-skim",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 47.7,
+      "energi_kcal": 298,
+      "protein_g": 23.7,
+      "lemak_g": 20.4,
+      "karbohidrat_g": 4.44,
+      "serat_g": null,
+      "natrium_mg": 699
+    }
+  },
+  {
+    "kode": "USDA329490",
+    "nama": "Egg, whole, dried",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 4.07,
+      "energi_kcal": 575,
+      "protein_g": 48.1,
+      "lemak_g": 39.8,
+      "karbohidrat_g": 1.87,
+      "serat_g": null,
+      "natrium_mg": 485
+    }
+  },
+  {
+    "kode": "USDA329596",
+    "nama": "Egg, yolk, raw, frozen, pasteurized",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 56.1,
+      "energi_kcal": 296,
+      "protein_g": 15.6,
+      "lemak_g": 25.1,
+      "karbohidrat_g": 0.59,
+      "serat_g": null,
+      "natrium_mg": 66.0
+    }
+  },
+  {
+    "kode": "USDA329716",
+    "nama": "Egg, yolk, dried",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 3.64,
+      "energi_kcal": 654,
+      "protein_g": 34.2,
+      "lemak_g": 55.5,
+      "karbohidrat_g": 1.07,
+      "serat_g": null,
+      "natrium_mg": 149
+    }
+  },
+  {
+    "kode": "USDA330137",
+    "nama": "Yogurt, Greek, plain, nonfat",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 85.0,
+      "energi_kcal": 61.0,
+      "protein_g": 10.3,
+      "lemak_g": 0.37,
+      "karbohidrat_g": 3.64,
+      "serat_g": null,
+      "natrium_mg": 36.0
+    }
+  },
+  {
+    "kode": "USDA330415",
+    "nama": "Yogurt, Greek, strawberry, nonfat",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 79.0,
+      "energi_kcal": 83.0,
+      "protein_g": 8.06,
+      "lemak_g": 0.15,
+      "karbohidrat_g": 12.2,
+      "serat_g": 0.6,
+      "natrium_mg": 32.0
+    }
+  },
+  {
+    "kode": "USDA330458",
+    "nama": "Oil, coconut",
+    "kategori": "Lemak dan Minyak",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.03,
+      "energi_kcal": 833,
+      "protein_g": 0.0,
+      "lemak_g": 99.1,
+      "karbohidrat_g": 0.84,
+      "serat_g": null,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA331897",
+    "nama": "Chicken, broilers or fryers, drumstick, meat only, cooked, braised",
+    "kategori": "Daging dan Unggas",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 69.9,
+      "energi_kcal": 156,
+      "protein_g": 23.9,
+      "lemak_g": 5.95,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 117
+    }
+  },
+  {
+    "kode": "USDA331960",
+    "nama": "Chicken, broiler or fryers, breast, skinless, boneless, meat only, cooked, braised",
+    "kategori": "Daging dan Unggas",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 65.3,
+      "energi_kcal": 166,
+      "protein_g": 32.1,
+      "lemak_g": 3.24,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 47.0
+    }
+  },
+  {
+    "kode": "USDA332282",
+    "nama": "Sauce, pasta, spaghetti/marinara, ready-to-serve",
+    "kategori": "Sup, Saus, dan Kuah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 87.4,
+      "energi_kcal": 45.0,
+      "protein_g": 1.41,
+      "lemak_g": 1.48,
+      "karbohidrat_g": 8.05,
+      "serat_g": 1.8,
+      "natrium_mg": 419
+    }
+  },
+  {
+    "kode": "USDA332397",
+    "nama": "Ham, sliced, pre-packaged, deli meat (96%fat free, water added)",
+    "kategori": "Daging Olahan",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 75.7,
+      "energi_kcal": 106,
+      "protein_g": 16.7,
+      "lemak_g": 3.73,
+      "karbohidrat_g": 0.27,
+      "serat_g": null,
+      "natrium_mg": 1040.0
+    }
+  },
+  {
+    "kode": "USDA332791",
+    "nama": "Olives, green, Manzanilla, stuffed with pimiento",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 76.7,
+      "energi_kcal": 130,
+      "protein_g": 1.15,
+      "lemak_g": 12.9,
+      "karbohidrat_g": 4.96,
+      "serat_g": 4.0,
+      "natrium_mg": 1620.0
+    }
+  },
+  {
+    "kode": "USDA333008",
+    "nama": "Cookies, oatmeal, soft, with raisins",
+    "kategori": "Produk Roti dan Kue",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.85,
+      "energi_kcal": 430,
+      "protein_g": 5.79,
+      "lemak_g": 14.3,
+      "karbohidrat_g": 69.6,
+      "serat_g": 3.3,
+      "natrium_mg": 314
+    }
+  },
+  {
+    "kode": "USDA333281",
+    "nama": "Tomatoes, canned, red, ripe, diced",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 94.6,
+      "energi_kcal": 18.0,
+      "protein_g": 0.84,
+      "lemak_g": 0.5,
+      "karbohidrat_g": 3.32,
+      "serat_g": null,
+      "natrium_mg": 125
+    }
+  },
+  {
+    "kode": "USDA333374",
+    "nama": "Fish, haddock, raw",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 83.4,
+      "energi_kcal": 74.0,
+      "protein_g": 16.3,
+      "lemak_g": 0.45,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 213
+    }
+  },
+  {
+    "kode": "USDA333476",
+    "nama": "Fish, pollock, raw",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 86.7,
+      "energi_kcal": 56.0,
+      "protein_g": 12.3,
+      "lemak_g": 0.41,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 333
+    }
+  },
+  {
+    "kode": "USDA334194",
+    "nama": "Fish, tuna, light, canned in water, drained solids",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 79.0,
+      "energi_kcal": 90.0,
+      "protein_g": 19.0,
+      "lemak_g": 0.94,
+      "karbohidrat_g": 0.08,
+      "serat_g": null,
+      "natrium_mg": 219
+    }
+  },
+  {
+    "kode": "USDA334536",
+    "nama": "Restaurant, Chinese, fried rice, without meat",
+    "kategori": "Makanan Siap Saji",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 59.3,
+      "energi_kcal": 174,
+      "protein_g": 3.84,
+      "lemak_g": 3.19,
+      "karbohidrat_g": 32.5,
+      "serat_g": null,
+      "natrium_mg": 361
+    }
+  },
+  {
+    "kode": "USDA334628",
+    "nama": "Restaurant, Latino, tamale, pork",
+    "kategori": "Makanan Siap Saji",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 66.0,
+      "energi_kcal": 174,
+      "protein_g": 7.38,
+      "lemak_g": 9.04,
+      "karbohidrat_g": 15.8,
+      "serat_g": 2.4,
+      "natrium_mg": 473
+    }
+  },
+  {
+    "kode": "USDA334720",
+    "nama": "Restaurant, Latino, pupusas con frijoles (pupusas, bean)",
+    "kategori": "Makanan Siap Saji",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 52.2,
+      "energi_kcal": 229,
+      "protein_g": 5.59,
+      "lemak_g": 9.01,
+      "karbohidrat_g": 31.5,
+      "serat_g": 5.8,
+      "natrium_mg": 305
+    }
+  },
+  {
+    "kode": "USDA746758",
+    "nama": "Beef, loin, tenderloin roast, separable lean only, boneless, trimmed to 0\" fat, select, cooked, roasted",
+    "kategori": "Daging Sapi",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 65.7,
+      "energi_kcal": 176,
+      "protein_g": 27.7,
+      "lemak_g": 6.36,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 54.0
+    }
+  },
+  {
+    "kode": "USDA746759",
+    "nama": "Beef, loin, top loin steak, boneless, lip-on, separable lean only, trimmed to 1/8\" fat, choice, raw",
+    "kategori": "Daging Sapi",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 69.9,
+      "energi_kcal": 155,
+      "protein_g": 22.8,
+      "lemak_g": 6.39,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 45.0
+    }
+  },
+  {
+    "kode": "USDA746760",
+    "nama": "Beef, round, eye of round roast, boneless, separable lean only, trimmed to 0\" fat, select, raw",
+    "kategori": "Daging Sapi",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 73.7,
+      "energi_kcal": 122,
+      "protein_g": 23.4,
+      "lemak_g": 2.48,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 50.0
+    }
+  },
+  {
+    "kode": "USDA746761",
+    "nama": "Beef, round, top round roast, boneless, separable lean only, trimmed to 0\" fat, select, raw",
+    "kategori": "Daging Sapi",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 73.3,
+      "energi_kcal": 123,
+      "protein_g": 23.7,
+      "lemak_g": 2.41,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 55.0
+    }
+  },
+  {
+    "kode": "USDA746762",
+    "nama": "Beef, short loin, porterhouse steak, separable lean only, trimmed to 1/8\" fat, select, raw",
+    "kategori": "Daging Sapi",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 71.4,
+      "energi_kcal": 145,
+      "protein_g": 22.7,
+      "lemak_g": 5.32,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 43.0
+    }
+  },
+  {
+    "kode": "USDA746763",
+    "nama": "Beef, short loin, t-bone steak, bone-in, separable lean only, trimmed to 1/8\" fat, choice, cooked, grilled",
+    "kategori": "Daging Sapi",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 60.3,
+      "energi_kcal": 219,
+      "protein_g": 27.3,
+      "lemak_g": 11.4,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 67.0
+    }
+  },
+  {
+    "kode": "USDA746764",
+    "nama": "Carrots, frozen, unprepared",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 90.1,
+      "energi_kcal": 37.0,
+      "protein_g": 0.81,
+      "lemak_g": 0.47,
+      "karbohidrat_g": 7.92,
+      "serat_g": 3.2,
+      "natrium_mg": 66.0
+    }
+  },
+  {
+    "kode": "USDA746765",
+    "nama": "Cheese, dry white, queso seco",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 42.2,
+      "energi_kcal": 326,
+      "protein_g": 24.5,
+      "lemak_g": 24.3,
+      "karbohidrat_g": 2.07,
+      "serat_g": null,
+      "natrium_mg": 1810.0
+    }
+  },
+  {
+    "kode": "USDA746766",
+    "nama": "Cheese, ricotta, whole milk",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 72.9,
+      "energi_kcal": 157,
+      "protein_g": 7.81,
+      "lemak_g": 11.0,
+      "karbohidrat_g": 6.86,
+      "serat_g": null,
+      "natrium_mg": 105
+    }
+  },
+  {
+    "kode": "USDA746767",
+    "nama": "Cheese, swiss",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 37.6,
+      "energi_kcal": 393,
+      "protein_g": 27.0,
+      "lemak_g": 31.0,
+      "karbohidrat_g": 1.44,
+      "serat_g": null,
+      "natrium_mg": 185
+    }
+  },
+  {
+    "kode": "USDA746768",
+    "nama": "Figs, dried, uncooked",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 30.0,
+      "energi_kcal": 249,
+      "protein_g": 3.3,
+      "lemak_g": 0.92,
+      "karbohidrat_g": 63.9,
+      "serat_g": 9.8,
+      "natrium_mg": 10.0
+    }
+  },
+  {
+    "kode": "USDA746769",
+    "nama": "Lettuce, cos or romaine, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 94.7,
+      "energi_kcal": 17.0,
+      "protein_g": 1.24,
+      "lemak_g": 0.26,
+      "karbohidrat_g": 3.24,
+      "serat_g": 1.8,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA746770",
+    "nama": "Melons, cantaloupe, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 90.2,
+      "energi_kcal": 34.0,
+      "protein_g": 0.82,
+      "lemak_g": 0.18,
+      "karbohidrat_g": 8.16,
+      "serat_g": 0.8,
+      "natrium_mg": 30.0
+    }
+  },
+  {
+    "kode": "USDA746771",
+    "nama": "Oranges, raw, navels",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 86.7,
+      "energi_kcal": 47.0,
+      "protein_g": 0.91,
+      "lemak_g": 0.15,
+      "karbohidrat_g": 11.8,
+      "serat_g": 2.0,
+      "natrium_mg": 9.0
+    }
+  },
+  {
+    "kode": "USDA746772",
+    "nama": "Milk, lowfat, fluid, 1% milkfat, with added vitamin A and vitamin D",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 89.7,
+      "energi_kcal": 43.0,
+      "protein_g": 3.38,
+      "lemak_g": 0.95,
+      "karbohidrat_g": 5.18,
+      "serat_g": null,
+      "natrium_mg": 39.0
+    }
+  },
+  {
+    "kode": "USDA746773",
+    "nama": "Pears, raw, bartlett",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 84.1,
+      "energi_kcal": 57.0,
+      "protein_g": 0.38,
+      "lemak_g": 0.16,
+      "karbohidrat_g": 15.1,
+      "serat_g": 3.1,
+      "natrium_mg": 7.0
+    }
+  },
+  {
+    "kode": "USDA746774",
+    "nama": "Restaurant, Chinese, sweet and sour pork",
+    "kategori": "Makanan Siap Saji",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 50.8,
+      "energi_kcal": 260,
+      "protein_g": 8.88,
+      "lemak_g": 13.6,
+      "karbohidrat_g": 25.5,
+      "serat_g": 1.0,
+      "natrium_mg": 304
+    }
+  },
+  {
+    "kode": "USDA746775",
+    "nama": "Salt, table, iodized",
+    "kategori": "Bumbu dan Rempah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.42,
+      "energi_kcal": null,
+      "protein_g": null,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": null,
+      "natrium_mg": 38700.0
+    }
+  },
+  {
+    "kode": "USDA746776",
+    "nama": "Milk, nonfat, fluid, with added vitamin A and vitamin D (fat free or skim)",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 90.8,
+      "energi_kcal": 34.0,
+      "protein_g": 3.43,
+      "lemak_g": 0.08,
+      "karbohidrat_g": 4.92,
+      "serat_g": null,
+      "natrium_mg": 41.0
+    }
+  },
+  {
+    "kode": "USDA746777",
+    "nama": "Sauce, salsa, ready-to-serve",
+    "kategori": "Sup, Saus, dan Kuah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 89.3,
+      "energi_kcal": 29.0,
+      "protein_g": 1.44,
+      "lemak_g": 0.19,
+      "karbohidrat_g": 6.74,
+      "serat_g": 1.8,
+      "natrium_mg": 656
+    }
+  },
+  {
+    "kode": "USDA746778",
+    "nama": "Milk, reduced fat, fluid, 2% milkfat, with added vitamin A and vitamin D",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 89.1,
+      "energi_kcal": 50.0,
+      "protein_g": 3.36,
+      "lemak_g": 1.9,
+      "karbohidrat_g": 4.9,
+      "serat_g": null,
+      "natrium_mg": 39.0
+    }
+  },
+  {
+    "kode": "USDA746779",
+    "nama": "Sausage, breakfast sausage, beef, pre-cooked, unprepared",
+    "kategori": "Daging Olahan",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 51.7,
+      "energi_kcal": 328,
+      "protein_g": 13.3,
+      "lemak_g": 28.7,
+      "karbohidrat_g": 3.37,
+      "serat_g": null,
+      "natrium_mg": 866
+    }
+  },
+  {
+    "kode": "USDA746780",
+    "nama": "Sausage, Italian, pork, mild, cooked, pan-fried",
+    "kategori": "Daging Olahan",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 50.9,
+      "energi_kcal": 322,
+      "protein_g": 18.2,
+      "lemak_g": 26.2,
+      "karbohidrat_g": 2.15,
+      "serat_g": null,
+      "natrium_mg": 766
+    }
+  },
+  {
+    "kode": "USDA746781",
+    "nama": "Sausage, pork, chorizo, link or ground, cooked, pan-fried",
+    "kategori": "Daging Olahan",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 46.3,
+      "energi_kcal": 346,
+      "protein_g": 19.3,
+      "lemak_g": 28.1,
+      "karbohidrat_g": 2.63,
+      "serat_g": null,
+      "natrium_mg": 983
+    }
+  },
+  {
+    "kode": "USDA746782",
+    "nama": "Milk, whole, 3.25% milkfat, with added vitamin D",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 88.1,
+      "energi_kcal": 60.0,
+      "protein_g": 3.27,
+      "lemak_g": 3.2,
+      "karbohidrat_g": 4.63,
+      "serat_g": null,
+      "natrium_mg": 38.0
+    }
+  },
+  {
+    "kode": "USDA746783",
+    "nama": "Sausage, turkey, breakfast links, mild, raw",
+    "kategori": "Daging Olahan",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 69.6,
+      "energi_kcal": 169,
+      "protein_g": 16.7,
+      "lemak_g": 10.4,
+      "karbohidrat_g": 0.93,
+      "serat_g": null,
+      "natrium_mg": 599
+    }
+  },
+  {
+    "kode": "USDA746784",
+    "nama": "Sugars, granulated",
+    "kategori": "Makanan Manis",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.02,
+      "energi_kcal": 385,
+      "protein_g": 0.0,
+      "lemak_g": 0.32,
+      "karbohidrat_g": 99.6,
+      "serat_g": null,
+      "natrium_mg": 1.0
+    }
+  },
+  {
+    "kode": "USDA746785",
+    "nama": "Turkey, ground, 93% lean, 7% fat, pan-broiled crumbles",
+    "kategori": "Daging dan Unggas",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 61.1,
+      "energi_kcal": 220,
+      "protein_g": 27.1,
+      "lemak_g": 11.6,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 90.0
+    }
+  },
+  {
+    "kode": "USDA746952",
+    "nama": "Ham, sliced, restaurant",
+    "kategori": "Daging",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 70.7,
+      "energi_kcal": 121,
+      "protein_g": 19.6,
+      "lemak_g": 3.68,
+      "karbohidrat_g": 2.36,
+      "serat_g": null,
+      "natrium_mg": 1030.0
+    }
+  },
+  {
+    "kode": "USDA747429",
+    "nama": "Cheese, American, restaurant",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 39.5,
+      "energi_kcal": 375,
+      "protein_g": 17.5,
+      "lemak_g": 31.1,
+      "karbohidrat_g": 6.35,
+      "serat_g": null,
+      "natrium_mg": 1600.0
+    }
+  },
+  {
+    "kode": "USDA747430",
+    "nama": "Beans, Dry, Medium Red (0% moisture)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.0,
+      "energi_kcal": null,
+      "protein_g": 25.5,
+      "lemak_g": 1.04,
+      "karbohidrat_g": null,
+      "serat_g": 4.3,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA747431",
+    "nama": "Beans, Dry, Red (0% moisture)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.0,
+      "energi_kcal": null,
+      "protein_g": 21.3,
+      "lemak_g": 1.16,
+      "karbohidrat_g": null,
+      "serat_g": 4.0,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA747432",
+    "nama": "Beans, Dry, Flor de Mayo (0% moisture)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.0,
+      "energi_kcal": null,
+      "protein_g": 23.3,
+      "lemak_g": 0.86,
+      "karbohidrat_g": null,
+      "serat_g": 4.0,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA747433",
+    "nama": "Beans, Dry, Brown (0% moisture)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.0,
+      "energi_kcal": null,
+      "protein_g": 25.6,
+      "lemak_g": 1.12,
+      "karbohidrat_g": null,
+      "serat_g": 4.1,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA747434",
+    "nama": "Beans, Dry, Tan (0% moisture)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.0,
+      "energi_kcal": null,
+      "protein_g": 26.8,
+      "lemak_g": 1.14,
+      "karbohidrat_g": null,
+      "serat_g": 4.4,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA747435",
+    "nama": "Beans, Dry, Light Tan (0% moisture)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.0,
+      "energi_kcal": null,
+      "protein_g": 24.6,
+      "lemak_g": 1.28,
+      "karbohidrat_g": null,
+      "serat_g": 4.3,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA747436",
+    "nama": "Beans, Dry, Carioca (0% moisture)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.0,
+      "energi_kcal": null,
+      "protein_g": 25.2,
+      "lemak_g": 1.44,
+      "karbohidrat_g": null,
+      "serat_g": 4.5,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA747437",
+    "nama": "Beans, Dry, Cranberry (0% moisture)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.0,
+      "energi_kcal": null,
+      "protein_g": 24.4,
+      "lemak_g": 1.23,
+      "karbohidrat_g": null,
+      "serat_g": 4.3,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA747438",
+    "nama": "Beans, Dry, Light Red Kidney (0% moisture)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.0,
+      "energi_kcal": null,
+      "protein_g": 25.0,
+      "lemak_g": 1.03,
+      "karbohidrat_g": null,
+      "serat_g": 4.5,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA747439",
+    "nama": "Beans, Dry, Pink (0% moisture)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.0,
+      "energi_kcal": null,
+      "protein_g": 23.4,
+      "lemak_g": 1.2,
+      "karbohidrat_g": null,
+      "serat_g": 4.1,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA747440",
+    "nama": "Beans, Dry, Dark Red Kidney (0% moisture)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.0,
+      "energi_kcal": null,
+      "protein_g": 25.9,
+      "lemak_g": 1.31,
+      "karbohidrat_g": null,
+      "serat_g": 4.3,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA747441",
+    "nama": "Beans, Dry, Navy (0% moisture)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.0,
+      "energi_kcal": null,
+      "protein_g": 24.1,
+      "lemak_g": 1.51,
+      "karbohidrat_g": null,
+      "serat_g": 4.3,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA747442",
+    "nama": "Beans, Dry, Small White (0% moisture)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.0,
+      "energi_kcal": null,
+      "protein_g": 24.5,
+      "lemak_g": 1.32,
+      "karbohidrat_g": null,
+      "serat_g": 4.3,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA747443",
+    "nama": "Beans, Dry, Small Red (0% moisture)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.0,
+      "energi_kcal": null,
+      "protein_g": 23.5,
+      "lemak_g": 1.28,
+      "karbohidrat_g": null,
+      "serat_g": 4.1,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA747444",
+    "nama": "Beans, Dry, Black (0% moisture)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.0,
+      "energi_kcal": null,
+      "protein_g": 24.4,
+      "lemak_g": 1.45,
+      "karbohidrat_g": null,
+      "serat_g": 4.2,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA747445",
+    "nama": "Beans, Dry, Pinto (0% moisture)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.0,
+      "energi_kcal": null,
+      "protein_g": 23.7,
+      "lemak_g": 1.24,
+      "karbohidrat_g": null,
+      "serat_g": 4.1,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA747446",
+    "nama": "Beans, Dry, Great Northern (0% moisture)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.0,
+      "energi_kcal": null,
+      "protein_g": 24.7,
+      "lemak_g": 1.24,
+      "karbohidrat_g": null,
+      "serat_g": 4.3,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA747447",
+    "nama": "Broccoli, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 90.0,
+      "energi_kcal": 31.0,
+      "protein_g": 2.57,
+      "lemak_g": 0.34,
+      "karbohidrat_g": 6.27,
+      "serat_g": 2.4,
+      "natrium_mg": 36.0
+    }
+  },
+  {
+    "kode": "USDA747693",
+    "nama": "Ketchup, restaurant",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 68.5,
+      "energi_kcal": 117,
+      "protein_g": 1.11,
+      "lemak_g": 0.55,
+      "karbohidrat_g": 26.8,
+      "serat_g": null,
+      "natrium_mg": 949
+    }
+  },
+  {
+    "kode": "USDA747997",
+    "nama": "Eggs, Grade A, Large, egg white",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 86.3,
+      "energi_kcal": 55.0,
+      "protein_g": 10.7,
+      "lemak_g": 0.0,
+      "karbohidrat_g": 2.36,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA748236",
+    "nama": "Eggs, Grade A, Large, egg yolk",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 52.1,
+      "energi_kcal": 334,
+      "protein_g": 16.2,
+      "lemak_g": 28.8,
+      "karbohidrat_g": 1.02,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA748278",
+    "nama": "Oil, canola",
+    "kategori": "Lemak dan Minyak",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": null,
+      "energi_kcal": null,
+      "protein_g": null,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA748323",
+    "nama": "Oil, corn",
+    "kategori": "Lemak dan Minyak",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": null,
+      "energi_kcal": null,
+      "protein_g": null,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA748366",
+    "nama": "Oil, soybean",
+    "kategori": "Lemak dan Minyak",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": null,
+      "energi_kcal": null,
+      "protein_g": null,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA748608",
+    "nama": "Oil, olive, extra virgin",
+    "kategori": "Lemak dan Minyak",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": null,
+      "energi_kcal": null,
+      "protein_g": null,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA748967",
+    "nama": "Eggs, Grade A, Large, egg whole",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 75.8,
+      "energi_kcal": 148,
+      "protein_g": 12.4,
+      "lemak_g": 9.96,
+      "karbohidrat_g": 0.96,
+      "serat_g": 0.0,
+      "natrium_mg": 129
+    }
+  },
+  {
+    "kode": "USDA749420",
+    "nama": "Pork, cured, bacon, cooked, restaurant",
+    "kategori": "Daging",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 14.2,
+      "energi_kcal": 500,
+      "protein_g": 40.9,
+      "lemak_g": 36.5,
+      "karbohidrat_g": 2.1,
+      "serat_g": null,
+      "natrium_mg": 1830.0
+    }
+  },
+  {
+    "kode": "USDA789828",
+    "nama": "Butter, stick, unsalted",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 17.4,
+      "energi_kcal": null,
+      "protein_g": null,
+      "lemak_g": 81.5,
+      "karbohidrat_g": null,
+      "serat_g": null,
+      "natrium_mg": 10.0
+    }
+  },
+  {
+    "kode": "USDA789890",
+    "nama": "Flour, wheat, all-purpose, enriched, bleached",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 9.83,
+      "energi_kcal": 366,
+      "protein_g": 10.9,
+      "lemak_g": 1.48,
+      "karbohidrat_g": 77.3,
+      "serat_g": null,
+      "natrium_mg": 2.0
+    }
+  },
+  {
+    "kode": "USDA789951",
+    "nama": "Flour, wheat, all-purpose, enriched, unbleached",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 11.7,
+      "energi_kcal": 358,
+      "protein_g": 13.1,
+      "lemak_g": 1.48,
+      "karbohidrat_g": 73.2,
+      "serat_g": null,
+      "natrium_mg": 4.0
+    }
+  },
+  {
+    "kode": "USDA790018",
+    "nama": "Flour, wheat, all-purpose, unenriched, unbleached",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 11.1,
+      "energi_kcal": 362,
+      "protein_g": 12.0,
+      "lemak_g": 1.7,
+      "karbohidrat_g": 74.6,
+      "serat_g": 3.0,
+      "natrium_mg": 2.0
+    }
+  },
+  {
+    "kode": "USDA790085",
+    "nama": "Flour, whole wheat, unenriched",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 9.44,
+      "energi_kcal": 370,
+      "protein_g": 15.1,
+      "lemak_g": 2.73,
+      "karbohidrat_g": 71.2,
+      "serat_g": 10.6,
+      "natrium_mg": 3.0
+    }
+  },
+  {
+    "kode": "USDA790146",
+    "nama": "Flour, bread, white, enriched, unbleached",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 10.7,
+      "energi_kcal": 363,
+      "protein_g": 14.3,
+      "lemak_g": 1.65,
+      "karbohidrat_g": 72.8,
+      "serat_g": null,
+      "natrium_mg": 3.0
+    }
+  },
+  {
+    "kode": "USDA790214",
+    "nama": "Flour, rice, white, unenriched",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 11.6,
+      "energi_kcal": 359,
+      "protein_g": 6.94,
+      "lemak_g": 1.3,
+      "karbohidrat_g": 79.8,
+      "serat_g": 0.5,
+      "natrium_mg": 5.0
+    }
+  },
+  {
+    "kode": "USDA790276",
+    "nama": "Flour, corn, yellow, fine meal, enriched",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 10.8,
+      "energi_kcal": 364,
+      "protein_g": 6.2,
+      "lemak_g": 1.74,
+      "karbohidrat_g": 80.8,
+      "serat_g": 4.3,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA790508",
+    "nama": "Butter, stick, salted",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 15.8,
+      "energi_kcal": null,
+      "protein_g": null,
+      "lemak_g": 82.2,
+      "karbohidrat_g": null,
+      "serat_g": null,
+      "natrium_mg": 524
+    }
+  },
+  {
+    "kode": "USDA790577",
+    "nama": "Onions, red, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 88.6,
+      "energi_kcal": 44.0,
+      "protein_g": 0.94,
+      "lemak_g": 0.1,
+      "karbohidrat_g": 9.93,
+      "serat_g": 2.2,
+      "natrium_mg": 1.0
+    }
+  },
+  {
+    "kode": "USDA790646",
+    "nama": "Onions, yellow, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 90.1,
+      "energi_kcal": 38.0,
+      "protein_g": 0.83,
+      "lemak_g": 0.05,
+      "karbohidrat_g": 8.61,
+      "serat_g": 1.9,
+      "natrium_mg": 1.0
+    }
+  },
+  {
+    "kode": "USDA1104647",
+    "nama": "Garlic, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 63.1,
+      "energi_kcal": 143,
+      "protein_g": 6.62,
+      "lemak_g": 0.38,
+      "karbohidrat_g": 28.2,
+      "serat_g": 2.7,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA1104705",
+    "nama": "Flour, soy, defatted",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 6.24,
+      "energi_kcal": 366,
+      "protein_g": 51.1,
+      "lemak_g": 3.33,
+      "karbohidrat_g": 32.9,
+      "serat_g": null,
+      "natrium_mg": 2.0
+    }
+  },
+  {
+    "kode": "USDA1104766",
+    "nama": "Flour, soy, full-fat",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 7.85,
+      "energi_kcal": 452,
+      "protein_g": 38.6,
+      "lemak_g": 20.7,
+      "karbohidrat_g": 27.9,
+      "serat_g": null,
+      "natrium_mg": 2.0
+    }
+  },
+  {
+    "kode": "USDA1104812",
+    "nama": "Flour, rice, brown",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 12.1,
+      "energi_kcal": 365,
+      "protein_g": 7.19,
+      "lemak_g": 3.85,
+      "karbohidrat_g": 75.5,
+      "serat_g": null,
+      "natrium_mg": 1.0
+    }
+  },
+  {
+    "kode": "USDA1104867",
+    "nama": "Flour, rice, glutinous",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 11.8,
+      "energi_kcal": 358,
+      "protein_g": 6.69,
+      "lemak_g": 1.16,
+      "karbohidrat_g": 80.1,
+      "serat_g": null,
+      "natrium_mg": 6.0
+    }
+  },
+  {
+    "kode": "USDA1104913",
+    "nama": "Flour, pastry, unenriched, unbleached",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 11.9,
+      "energi_kcal": 358,
+      "protein_g": 8.75,
+      "lemak_g": 1.64,
+      "karbohidrat_g": 77.2,
+      "serat_g": null,
+      "natrium_mg": 1.0
+    }
+  },
+  {
+    "kode": "USDA1104962",
+    "nama": "Onions, white, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 91.3,
+      "energi_kcal": 35.0,
+      "protein_g": 0.89,
+      "lemak_g": 0.13,
+      "karbohidrat_g": 7.68,
+      "serat_g": 1.2,
+      "natrium_mg": 2.0
+    }
+  },
+  {
+    "kode": "USDA1105073",
+    "nama": "Bananas, overripe, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 78.3,
+      "energi_kcal": 85.0,
+      "protein_g": 0.73,
+      "lemak_g": 0.22,
+      "karbohidrat_g": 20.1,
+      "serat_g": 1.7,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA1105314",
+    "nama": "Bananas, ripe and slightly ripe, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 75.3,
+      "energi_kcal": 97.0,
+      "protein_g": 0.74,
+      "lemak_g": 0.29,
+      "karbohidrat_g": 23.0,
+      "serat_g": 1.7,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA1750339",
+    "nama": "Apples, red delicious, with skin, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 84.7,
+      "energi_kcal": null,
+      "protein_g": 0.188,
+      "lemak_g": 0.212,
+      "karbohidrat_g": 14.8,
+      "serat_g": 2.04,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA1750340",
+    "nama": "Apples, fuji, with skin, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 83.6,
+      "energi_kcal": null,
+      "protein_g": 0.148,
+      "lemak_g": 0.162,
+      "karbohidrat_g": 15.7,
+      "serat_g": 2.08,
+      "natrium_mg": 1.01
+    }
+  },
+  {
+    "kode": "USDA1750341",
+    "nama": "Apples, gala, with skin, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 84.6,
+      "energi_kcal": null,
+      "protein_g": 0.133,
+      "lemak_g": 0.15,
+      "karbohidrat_g": 14.8,
+      "serat_g": 2.11,
+      "natrium_mg": 0.279
+    }
+  },
+  {
+    "kode": "USDA1750342",
+    "nama": "Apples, granny smith, with skin, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 85.1,
+      "energi_kcal": null,
+      "protein_g": 0.266,
+      "lemak_g": 0.138,
+      "karbohidrat_g": 14.1,
+      "serat_g": 2.51,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA1750343",
+    "nama": "Apples, honeycrisp, with skin, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 85.0,
+      "energi_kcal": null,
+      "protein_g": 0.102,
+      "lemak_g": 0.1,
+      "karbohidrat_g": 14.7,
+      "serat_g": 1.72,
+      "natrium_mg": 0.138
+    }
+  },
+  {
+    "kode": "USDA1750348",
+    "nama": "Oil, peanut",
+    "kategori": "Lemak dan Minyak",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": null,
+      "energi_kcal": null,
+      "protein_g": null,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA1750349",
+    "nama": "Oil, sunflower",
+    "kategori": "Lemak dan Minyak",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": null,
+      "energi_kcal": null,
+      "protein_g": null,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA1750350",
+    "nama": "Oil, safflower",
+    "kategori": "Lemak dan Minyak",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": null,
+      "energi_kcal": null,
+      "protein_g": null,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA1750351",
+    "nama": "Oil, olive, extra light",
+    "kategori": "Lemak dan Minyak",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": null,
+      "energi_kcal": null,
+      "protein_g": null,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA1999626",
+    "nama": "Mushroom, lion's mane",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 88.6,
+      "energi_kcal": null,
+      "protein_g": 2.5,
+      "lemak_g": 0.256,
+      "karbohidrat_g": 7.59,
+      "serat_g": 4.38,
+      "natrium_mg": 0.336
+    }
+  },
+  {
+    "kode": "USDA1999627",
+    "nama": "Mushroom, oyster",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 89.2,
+      "energi_kcal": null,
+      "protein_g": 2.9,
+      "lemak_g": 0.188,
+      "karbohidrat_g": 6.94,
+      "serat_g": 2.85,
+      "natrium_mg": 1.13
+    }
+  },
+  {
+    "kode": "USDA1999628",
+    "nama": "Mushrooms, shiitake",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 88.6,
+      "energi_kcal": null,
+      "protein_g": 2.41,
+      "lemak_g": 0.195,
+      "karbohidrat_g": 8.17,
+      "serat_g": 4.17,
+      "natrium_mg": 0.936
+    }
+  },
+  {
+    "kode": "USDA1999629",
+    "nama": "Mushrooms, white button",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 91.8,
+      "energi_kcal": null,
+      "protein_g": 2.89,
+      "lemak_g": 0.371,
+      "karbohidrat_g": 4.08,
+      "serat_g": 1.72,
+      "natrium_mg": 6.44
+    }
+  },
+  {
+    "kode": "USDA1999630",
+    "nama": "Soy milk, unsweetened, plain, shelf stable",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 92.4,
+      "energi_kcal": null,
+      "protein_g": 3.55,
+      "lemak_g": 2.12,
+      "karbohidrat_g": 1.29,
+      "serat_g": 0.0,
+      "natrium_mg": 34.3
+    }
+  },
+  {
+    "kode": "USDA1999631",
+    "nama": "Almond milk, unsweetened, plain, shelf stable",
+    "kategori": "Minuman",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 97.4,
+      "energi_kcal": null,
+      "protein_g": 0.555,
+      "lemak_g": 1.22,
+      "karbohidrat_g": 0.337,
+      "serat_g": 0.0,
+      "natrium_mg": 59.6
+    }
+  },
+  {
+    "kode": "USDA1999632",
+    "nama": "Spinach, baby",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 92.5,
+      "energi_kcal": null,
+      "protein_g": 2.85,
+      "lemak_g": 0.619,
+      "karbohidrat_g": 2.41,
+      "serat_g": 1.56,
+      "natrium_mg": 111
+    }
+  },
+  {
+    "kode": "USDA1999633",
+    "nama": "Spinach, mature",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 92.4,
+      "energi_kcal": null,
+      "protein_g": 2.91,
+      "lemak_g": 0.604,
+      "karbohidrat_g": 2.64,
+      "serat_g": 1.59,
+      "natrium_mg": 107
+    }
+  },
+  {
+    "kode": "USDA1999634",
+    "nama": "Tomato, roma",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 94.7,
+      "energi_kcal": null,
+      "protein_g": 0.696,
+      "lemak_g": 0.425,
+      "karbohidrat_g": 3.84,
+      "serat_g": 0.971,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2003586",
+    "nama": "Flour, 00",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 12.2,
+      "energi_kcal": null,
+      "protein_g": 11.4,
+      "lemak_g": 1.52,
+      "karbohidrat_g": 74.4,
+      "serat_g": 2.66,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2003587",
+    "nama": "Flour, spelt, whole grain",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 10.7,
+      "energi_kcal": null,
+      "protein_g": 14.5,
+      "lemak_g": 2.54,
+      "karbohidrat_g": 70.7,
+      "serat_g": 9.34,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2003588",
+    "nama": "Flour, semolina, coarse and semi-coarse",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 12.2,
+      "energi_kcal": null,
+      "protein_g": 11.7,
+      "lemak_g": 1.6,
+      "karbohidrat_g": 73.8,
+      "serat_g": 3.22,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2003589",
+    "nama": "Flour, semolina, fine",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 12.1,
+      "energi_kcal": null,
+      "protein_g": 13.3,
+      "lemak_g": 1.84,
+      "karbohidrat_g": 72.0,
+      "serat_g": 3.68,
+      "natrium_mg": 0.426
+    }
+  },
+  {
+    "kode": "USDA2003590",
+    "nama": "Apple juice, with added vitamin C, from concentrate, shelf stable",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 88.1,
+      "energi_kcal": null,
+      "protein_g": 0.086,
+      "lemak_g": 0.286,
+      "karbohidrat_g": 11.4,
+      "serat_g": null,
+      "natrium_mg": 4.87
+    }
+  },
+  {
+    "kode": "USDA2003591",
+    "nama": "Orange juice, no pulp, not fortified, from concentrate, refrigerated",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 88.2,
+      "energi_kcal": null,
+      "protein_g": 0.734,
+      "lemak_g": 0.325,
+      "karbohidrat_g": 10.3,
+      "serat_g": null,
+      "natrium_mg": 5.23
+    }
+  },
+  {
+    "kode": "USDA2003592",
+    "nama": "Grape juice, purple, with added vitamin C, from concentrate, shelf stable",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 83.7,
+      "energi_kcal": null,
+      "protein_g": 0.258,
+      "lemak_g": 0.288,
+      "karbohidrat_g": 15.6,
+      "serat_g": null,
+      "natrium_mg": 4.02
+    }
+  },
+  {
+    "kode": "USDA2003593",
+    "nama": "Grape juice, white, with added vitamin C, from concentrate, shelf stable",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 83.7,
+      "energi_kcal": null,
+      "protein_g": 0.094,
+      "lemak_g": 0.265,
+      "karbohidrat_g": 15.8,
+      "serat_g": null,
+      "natrium_mg": 7.19
+    }
+  },
+  {
+    "kode": "USDA2003594",
+    "nama": "Cranberry juice, not fortified, from concentrate, shelf stable",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 92.3,
+      "energi_kcal": null,
+      "protein_g": 0.0,
+      "lemak_g": 0.338,
+      "karbohidrat_g": 7.26,
+      "serat_g": null,
+      "natrium_mg": 6.34
+    }
+  },
+  {
+    "kode": "USDA2003595",
+    "nama": "Grapefruit juice, red, not fortified, not from concentrate, refrigerated",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 89.8,
+      "energi_kcal": null,
+      "protein_g": 0.57,
+      "lemak_g": 0.267,
+      "karbohidrat_g": 9.1,
+      "serat_g": null,
+      "natrium_mg": 1.03
+    }
+  },
+  {
+    "kode": "USDA2003596",
+    "nama": "Tomato juice, with added ingredients, from concentrate, shelf stable",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 93.6,
+      "energi_kcal": null,
+      "protein_g": 0.859,
+      "lemak_g": 0.288,
+      "karbohidrat_g": 4.32,
+      "serat_g": null,
+      "natrium_mg": 236
+    }
+  },
+  {
+    "kode": "USDA2003597",
+    "nama": "Orange juice, no pulp, not fortified, not from concentrate, refrigerated",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 88.5,
+      "energi_kcal": null,
+      "protein_g": 0.812,
+      "lemak_g": 0.356,
+      "karbohidrat_g": 10.0,
+      "serat_g": null,
+      "natrium_mg": 0.075
+    }
+  },
+  {
+    "kode": "USDA2003598",
+    "nama": "Mushroom, portabella",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 91.5,
+      "energi_kcal": null,
+      "protein_g": 2.75,
+      "lemak_g": 0.312,
+      "karbohidrat_g": 4.66,
+      "serat_g": 1.88,
+      "natrium_mg": 5.31
+    }
+  },
+  {
+    "kode": "USDA2003599",
+    "nama": "Mushroom, king oyster",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 88.1,
+      "energi_kcal": null,
+      "protein_g": 2.41,
+      "lemak_g": 0.308,
+      "karbohidrat_g": 8.5,
+      "serat_g": 3.01,
+      "natrium_mg": 0.771
+    }
+  },
+  {
+    "kode": "USDA2003600",
+    "nama": "Mushroom, enoki",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 88.3,
+      "energi_kcal": null,
+      "protein_g": 2.42,
+      "lemak_g": 0.245,
+      "karbohidrat_g": 8.14,
+      "serat_g": 2.94,
+      "natrium_mg": 0.417
+    }
+  },
+  {
+    "kode": "USDA2003601",
+    "nama": "Mushroom, crimini",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 91.8,
+      "energi_kcal": null,
+      "protein_g": 3.09,
+      "lemak_g": 0.197,
+      "karbohidrat_g": 4.01,
+      "serat_g": 1.78,
+      "natrium_mg": 4.57
+    }
+  },
+  {
+    "kode": "USDA2003602",
+    "nama": "Mushroom, maitake",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 90.4,
+      "energi_kcal": null,
+      "protein_g": 2.2,
+      "lemak_g": 0.265,
+      "karbohidrat_g": 6.6,
+      "serat_g": 3.07,
+      "natrium_mg": 0.345
+    }
+  },
+  {
+    "kode": "USDA2003603",
+    "nama": "Mushroom, beech",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 89.8,
+      "energi_kcal": null,
+      "protein_g": 2.18,
+      "lemak_g": 0.449,
+      "karbohidrat_g": 6.76,
+      "serat_g": 3.14,
+      "natrium_mg": 0.891
+    }
+  },
+  {
+    "kode": "USDA2003604",
+    "nama": "Mushroom, pioppini",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 89.6,
+      "energi_kcal": null,
+      "protein_g": 3.5,
+      "lemak_g": 0.24,
+      "karbohidrat_g": 5.76,
+      "serat_g": 2.75,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2257044",
+    "nama": "Soy milk, sweetened, plain, refrigerated",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 91.5,
+      "energi_kcal": null,
+      "protein_g": 2.78,
+      "lemak_g": 1.96,
+      "karbohidrat_g": 3.0,
+      "serat_g": 0.0,
+      "natrium_mg": 39.4
+    }
+  },
+  {
+    "kode": "USDA2257045",
+    "nama": "Almond milk, unsweetened, plain, refrigerated",
+    "kategori": "Minuman",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 96.5,
+      "energi_kcal": null,
+      "protein_g": 0.656,
+      "lemak_g": 1.56,
+      "karbohidrat_g": 0.671,
+      "serat_g": 0.0,
+      "natrium_mg": 59.2
+    }
+  },
+  {
+    "kode": "USDA2257046",
+    "nama": "Oat milk, unsweetened, plain, refrigerated",
+    "kategori": "Minuman",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 90.6,
+      "energi_kcal": null,
+      "protein_g": 0.797,
+      "lemak_g": 2.75,
+      "karbohidrat_g": 5.1,
+      "serat_g": 0.0,
+      "natrium_mg": 42.0
+    }
+  },
+  {
+    "kode": "USDA2258586",
+    "nama": "Carrots, mature, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 87.7,
+      "energi_kcal": null,
+      "protein_g": 0.941,
+      "lemak_g": 0.351,
+      "karbohidrat_g": 10.3,
+      "serat_g": 3.1,
+      "natrium_mg": 86.6
+    }
+  },
+  {
+    "kode": "USDA2258587",
+    "nama": "Carrots, baby, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 89.3,
+      "energi_kcal": null,
+      "protein_g": 0.805,
+      "lemak_g": 0.138,
+      "karbohidrat_g": 9.08,
+      "serat_g": 2.69,
+      "natrium_mg": 62.7
+    }
+  },
+  {
+    "kode": "USDA2258588",
+    "nama": "Peppers, bell, green, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 94.1,
+      "energi_kcal": null,
+      "protein_g": 0.715,
+      "lemak_g": 0.106,
+      "karbohidrat_g": 4.78,
+      "serat_g": 0.942,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2258589",
+    "nama": "Peppers, bell, yellow, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 92.1,
+      "energi_kcal": null,
+      "protein_g": 0.819,
+      "lemak_g": 0.121,
+      "karbohidrat_g": 6.6,
+      "serat_g": 1.07,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2258590",
+    "nama": "Peppers, bell, red, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 91.9,
+      "energi_kcal": null,
+      "protein_g": 0.896,
+      "lemak_g": 0.126,
+      "karbohidrat_g": 6.65,
+      "serat_g": 1.16,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2258591",
+    "nama": "Peppers, bell, orange, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 91.9,
+      "energi_kcal": null,
+      "protein_g": 0.882,
+      "lemak_g": 0.156,
+      "karbohidrat_g": 6.7,
+      "serat_g": 0.967,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2259792",
+    "nama": "Buttermilk, low fat",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 89.8,
+      "energi_kcal": null,
+      "protein_g": 3.46,
+      "lemak_g": 1.08,
+      "karbohidrat_g": 4.81,
+      "serat_g": null,
+      "natrium_mg": 92.5
+    }
+  },
+  {
+    "kode": "USDA2259793",
+    "nama": "Yogurt, plain, whole milk",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 85.3,
+      "energi_kcal": null,
+      "protein_g": 3.82,
+      "lemak_g": 4.48,
+      "karbohidrat_g": 5.57,
+      "serat_g": null,
+      "natrium_mg": 41.8
+    }
+  },
+  {
+    "kode": "USDA2259794",
+    "nama": "Yogurt, Greek, plain, whole milk",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 81.3,
+      "energi_kcal": null,
+      "protein_g": 8.78,
+      "lemak_g": 4.39,
+      "karbohidrat_g": 4.75,
+      "serat_g": null,
+      "natrium_mg": 33.8
+    }
+  },
+  {
+    "kode": "USDA2259795",
+    "nama": "Cheese, parmesan, grated, refrigerated",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 30.8,
+      "energi_kcal": null,
+      "protein_g": 30.1,
+      "lemak_g": 29.5,
+      "karbohidrat_g": 4.33,
+      "serat_g": null,
+      "natrium_mg": 1050.0
+    }
+  },
+  {
+    "kode": "USDA2259796",
+    "nama": "Cheese, feta, whole milk, crumbled",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 51.9,
+      "energi_kcal": null,
+      "protein_g": 19.7,
+      "lemak_g": 19.1,
+      "karbohidrat_g": 5.58,
+      "serat_g": null,
+      "natrium_mg": 1030.0
+    }
+  },
+  {
+    "kode": "USDA2261420",
+    "nama": "Flour, almond",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 4.32,
+      "energi_kcal": null,
+      "protein_g": 26.2,
+      "lemak_g": 50.2,
+      "karbohidrat_g": 16.2,
+      "serat_g": 9.27,
+      "natrium_mg": 0.894
+    }
+  },
+  {
+    "kode": "USDA2261421",
+    "nama": "Flour, oat, whole grain",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.86,
+      "energi_kcal": null,
+      "protein_g": 13.2,
+      "lemak_g": 6.31,
+      "karbohidrat_g": 69.9,
+      "serat_g": 10.5,
+      "natrium_mg": 3.62
+    }
+  },
+  {
+    "kode": "USDA2261422",
+    "nama": "Flour, potato",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.28,
+      "energi_kcal": null,
+      "protein_g": 8.11,
+      "lemak_g": 0.951,
+      "karbohidrat_g": 79.9,
+      "serat_g": 5.4,
+      "natrium_mg": 47.7
+    }
+  },
+  {
+    "kode": "USDA2262072",
+    "nama": "Peanut butter, creamy",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 1.1,
+      "energi_kcal": null,
+      "protein_g": 24.0,
+      "lemak_g": 49.4,
+      "karbohidrat_g": 22.7,
+      "serat_g": 6.32,
+      "natrium_mg": 221
+    }
+  },
+  {
+    "kode": "USDA2262073",
+    "nama": "Sesame butter, creamy",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 0.606,
+      "energi_kcal": null,
+      "protein_g": 19.7,
+      "lemak_g": 62.4,
+      "karbohidrat_g": 14.2,
+      "serat_g": 8.37,
+      "natrium_mg": 63.6
+    }
+  },
+  {
+    "kode": "USDA2262074",
+    "nama": "Almond butter, creamy",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 1.75,
+      "energi_kcal": null,
+      "protein_g": 20.8,
+      "lemak_g": 53.0,
+      "karbohidrat_g": 21.2,
+      "serat_g": 9.72,
+      "natrium_mg": 0.996
+    }
+  },
+  {
+    "kode": "USDA2262075",
+    "nama": "Flaxseed, ground",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 6.8,
+      "energi_kcal": null,
+      "protein_g": 18.0,
+      "lemak_g": 37.3,
+      "karbohidrat_g": 34.4,
+      "serat_g": 23.1,
+      "natrium_mg": 36.7
+    }
+  },
+  {
+    "kode": "USDA2346384",
+    "nama": "Cottage cheese, full fat, large or small curd",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 78.1,
+      "energi_kcal": null,
+      "protein_g": 11.6,
+      "lemak_g": 4.22,
+      "karbohidrat_g": 4.6,
+      "serat_g": null,
+      "natrium_mg": 350
+    }
+  },
+  {
+    "kode": "USDA2346385",
+    "nama": "Cream cheese, full fat, block",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 54.7,
+      "energi_kcal": null,
+      "protein_g": 5.79,
+      "lemak_g": 33.5,
+      "karbohidrat_g": 4.56,
+      "serat_g": null,
+      "natrium_mg": 368
+    }
+  },
+  {
+    "kode": "USDA2346386",
+    "nama": "Cream, heavy",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 58.1,
+      "energi_kcal": null,
+      "protein_g": 2.02,
+      "lemak_g": 35.6,
+      "karbohidrat_g": 3.8,
+      "serat_g": null,
+      "natrium_mg": 20.6
+    }
+  },
+  {
+    "kode": "USDA2346387",
+    "nama": "Cream, sour, full fat",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 72.6,
+      "energi_kcal": null,
+      "protein_g": 3.07,
+      "lemak_g": 18.0,
+      "karbohidrat_g": 5.56,
+      "serat_g": null,
+      "natrium_mg": 50.0
+    }
+  },
+  {
+    "kode": "USDA2346388",
+    "nama": "Lettuce, iceberg, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 95.5,
+      "energi_kcal": null,
+      "protein_g": 0.742,
+      "lemak_g": 0.074,
+      "karbohidrat_g": 3.37,
+      "serat_g": null,
+      "natrium_mg": 16.1
+    }
+  },
+  {
+    "kode": "USDA2346389",
+    "nama": "Lettuce, romaine, green, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 94.3,
+      "energi_kcal": null,
+      "protein_g": 0.977,
+      "lemak_g": 0.071,
+      "karbohidrat_g": 4.06,
+      "serat_g": null,
+      "natrium_mg": 23.0
+    }
+  },
+  {
+    "kode": "USDA2346390",
+    "nama": "Lettuce, leaf, red, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 95.0,
+      "energi_kcal": null,
+      "protein_g": 0.883,
+      "lemak_g": 0.106,
+      "karbohidrat_g": 3.26,
+      "serat_g": null,
+      "natrium_mg": 24.9
+    }
+  },
+  {
+    "kode": "USDA2346391",
+    "nama": "Lettuce, leaf, green, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 94.0,
+      "energi_kcal": null,
+      "protein_g": 1.09,
+      "lemak_g": 0.156,
+      "karbohidrat_g": 4.07,
+      "serat_g": null,
+      "natrium_mg": 28.9
+    }
+  },
+  {
+    "kode": "USDA2346392",
+    "nama": "Nuts, pine nuts, raw",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 1.92,
+      "energi_kcal": null,
+      "protein_g": 15.7,
+      "lemak_g": 61.3,
+      "karbohidrat_g": 18.6,
+      "serat_g": 3.94,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2346393",
+    "nama": "Nuts, almonds, whole, raw",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 4.26,
+      "energi_kcal": null,
+      "protein_g": 21.5,
+      "lemak_g": 51.1,
+      "karbohidrat_g": 20.0,
+      "serat_g": 10.8,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2346394",
+    "nama": "Nuts, walnuts, English, halves, raw",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 3.14,
+      "energi_kcal": null,
+      "protein_g": 14.6,
+      "lemak_g": 69.7,
+      "karbohidrat_g": 10.9,
+      "serat_g": 5.21,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2346395",
+    "nama": "Nuts, pecans, halves, raw",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 2.62,
+      "energi_kcal": null,
+      "protein_g": 9.96,
+      "lemak_g": 73.3,
+      "karbohidrat_g": 12.7,
+      "serat_g": 5.79,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2346396",
+    "nama": "Oats, whole grain, rolled, old fashioned",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 10.2,
+      "energi_kcal": null,
+      "protein_g": 13.5,
+      "lemak_g": 5.89,
+      "karbohidrat_g": 68.7,
+      "serat_g": null,
+      "natrium_mg": 0.668
+    }
+  },
+  {
+    "kode": "USDA2346397",
+    "nama": "Oats, whole grain, steel cut",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 10.1,
+      "energi_kcal": null,
+      "protein_g": 12.5,
+      "lemak_g": 5.8,
+      "karbohidrat_g": 69.8,
+      "serat_g": null,
+      "natrium_mg": 0.311
+    }
+  },
+  {
+    "kode": "USDA2346398",
+    "nama": "Pineapple, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 85.0,
+      "energi_kcal": null,
+      "protein_g": 0.461,
+      "lemak_g": 0.211,
+      "karbohidrat_g": 14.1,
+      "serat_g": 0.935,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2346399",
+    "nama": "Cherries, sweet, dark red, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 82.2,
+      "energi_kcal": null,
+      "protein_g": 1.04,
+      "lemak_g": 0.192,
+      "karbohidrat_g": 16.2,
+      "serat_g": null,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2346400",
+    "nama": "Beans, snap, green, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 89.7,
+      "energi_kcal": null,
+      "protein_g": 1.97,
+      "lemak_g": 0.275,
+      "karbohidrat_g": 7.41,
+      "serat_g": 3.01,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2346401",
+    "nama": "Potatoes, russet, without skin, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 78.6,
+      "energi_kcal": null,
+      "protein_g": 2.27,
+      "lemak_g": 0.36,
+      "karbohidrat_g": 17.8,
+      "serat_g": null,
+      "natrium_mg": 2.74
+    }
+  },
+  {
+    "kode": "USDA2346402",
+    "nama": "Potatoes, red, without skin, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 80.5,
+      "energi_kcal": null,
+      "protein_g": 2.06,
+      "lemak_g": 0.248,
+      "karbohidrat_g": 16.3,
+      "serat_g": null,
+      "natrium_mg": 2.86
+    }
+  },
+  {
+    "kode": "USDA2346403",
+    "nama": "Potatoes, gold, without skin, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 81.1,
+      "energi_kcal": null,
+      "protein_g": 1.81,
+      "lemak_g": 0.264,
+      "karbohidrat_g": 16.0,
+      "serat_g": null,
+      "natrium_mg": 2.24
+    }
+  },
+  {
+    "kode": "USDA2346404",
+    "nama": "Sweet potatoes, orange flesh, without skin, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 79.5,
+      "energi_kcal": null,
+      "protein_g": 1.58,
+      "lemak_g": 0.375,
+      "karbohidrat_g": 17.3,
+      "serat_g": null,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2346405",
+    "nama": "Celery, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 95.2,
+      "energi_kcal": null,
+      "protein_g": 0.492,
+      "lemak_g": 0.162,
+      "karbohidrat_g": 3.32,
+      "serat_g": null,
+      "natrium_mg": 97.2
+    }
+  },
+  {
+    "kode": "USDA2346406",
+    "nama": "Cucumber, with peel, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 95.9,
+      "energi_kcal": null,
+      "protein_g": 0.625,
+      "lemak_g": 0.178,
+      "karbohidrat_g": 2.95,
+      "serat_g": null,
+      "natrium_mg": 1.52
+    }
+  },
+  {
+    "kode": "USDA2346407",
+    "nama": "Cabbage, green, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 91.9,
+      "energi_kcal": null,
+      "protein_g": 0.961,
+      "lemak_g": 0.228,
+      "karbohidrat_g": 6.38,
+      "serat_g": null,
+      "natrium_mg": 16.1
+    }
+  },
+  {
+    "kode": "USDA2346408",
+    "nama": "Cabbage, red, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 91.1,
+      "energi_kcal": null,
+      "protein_g": 1.24,
+      "lemak_g": 0.214,
+      "karbohidrat_g": 6.79,
+      "serat_g": null,
+      "natrium_mg": 11.7
+    }
+  },
+  {
+    "kode": "USDA2346409",
+    "nama": "Strawberries, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 90.8,
+      "energi_kcal": null,
+      "protein_g": 0.641,
+      "lemak_g": 0.22,
+      "karbohidrat_g": 7.96,
+      "serat_g": null,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2346410",
+    "nama": "Raspberries, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 85.6,
+      "energi_kcal": null,
+      "protein_g": 1.01,
+      "lemak_g": 0.188,
+      "karbohidrat_g": 12.9,
+      "serat_g": null,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2346411",
+    "nama": "Blueberries, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 84.2,
+      "energi_kcal": null,
+      "protein_g": 0.703,
+      "lemak_g": 0.306,
+      "karbohidrat_g": 14.6,
+      "serat_g": null,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2346412",
+    "nama": "Grapes, red, seedless, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 78.2,
+      "energi_kcal": null,
+      "protein_g": 0.914,
+      "lemak_g": 0.164,
+      "karbohidrat_g": 20.2,
+      "serat_g": null,
+      "natrium_mg": 7.0
+    }
+  },
+  {
+    "kode": "USDA2346413",
+    "nama": "Grapes, green, seedless, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 79.9,
+      "energi_kcal": null,
+      "protein_g": 0.899,
+      "lemak_g": 0.232,
+      "karbohidrat_g": 18.6,
+      "serat_g": null,
+      "natrium_mg": 3.17
+    }
+  },
+  {
+    "kode": "USDA2346414",
+    "nama": "Applesauce, unsweetened, with added vitamin C",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 87.1,
+      "energi_kcal": null,
+      "protein_g": 0.273,
+      "lemak_g": 0.162,
+      "karbohidrat_g": 12.3,
+      "serat_g": null,
+      "natrium_mg": 0.504
+    }
+  },
+  {
+    "kode": "USDA2512371",
+    "nama": "Flour, amaranth",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 9.49,
+      "energi_kcal": null,
+      "protein_g": 13.2,
+      "lemak_g": 6.24,
+      "karbohidrat_g": 68.8,
+      "serat_g": 7.21,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2512372",
+    "nama": "Flour, quinoa",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 9.95,
+      "energi_kcal": null,
+      "protein_g": 11.9,
+      "lemak_g": 6.6,
+      "karbohidrat_g": 69.5,
+      "serat_g": 6.3,
+      "natrium_mg": 6.32
+    }
+  },
+  {
+    "kode": "USDA2512373",
+    "nama": "Flour, sorghum",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 9.41,
+      "energi_kcal": null,
+      "protein_g": 8.27,
+      "lemak_g": 3.59,
+      "karbohidrat_g": 77.4,
+      "serat_g": 6.02,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2512374",
+    "nama": "Flour, buckwheat",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 12.0,
+      "energi_kcal": null,
+      "protein_g": 8.88,
+      "lemak_g": 2.48,
+      "karbohidrat_g": 75.0,
+      "serat_g": 10.4,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2512375",
+    "nama": "Flour, rye",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 11.1,
+      "energi_kcal": null,
+      "protein_g": 8.4,
+      "lemak_g": 1.91,
+      "karbohidrat_g": 77.2,
+      "serat_g": 13.7,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2512376",
+    "nama": "Flour, barley",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 9.9,
+      "energi_kcal": null,
+      "protein_g": 8.72,
+      "lemak_g": 2.45,
+      "karbohidrat_g": 77.4,
+      "serat_g": 12.8,
+      "natrium_mg": 20.3
+    }
+  },
+  {
+    "kode": "USDA2512377",
+    "nama": "Flour, cassava",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 10.6,
+      "energi_kcal": null,
+      "protein_g": 0.918,
+      "lemak_g": 0.494,
+      "karbohidrat_g": 87.3,
+      "serat_g": 4.83,
+      "natrium_mg": 13.1
+    }
+  },
+  {
+    "kode": "USDA2512378",
+    "nama": "Buckwheat, whole grain",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 13.0,
+      "energi_kcal": null,
+      "protein_g": 11.1,
+      "lemak_g": 3.04,
+      "karbohidrat_g": 71.1,
+      "serat_g": 4.05,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2512379",
+    "nama": "Millet, whole grain",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 10.2,
+      "energi_kcal": null,
+      "protein_g": 10.0,
+      "lemak_g": 4.19,
+      "karbohidrat_g": 74.4,
+      "serat_g": 2.62,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2512380",
+    "nama": "Rice, brown, long grain, unenriched, raw",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 11.5,
+      "energi_kcal": null,
+      "protein_g": 7.25,
+      "lemak_g": 3.31,
+      "karbohidrat_g": 76.7,
+      "serat_g": 3.02,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2512381",
+    "nama": "Rice, white, long grain, unenriched, raw",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 11.2,
+      "energi_kcal": null,
+      "protein_g": 7.04,
+      "lemak_g": 1.03,
+      "karbohidrat_g": 80.3,
+      "serat_g": 0.149,
+      "natrium_mg": 0.462
+    }
+  },
+  {
+    "kode": "USDA2514743",
+    "nama": "Beef, ground, 90% lean meat / 10% fat, raw",
+    "kategori": "Daging Sapi",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 69.0,
+      "energi_kcal": null,
+      "protein_g": 18.2,
+      "lemak_g": 12.8,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 61.6
+    }
+  },
+  {
+    "kode": "USDA2514744",
+    "nama": "Beef, ground, 80% lean meat / 20% fat, raw",
+    "kategori": "Daging Sapi",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 62.8,
+      "energi_kcal": null,
+      "protein_g": 17.5,
+      "lemak_g": 19.4,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 54.9
+    }
+  },
+  {
+    "kode": "USDA2514745",
+    "nama": "Pork, ground, raw",
+    "kategori": "Daging",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 63.9,
+      "energi_kcal": null,
+      "protein_g": 17.8,
+      "lemak_g": 17.5,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 53.6
+    }
+  },
+  {
+    "kode": "USDA2514746",
+    "nama": "Chicken, ground, with additives, raw",
+    "kategori": "Daging dan Unggas",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 74.7,
+      "energi_kcal": null,
+      "protein_g": 17.9,
+      "lemak_g": 7.16,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 63.0
+    }
+  },
+  {
+    "kode": "USDA2514747",
+    "nama": "Turkey, ground, 93% lean/ 7% fat, raw",
+    "kategori": "Daging dan Unggas",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 72.9,
+      "energi_kcal": null,
+      "protein_g": 17.3,
+      "lemak_g": 9.59,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 80.2
+    }
+  },
+  {
+    "kode": "USDA2515373",
+    "nama": "Nuts, brazilnuts, raw",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 2.26,
+      "energi_kcal": null,
+      "protein_g": 15.0,
+      "lemak_g": 57.4,
+      "karbohidrat_g": 21.6,
+      "serat_g": 5.98,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2515374",
+    "nama": "Nuts, cashew nuts, raw",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 4.81,
+      "energi_kcal": null,
+      "protein_g": 17.4,
+      "lemak_g": 38.9,
+      "karbohidrat_g": 36.3,
+      "serat_g": 4.1,
+      "natrium_mg": 4.76
+    }
+  },
+  {
+    "kode": "USDA2515375",
+    "nama": "Nuts, hazelnuts or filberts, raw",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 4.31,
+      "energi_kcal": null,
+      "protein_g": 13.5,
+      "lemak_g": 53.5,
+      "karbohidrat_g": 26.5,
+      "serat_g": 8.41,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2515376",
+    "nama": "Peanuts, raw",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 4.82,
+      "energi_kcal": null,
+      "protein_g": 23.2,
+      "lemak_g": 43.3,
+      "karbohidrat_g": 26.5,
+      "serat_g": 8.01,
+      "natrium_mg": 1.49
+    }
+  },
+  {
+    "kode": "USDA2515377",
+    "nama": "Flour, chestnut",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 7.33,
+      "energi_kcal": null,
+      "protein_g": 5.29,
+      "lemak_g": 4.64,
+      "karbohidrat_g": 80.5,
+      "serat_g": 8.71,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2515378",
+    "nama": "Nuts, macadamia nuts, raw",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 1.83,
+      "energi_kcal": null,
+      "protein_g": 7.79,
+      "lemak_g": 64.9,
+      "karbohidrat_g": 24.1,
+      "serat_g": 7.56,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2515379",
+    "nama": "Nuts, pistachio nuts, raw",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 3.95,
+      "energi_kcal": null,
+      "protein_g": 20.5,
+      "lemak_g": 45.0,
+      "karbohidrat_g": 27.7,
+      "serat_g": 6.97,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2515380",
+    "nama": "Seeds, pumpkin seeds (pepitas), raw",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 6.62,
+      "energi_kcal": null,
+      "protein_g": 29.9,
+      "lemak_g": 40.0,
+      "karbohidrat_g": 18.7,
+      "serat_g": 5.08,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2515381",
+    "nama": "Seeds, sunflower seed, kernel, raw",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 4.87,
+      "energi_kcal": null,
+      "protein_g": 18.9,
+      "lemak_g": 48.4,
+      "karbohidrat_g": 24.5,
+      "serat_g": 7.22,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2515382",
+    "nama": "Flour, coconut",
+    "kategori": "Kacang dan Biji-bijian",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 4.69,
+      "energi_kcal": null,
+      "protein_g": 16.1,
+      "lemak_g": 15.3,
+      "karbohidrat_g": 58.9,
+      "serat_g": 34.2,
+      "natrium_mg": 46.9
+    }
+  },
+  {
+    "kode": "USDA2644281",
+    "nama": "Beans, cannellini, dry",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 12.3,
+      "energi_kcal": null,
+      "protein_g": 21.6,
+      "lemak_g": 2.2,
+      "karbohidrat_g": 59.8,
+      "serat_g": null,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2644282",
+    "nama": "Chickpeas, (garbanzo beans, bengal gram), dry",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.77,
+      "energi_kcal": null,
+      "protein_g": 21.3,
+      "lemak_g": 6.27,
+      "karbohidrat_g": 60.4,
+      "serat_g": null,
+      "natrium_mg": 8.78
+    }
+  },
+  {
+    "kode": "USDA2644283",
+    "nama": "Lentils, dry",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 9.45,
+      "energi_kcal": null,
+      "protein_g": 23.6,
+      "lemak_g": 1.92,
+      "karbohidrat_g": 62.2,
+      "serat_g": null,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2644284",
+    "nama": "Blackeye pea, dry",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 11.0,
+      "energi_kcal": null,
+      "protein_g": 21.2,
+      "lemak_g": 2.42,
+      "karbohidrat_g": 61.8,
+      "serat_g": null,
+      "natrium_mg": 3.46
+    }
+  },
+  {
+    "kode": "USDA2644285",
+    "nama": "Beans, black, canned, sodium added, drained and rinsed",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 70.8,
+      "energi_kcal": null,
+      "protein_g": 6.91,
+      "lemak_g": 1.27,
+      "karbohidrat_g": 19.8,
+      "serat_g": null,
+      "natrium_mg": 218
+    }
+  },
+  {
+    "kode": "USDA2644286",
+    "nama": "Beans, navy, canned, sodium added, drained and rinsed",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 71.0,
+      "energi_kcal": null,
+      "protein_g": 6.57,
+      "lemak_g": 1.4,
+      "karbohidrat_g": 20.0,
+      "serat_g": null,
+      "natrium_mg": 190
+    }
+  },
+  {
+    "kode": "USDA2644287",
+    "nama": "Beans, cannellini, canned, sodium added, drained and rinsed",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 71.5,
+      "energi_kcal": null,
+      "protein_g": 7.41,
+      "lemak_g": 1.17,
+      "karbohidrat_g": 18.8,
+      "serat_g": null,
+      "natrium_mg": 164
+    }
+  },
+  {
+    "kode": "USDA2644288",
+    "nama": "Chickpeas (garbanzo beans, bengal gram), canned, sodium added, drained and rinsed",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 68.6,
+      "energi_kcal": null,
+      "protein_g": 7.02,
+      "lemak_g": 3.1,
+      "karbohidrat_g": 20.3,
+      "serat_g": null,
+      "natrium_mg": 202
+    }
+  },
+  {
+    "kode": "USDA2644289",
+    "nama": "Beans, kidney, dark red, canned, sodium added, sugar added, drained and rinsed",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 68.8,
+      "energi_kcal": null,
+      "protein_g": 7.8,
+      "lemak_g": 1.26,
+      "karbohidrat_g": 21.0,
+      "serat_g": null,
+      "natrium_mg": 172
+    }
+  },
+  {
+    "kode": "USDA2644290",
+    "nama": "Beans, kidney, light red, canned, sodium added, sugar added, drained and rinsed",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 68.9,
+      "energi_kcal": null,
+      "protein_g": 7.31,
+      "lemak_g": 1.3,
+      "karbohidrat_g": 21.4,
+      "serat_g": null,
+      "natrium_mg": 158
+    }
+  },
+  {
+    "kode": "USDA2644291",
+    "nama": "Peas, green, sweet, canned, sodium added, sugar added, drained and rinsed",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 80.5,
+      "energi_kcal": null,
+      "protein_g": 4.73,
+      "lemak_g": 1.15,
+      "karbohidrat_g": 12.7,
+      "serat_g": null,
+      "natrium_mg": 207
+    }
+  },
+  {
+    "kode": "USDA2644292",
+    "nama": "Beans, pinto, canned, sodium added, drained and rinsed",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 71.3,
+      "energi_kcal": null,
+      "protein_g": 6.69,
+      "lemak_g": 1.27,
+      "karbohidrat_g": 19.6,
+      "serat_g": null,
+      "natrium_mg": 202
+    }
+  },
+  {
+    "kode": "USDA2644293",
+    "nama": "Blackeye pea, canned, sodium added, drained and rinsed",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 71.6,
+      "energi_kcal": null,
+      "protein_g": 6.92,
+      "lemak_g": 1.3,
+      "karbohidrat_g": 19.2,
+      "serat_g": null,
+      "natrium_mg": 227
+    }
+  },
+  {
+    "kode": "USDA2644294",
+    "nama": "Beans, great northern, canned, sodium added, drained and rinsed",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 71.2,
+      "energi_kcal": null,
+      "protein_g": 7.03,
+      "lemak_g": 1.27,
+      "karbohidrat_g": 19.3,
+      "serat_g": null,
+      "natrium_mg": 223
+    }
+  },
+  {
+    "kode": "USDA2646168",
+    "nama": "Pork, loin, boneless, raw",
+    "kategori": "Daging",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 68.8,
+      "energi_kcal": null,
+      "protein_g": 21.1,
+      "lemak_g": 9.47,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 40.2
+    }
+  },
+  {
+    "kode": "USDA2646169",
+    "nama": "Pork, loin, tenderloin, boneless, raw",
+    "kategori": "Daging",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 73.9,
+      "energi_kcal": null,
+      "protein_g": 21.6,
+      "lemak_g": 3.9,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 41.4
+    }
+  },
+  {
+    "kode": "USDA2646170",
+    "nama": "Chicken, breast, boneless, skinless, raw",
+    "kategori": "Daging dan Unggas",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 74.8,
+      "energi_kcal": null,
+      "protein_g": 22.5,
+      "lemak_g": 1.93,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 65.8
+    }
+  },
+  {
+    "kode": "USDA2646171",
+    "nama": "Chicken, thigh, boneless, skinless, raw",
+    "kategori": "Daging dan Unggas",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 72.9,
+      "energi_kcal": null,
+      "protein_g": 18.6,
+      "lemak_g": 7.92,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 62.3
+    }
+  },
+  {
+    "kode": "USDA2646172",
+    "nama": "Beef, ribeye, steak, boneless, choice, raw",
+    "kategori": "Daging Sapi",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 60.6,
+      "energi_kcal": null,
+      "protein_g": 18.7,
+      "lemak_g": 20.0,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 42.5
+    }
+  },
+  {
+    "kode": "USDA2646173",
+    "nama": "Beef, round, top round, boneless, choice, raw",
+    "kategori": "Daging Sapi",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 70.9,
+      "energi_kcal": null,
+      "protein_g": 21.5,
+      "lemak_g": 5.7,
+      "karbohidrat_g": 0.852,
+      "serat_g": null,
+      "natrium_mg": 45.5
+    }
+  },
+  {
+    "kode": "USDA2646174",
+    "nama": "Beef, chuck, roast, boneless, choice, raw",
+    "kategori": "Daging Sapi",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 63.4,
+      "energi_kcal": null,
+      "protein_g": 18.4,
+      "lemak_g": 17.8,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 48.4
+    }
+  },
+  {
+    "kode": "USDA2646175",
+    "nama": "Beef, flank, steak, boneless, choice, raw",
+    "kategori": "Daging Sapi",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 69.8,
+      "energi_kcal": null,
+      "protein_g": 20.1,
+      "lemak_g": 9.4,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 51.3
+    }
+  },
+  {
+    "kode": "USDA2647437",
+    "nama": "Yogurt, plain, nonfat",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 86.6,
+      "energi_kcal": null,
+      "protein_g": 4.23,
+      "lemak_g": 0.087,
+      "karbohidrat_g": 8.08,
+      "serat_g": null,
+      "natrium_mg": 51.5
+    }
+  },
+  {
+    "kode": "USDA2647438",
+    "nama": "Cheese, monterey jack, solid",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 39.2,
+      "energi_kcal": null,
+      "protein_g": 22.6,
+      "lemak_g": 32.6,
+      "karbohidrat_g": 1.9,
+      "serat_g": null,
+      "natrium_mg": 662
+    }
+  },
+  {
+    "kode": "USDA2647439",
+    "nama": "Cheese, pasteurized process cheese food or product, American, singles",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 44.8,
+      "energi_kcal": null,
+      "protein_g": 15.6,
+      "lemak_g": 23.9,
+      "karbohidrat_g": 8.19,
+      "serat_g": null,
+      "natrium_mg": 1420.0
+    }
+  },
+  {
+    "kode": "USDA2647440",
+    "nama": "Cheese, provolone, sliced",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 42.3,
+      "energi_kcal": null,
+      "protein_g": 23.5,
+      "lemak_g": 28.1,
+      "karbohidrat_g": 2.45,
+      "serat_g": null,
+      "natrium_mg": 601
+    }
+  },
+  {
+    "kode": "USDA2647441",
+    "nama": "Cheese, oaxaca, solid",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 49.8,
+      "energi_kcal": null,
+      "protein_g": 22.1,
+      "lemak_g": 22.1,
+      "karbohidrat_g": 2.4,
+      "serat_g": null,
+      "natrium_mg": 734
+    }
+  },
+  {
+    "kode": "USDA2647442",
+    "nama": "Cheese, queso fresco, solid",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 51.4,
+      "energi_kcal": null,
+      "protein_g": 18.9,
+      "lemak_g": 23.4,
+      "karbohidrat_g": 2.96,
+      "serat_g": null,
+      "natrium_mg": 626
+    }
+  },
+  {
+    "kode": "USDA2647443",
+    "nama": "Cheese, cotija, solid",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 40.0,
+      "energi_kcal": null,
+      "protein_g": 23.8,
+      "lemak_g": 27.2,
+      "karbohidrat_g": 2.72,
+      "serat_g": null,
+      "natrium_mg": 1620.0
+    }
+  },
+  {
+    "kode": "USDA2684440",
+    "nama": "Fish, salmon, sockeye, wild caught, raw",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 72.5,
+      "energi_kcal": null,
+      "protein_g": 22.3,
+      "lemak_g": 4.94,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 53.3
+    }
+  },
+  {
+    "kode": "USDA2684441",
+    "nama": "Fish, salmon, Atlantic, farm raised, raw",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 65.8,
+      "energi_kcal": null,
+      "protein_g": 20.3,
+      "lemak_g": 13.1,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 49.5
+    }
+  },
+  {
+    "kode": "USDA2684442",
+    "nama": "Fish, tilapia, farm raised, raw",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 78.3,
+      "energi_kcal": null,
+      "protein_g": 19.0,
+      "lemak_g": 2.48,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 93.7
+    }
+  },
+  {
+    "kode": "USDA2684443",
+    "nama": "Crustaceans, shrimp, farm raised, raw",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 81.3,
+      "energi_kcal": null,
+      "protein_g": 15.6,
+      "lemak_g": 0.801,
+      "karbohidrat_g": 0.485,
+      "serat_g": null,
+      "natrium_mg": 475
+    }
+  },
+  {
+    "kode": "USDA2684444",
+    "nama": "Fish, cod, Atlantic, wild caught, raw",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 82.9,
+      "energi_kcal": null,
+      "protein_g": 16.1,
+      "lemak_g": 0.668,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 299
+    }
+  },
+  {
+    "kode": "USDA2684445",
+    "nama": "Fish, catfish, farm raised, raw",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 75.9,
+      "energi_kcal": null,
+      "protein_g": 16.5,
+      "lemak_g": 7.31,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 60.5
+    }
+  },
+  {
+    "kode": "USDA2684446",
+    "nama": "Crustaceans, crab, blue swimming, lump, pasteurized, refrigerated",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 78.9,
+      "energi_kcal": null,
+      "protein_g": 18.6,
+      "lemak_g": 0.808,
+      "karbohidrat_g": 0.0,
+      "serat_g": null,
+      "natrium_mg": 331
+    }
+  },
+  {
+    "kode": "USDA2685568",
+    "nama": "Squash, summer, green, zucchini, includes skin, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 95.0,
+      "energi_kcal": null,
+      "protein_g": 0.984,
+      "lemak_g": 0.205,
+      "karbohidrat_g": 3.27,
+      "serat_g": 0.752,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2685569",
+    "nama": "Squash, summer, yellow, includes skin, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 94.0,
+      "energi_kcal": null,
+      "protein_g": 0.891,
+      "lemak_g": 0.135,
+      "karbohidrat_g": 4.39,
+      "serat_g": 0.956,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2685570",
+    "nama": "Squash, winter, butternut, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 87.3,
+      "energi_kcal": null,
+      "protein_g": 1.15,
+      "lemak_g": 0.168,
+      "karbohidrat_g": 10.5,
+      "serat_g": 1.96,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2685571",
+    "nama": "Squash, winter, acorn, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 87.2,
+      "energi_kcal": null,
+      "protein_g": 1.25,
+      "lemak_g": 0.182,
+      "karbohidrat_g": 10.5,
+      "serat_g": 2.64,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2685572",
+    "nama": "Cabbage, bok choy, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 94.5,
+      "energi_kcal": null,
+      "protein_g": 1.02,
+      "lemak_g": 0.234,
+      "karbohidrat_g": 3.51,
+      "serat_g": 1.26,
+      "natrium_mg": 14.3
+    }
+  },
+  {
+    "kode": "USDA2685573",
+    "nama": "Cauliflower, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 92.7,
+      "energi_kcal": null,
+      "protein_g": 1.64,
+      "lemak_g": 0.238,
+      "karbohidrat_g": 4.72,
+      "serat_g": 1.95,
+      "natrium_mg": 20.0
+    }
+  },
+  {
+    "kode": "USDA2685574",
+    "nama": "Collards, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 87.5,
+      "energi_kcal": null,
+      "protein_g": 2.97,
+      "lemak_g": 0.77,
+      "karbohidrat_g": 7.02,
+      "serat_g": 3.82,
+      "natrium_mg": 18.4
+    }
+  },
+  {
+    "kode": "USDA2685575",
+    "nama": "Brussels sprouts, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 84.6,
+      "energi_kcal": null,
+      "protein_g": 3.98,
+      "lemak_g": 0.565,
+      "karbohidrat_g": 9.62,
+      "serat_g": 4.78,
+      "natrium_mg": 25.7
+    }
+  },
+  {
+    "kode": "USDA2685576",
+    "nama": "Beets, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 88.2,
+      "energi_kcal": null,
+      "protein_g": 1.69,
+      "lemak_g": 0.302,
+      "karbohidrat_g": 8.79,
+      "serat_g": 3.12,
+      "natrium_mg": 112
+    }
+  },
+  {
+    "kode": "USDA2685577",
+    "nama": "Eggplant, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 93.1,
+      "energi_kcal": null,
+      "protein_g": 0.852,
+      "lemak_g": 0.12,
+      "karbohidrat_g": 5.4,
+      "serat_g": 2.45,
+      "natrium_mg": 0.442
+    }
+  },
+  {
+    "kode": "USDA2685578",
+    "nama": "Tomatoes, whole, canned, solids and liquids, with salt added",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 93.9,
+      "energi_kcal": null,
+      "protein_g": 0.868,
+      "lemak_g": 0.206,
+      "karbohidrat_g": 4.29,
+      "serat_g": 0.872,
+      "natrium_mg": 112
+    }
+  },
+  {
+    "kode": "USDA2685579",
+    "nama": "Tomato, sauce, canned, with salt added",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 90.2,
+      "energi_kcal": null,
+      "protein_g": 1.35,
+      "lemak_g": 0.382,
+      "karbohidrat_g": 6.33,
+      "serat_g": 1.64,
+      "natrium_mg": 417
+    }
+  },
+  {
+    "kode": "USDA2685580",
+    "nama": "Tomato, paste, canned, without salt added",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 71.9,
+      "energi_kcal": null,
+      "protein_g": 4.23,
+      "lemak_g": 0.732,
+      "karbohidrat_g": 20.2,
+      "serat_g": 4.7,
+      "natrium_mg": 61.2
+    }
+  },
+  {
+    "kode": "USDA2685581",
+    "nama": "Tomatoes, crushed, canned",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 89.9,
+      "energi_kcal": null,
+      "protein_g": 1.44,
+      "lemak_g": 0.398,
+      "karbohidrat_g": 7.14,
+      "serat_g": 1.94,
+      "natrium_mg": 140
+    }
+  },
+  {
+    "kode": "USDA2685582",
+    "nama": "Tomato, puree, canned",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 89.1,
+      "energi_kcal": null,
+      "protein_g": 1.58,
+      "lemak_g": 0.265,
+      "karbohidrat_g": 8.04,
+      "serat_g": 1.97,
+      "natrium_mg": 29.4
+    }
+  },
+  {
+    "kode": "USDA2710815",
+    "nama": "Apricot, with skin, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 87.9,
+      "energi_kcal": null,
+      "protein_g": 0.961,
+      "lemak_g": 0.405,
+      "karbohidrat_g": 10.2,
+      "serat_g": 1.51,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2710816",
+    "nama": "Melons, honeydew, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 90.6,
+      "energi_kcal": null,
+      "protein_g": 0.531,
+      "lemak_g": 0.216,
+      "karbohidrat_g": 8.15,
+      "serat_g": null,
+      "natrium_mg": 21.2
+    }
+  },
+  {
+    "kode": "USDA2710817",
+    "nama": "Plantains, ripe, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 66.1,
+      "energi_kcal": null,
+      "protein_g": 1.16,
+      "lemak_g": 0.893,
+      "karbohidrat_g": 31.0,
+      "serat_g": 2.12,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2710818",
+    "nama": "Plantains, underripe, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 63.6,
+      "energi_kcal": null,
+      "protein_g": 1.23,
+      "lemak_g": 0.685,
+      "karbohidrat_g": 33.6,
+      "serat_g": 2.53,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2710819",
+    "nama": "Chia seeds, dry, raw",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 7.45,
+      "energi_kcal": null,
+      "protein_g": 17.0,
+      "lemak_g": 32.9,
+      "karbohidrat_g": 38.3,
+      "serat_g": null,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2710820",
+    "nama": "Bulgur, dry, raw",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.48,
+      "energi_kcal": null,
+      "protein_g": 11.8,
+      "lemak_g": 2.42,
+      "karbohidrat_g": 75.9,
+      "serat_g": 11.7,
+      "natrium_mg": 2.18
+    }
+  },
+  {
+    "kode": "USDA2710821",
+    "nama": "Wild rice, dry, raw",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.43,
+      "energi_kcal": null,
+      "protein_g": 12.8,
+      "lemak_g": 1.7,
+      "karbohidrat_g": 75.7,
+      "serat_g": 4.26,
+      "natrium_mg": 1.01
+    }
+  },
+  {
+    "kode": "USDA2710822",
+    "nama": "Arugula, baby, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 90.9,
+      "energi_kcal": null,
+      "protein_g": 1.65,
+      "lemak_g": 0.325,
+      "karbohidrat_g": 5.37,
+      "serat_g": 2.28,
+      "natrium_mg": 86.9
+    }
+  },
+  {
+    "kode": "USDA2710823",
+    "nama": "Asparagus, green, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 92.6,
+      "energi_kcal": null,
+      "protein_g": 1.44,
+      "lemak_g": 0.216,
+      "karbohidrat_g": 5.1,
+      "serat_g": 1.88,
+      "natrium_mg": 2.46
+    }
+  },
+  {
+    "kode": "USDA2710824",
+    "nama": "Avocado, Hass, peeled, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 67.0,
+      "energi_kcal": null,
+      "protein_g": 1.81,
+      "lemak_g": 20.3,
+      "karbohidrat_g": 8.32,
+      "serat_g": null,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2710825",
+    "nama": "Rice, black, unenriched, raw",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 10.5,
+      "energi_kcal": null,
+      "protein_g": 7.57,
+      "lemak_g": 3.44,
+      "karbohidrat_g": 77.2,
+      "serat_g": 4.18,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2710826",
+    "nama": "Corn, sweet, yellow and white kernels,  fresh, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 80.2,
+      "energi_kcal": null,
+      "protein_g": 2.79,
+      "lemak_g": 1.63,
+      "karbohidrat_g": 14.7,
+      "serat_g": 2.43,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2710827",
+    "nama": "Einkorn, grain, dry, raw",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 10.5,
+      "energi_kcal": null,
+      "protein_g": 15.1,
+      "lemak_g": 3.81,
+      "karbohidrat_g": 68.7,
+      "serat_g": 8.91,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2710828",
+    "nama": "Farro, pearled, dry, raw",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 10.5,
+      "energi_kcal": null,
+      "protein_g": 12.6,
+      "lemak_g": 3.1,
+      "karbohidrat_g": 72.1,
+      "serat_g": 7.31,
+      "natrium_mg": 0.845
+    }
+  },
+  {
+    "kode": "USDA2710829",
+    "nama": "Fonio, grain, dry, raw",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 9.37,
+      "energi_kcal": null,
+      "protein_g": 7.17,
+      "lemak_g": 1.69,
+      "karbohidrat_g": 81.3,
+      "serat_g": 2.2,
+      "natrium_mg": 2.97
+    }
+  },
+  {
+    "kode": "USDA2710830",
+    "nama": "Khorasan, grain, dry, raw",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.9,
+      "energi_kcal": null,
+      "protein_g": 14.8,
+      "lemak_g": 2.8,
+      "karbohidrat_g": 71.8,
+      "serat_g": 10.5,
+      "natrium_mg": 3.94
+    }
+  },
+  {
+    "kode": "USDA2710831",
+    "nama": "Kiwifruit (kiwi), green, peeled, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 83.8,
+      "energi_kcal": null,
+      "protein_g": 1.01,
+      "lemak_g": 0.64,
+      "karbohidrat_g": 13.8,
+      "serat_g": 2.13,
+      "natrium_mg": 2.28
+    }
+  },
+  {
+    "kode": "USDA2710832",
+    "nama": "Mandarin, seedless, peeled, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 84.6,
+      "energi_kcal": null,
+      "protein_g": 1.04,
+      "lemak_g": 0.458,
+      "karbohidrat_g": 13.4,
+      "serat_g": 1.33,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2710833",
+    "nama": "Mango, Tommy Atkins, peeled, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 83.2,
+      "energi_kcal": null,
+      "protein_g": 0.562,
+      "lemak_g": 0.572,
+      "karbohidrat_g": 15.3,
+      "serat_g": 1.75,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2710834",
+    "nama": "Mango, Ataulfo, peeled, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 80.8,
+      "energi_kcal": null,
+      "protein_g": 0.688,
+      "lemak_g": 0.681,
+      "karbohidrat_g": 17.4,
+      "serat_g": 1.29,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2710835",
+    "nama": "Corn flour, masa harina, white or yellow, dry, raw",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 10.1,
+      "energi_kcal": null,
+      "protein_g": 7.56,
+      "lemak_g": 4.34,
+      "karbohidrat_g": 76.7,
+      "serat_g": 7.04,
+      "natrium_mg": 2.73
+    }
+  },
+  {
+    "kode": "USDA2710836",
+    "nama": "Pear, Anjou, green, with skin, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 84.3,
+      "energi_kcal": null,
+      "protein_g": 0.312,
+      "lemak_g": 0.371,
+      "karbohidrat_g": 14.8,
+      "serat_g": 2.64,
+      "natrium_mg": 0.398
+    }
+  },
+  {
+    "kode": "USDA2710837",
+    "nama": "Plum, black, with skin, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 84.9,
+      "energi_kcal": null,
+      "protein_g": 0.578,
+      "lemak_g": 0.282,
+      "karbohidrat_g": 13.5,
+      "serat_g": 1.35,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2710838",
+    "nama": "Rice, red, unenriched, dry, raw",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 10.5,
+      "energi_kcal": null,
+      "protein_g": 8.56,
+      "lemak_g": 3.44,
+      "karbohidrat_g": 76.2,
+      "serat_g": 4.2,
+      "natrium_mg": 0.438
+    }
+  },
+  {
+    "kode": "USDA2710839",
+    "nama": "Sorghum bran, white, unenriched, dry, raw",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 7.42,
+      "energi_kcal": null,
+      "protein_g": 11.2,
+      "lemak_g": 9.26,
+      "karbohidrat_g": 68.7,
+      "serat_g": 35.0,
+      "natrium_mg": 2.92
+    }
+  },
+  {
+    "kode": "USDA2710840",
+    "nama": "Sorghum flour, white, pearled, unenriched, dry, raw",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 11.9,
+      "energi_kcal": null,
+      "protein_g": 10.2,
+      "lemak_g": 3.24,
+      "karbohidrat_g": 73.5,
+      "serat_g": 3.3,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2710841",
+    "nama": "Sorghum grain, white, pearled, unenriched, dry, raw",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 10.4,
+      "energi_kcal": null,
+      "protein_g": 10.2,
+      "lemak_g": 3.26,
+      "karbohidrat_g": 74.9,
+      "serat_g": 3.92,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2710842",
+    "nama": "Sorghum, whole grain, white, dry, raw",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 10.6,
+      "energi_kcal": null,
+      "protein_g": 10.1,
+      "lemak_g": 4.22,
+      "karbohidrat_g": 73.6,
+      "serat_g": 8.27,
+      "natrium_mg": 0.329
+    }
+  },
+  {
+    "kode": "USDA2710843",
+    "nama": "Plantains, overripe, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 67.7,
+      "energi_kcal": null,
+      "protein_g": 1.17,
+      "lemak_g": 0.99,
+      "karbohidrat_g": 29.2,
+      "serat_g": 1.79,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2727566",
+    "nama": "Chicken, drumstick, meat and skin, raw",
+    "kategori": "Daging dan Unggas",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 75.3,
+      "energi_kcal": null,
+      "protein_g": 18.4,
+      "lemak_g": 5.94,
+      "karbohidrat_g": -0.475,
+      "serat_g": null,
+      "natrium_mg": 91.0
+    }
+  },
+  {
+    "kode": "USDA2727567",
+    "nama": "Chicken, thigh, meat and skin, raw",
+    "kategori": "Daging dan Unggas",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 68.9,
+      "energi_kcal": null,
+      "protein_g": 17.1,
+      "lemak_g": 13.4,
+      "karbohidrat_g": -0.173,
+      "serat_g": null,
+      "natrium_mg": 63.6
+    }
+  },
+  {
+    "kode": "USDA2727568",
+    "nama": "Chicken, wing, meat and skin, raw",
+    "kategori": "Daging dan Unggas",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 70.7,
+      "energi_kcal": null,
+      "protein_g": 18.4,
+      "lemak_g": 10.6,
+      "karbohidrat_g": -0.459,
+      "serat_g": null,
+      "natrium_mg": 84.1
+    }
+  },
+  {
+    "kode": "USDA2727569",
+    "nama": "Chicken, breast, meat and skin, raw",
+    "kategori": "Daging dan Unggas",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 73.2,
+      "energi_kcal": null,
+      "protein_g": 21.4,
+      "lemak_g": 4.78,
+      "karbohidrat_g": -0.428,
+      "serat_g": null,
+      "natrium_mg": 48.1
+    }
+  },
+  {
+    "kode": "USDA2727570",
+    "nama": "Lamb, ground, raw",
+    "kategori": "Daging",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 63.3,
+      "energi_kcal": null,
+      "protein_g": 17.5,
+      "lemak_g": 18.6,
+      "karbohidrat_g": -0.251,
+      "serat_g": null,
+      "natrium_mg": 53.4
+    }
+  },
+  {
+    "kode": "USDA2727571",
+    "nama": "Bison, ground, raw",
+    "kategori": "Daging",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 70.4,
+      "energi_kcal": null,
+      "protein_g": 19.9,
+      "lemak_g": 8.88,
+      "karbohidrat_g": -0.15,
+      "serat_g": null,
+      "natrium_mg": 55.7
+    }
+  },
+  {
+    "kode": "USDA2727572",
+    "nama": "Beef, short loin (NY strip steak), raw",
+    "kategori": "Daging Sapi",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 66.0,
+      "energi_kcal": null,
+      "protein_g": 21.3,
+      "lemak_g": 11.5,
+      "karbohidrat_g": 0.221,
+      "serat_g": null,
+      "natrium_mg": 43.1
+    }
+  },
+  {
+    "kode": "USDA2727573",
+    "nama": "Beef, tenderloin steak, raw",
+    "kategori": "Daging Sapi",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 71.2,
+      "energi_kcal": null,
+      "protein_g": 21.1,
+      "lemak_g": 6.46,
+      "karbohidrat_g": 0.18,
+      "serat_g": null,
+      "natrium_mg": 44.8
+    }
+  },
+  {
+    "kode": "USDA2727574",
+    "nama": "Beef, top sirloin steak, raw",
+    "kategori": "Daging Sapi",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 71.0,
+      "energi_kcal": null,
+      "protein_g": 22.0,
+      "lemak_g": 5.71,
+      "karbohidrat_g": 0.218,
+      "serat_g": null,
+      "natrium_mg": 42.8
+    }
+  },
+  {
+    "kode": "USDA2727575",
+    "nama": "Pork, chop, center cut, raw",
+    "kategori": "Daging",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 71.2,
+      "energi_kcal": null,
+      "protein_g": 22.8,
+      "lemak_g": 5.48,
+      "karbohidrat_g": -0.562,
+      "serat_g": null,
+      "natrium_mg": 39.3
+    }
+  },
+  {
+    "kode": "USDA2727576",
+    "nama": "Pork, belly, with skin, raw",
+    "kategori": "Daging",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 49.0,
+      "energi_kcal": null,
+      "protein_g": 15.2,
+      "lemak_g": 35.8,
+      "karbohidrat_g": -0.705,
+      "serat_g": null,
+      "natrium_mg": 49.7
+    }
+  },
+  {
+    "kode": "USDA2727577",
+    "nama": "Pawpaw, peeled, seeded, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 76.2,
+      "energi_kcal": null,
+      "protein_g": 1.15,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": 3.3,
+      "natrium_mg": 0.351
+    }
+  },
+  {
+    "kode": "USDA2727578",
+    "nama": "Squash, pie pumpkin, peeled, seeded, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 90.6,
+      "energi_kcal": null,
+      "protein_g": 0.854,
+      "lemak_g": 0.21,
+      "karbohidrat_g": 7.39,
+      "serat_g": 2.3,
+      "natrium_mg": 0.312
+    }
+  },
+  {
+    "kode": "USDA2727579",
+    "nama": "Squash, spaghetti, peeled, seeded, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 92.8,
+      "energi_kcal": null,
+      "protein_g": 0.792,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": 1.4,
+      "natrium_mg": 0.312
+    }
+  },
+  {
+    "kode": "USDA2727580",
+    "nama": "Rutabaga, peeled, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 88.6,
+      "energi_kcal": null,
+      "protein_g": 0.888,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": 2.9,
+      "natrium_mg": 4.59
+    }
+  },
+  {
+    "kode": "USDA2727581",
+    "nama": "Blackberries, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 86.4,
+      "energi_kcal": null,
+      "protein_g": 1.53,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": 5.3,
+      "natrium_mg": 1.55
+    }
+  },
+  {
+    "kode": "USDA2727582",
+    "nama": "Tomatillos, dehusked, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 92.6,
+      "energi_kcal": null,
+      "protein_g": 1.06,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": 1.7,
+      "natrium_mg": 0.311
+    }
+  },
+  {
+    "kode": "USDA2727583",
+    "nama": "Cabbage, napa, leaf, destemmed, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 94.2,
+      "energi_kcal": null,
+      "protein_g": 1.06,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": 1.2,
+      "natrium_mg": 12.6
+    }
+  },
+  {
+    "kode": "USDA2727584",
+    "nama": "Leeks, bulb and greens, root removed, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 87.4,
+      "energi_kcal": null,
+      "protein_g": 1.47,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": 3.0,
+      "natrium_mg": 17.7
+    }
+  },
+  {
+    "kode": "USDA2727585",
+    "nama": "Green onion, (scallion), bulb and greens, root removed, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 91.7,
+      "energi_kcal": null,
+      "protein_g": 0.669,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": 2.3,
+      "natrium_mg": 9.95
+    }
+  },
+  {
+    "kode": "USDA2727586",
+    "nama": "Shallots, bulb, peeled, root removed, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 83.5,
+      "energi_kcal": null,
+      "protein_g": 1.38,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": 2.2,
+      "natrium_mg": 3.64
+    }
+  },
+  {
+    "kode": "USDA2727587",
+    "nama": "Juice, prune, shelf-stable",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 81.3,
+      "energi_kcal": null,
+      "protein_g": 0.423,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": null,
+      "natrium_mg": 10.3
+    }
+  },
+  {
+    "kode": "USDA2727588",
+    "nama": "Juice, pomegranate, from concentrate, shelf-stable",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 84.1,
+      "energi_kcal": null,
+      "protein_g": 0.0,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": null,
+      "natrium_mg": 4.04
+    }
+  },
+  {
+    "kode": "USDA2727589",
+    "nama": "Juice, tart cherry, from concentrate, shelf-stable",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 85.7,
+      "energi_kcal": null,
+      "protein_g": 0.147,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": null,
+      "natrium_mg": 1.36
+    }
+  },
+  {
+    "kode": "USDA2747652",
+    "nama": "Anchovies, canned in olive oil, with salt, drained",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 44.4,
+      "energi_kcal": null,
+      "protein_g": 26.9,
+      "lemak_g": 9.85,
+      "karbohidrat_g": 2.41,
+      "serat_g": null,
+      "natrium_mg": 5400.0
+    }
+  },
+  {
+    "kode": "USDA2747653",
+    "nama": "Beet greens, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 91.9,
+      "energi_kcal": null,
+      "protein_g": 1.61,
+      "lemak_g": 0.144,
+      "karbohidrat_g": 4.66,
+      "serat_g": 2.58,
+      "natrium_mg": 280
+    }
+  },
+  {
+    "kode": "USDA2747654",
+    "nama": "Cod, Pacific or Alaskan, frozen, wild caught",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 83.5,
+      "energi_kcal": null,
+      "protein_g": 14.2,
+      "lemak_g": 0.216,
+      "karbohidrat_g": 0.524,
+      "serat_g": null,
+      "natrium_mg": 354
+    }
+  },
+  {
+    "kode": "USDA2747655",
+    "nama": "Fennel, bulb, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 92.6,
+      "energi_kcal": null,
+      "protein_g": 0.922,
+      "lemak_g": 0.14,
+      "karbohidrat_g": 5.49,
+      "serat_g": 2.05,
+      "natrium_mg": 49.0
+    }
+  },
+  {
+    "kode": "USDA2747656",
+    "nama": "Halibut, frozen, wild caught",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 79.0,
+      "energi_kcal": null,
+      "protein_g": 19.1,
+      "lemak_g": 0.592,
+      "karbohidrat_g": -0.06,
+      "serat_g": null,
+      "natrium_mg": 108
+    }
+  },
+  {
+    "kode": "USDA2747657",
+    "nama": "Lobster, tail only, frozen, wild caught",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 83.7,
+      "energi_kcal": null,
+      "protein_g": 13.0,
+      "lemak_g": 0.367,
+      "karbohidrat_g": 0.886,
+      "serat_g": null,
+      "natrium_mg": 509
+    }
+  },
+  {
+    "kode": "USDA2747658",
+    "nama": "Mahi mahi, frozen, wild caught",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 78.3,
+      "energi_kcal": null,
+      "protein_g": 19.8,
+      "lemak_g": 0.377,
+      "karbohidrat_g": 0.287,
+      "serat_g": null,
+      "natrium_mg": 51.9
+    }
+  },
+  {
+    "kode": "USDA2747659",
+    "nama": "Parsnips, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 77.8,
+      "energi_kcal": null,
+      "protein_g": 1.27,
+      "lemak_g": 0.538,
+      "karbohidrat_g": 19.3,
+      "serat_g": 5.35,
+      "natrium_mg": 0.491
+    }
+  },
+  {
+    "kode": "USDA2747660",
+    "nama": "Peppers, banana or Hungarian wax, seeded, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 93.8,
+      "energi_kcal": null,
+      "protein_g": 0.723,
+      "lemak_g": 0.131,
+      "karbohidrat_g": 4.97,
+      "serat_g": 1.79,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2747661",
+    "nama": "Peppers, jalapeno, seeded, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 93.8,
+      "energi_kcal": null,
+      "protein_g": 0.621,
+      "lemak_g": 0.149,
+      "karbohidrat_g": 5.08,
+      "serat_g": 1.72,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2747662",
+    "nama": "Peppers, poblano, seeded, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 92.8,
+      "energi_kcal": null,
+      "protein_g": 1.43,
+      "lemak_g": 0.191,
+      "karbohidrat_g": 5.14,
+      "serat_g": 2.07,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2747663",
+    "nama": "Peppers, serrano, seeded, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 92.4,
+      "energi_kcal": null,
+      "protein_g": 0.856,
+      "lemak_g": 0.141,
+      "karbohidrat_g": 6.14,
+      "serat_g": 2.52,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2747664",
+    "nama": "Radicchio, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 92.8,
+      "energi_kcal": null,
+      "protein_g": 1.31,
+      "lemak_g": 0.143,
+      "karbohidrat_g": 4.96,
+      "serat_g": 2.11,
+      "natrium_mg": 8.08
+    }
+  },
+  {
+    "kode": "USDA2747665",
+    "nama": "Radishes, red, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 94.7,
+      "energi_kcal": null,
+      "protein_g": 0.656,
+      "lemak_g": 0.083,
+      "karbohidrat_g": 4.06,
+      "serat_g": 1.31,
+      "natrium_mg": 51.2
+    }
+  },
+  {
+    "kode": "USDA2747666",
+    "nama": "Scallops, bay, Patagonian, frozen, wild caught",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 79.4,
+      "energi_kcal": null,
+      "protein_g": 16.4,
+      "lemak_g": 0.419,
+      "karbohidrat_g": 2.28,
+      "serat_g": null,
+      "natrium_mg": 252
+    }
+  },
+  {
+    "kode": "USDA2747667",
+    "nama": "Scallops, sea, frozen, wild caught",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 82.5,
+      "energi_kcal": null,
+      "protein_g": 13.5,
+      "lemak_g": 0.493,
+      "karbohidrat_g": 1.97,
+      "serat_g": null,
+      "natrium_mg": 313
+    }
+  },
+  {
+    "kode": "USDA2747668",
+    "nama": "Sea bass, Chilean, frozen, wild caught",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 67.5,
+      "energi_kcal": null,
+      "protein_g": 14.9,
+      "lemak_g": 16.6,
+      "karbohidrat_g": 0.139,
+      "serat_g": null,
+      "natrium_mg": 109
+    }
+  },
+  {
+    "kode": "USDA2747669",
+    "nama": "Snapper, frozen, wild caught",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 77.2,
+      "energi_kcal": null,
+      "protein_g": 20.7,
+      "lemak_g": 0.569,
+      "karbohidrat_g": 0.441,
+      "serat_g": null,
+      "natrium_mg": 93.1
+    }
+  },
+  {
+    "kode": "USDA2747670",
+    "nama": "Snow crab, legs only, frozen  ",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 80.3,
+      "energi_kcal": null,
+      "protein_g": 15.5,
+      "lemak_g": 0.294,
+      "karbohidrat_g": 1.11,
+      "serat_g": null,
+      "natrium_mg": 728
+    }
+  },
+  {
+    "kode": "USDA2747671",
+    "nama": "Squid (calamari), frozen, tubes only",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 88.9,
+      "energi_kcal": null,
+      "protein_g": 8.81,
+      "lemak_g": 0.551,
+      "karbohidrat_g": 0.932,
+      "serat_g": null,
+      "natrium_mg": 272
+    }
+  },
+  {
+    "kode": "USDA2747672",
+    "nama": "Swordfish, frozen, wild caught",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 70.9,
+      "energi_kcal": null,
+      "protein_g": 19.2,
+      "lemak_g": 8.12,
+      "karbohidrat_g": 0.45,
+      "serat_g": null,
+      "natrium_mg": 56.9
+    }
+  },
+  {
+    "kode": "USDA2747673",
+    "nama": "Tuna, ahi or yellowfin, frozen, wild caught",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 73.5,
+      "energi_kcal": null,
+      "protein_g": 24.7,
+      "lemak_g": 0.388,
+      "karbohidrat_g": -0.104,
+      "serat_g": null,
+      "natrium_mg": 94.4
+    }
+  },
+  {
+    "kode": "USDA2747674",
+    "nama": "Turnips, raw",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 91.0,
+      "energi_kcal": null,
+      "protein_g": 0.953,
+      "lemak_g": 0.119,
+      "karbohidrat_g": 7.27,
+      "serat_g": 1.92,
+      "natrium_mg": 12.8
+    }
+  },
+  {
+    "kode": "USDA2747675",
+    "nama": "Watermelon, seedless, flesh only, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 90.9,
+      "energi_kcal": null,
+      "protein_g": 0.871,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": null,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2747676",
+    "nama": "Watermelon, seedless, rind only, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 94.7,
+      "energi_kcal": null,
+      "protein_g": 0.531,
+      "lemak_g": 0.07,
+      "karbohidrat_g": 4.17,
+      "serat_g": 1.54,
+      "natrium_mg": 3.76
+    }
+  },
+  {
+    "kode": "USDA2758975",
+    "nama": "Rhubarb, stalk, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 94.6,
+      "energi_kcal": null,
+      "protein_g": null,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": 1.43,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2758976",
+    "nama": "Cranberries, dried, sweetened",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 14.9,
+      "energi_kcal": null,
+      "protein_g": null,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": 4.36,
+      "natrium_mg": 4.66
+    }
+  },
+  {
+    "kode": "USDA2758977",
+    "nama": "Grapefruit, raw",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 87.1,
+      "energi_kcal": null,
+      "protein_g": null,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": 0.652,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2758978",
+    "nama": "Plums, dried (prunes), uncooked",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 31.4,
+      "energi_kcal": null,
+      "protein_g": null,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": 6.25,
+      "natrium_mg": 0.85
+    }
+  },
+  {
+    "kode": "USDA2758979",
+    "nama": "Raisins, golden, seedless",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 15.0,
+      "energi_kcal": null,
+      "protein_g": null,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": 3.01,
+      "natrium_mg": 13.3
+    }
+  },
+  {
+    "kode": "USDA2758980",
+    "nama": "Raisins, dark, seedless",
+    "kategori": "Buah",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 15.6,
+      "energi_kcal": null,
+      "protein_g": null,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": 3.68,
+      "natrium_mg": 13.2
+    }
+  },
+  {
+    "kode": "USDA2758981",
+    "nama": "Edamame, frozen, prepared",
+    "kategori": "Sayuran",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 67.2,
+      "energi_kcal": null,
+      "protein_g": 11.9,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": 6.23,
+      "natrium_mg": 15.2
+    }
+  },
+  {
+    "kode": "USDA2758982",
+    "nama": "Baked beans, Original, canned, with pork",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 69.0,
+      "energi_kcal": null,
+      "protein_g": 4.62,
+      "lemak_g": 0.95,
+      "karbohidrat_g": 23.8,
+      "serat_g": 3.55,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA2758983",
+    "nama": "Beans, baked, canned, vegetarian",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 69.7,
+      "energi_kcal": null,
+      "protein_g": 4.81,
+      "lemak_g": 0.7,
+      "karbohidrat_g": 23.3,
+      "serat_g": 4.23,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA2758984",
+    "nama": "Refried beans, canned (pinto)",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 79.1,
+      "energi_kcal": null,
+      "protein_g": 4.12,
+      "lemak_g": 1.88,
+      "karbohidrat_g": 13.4,
+      "serat_g": 3.9,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA2758985",
+    "nama": "Refried beans, canned, vegetarian",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 77.5,
+      "energi_kcal": null,
+      "protein_g": 4.5,
+      "lemak_g": 1.34,
+      "karbohidrat_g": 15.0,
+      "serat_g": 4.2,
+      "natrium_mg": 281
+    }
+  },
+  {
+    "kode": "USDA2758986",
+    "nama": "Mayonnaise, Regular",
+    "kategori": "Lemak dan Minyak",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 16.6,
+      "energi_kcal": null,
+      "protein_g": 1.25,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA2758987",
+    "nama": "Salad dressing, Italian dressing, commercial, regular",
+    "kategori": "Lemak dan Minyak",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 58.9,
+      "energi_kcal": null,
+      "protein_g": 0.562,
+      "lemak_g": null,
+      "karbohidrat_g": null,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA2758988",
+    "nama": "Dressing, Ranch",
+    "kategori": "Lemak dan Minyak",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 44.0,
+      "energi_kcal": null,
+      "protein_g": 1.31,
+      "lemak_g": 44.7,
+      "karbohidrat_g": 7.56,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA2758989",
+    "nama": "Peanut butter, Creamy",
+    "kategori": "Kacang-kacangan dan Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 1.04,
+      "energi_kcal": null,
+      "protein_g": 25.6,
+      "lemak_g": 50.8,
+      "karbohidrat_g": 19.6,
+      "serat_g": 5.18,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA2758990",
+    "nama": "Sweetened condensed milk",
+    "kategori": "Susu dan Telur",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 24.8,
+      "energi_kcal": null,
+      "protein_g": 7.38,
+      "lemak_g": 8.33,
+      "karbohidrat_g": 57.9,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA2758991",
+    "nama": "Bologna, beef",
+    "kategori": "Daging Olahan",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 58.6,
+      "energi_kcal": null,
+      "protein_g": 12.1,
+      "lemak_g": 22.9,
+      "karbohidrat_g": 3.29,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA2758992",
+    "nama": "Bologna, classic",
+    "kategori": "Daging Olahan",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 58.9,
+      "energi_kcal": null,
+      "protein_g": 11.1,
+      "lemak_g": 21.6,
+      "karbohidrat_g": 4.69,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA2758993",
+    "nama": "Bread, white, commercial",
+    "kategori": "Produk Roti dan Kue",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 35.6,
+      "energi_kcal": null,
+      "protein_g": 9.5,
+      "lemak_g": 2.84,
+      "karbohidrat_g": 50.0,
+      "serat_g": 2.2,
+      "natrium_mg": 420
+    }
+  },
+  {
+    "kode": "USDA2758994",
+    "nama": "Bread, 100% whole wheat, commercial",
+    "kategori": "Produk Roti dan Kue",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 37.0,
+      "energi_kcal": null,
+      "protein_g": 12.9,
+      "lemak_g": 3.5,
+      "karbohidrat_g": 44.5,
+      "serat_g": 5.9,
+      "natrium_mg": 408
+    }
+  },
+  {
+    "kode": "USDA2758995",
+    "nama": "Bread, mulitgrain, commercial",
+    "kategori": "Produk Roti dan Kue",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 36.4,
+      "energi_kcal": null,
+      "protein_g": 12.9,
+      "lemak_g": 4.84,
+      "karbohidrat_g": 43.9,
+      "serat_g": 5.9,
+      "natrium_mg": 400
+    }
+  },
+  {
+    "kode": "USDA2758996",
+    "nama": "Tortilla, wheat flour, shelf stable",
+    "kategori": "Produk Roti dan Kue",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 31.8,
+      "energi_kcal": null,
+      "protein_g": 7.88,
+      "lemak_g": 7.39,
+      "karbohidrat_g": 50.3,
+      "serat_g": 2.6,
+      "natrium_mg": 730
+    }
+  },
+  {
+    "kode": "USDA2758997",
+    "nama": "Tortilla, corn, shelf stable",
+    "kategori": "Produk Roti dan Kue",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 48.4,
+      "energi_kcal": null,
+      "protein_g": 4.31,
+      "lemak_g": 2.31,
+      "karbohidrat_g": 44.2,
+      "serat_g": 4.5,
+      "natrium_mg": 34.9
+    }
+  },
+  {
+    "kode": "USDA2758998",
+    "nama": "Pasta, dry, enriched, spaghetti",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.63,
+      "energi_kcal": null,
+      "protein_g": 15.1,
+      "lemak_g": 1.85,
+      "karbohidrat_g": 73.5,
+      "serat_g": 4.2,
+      "natrium_mg": 2.41
+    }
+  },
+  {
+    "kode": "USDA2759000",
+    "nama": "Pasta, dry, whole grain, spaghetti ",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 7.56,
+      "energi_kcal": null,
+      "protein_g": 15.4,
+      "lemak_g": 2.66,
+      "karbohidrat_g": 72.6,
+      "serat_g": 8.8,
+      "natrium_mg": 4.58
+    }
+  },
+  {
+    "kode": "USDA2759001",
+    "nama": "Lunchmeat, turkey, oven roasted, sliced",
+    "kategori": "Daging Olahan",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 74.3,
+      "energi_kcal": null,
+      "protein_g": 15.4,
+      "lemak_g": 4.18,
+      "karbohidrat_g": 2.67,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA2759002",
+    "nama": "Lunchmeat, ham, black forest, sliced",
+    "kategori": "Daging Olahan",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 73.2,
+      "energi_kcal": null,
+      "protein_g": 17.1,
+      "lemak_g": 4.21,
+      "karbohidrat_g": 1.81,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA2759003",
+    "nama": "Lunchmeat, roast beef, sliced, prepackaged",
+    "kategori": "Daging Olahan",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 73.2,
+      "energi_kcal": null,
+      "protein_g": 18.5,
+      "lemak_g": 4.47,
+      "karbohidrat_g": 0.567,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA2759004",
+    "nama": "Lunchmeat, chicken breast, sliced",
+    "kategori": "Daging Olahan",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 74.5,
+      "energi_kcal": null,
+      "protein_g": 16.4,
+      "lemak_g": 2.46,
+      "karbohidrat_g": 3.1,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA2759005",
+    "nama": "Salami, hard, sliced",
+    "kategori": "Daging Olahan",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 35.4,
+      "energi_kcal": null,
+      "protein_g": 19.9,
+      "lemak_g": 35.8,
+      "karbohidrat_g": 3.88,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA2759006",
+    "nama": "Pepperoni, beef and pork, sliced",
+    "kategori": "Daging Olahan",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 30.3,
+      "energi_kcal": null,
+      "protein_g": 19.9,
+      "lemak_g": 42.4,
+      "karbohidrat_g": 2.16,
+      "serat_g": null,
+      "natrium_mg": null
+    }
+  },
+  {
+    "kode": "USDA2768188",
+    "nama": "Alaska Pollock, raw",
+    "kategori": "Ikan dan Makanan Laut",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 80.4,
+      "energi_kcal": null,
+      "protein_g": 17.3,
+      "lemak_g": 0.992,
+      "karbohidrat_g": 0.057,
+      "serat_g": 0.0,
+      "natrium_mg": 115
+    }
+  },
+  {
+    "kode": "USDA2779240",
+    "nama": "Sorghum, puffed, organic",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 7.42,
+      "energi_kcal": null,
+      "protein_g": 9.25,
+      "lemak_g": 3.01,
+      "karbohidrat_g": 79.2,
+      "serat_g": 6.68,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779241",
+    "nama": "Quinoa, puffed, organic",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.43,
+      "energi_kcal": null,
+      "protein_g": 8.25,
+      "lemak_g": 3.59,
+      "karbohidrat_g": 78.4,
+      "serat_g": 3.84,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779242",
+    "nama": "Mushroom corn, puffed, organic",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.55,
+      "energi_kcal": null,
+      "protein_g": 9.62,
+      "lemak_g": 4.84,
+      "karbohidrat_g": 75.6,
+      "serat_g": 5.88,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779243",
+    "nama": "Millet, puffed, organic",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.13,
+      "energi_kcal": null,
+      "protein_g": 12.3,
+      "lemak_g": 4.44,
+      "karbohidrat_g": 73.9,
+      "serat_g": 3.8,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779244",
+    "nama": "Khorasan, puffed, organic",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 6.87,
+      "energi_kcal": null,
+      "protein_g": 18.5,
+      "lemak_g": 2.18,
+      "karbohidrat_g": 71.0,
+      "serat_g": 7.72,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779245",
+    "nama": "Kamut, puffed, organic",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.0,
+      "energi_kcal": null,
+      "protein_g": 17.8,
+      "lemak_g": 2.18,
+      "karbohidrat_g": 70.3,
+      "serat_g": 8.2,
+      "natrium_mg": 3.3
+    }
+  },
+  {
+    "kode": "USDA2779246",
+    "nama": "Winter wheat, hard red, puffed, organic",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 7.25,
+      "energi_kcal": null,
+      "protein_g": 11.0,
+      "lemak_g": 2.21,
+      "karbohidrat_g": 77.9,
+      "serat_g": 10.6,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779247",
+    "nama": "Buckwheat, puffed, organic",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.38,
+      "energi_kcal": null,
+      "protein_g": 8.81,
+      "lemak_g": 1.93,
+      "karbohidrat_g": 79.9,
+      "serat_g": 3.46,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779248",
+    "nama": "Brown rice, puffed, organic",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 6.15,
+      "energi_kcal": null,
+      "protein_g": 7.5,
+      "lemak_g": 2.8,
+      "karbohidrat_g": 82.3,
+      "serat_g": 2.62,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779249",
+    "nama": "Amaranth, puffed, organic",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 7.56,
+      "energi_kcal": null,
+      "protein_g": 12.1,
+      "lemak_g": 4.43,
+      "karbohidrat_g": 74.1,
+      "serat_g": 6.7,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779250",
+    "nama": "Rice, white, puffed",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.12,
+      "energi_kcal": null,
+      "protein_g": 6.94,
+      "lemak_g": 0.97,
+      "karbohidrat_g": 83.6,
+      "serat_g": 1.11,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779251",
+    "nama": "Sorghum, puffed",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.11,
+      "energi_kcal": null,
+      "protein_g": 9.38,
+      "lemak_g": 2.9,
+      "karbohidrat_g": 78.4,
+      "serat_g": 6.22,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779252",
+    "nama": "Quinoa, puffed",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 6.78,
+      "energi_kcal": null,
+      "protein_g": 13.5,
+      "lemak_g": 6.79,
+      "karbohidrat_g": 70.8,
+      "serat_g": 4.67,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779253",
+    "nama": "Oats, puffed",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 6.36,
+      "energi_kcal": null,
+      "protein_g": 14.6,
+      "lemak_g": 6.85,
+      "karbohidrat_g": 70.6,
+      "serat_g": 8.79,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779254",
+    "nama": "Wheat, durum, puffed",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.21,
+      "energi_kcal": null,
+      "protein_g": 16.6,
+      "lemak_g": 2.72,
+      "karbohidrat_g": 70.9,
+      "serat_g": 7.5,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779255",
+    "nama": "Chickpeas, puffed",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 5.3,
+      "energi_kcal": null,
+      "protein_g": 23.4,
+      "lemak_g": 6.92,
+      "karbohidrat_g": 61.6,
+      "serat_g": 9.01,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779256",
+    "nama": "Brown rice, puffed",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 7.94,
+      "energi_kcal": null,
+      "protein_g": 7.81,
+      "lemak_g": 2.76,
+      "karbohidrat_g": 80.3,
+      "serat_g": 2.7,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779257",
+    "nama": "Millet, puffed",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 7.38,
+      "energi_kcal": null,
+      "protein_g": 10.6,
+      "lemak_g": 4.35,
+      "karbohidrat_g": 76.4,
+      "serat_g": 2.99,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779258",
+    "nama": "Sorghum, flour, pre-gelatinized, organic",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 9.0,
+      "energi_kcal": null,
+      "protein_g": 9.06,
+      "lemak_g": 3.04,
+      "karbohidrat_g": 77.6,
+      "serat_g": 6.33,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779259",
+    "nama": "Quinoa flour, pre-gelatinized, organic",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.67,
+      "energi_kcal": null,
+      "protein_g": 9.0,
+      "lemak_g": 4.06,
+      "karbohidrat_g": 76.8,
+      "serat_g": 4.1,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779260",
+    "nama": "Millet, flour, pre-gelatinized, organic",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.65,
+      "energi_kcal": null,
+      "protein_g": 11.1,
+      "lemak_g": 4.43,
+      "karbohidrat_g": 74.8,
+      "serat_g": 3.38,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779261",
+    "nama": "Brown rice, flour, coarse ground, pre-gelatinized, organic",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 6.61,
+      "energi_kcal": null,
+      "protein_g": 7.38,
+      "lemak_g": 3.02,
+      "karbohidrat_g": 81.6,
+      "serat_g": 2.58,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779262",
+    "nama": "Amaranth, flour, pre-gelatinized, organic",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.94,
+      "energi_kcal": null,
+      "protein_g": 11.8,
+      "lemak_g": 4.17,
+      "karbohidrat_g": 73.4,
+      "serat_g": 7.32,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779263",
+    "nama": "White rice, flour, pre-gelatinized",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 5.98,
+      "energi_kcal": null,
+      "protein_g": 8.75,
+      "lemak_g": 1.01,
+      "karbohidrat_g": 83.8,
+      "serat_g": 0.84,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779264",
+    "nama": "Sorghum, flour, pre-gelatinized",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 9.31,
+      "energi_kcal": null,
+      "protein_g": 9.69,
+      "lemak_g": 3.2,
+      "karbohidrat_g": 76.6,
+      "serat_g": 5.34,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779265",
+    "nama": "Millet, flour, pre-gelatinized",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 6.13,
+      "energi_kcal": null,
+      "protein_g": 12.9,
+      "lemak_g": 4.5,
+      "karbohidrat_g": 75.2,
+      "serat_g": 3.46,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779266",
+    "nama": "Corn, flour, pre-gelatinized",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.05,
+      "energi_kcal": null,
+      "protein_g": 6.62,
+      "lemak_g": 1.13,
+      "karbohidrat_g": 83.9,
+      "serat_g": 2.55,
+      "natrium_mg": 0.0
+    }
+  },
+  {
+    "kode": "USDA2779267",
+    "nama": "Chickpea flour, pre-gelatinized",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 8.34,
+      "energi_kcal": null,
+      "protein_g": 22.1,
+      "lemak_g": 7.05,
+      "karbohidrat_g": 59.8,
+      "serat_g": 8.73,
+      "natrium_mg": 2.87
+    }
+  },
+  {
+    "kode": "USDA2779268",
+    "nama": "Kernza flour, pre-gelatinized",
+    "kategori": "Serealia dan Produk Olahannya",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "USDA Foundation Foods",
+    "nutrisi": {
+      "air_g": 5.64,
+      "energi_kcal": null,
+      "protein_g": 19.6,
+      "lemak_g": 3.84,
+      "karbohidrat_g": 68.4,
+      "serat_g": 16.0,
+      "natrium_mg": 0.0
+    }
+  }
+]

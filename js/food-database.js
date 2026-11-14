@@ -23,24 +23,48 @@ export const foodAliases = {
 "buncis wortel tumis": "tumis buncis dan wortel"
 };
 
-// Memuat database Panganku
+// Memuat database Panganku + USDA
 export async function loadPangankuDatabase() {
-  const url = new URL(
+  const pangankuUrl = new URL(
     "../data/panganku/panganku-nutrisi.json",
     import.meta.url
   );
 
-  const response = await fetch(url);
+  const usdaUrl = new URL(
+    "../data/usda/usda_foundation_kaloriku.json",
+    import.meta.url
+  );
 
-  if (!response.ok) {
+  // Memuat kedua database secara bersamaan
+  const [pangankuResponse, usdaResponse] = await Promise.all([
+    fetch(pangankuUrl),
+    fetch(usdaUrl)
+  ]);
+
+  if (!pangankuResponse.ok) {
     throw new Error("Database Panganku gagal dimuat.");
   }
 
-  const records = await response.json();
+  if (!usdaResponse.ok) {
+    throw new Error("Database USDA gagal dimuat.");
+  }
 
-  if (!Array.isArray(records)) {
+  const pangankuRecords = await pangankuResponse.json();
+  const usdaRecords = await usdaResponse.json();
+
+  if (!Array.isArray(pangankuRecords)) {
     throw new Error("Format database Panganku tidak valid.");
   }
+
+  if (!Array.isArray(usdaRecords)) {
+    throw new Error("Format database USDA tidak valid.");
+  }
+
+  // Panganku ditempatkan lebih dulu agar menjadi prioritas
+  const records = [
+    ...pangankuRecords,
+    ...usdaRecords
+  ];
 
   const database = {};
 
@@ -49,11 +73,12 @@ export async function loadPangankuDatabase() {
 
     const name = normalizeFoodName(item.nama);
 
+    // Jika nama sudah ada, pertahankan data pertama.
+    // Dengan urutan di atas, Panganku memiliki prioritas.
     if (!name || database[name]) return;
 
     const n = item.nutrisi;
 
-    // Nilai kosong atau tidak valid tidak dianggap nol.
     const getValue = value => {
       if (
         value === null ||
@@ -77,7 +102,6 @@ export async function loadPangankuDatabase() {
       fiber: getValue(n.serat_g),
       sodium: getValue(n.natrium_mg),
 
-      // Nilai negatif dari sumber dianggap tidak tersedia.
       water: air !== null && air >= 0 ? air : null,
 
       code: item.kode,
@@ -89,7 +113,13 @@ export async function loadPangankuDatabase() {
   });
 
   console.log(
-    `Database Panganku berhasil dimuat: ${Object.keys(database).length} makanan`
+    `Database makanan berhasil dimuat: ${
+      Object.keys(database).length
+    } makanan`
+  );
+
+  console.log(
+    `Panganku: ${pangankuRecords.length} | USDA: ${usdaRecords.length}`
   );
 
   return database;
