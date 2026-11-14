@@ -259,8 +259,7 @@ export async function deleteProfileFromCloud() {
 
     await deleteDoc(profileRef);
 
-    console.log("Profil berhasil dihapus dari Firestore.");
-    return true;
+    
 
   } catch (error) {
     console.error("Gagal menghapus profil Firestore:", error);

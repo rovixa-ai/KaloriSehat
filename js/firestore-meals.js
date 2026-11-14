@@ -674,9 +674,7 @@ export async function loadMealsFromCloud() {
       Number(a.createdAt || 0)
   );
 
-  console.log(
-    `${meals.length} catatan berhasil dimuat dari Firestore.`
-  );
+  
 
   return meals;
 }

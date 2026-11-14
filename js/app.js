@@ -1,8 +1,7 @@
+
 import {
   openFoodEditModal
 } from "./food-edit-modal.js";
-
-
 
 import {
   foodAliases,
@@ -32,20 +31,55 @@ import {
 } from "./food-analysis.js";
 
 const $ = id => document.getElementById(id);
+
+// Sistem terjemahan
+const t = key => window.t?.(`foodScanner.${key}`) ?? key;
+
+function getLocale() {
+  return window.getLanguage?.() === "en" ? "en-US" : "id-ID";
+}
+
 // Memulai sinkronisasi riwayat makanan.
 startMealSync();
 
 let currentResult = null;
 let selectedSuggestedFood = null;
 let pangankuFoods = {};
-
-
-
 let previewObjectUrl = null;
+let latestDetectedFoods = null;
+
+// Status analisis agar dapat diterjemahkan ulang
+let analysisStatusType = "";
+let analysisStatusValue = null;
+
+function setAnalysisStatus(type = "", value = null) {
+  analysisStatusType = type;
+  analysisStatusValue = value;
+
+  const status = $("analysisStatus");
+  if (!status) return;
+
+  switch (type) {
+    case "analyzing":
+      status.textContent = t("analyzing");
+      break;
+
+    case "found":
+      status.textContent =
+        `${t("foundFoods")} ${value} ${t("foods")}`;
+      break;
+
+    case "error":
+      status.textContent = value || t("analysisError");
+      break;
+
+    default:
+      status.textContent = "";
+  }
+}
 
 // Mengembalikan scanner ke kondisi awal
 function resetFoodScanner() {
-  // Reset foto
   $("foodPhoto").value = "";
 
   if (previewObjectUrl) {
@@ -56,31 +90,25 @@ function resetFoodScanner() {
   $("preview").src = "";
   $("preview").hidden = true;
 
-  // Reset tombol dan status analisis
   $("analyzeButton").disabled = true;
-  $("analysisStatus").textContent = "";
+  setAnalysisStatus();
 
-  // Hapus hasil analisis sebelumnya
   $("analysisResults").hidden = true;
   $("detectedFoods").innerHTML = "";
 
-  // Reset input makanan manual
   $("foodName").value = "";
   $("foodWeight").value = 100;
 
-  // Reset hasil perhitungan
   $("result").hidden = true;
   $("resultDetails").textContent = "";
 
-  // Reset sugesti makanan
   $("foodSuggestions").hidden = true;
   $("suggestionList").innerHTML = "";
 
-  // Reset variabel sementara
   currentResult = null;
   selectedSuggestedFood = null;
+  latestDetectedFoods = null;
 }
-
 
 // Memuat database Panganku
 const pangankuDatabasePromise = loadPangankuDatabase()
@@ -159,7 +187,6 @@ function escapeHTML(value) {
 }
 
 // Memilih foto makanan
-
 $("foodPhoto").addEventListener("change", event => {
   const file = event.target.files[0];
 
@@ -167,15 +194,15 @@ $("foodPhoto").addEventListener("change", event => {
 
   if (!file.type.startsWith("image/")) {
     showAppModal({
-  type: "warning",
-  title: "File Belum Dipilih",
-  message: "Silakan pilih file gambar terlebih dahulu."
-});
+      type: "warning",
+      title: t("fileNotSelected"),
+      message: t("selectImageFirst")
+    });
+
     event.target.value = "";
     return;
   }
 
-  // Hapus URL foto sebelumnya
   if (previewObjectUrl) {
     URL.revokeObjectURL(previewObjectUrl);
   }
@@ -186,12 +213,14 @@ $("foodPhoto").addEventListener("change", event => {
   $("preview").hidden = false;
 
   $("analyzeButton").disabled = false;
-  $("analysisStatus").textContent = "";
+
+  setAnalysisStatus();
+
   $("analysisResults").hidden = true;
   $("detectedFoods").innerHTML = "";
+
+  latestDetectedFoods = null;
 });
-
-
 
 // Analisis foto menggunakan modul food-analysis.js
 $("analyzeButton").addEventListener("click", async () => {
@@ -199,17 +228,17 @@ $("analyzeButton").addEventListener("click", async () => {
 
   if (!file) {
     showAppModal({
-  type: "warning",
-  title: "File Belum Dipilih",
-  message: "Silakan pilih file Photo makanan terlebih dahulu."
-});
+      type: "warning",
+      title: t("fileNotSelected"),
+      message: t("selectFoodPhoto")
+    });
+
     return;
   }
 
   $("analyzeButton").disabled = true;
 
-  $("analysisStatus").textContent =
-    "AI sedang menganalisis foto makanan...";
+  setAnalysisStatus("analyzing");
 
   $("analysisResults").hidden = true;
 
@@ -218,16 +247,17 @@ $("analyzeButton").addEventListener("click", async () => {
 
     await renderDetectedFoods(foods);
 
-    $("analysisStatus").textContent =
-      `AI menemukan ${foods.length} makanan.`;
+    setAnalysisStatus("found", foods.length);
 
     $("analysisResults").hidden = false;
 
   } catch (error) {
     console.error(error);
 
-    $("analysisStatus").textContent =
-      error.message || "Terjadi kesalahan saat menghubungi AI.";
+    setAnalysisStatus(
+      "error",
+      error.message || t("analysisError")
+    );
 
   } finally {
     $("analyzeButton").disabled = false;
@@ -235,9 +265,10 @@ $("analyzeButton").addEventListener("click", async () => {
 });
 
 // Menampilkan makanan hasil identifikasi AI
-
 async function renderDetectedFoods(foodList) {
   await pangankuDatabasePromise;
+
+  latestDetectedFoods = foodList;
 
   const container = $("detectedFoods");
   container.innerHTML = "";
@@ -270,11 +301,11 @@ async function renderDetectedFoods(foodList) {
 
     const weightText = document.createElement("p");
     weightText.textContent =
-      `Perkiraan berat: ${weight} gram`;
+      `${t("estimatedWeight")} ${weight} ${t("gram")}`;
 
     const confidence = document.createElement("small");
     confidence.textContent =
-      `Keyakinan AI: ${food.confidence || "Tidak diketahui"}`;
+      `${t("aiConfidence")} ${food.confidence || t("unknown")}`;
 
     // Cari nutrisi di database Panganku
     const nutrition = findFood(
@@ -316,18 +347,17 @@ async function renderDetectedFoods(foodList) {
       total.fat += fat;
 
       nutritionInfo.textContent =
-        `${Math.round(kcal)} kkal | ` +
-        `Protein ${protein.toFixed(1)} g | ` +
-        `Karbohidrat ${carbs.toFixed(1)} g | ` +
-        `Lemak ${fat.toFixed(1)} g`;
+        `${Math.round(kcal)} ${t("calories")} | ` +
+        `${t("protein")} ${protein.toFixed(1)} g | ` +
+        `${t("carbohydrates")} ${carbs.toFixed(1)} g | ` +
+        `${t("fat")} ${fat.toFixed(1)} g`;
 
     } else {
-      nutritionInfo.textContent =
-        "Data nutrisi belum ditemukan di Panganku.";
+      nutritionInfo.textContent = t("nutritionNotFound");
 
       const statusDot = document.createElement("span");
       statusDot.className = "nutrition-status-dot";
-      statusDot.title = "Data nutrisi belum ditemukan";
+      statusDot.title = t("nutritionNotFoundTitle");
 
       nameRow.appendChild(statusDot);
     }
@@ -339,79 +369,75 @@ async function renderDetectedFoods(foodList) {
       nutritionInfo
     );
 
-    // Satu tombol Edit untuk setiap card
+    // Tombol Edit
     const editButton = document.createElement("button");
     editButton.type = "button";
-    editButton.textContent = "Edit";
+    editButton.textContent = t("edit");
     editButton.className = "small-select-button";
 
-    
-editButton.addEventListener("click", () => {
-  openFoodEditModal({
-    mode: "edit",
-    food,
-    pangankuFoods,
-    findFoodSuggestions,
+    editButton.addEventListener("click", () => {
+      openFoodEditModal({
+        mode: "edit",
+        food,
+        pangankuFoods,
+        findFoodSuggestions,
 
-    onSave: ({
-      originalName: modalOriginalName,
-      selectedFoodName,
-      weight
-    }) => {
-      // Simpan alias nama AI ke nama Panganku
-      saveFoodAlias(
-        modalOriginalName || originalName,
-        selectedFoodName
-      );
+        onSave: ({
+          originalName: modalOriginalName,
+          selectedFoodName,
+          weight
+        }) => {
+          // Simpan alias nama AI ke nama Panganku
+          saveFoodAlias(
+            modalOriginalName || originalName,
+            selectedFoodName
+          );
 
-      // Simpan juga nama sebelumnya jika berbeda
-      if (food.name !== selectedFoodName) {
-        saveFoodAlias(food.name, selectedFoodName);
-      }
+          // Simpan juga nama sebelumnya jika berbeda
+          if (food.name !== selectedFoodName) {
+            saveFoodAlias(food.name, selectedFoodName);
+          }
 
-      // Perbarui data makanan
-      food.originalName = modalOriginalName || originalName;
-      food.name = selectedFoodName;
-      food.estimatedWeight = Number(weight);
+          // Perbarui data makanan
+          food.originalName = modalOriginalName || originalName;
+          food.name = selectedFoodName;
+          food.estimatedWeight = Number(weight);
 
-      // Hapus hasil perhitungan manual sebelumnya
-      $("result").hidden = true;
-      currentResult = null;
-      selectedSuggestedFood = null;
+          // Hapus hasil perhitungan manual sebelumnya
+          $("result").hidden = true;
+          currentResult = null;
+          selectedSuggestedFood = null;
 
-      // Hitung ulang seluruh nutrisi
-      renderDetectedFoods(foodList);
-    },
+          // Hitung ulang seluruh nutrisi
+          renderDetectedFoods(foodList);
+        },
 
-    onDelete: (deletedFood) => {
-      // Hapus makanan dari hasil analisis
-      const index = foodList.indexOf(deletedFood);
+        onDelete: deletedFood => {
+          // Hapus makanan dari hasil analisis
+          const index = foodList.indexOf(deletedFood);
 
-      if (index !== -1) {
-        foodList.splice(index, 1);
-      }
+          if (index !== -1) {
+            foodList.splice(index, 1);
+          }
 
-      // Reset hasil perhitungan manual
-      $("result").hidden = true;
-      currentResult = null;
-      selectedSuggestedFood = null;
+          $("result").hidden = true;
+          currentResult = null;
+          selectedSuggestedFood = null;
 
-      // Hitung ulang seluruh nutrisi
-      renderDetectedFoods(foodList);
-    }
-  });
-});
-
+          // Hitung ulang seluruh nutrisi
+          renderDetectedFoods(foodList);
+        }
+      });
+    });
 
     item.append(info, editButton);
     container.appendChild(item);
   });
 
-
   // Tombol Tambah Makanan
   const addFoodButton = document.createElement("button");
   addFoodButton.type = "button";
-  addFoodButton.textContent = "+ Tambah Makanan";
+  addFoodButton.textContent = `+ ${t("addFood")}`;
   addFoodButton.className = "add-food-button";
 
   addFoodButton.addEventListener("click", () => {
@@ -429,10 +455,9 @@ editButton.addEventListener("click", () => {
           name: selectedFoodName,
           originalName: selectedFoodName,
           estimatedWeight: Number(weight),
-          confidence: "Dipilih manual"
+          confidence: t("manuallySelected")
         });
 
-        // Reset hasil perhitungan manual
         $("result").hidden = true;
         currentResult = null;
         selectedSuggestedFood = null;
@@ -445,7 +470,6 @@ editButton.addEventListener("click", () => {
 
   container.appendChild(addFoodButton);
 
-
   // Total nutrisi
   const totalBox = document.createElement("div");
   totalBox.className = "detected-food-item";
@@ -453,22 +477,22 @@ editButton.addEventListener("click", () => {
   const totalInfo = document.createElement("div");
 
   const totalTitle = document.createElement("strong");
-  totalTitle.textContent = "Total Nutrisi Makanan";
+  totalTitle.textContent = t("totalNutrition");
 
   const totalText = document.createElement("p");
   totalText.textContent =
-    `${Math.round(total.kcal)} kkal | ` +
-    `Protein ${total.protein.toFixed(1)} g | ` +
-    `Karbohidrat ${total.carbs.toFixed(1)} g | ` +
-    `Lemak ${total.fat.toFixed(1)} g`;
+    `${Math.round(total.kcal)} ${t("calories")} | ` +
+    `${t("protein")} ${total.protein.toFixed(1)} g | ` +
+    `${t("carbohydrates")} ${total.carbs.toFixed(1)} g | ` +
+    `${t("fat")} ${total.fat.toFixed(1)} g`;
 
   totalInfo.append(totalTitle, totalText);
   totalBox.appendChild(totalInfo);
 
-  // Simpan seluruh makanan sebagai satu kelompok
+  // Tombol simpan seluruh makanan
   const saveGroupButton = document.createElement("button");
   saveGroupButton.type = "button";
-  saveGroupButton.textContent = "Simpan Makanan";
+  saveGroupButton.textContent = t("saveFood");
   saveGroupButton.className = "save-group-button";
 
   saveGroupButton.addEventListener("click", () => {
@@ -516,10 +540,11 @@ editButton.addEventListener("click", () => {
 
     if (!foodsToSave.length) {
       showAppModal({
-  type: "warning",
-  title: "Belum ada data",
-  message: "Belum ada makanan dengan data nutrisi di simpan."
-});
+        type: "warning",
+        title: t("noData"),
+        message: t("noFoodNutrition")
+      });
+
       return;
     }
 
@@ -540,8 +565,8 @@ editButton.addEventListener("click", () => {
     const meals = getMeals();
 
     meals.push({
-  id: createMealId(),
-  name: "Menu dari foto",
+      id: createMealId(),
+      name: t("photoMenu"),
       foods: foodsToSave,
       foodCount: foodsToSave.length,
       ...groupTotal,
@@ -551,52 +576,54 @@ editButton.addEventListener("click", () => {
 
     saveMeals(meals);
 
-// Masukkan catatan terbaru ke antrean Firestore.
-void enqueueMealsForSync([
-  meals[meals.length - 1]
-]).catch(error => {
-  console.error("Gagal memasukkan scan foto ke antrean:", error);
-});
+    // Masukkan catatan terbaru ke antrean Firestore.
+    void enqueueMealsForSync([
+      meals[meals.length - 1]
+    ]).catch(error => {
+      console.error(
+        "Gagal memasukkan scan foto ke antrean:",
+        error
+      );
+    });
 
-updateDashboard();
+    updateDashboard();
     resetFoodScanner();
 
     showAppModal({
-  type: "success",
-  title: "Berhasil",
-  message: "Makanan Berhasil di simpan."
-});
+      type: "success",
+      title: t("success"),
+      message: t("foodSaved")
+    });
   });
 
   // Tombol Batal
-const cancelGroupButton = document.createElement("button");
-cancelGroupButton.type = "button";
-cancelGroupButton.textContent = "Batal";
-cancelGroupButton.className = "cancel-button";
+  const cancelGroupButton = document.createElement("button");
+  cancelGroupButton.type = "button";
+  cancelGroupButton.textContent = t("cancel");
+  cancelGroupButton.className = "cancel-button";
 
-cancelGroupButton.addEventListener("click", () => {
-  const confirmCancel = confirm(
-    "Batalkan hasil identifikasi makanan?"
+  cancelGroupButton.addEventListener("click", () => {
+    const confirmCancel = confirm(
+      t("cancelIdentification")
+    );
+
+    if (!confirmCancel) return;
+
+    resetFoodScanner();
+  });
+
+  // Susun tombol dalam satu baris
+  const groupActions = document.createElement("div");
+  groupActions.className = "group-actions";
+
+  groupActions.append(
+    cancelGroupButton,
+    saveGroupButton
   );
 
-  if (!confirmCancel) return;
-
-  resetFoodScanner();
-});
-
-// Susun tombol dalam satu baris
-const groupActions = document.createElement("div");
-groupActions.className = "group-actions";
-
-groupActions.append(
-  cancelGroupButton,
-  saveGroupButton
-);
-
-totalBox.appendChild(groupActions);
-container.appendChild(totalBox);
+  totalBox.appendChild(groupActions);
+  container.appendChild(totalBox);
 }
-
 
 // Menampilkan sugesti makanan untuk input manual
 function showFoodSuggestions(query) {
@@ -613,10 +640,10 @@ function showFoodSuggestions(query) {
 
     container.innerHTML = `
       <p class="no-suggestion">
-        Makanan "${escapeHTML(query)}" belum ditemukan dalam database Panganku.
+        ${escapeHTML(query)} ${t("noSuggestion")}
       </p>
       <p class="suggestion-hint">
-        Coba gunakan nama makanan lain atau nama yang lebih spesifik.
+        ${t("tryOtherFood")}
       </p>
     `;
 
@@ -628,8 +655,9 @@ function showFoodSuggestions(query) {
 
     button.type = "button";
     button.className = "suggestion-item";
+
     button.textContent =
-      `${item.name} — ${item.food.kcal} kkal / 100 g`;
+      `${item.name} — ${item.food.kcal ?? "—"} ${t("calories")} / ${t("per100g")}`;
 
     button.addEventListener("click", () => {
       $("foodName").value = item.name;
@@ -656,10 +684,11 @@ $("calculateButton").addEventListener("click", async () => {
 
   if (!name || !weight || weight <= 0) {
     showAppModal({
-  type: "warning",
-  title: "Isi Data Makanan",
-  message: "Isi Makanan dan berat yang benar."
-});
+      type: "warning",
+      title: t("enterFoodData"),
+      message: t("enterValidFood")
+    });
+
     return;
   }
 
@@ -675,10 +704,11 @@ $("calculateButton").addEventListener("click", async () => {
 
   if (food.kcal === null) {
     showAppModal({
-  type: "warning",
-  title: "Data Kosong",
-  message: "Data tidak tersedia."
-});
+      type: "warning",
+      title: t("emptyData"),
+      message: t("dataUnavailable")
+    });
+
     return;
   }
 
@@ -701,48 +731,49 @@ $("calculateButton").addEventListener("click", async () => {
   };
 
   $("resultDetails").textContent =
-    `${Math.round(currentResult.kcal)} kkal | ` +
-    `Protein ${currentResult.protein.toFixed(1)} g | ` +
-    `Karbohidrat ${currentResult.carbs.toFixed(1)} g | ` +
-    `Lemak ${currentResult.fat.toFixed(1)} g`;
+    `${Math.round(currentResult.kcal)} ${t("calories")} | ` +
+    `${t("protein")} ${currentResult.protein.toFixed(1)} g | ` +
+    `${t("carbohydrates")} ${currentResult.carbs.toFixed(1)} g | ` +
+    `${t("fat")} ${currentResult.fat.toFixed(1)} g`;
 
   $("result").hidden = false;
 });
 
 // Menyimpan satu makanan manual
-
 $("saveMeal").addEventListener("click", () => {
   if (!currentResult) return;
 
   const meals = getMeals();
 
- meals.push({
-  id: createMealId(),
-  ...currentResult,
+  meals.push({
+    id: createMealId(),
+    ...currentResult,
     date: new Date().toLocaleDateString("sv-SE"),
     createdAt: Date.now()
   });
 
   saveMeals(meals);
 
-// Masukkan catatan terbaru ke antrean Firestore.
-void enqueueMealsForSync([
-  meals[meals.length - 1]
-]).catch(error => {
-  console.error("Gagal memasukkan scan manual ke antrean:", error);
-});
+  // Masukkan catatan terbaru ke antrean Firestore.
+  void enqueueMealsForSync([
+    meals[meals.length - 1]
+  ]).catch(error => {
+    console.error(
+      "Gagal memasukkan scan manual ke antrean:",
+      error
+    );
+  });
 
-updateDashboard();
+  updateDashboard();
 
   resetFoodScanner();
 
   showAppModal({
-  type: "success",
-  title: "Berhasil",
-  message: "Makanan Berhasil di Simpan."
+    type: "success",
+    title: t("success"),
+    message: t("foodSaved")
+  });
 });
-});
-
 
 // Debug pencarian Panganku
 window.cariPanganku = function (kata) {
@@ -756,11 +787,12 @@ window.cariPanganku = function (kata) {
     }));
 };
 
+// Reset seluruh isian
 const resetMealButton = $("resetMeal");
 
 resetMealButton?.addEventListener("click", () => {
   const confirmReset = confirm(
-    "Reset seluruh isian dan hasil analisis makanan?"
+    t("resetAll")
   );
 
   if (!confirmReset) return;
@@ -768,6 +800,7 @@ resetMealButton?.addEventListener("click", () => {
   resetFoodScanner();
 });
 
+// Membatalkan input makanan manual
 const cancelMealButton = $("cancelMeal");
 
 cancelMealButton?.addEventListener("click", () => {
@@ -783,7 +816,6 @@ cancelMealButton?.addEventListener("click", () => {
   $("foodSuggestions").hidden = true;
   $("suggestionList").innerHTML = "";
 });
-
 
 /*
  * STICKY HEADER ANIMATION
@@ -820,6 +852,7 @@ if (document.readyState === "loading") {
 // Memperbarui sapaan berdasarkan profil tersimpan.
 function updateWelcomeGreeting() {
   const greeting = document.getElementById("welcomeGreeting");
+
   if (!greeting) return;
 
   let profile = {};
@@ -835,13 +868,18 @@ function updateWelcomeGreeting() {
   const name = profile.name?.trim();
 
   greeting.textContent = name
-    ? `Halo, ${name}! 👋`
-    : "Halo, selamat datang! 👋";
+    ? (window.getLanguage?.() === "en"
+        ? `Hello, ${name}! 👋`
+        : `Halo, ${name}! 👋`)
+    : t("greeting");
 }
 
 updateWelcomeGreeting();
 
-window.addEventListener("profileUpdated", updateWelcomeGreeting);
+window.addEventListener(
+  "profileUpdated",
+  updateWelcomeGreeting
+);
 
 // Menampilkan foto profil pada header Dashboard.
 function updateDashboardAvatar() {
@@ -869,6 +907,7 @@ function updateDashboardAvatar() {
     photo.removeAttribute("src");
     photo.hidden = true;
     initial.hidden = false;
+
     initial.textContent =
       profile.name?.trim().charAt(0).toUpperCase() || "K";
   }
@@ -876,4 +915,36 @@ function updateDashboardAvatar() {
 
 updateDashboardAvatar();
 
-window.addEventListener("profileUpdated", updateDashboardAvatar);
+window.addEventListener(
+  "profileUpdated",
+  updateDashboardAvatar
+);
+
+// Memperbarui tampilan dinamis ketika bahasa diganti.
+window.addEventListener("languageChanged", async () => {
+  updateWelcomeGreeting();
+  updateDashboardAvatar();
+
+  // Perbarui status analisis
+  setAnalysisStatus(
+    analysisStatusType,
+    analysisStatusValue
+  );
+
+  // Render ulang hasil identifikasi agar teks ikut berubah bahasa
+  if (
+    latestDetectedFoods &&
+    !$("analysisResults").hidden
+  ) {
+    await renderDetectedFoods(latestDetectedFoods);
+  }
+
+  // Perbarui hasil perhitungan makanan manual
+  if (currentResult && !$("result").hidden) {
+    $("resultDetails").textContent =
+      `${Math.round(currentResult.kcal)} ${t("calories")} | ` +
+      `${t("protein")} ${currentResult.protein.toFixed(1)} g | ` +
+      `${t("carbohydrates")} ${currentResult.carbs.toFixed(1)} g | ` +
+      `${t("fat")} ${currentResult.fat.toFixed(1)} g`;
+  }
+});
