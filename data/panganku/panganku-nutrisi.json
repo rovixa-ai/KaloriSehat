@@ -89894,5 +89894,22 @@
       "serat_g": 0,
       "natrium_mg": 54
     }
+  },
+  {
+    "kode": "CC0152",
+    "nama": "Coca cola Zero Sugar",
+    "kategori": "Minuman",
+    "tipe": "Olahan",
+    "basis": "100 g",
+    "sumber": "Panganku",
+    "nutrisi": {
+      "air_g": 100,
+      "energi_kcal": 0,
+      "protein_g": 0,
+      "lemak_g": 0,
+      "karbohidrat_g": 0,
+      "serat_g": 0,
+      "natrium_mg": 20
+    }
   }
 ]
