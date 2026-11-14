@@ -380,7 +380,7 @@ photoInput?.addEventListener("change", async (event) => {
 // Tampilkan foto yang sudah tersimpan.
 renderProfilePhoto();
 
-  function updateGoalSimulation() {
+  function updateGoalSimulation(saveChanges = true) {
     const message = profilePage.querySelector("#goalSimulationMessage");
     const results = profilePage.querySelector(".goal-simulation-results");
 
@@ -402,8 +402,7 @@ renderProfilePhoto();
       age <= 0 || weight <= 0 || height <= 0 ||
       goalWeight <= 0 || duration <= 0
     ) {
-      message.textContent =
-        "Lengkapi data profil, target berat badan, dan target waktu untuk melihat simulasi.";
+      message.textContent = window.t("profile.simulation.invalidData");
 
       results.hidden = true;
       return;
@@ -421,7 +420,7 @@ renderProfilePhoto();
     const activityFactor = activityFactors[activity];
 
     if (!activityFactor) {
-      message.textContent = "Pilihan aktivitas tidak valid.";
+     message.textContent = window.t("profile.simulation.invalidActivity");
       results.hidden = true;
       return;
     }
@@ -448,65 +447,71 @@ renderProfilePhoto();
       Math.abs(weightDifference) * 7700 / durationDays;
 
     let calorieTarget = tdee;
-    let adjustmentLabel = "Pemeliharaan";
-    let weeklyLabel = "Tidak ada perubahan";
-    let status = "Pemeliharaan";
+    let adjustmentLabel = window.t("profile.simulation.maintenance");
+    let weeklyLabel = window.t("profile.simulation.noChange");
+    let status = window.t("profile.simulation.maintenance");
     let warning = "";
 
     if (weightDifference < 0) {
       calorieTarget = tdee - dailyAdjustment;
-      adjustmentLabel = `Defisit ${Math.round(dailyAdjustment)} kkal/hari`;
-      weeklyLabel = `Turun ${Math.abs(weeklyChange).toFixed(2)} kg`;
+      adjustmentLabel = `${window.t("profile.simulation.deficit")} ${Math.round(dailyAdjustment)} ${window.t("profile.simulation.kcalPerDay")}`;
+
+weeklyLabel = `${window.t("profile.simulation.decrease")} ${Math.abs(weeklyChange).toFixed(2)} kg`;
 
       const weeklyRate = Math.abs(weeklyChange) / weight * 100;
 
       if (weeklyRate <= 0.75) {
-        status = "Realistis";
+        status = window.t("profile.simulation.realistic");
       } else if (weeklyRate <= 1) {
-        status = "Agresif";
-        warning = "Target tergolong agresif. Pertimbangkan pemantauan dan evaluasi berkala.";
+        status = window.t("profile.simulation.aggressive");
+        warning = window.t("profile.simulation.warningAggressiveLoss");
       } else {
-        status = "Tidak disarankan";
-        warning = "Target penurunan terlalu cepat. Sebaiknya evaluasi kembali durasi target bersama tenaga kesehatan.";
+        status = window.t("profile.simulation.notRecommended");
+        warning = window.t("profile.simulation.warningFastLoss");
       }
 
     } else if (weightDifference > 0) {
       calorieTarget = tdee + dailyAdjustment;
-      adjustmentLabel = `Surplus ${Math.round(dailyAdjustment)} kkal/hari`;
-      weeklyLabel = `Naik ${Math.abs(weeklyChange).toFixed(2)} kg`;
+      adjustmentLabel = `${window.t("profile.simulation.surplus")} ${Math.round(dailyAdjustment)} ${window.t("profile.simulation.kcalPerDay")}`;
+
+      weeklyLabel = `${window.t("profile.simulation.increase")} ${Math.abs(weeklyChange).toFixed(2)} kg`;
 
       const weeklyRate = Math.abs(weeklyChange) / weight * 100;
 
       if (weeklyRate <= 0.25) {
-        status = "Realistis";
+        status = window.t("profile.simulation.realistic");
       } else if (weeklyRate <= 0.5) {
-        status = "Agresif";
-        warning = "Target kenaikan tergolong agresif. Pantau perubahan berat dan kondisi tubuh secara berkala.";
+        status = window.t("profile.simulation.aggressive");
+        warning = window.t("profile.simulation.warningAggressiveGain");
       } else {
-        status = "Tidak disarankan";
-        warning = "Target kenaikan terlalu cepat. Sebaiknya evaluasi kembali durasi target.";
+        status = window.t("profile.simulation.notRecommended");
+        warning = window.t("profile.simulation.warningFastGain");
       }
     }
 
     if (calorieTarget <= 0) {
-      warning += " Hasil target kalori tidak layak dijadikan panduan konsumsi. Evaluasi kembali target dan durasinya.";
+      warning += " " + window.t("profile.simulation.warningInvalidCalories");
     } else if (calorieTarget < bmr) {
-      warning += " Estimasi target kalori berada di bawah BMR. Jangan langsung menerapkannya tanpa evaluasi dengan tenaga kesehatan.";
+      warning += " " + window.t("profile.simulation.warningBelowBmr");
     }
 
-    // Simpan hasil target kalori untuk digunakan Dashboard.
-const savedProfile = loadProfile();
+    // Simpan hasil hanya jika ada perubahan data.
+if (saveChanges) {
+  const savedProfile = loadProfile();
 
-savedProfile.dailyCalorieTarget =
-  calorieTarget > 0 ? Math.round(calorieTarget) : 0;
+  savedProfile.dailyCalorieTarget =
+    calorieTarget > 0 ? Math.round(calorieTarget) : 0;
 
-saveProfile(savedProfile);
+  saveProfile(savedProfile);
 
-window.dispatchEvent(new Event("profileTargetUpdated"));
+  window.dispatchEvent(new Event("profileTargetUpdated"));
+}
 
     // Format angka dengan format Indonesia.
-    const formatNumber = (number) =>
-      Math.round(number).toLocaleString("id-ID");
+    const locale = window.getLanguage() === "en" ? "en-US" : "id-ID";
+
+const formatNumber = (number) =>
+  Math.round(number).toLocaleString(locale);
 
     // Menampilkan hasil ke kartu simulasi.
     profilePage.querySelector("#simCurrentWeight").textContent =
@@ -519,13 +524,13 @@ window.dispatchEvent(new Event("profileTargetUpdated"));
       `${weightDifference > 0 ? "+" : ""}${weightDifference.toFixed(1)} kg`;
 
     profilePage.querySelector("#simDuration").textContent =
-      `${duration} bulan`;
+      `${duration} ${window.t("profile.simulation.month")}`
 
     profilePage.querySelector("#simBMR").textContent =
-      `${formatNumber(bmr)} kkal/hari`;
+      `${formatNumber(bmr)} ${window.t("profile.simulation.kcalPerDay")}`;
 
     profilePage.querySelector("#simTDEE").textContent =
-      `${formatNumber(tdee)} kkal/hari`;
+      `${formatNumber(tdee)} ${window.t("profile.simulation.kcalPerDay")}`;
 
     profilePage.querySelector("#simWeeklyChange").textContent =
       weeklyLabel;
@@ -534,7 +539,7 @@ window.dispatchEvent(new Event("profileTargetUpdated"));
       adjustmentLabel;
 
     profilePage.querySelector("#simCalorieTarget").textContent =
-      `${formatNumber(calorieTarget)} kkal/hari`;
+      `${formatNumber(calorieTarget)} ${window.t("profile.simulation.kcalPerDay")}`;
 
     profilePage.querySelector("#simGoalStatus").textContent =
       status;
@@ -542,11 +547,11 @@ window.dispatchEvent(new Event("profileTargetUpdated"));
     profilePage.querySelector("#simGoalWarning").textContent =
       warning;
 
-    message.textContent = "Simulasi berdasarkan data profil Anda.";
+    message.textContent = window.t("profile.simulation.simulationMessage");
     results.hidden = false;
 
     // Menghitung target nutrisi harian otomatis.
-function updateDailyNutritionTargets() {
+function updateDailyNutritionTargets(saveChanges = true) {
   const calorieInput = profilePage.querySelector("#dailyCalorieTarget");
   const proteinInput = profilePage.querySelector("#dailyProteinTarget");
   const carbInput = profilePage.querySelector("#dailyCarbTarget");
@@ -577,7 +582,8 @@ function updateDailyNutritionTargets() {
 
   const carbs = carbCalories / 4;
 
-  // Simpan target nutrisi ke profil.
+  // Simpan target hanya jika ada perubahan data.
+if (saveChanges) {
   const savedProfile = loadProfile();
 
   savedProfile.dailyCalorieTarget = Math.round(calorieTarget);
@@ -588,20 +594,40 @@ function updateDailyNutritionTargets() {
   saveProfile(savedProfile);
 
   window.dispatchEvent(new Event("profileTargetUpdated"));
-
-  // Tampilkan hasil sebagai teks, bukan input.
-  calorieInput.textContent = Math.round(calorieTarget).toLocaleString("id-ID");
-  proteinInput.textContent = Math.round(protein).toLocaleString("id-ID");
-  fatInput.textContent = Math.round(fat).toLocaleString("id-ID");
-  carbInput.textContent = Math.max(0, Math.round(carbs)).toLocaleString("id-ID");
 }
 
-updateDailyNutritionTargets();
+  
+  // Tampilkan hasil sebagai teks, bukan input.
+  const locale = window.getLanguage() === "en"
+  ? "en-US"
+  : "id-ID";
+
+calorieInput.textContent =
+  Math.round(calorieTarget).toLocaleString(locale);
+
+proteinInput.textContent =
+  Math.round(protein).toLocaleString(locale);
+
+fatInput.textContent =
+  Math.round(fat).toLocaleString(locale);
+
+carbInput.textContent =
+  Math.max(0, Math.round(carbs)).toLocaleString(locale);
+}
+
+updateDailyNutritionTargets(saveChanges);
   }
+
+// Listener bahasa cukup dipasang satu kali.
+window.addEventListener("languageChanged", () => {
+  updateGoalSimulation(false);
+});
 
   const saveButton = profilePage.querySelector(
     ".profile-save-button"
   );
+
+  
 
   // Fungsi Reset Semua Data KaloriKu
 // =========================================
@@ -861,3 +887,5 @@ if (document.readyState === "loading") {
 } else {
   initializeProfilePage();
 }
+
+

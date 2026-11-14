@@ -50,6 +50,18 @@ function applyTranslations(root = document) {
   root.querySelectorAll("[data-i18n-title]").forEach(element => {
     element.title = t(element.dataset.i18nTitle);
   });
+
+  root.querySelectorAll("[data-i18n-aria-label]").forEach(element => {
+    element.setAttribute(
+      "aria-label",
+      t(element.dataset.i18nAriaLabel)
+    );
+  });
+
+  root.querySelectorAll("[data-i18n-alt]").forEach(element => {
+    element.alt = t(element.dataset.i18nAlt);
+  });
+
 }
 
 function initializeLanguage() {
