@@ -1,6 +1,7 @@
 
 /* =====================================================
    KALORISEHATKU - FLOATING GLASS NAVIGATION
+   THEME: DARK GREEN + LIME
    ===================================================== */
 
 /* 1. FLOATING NAVIGATION BAR */
@@ -23,13 +24,13 @@
   padding: 8px;
   isolation: isolate;
 
-  background: rgba(255, 255, 255, 0.76);
-  border: 1px solid rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(225, 232, 228, 0.9);
   border-radius: 24px;
 
   box-shadow:
-    0 12px 35px rgba(20, 50, 35, 0.12),
-    0 3px 10px rgba(20, 50, 35, 0.05);
+    0 12px 35px rgba(20, 40, 30, 0.10),
+    0 3px 10px rgba(20, 40, 30, 0.04);
 
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
@@ -53,8 +54,8 @@
 
   border-radius: 18px;
 
-  background: rgba(22, 160, 105, 0.12);
-  border: 1px solid rgba(22, 160, 105, 0.10);
+  background: rgba(168, 240, 90, 0.20);
+  border: 1px solid rgba(168, 240, 90, 0.35);
 
   transform: translateX(calc(var(--nav-index) * 100%));
 
@@ -102,7 +103,7 @@
   border-radius: 16px;
   background: transparent;
 
-  color: var(--text-muted);
+  color: var(--text-muted, #929e96);
   font-family: inherit;
 
   cursor: pointer;
@@ -130,13 +131,11 @@
     filter 250ms ease;
 }
 
-
 .nav-icon svg {
   width: 24px;
   height: 24px;
   display: block;
 }
-
 
 /* 5. LABEL */
 .nav-label {
@@ -160,24 +159,24 @@
 
 /* 6. ACTIVE STATE */
 .nav-item.active {
-  color: var(--brand);
+  color: #405b2d;
   background: transparent;
 }
 
 .nav-item.active .nav-icon {
   transform: translateY(-2px) scale(1.08);
-  filter: drop-shadow(0 3px 5px rgba(22, 134, 91, .18));
+  filter: drop-shadow(0 3px 5px rgba(100, 145, 55, 0.20));
 }
 
 .nav-item.active .nav-label {
-  color: var(--brand);
+  color: #405b2d;
   font-weight: 800;
 }
 
 /* 7. HOVER */
 @media (hover: hover) {
   .nav-item:not(.active):hover {
-    color: var(--brand);
+    color: #668d3d;
   }
 
   .nav-item:not(.active):hover .nav-icon {
@@ -192,31 +191,45 @@
 }
 
 .nav-item:focus-visible {
-  outline: 2px solid var(--brand);
+  outline: 2px solid #a8f05a;
   outline-offset: -3px;
 }
 
 /* 9. DARK MODE */
 html[data-theme="dark"] .bottom-nav {
-  background: rgba(25, 34, 30, 0.82);
-  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(25, 37, 31, 0.88);
+  border-color: rgba(52, 70, 59, 0.85);
 
   box-shadow:
     0 12px 35px rgba(0, 0, 0, 0.35),
-    0 3px 10px rgba(0, 0, 0, 0.2);
+    0 3px 10px rgba(0, 0, 0, 0.18);
 }
 
 html[data-theme="dark"] .nav-indicator {
-  background: rgba(66, 214, 140, 0.15);
-  border-color: rgba(66, 214, 140, 0.12);
+  background: rgba(182, 243, 107, 0.14);
+  border-color: rgba(182, 243, 107, 0.24);
+}
+
+html[data-theme="dark"] .nav-item {
+  color: #899990;
 }
 
 html[data-theme="dark"] .nav-item.active {
-  color: var(--brand);
+  color: #b6f36b;
+}
+
+html[data-theme="dark"] .nav-item.active .nav-label {
+  color: #b6f36b;
 }
 
 html[data-theme="dark"] .nav-item.active .nav-icon {
-  filter: drop-shadow(0 3px 5px rgba(66, 214, 140, .2));
+  filter: drop-shadow(0 3px 5px rgba(182, 243, 107, 0.20));
+}
+
+@media (hover: hover) {
+  html[data-theme="dark"] .nav-item:not(.active):hover {
+    color: #b6f36b;
+  }
 }
 
 /* 10. SMALL SCREEN */

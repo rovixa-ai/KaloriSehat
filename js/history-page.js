@@ -1,5 +1,8 @@
 
-import { getMeals } from "./meal-storage.js";
+import {
+  getMeals,
+  getTarget
+} from "./meal-storage.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -116,38 +119,213 @@ function calculateDailyNutrition(dailyMeals) {
   });
 }
 
+
 function renderDailySummary(dailyMeals) {
   const nutrients = calculateDailyNutrition(dailyMeals);
 
+  const getNutrient = (key) =>
+    nutrients.find(item => item.key === key)?.total ?? null;
+
+  const kcal = getNutrient("kcal");
+  const protein = getNutrient("protein");
+  const carbs = getNutrient("carbs");
+  const fat = getNutrient("fat");
+
+  const target = Number(getTarget());
+  const validTarget = Number.isFinite(target) && target > 0;
+
+  const validKcal = kcal !== null && Number.isFinite(kcal);
+  const progress = validTarget && validKcal
+    ? (kcal / target) * 100
+    : null;
+
+  const progressWidth = progress === null
+    ? 0
+    : Math.min(progress, 100);
+
+  const remaining = validTarget && validKcal
+    ? target - kcal
+    : null;
+
+  const macroValuesValid = [protein, carbs, fat].every(value =>
+    value !== null && Number.isFinite(value) && value >= 0
+  );
+
+  const proteinCalories = macroValuesValid ? protein * 4 : 0;
+  const carbCalories = macroValuesValid ? carbs * 4 : 0;
+  const fatCalories = macroValuesValid ? fat * 9 : 0;
+
+  const macroTotal =
+    proteinCalories + carbCalories + fatCalories;
+
+  const proteinPercent = macroTotal > 0
+    ? (proteinCalories / macroTotal) * 100
+    : 0;
+
+  const carbPercent = macroTotal > 0
+    ? (carbCalories / macroTotal) * 100
+    : 0;
+
+  const fatPercent = macroTotal > 0
+    ? (fatCalories / macroTotal) * 100
+    : 0;
+
+  const macroChart = macroValuesValid && macroTotal > 0
+    ? `
+      <div
+        class="history-macro-donut"
+        style="background: conic-gradient(
+          var(--history-blue) 0% ${proteinPercent}%,
+          var(--history-orange) ${proteinPercent}% ${proteinPercent + carbPercent}%,
+          var(--history-purple) ${proteinPercent + carbPercent}% 100%
+        )"
+      >
+        <div class="history-macro-donut-center">
+          <strong>3</strong>
+          <span>Makro</span>
+        </div>
+      </div>
+
+      <div class="history-macro-legend">
+        <div>
+          <i class="protein-dot"></i>
+          <span>Protein</span>
+          <strong>${protein.toLocaleString("id-ID", {
+            maximumFractionDigits: 1
+          })} g</strong>
+        </div>
+
+        <div>
+          <i class="carbs-dot"></i>
+          <span>Karbo</span>
+          <strong>${carbs.toLocaleString("id-ID", {
+            maximumFractionDigits: 1
+          })} g</strong>
+        </div>
+
+        <div>
+          <i class="fat-dot"></i>
+          <span>Lemak</span>
+          <strong>${fat.toLocaleString("id-ID", {
+            maximumFractionDigits: 1
+          })} g</strong>
+        </div>
+      </div>
+    `
+    : `
+      <p class="history-macro-unavailable">
+        Data makro belum lengkap untuk menampilkan grafik.
+      </p>
+    `;
+
+  const summaryItems = nutrients
+    .filter(item => item.key !== "kcal")
+    .map(item => `
+      <div class="history-summary-item">
+        <span>${item.label}</span>
+        <strong>${formatNutrient(item.total, item.unit)}</strong>
+      </div>
+    `).join("");
+
   return `
     <div class="history-daily-summary">
+
       <div class="history-summary-header">
         <div>
-          <span>Total asupan nutrisi</span>
+          <span>Nutrition performance</span>
           <strong>Ringkasan harian</strong>
         </div>
+
         <span class="history-meal-count">
           ${dailyMeals.length} catatan
         </span>
       </div>
 
-      <div class="history-summary-grid">
-        ${nutrients.map((item, index) => `
-          <div class="history-summary-item ${index === 0 ? "main-nutrient" : ""}">
-            <span>${item.label}</span>
-            <strong>
-              ${item.total === null
-                ? "—"
-                : `${item.total.toLocaleString("id-ID", {
-                    maximumFractionDigits: 2
-                  })} ${item.unit}`}
-            </strong>
-          </div>
-        `).join("")}
+      <!-- KALORI UTAMA -->
+
+      <div class="history-calorie-panel">
+        <div class="history-calorie-heading">
+          <span>Total asupan kalori</span>
+          <span class="history-calorie-badge">KALORI</span>
+        </div>
+
+        <div class="history-calorie-number">
+          <strong>${formatNutrient(kcal, "kkal")}</strong>
+        </div>
+
+        <div class="history-target-info">
+          <span>Target harian</span>
+          <strong>
+            ${validTarget
+              ? formatNutrient(target, "kkal")
+              : "Belum diatur"}
+          </strong>
+        </div>
+
+        ${
+          progress !== null
+            ? `
+              <div class="history-progress-track">
+                <div
+                  class="history-progress-fill"
+                  style="width: ${progressWidth}%"
+                ></div>
+              </div>
+
+              <div class="history-progress-caption">
+                <strong>${progress.toLocaleString("id-ID", {
+                  maximumFractionDigits: 1
+                })}% tercapai</strong>
+
+                <span>
+                  ${remaining >= 0
+                    ? `Sisa ${formatNutrient(remaining, "kkal")}`
+                    : `Melebihi ${formatNutrient(Math.abs(remaining), "kkal")}`}
+                </span>
+              </div>
+            `
+            : `
+              <p class="history-target-unavailable">
+                ${
+                  !validTarget
+                    ? "Atur target kalori di profil untuk melihat progres."
+                    : "Data kalori belum lengkap."
+                }
+              </p>
+            `
+        }
       </div>
+
+      <!-- GRAFIK MAKRO -->
+
+      <div class="history-macro-section">
+        <div class="history-macro-heading">
+          <div>
+            <span>Komposisi nutrisi</span>
+            <strong>Distribusi makronutrisi</strong>
+          </div>
+        </div>
+
+        <div class="history-macro-content">
+          ${macroChart}
+        </div>
+      </div>
+
+      <!-- NUTRISI LAINNYA -->
+
+      <div class="history-summary-heading">
+        <span>Detail nutrisi</span>
+        <strong>Total asupan</strong>
+      </div>
+
+      <div class="history-summary-grid">
+        ${summaryItems}
+      </div>
+
     </div>
   `;
 }
+
 
 
 function renderHistoryPage(selectedDate = "") {

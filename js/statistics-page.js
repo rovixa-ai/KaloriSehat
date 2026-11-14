@@ -470,7 +470,7 @@ function renderCalorieChart(dailyData) {
             item.kcal > target;
 
           let statusClass = "";
-
+   
           if (isSuccess) {
             statusClass = "success";
           } else if (isOverTarget) {

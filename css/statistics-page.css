@@ -1,48 +1,79 @@
 
 /* =========================================
    KALORISEHATKU - HALAMAN STATISTIK
-   Modern Fitness | Light & Dark Mode
+   Dark Green & Lime Theme
+   Light & Dark Mode
+========================================= */
+
+/* =========================================
+   0. COLOR SYSTEM
 ========================================= */
 
 :root {
   --stat-bg: #ffffff;
-  --stat-bg-soft: #f3f8f5;
-  --stat-bg-highlight: #e5f4eb;
-  --stat-border: #e3ebe5;
-  --stat-text: #263b30;
+  --stat-bg-soft: #f3f5f4;
+  --stat-bg-highlight: #edf8df;
+  --stat-bg-summary: #111d19;
+
+  --stat-border: #e1e8e4;
+  --stat-text: #202c27;
   --stat-secondary: #718078;
-  --stat-muted: #89978e;
-  --stat-primary: #16865b;
-  --stat-primary-soft: #e7f5ed;
-  --stat-track: #eaf1ec;
-  --stat-shadow: 0 3px 12px rgba(30, 75, 48, 0.05);
+  --stat-muted: #929e96;
+
+  --stat-primary: #a8f05a;
+  --stat-primary-soft: #edf8df;
+  --stat-primary-border: #cce8a8;
+
+  --stat-track: #e8eee9;
+  --stat-shadow: 0 8px 24px rgba(20, 40, 30, 0.06);
+
   --stat-danger: #dc5b62;
-  --stat-success: #36a879;
+  --stat-danger-soft: rgba(220, 65, 78, .09);
+  --stat-success: #b6f36b;
+
+  --stat-blue: #64b5f6;
+  --stat-orange: #ffad66;
+  --stat-purple: #c5a1ff;
 }
 
 html[data-theme="dark"] {
   --stat-bg: #19251f;
   --stat-bg-soft: #202e26;
-  --stat-bg-highlight: #263f31;
+  --stat-bg-highlight: #293c2d;
+  --stat-bg-summary: #101a16;
+
   --stat-border: #34463b;
   --stat-text: #e5eee8;
   --stat-secondary: #b0beb5;
   --stat-muted: #899990;
-  --stat-primary: #55c991;
-  --stat-primary-soft: #263e31;
+
+  --stat-primary: #b6f36b;
+  --stat-primary-soft: #293c2d;
+  --stat-primary-border: #496344;
+
   --stat-track: #34463b;
-  --stat-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
-  --stat-danger: #f0787e;
-  --stat-success: #55c991;
+  --stat-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+
+  --stat-danger: #f08088;
+  --stat-danger-soft: rgba(240, 128, 136, .10);
+  --stat-success: #b6f36b;
+
+  --stat-blue: #64b5f6;
+  --stat-orange: #ffad66;
+  --stat-purple: #c5a1ff;
 }
 
-/* SECTION */
+/* =========================================
+   1. SECTION
+========================================= */
 
 .statistics-section {
   margin-top: 24px;
 }
 
-/* FILTER PERIODE */
+/* =========================================
+   2. FILTER PERIODE
+========================================= */
 
 .statistics-filter {
   display: flex;
@@ -67,15 +98,19 @@ html[data-theme="dark"] {
 
 .statistics-period:hover {
   border-color: var(--stat-primary);
+  color: var(--stat-text);
 }
 
 .statistics-period.active {
   background: var(--stat-primary);
   border-color: var(--stat-primary);
-  color: #ffffff;
+  color: #172314;
+  box-shadow: 0 4px 10px rgba(20, 40, 30, .08);
 }
 
-/* RINGKASAN STATISTIK */
+/* =========================================
+   3. RINGKASAN STATISTIK
+========================================= */
 
 .statistics-summary {
   display: grid;
@@ -90,6 +125,7 @@ html[data-theme="dark"] {
   border: 1px solid var(--stat-border);
   border-radius: 15px;
   box-shadow: var(--stat-shadow);
+  transition: background .25s ease, border-color .25s ease;
 }
 
 .statistics-card span,
@@ -101,13 +137,19 @@ html[data-theme="dark"] {
 
 .statistics-card strong {
   display: block;
-  color: var(--stat-primary);
+  color: #6da936;
   font-size: 25px;
   margin: 9px 0 4px;
   overflow-wrap: anywhere;
 }
 
-/* GRAFIK */
+html[data-theme="dark"] .statistics-card strong {
+  color: var(--stat-primary);
+}
+
+/* =========================================
+   4. GRAFIK
+========================================= */
 
 .statistics-chart {
   background: var(--stat-bg);
@@ -179,7 +221,9 @@ html[data-theme="dark"] {
   white-space: nowrap;
 }
 
-/* GARIS TARGET KALORI */
+/* =========================================
+   5. GARIS TARGET KALORI
+========================================= */
 
 .statistics-target-line {
   position: absolute;
@@ -202,7 +246,9 @@ html[data-theme="dark"] {
   font-weight: bold;
 }
 
-/* STATUS HARIAN */
+/* =========================================
+   6. STATUS HARIAN
+========================================= */
 
 .statistics-day-status {
   display: block;
@@ -219,7 +265,9 @@ html[data-theme="dark"] {
   background: var(--stat-danger);
 }
 
-/* TREND KALORI */
+/* =========================================
+   7. TREND KALORI
+========================================= */
 
 .statistics-trend {
   display: inline-block;
@@ -233,11 +281,15 @@ html[data-theme="dark"] {
 }
 
 .statistics-trend.down {
-  color: var(--stat-primary);
+  color: #6da936;
 }
 
 .statistics-trend.neutral {
   color: var(--stat-muted);
+}
+
+html[data-theme="dark"] .statistics-trend.down {
+  color: var(--stat-primary);
 }
 
 #statCalorieTrend small {
@@ -247,7 +299,9 @@ html[data-theme="dark"] {
   font-size: 11px;
 }
 
-/* RINGKASAN NUTRISI */
+/* =========================================
+   8. RINGKASAN NUTRISI
+========================================= */
 
 .statistics-nutrition {
   display: grid;
@@ -263,6 +317,7 @@ html[data-theme="dark"] {
   border-radius: 13px;
   text-align: center;
   box-shadow: var(--stat-shadow);
+  transition: background .25s ease, border-color .25s ease;
 }
 
 .statistics-nutrition span {
@@ -278,7 +333,9 @@ html[data-theme="dark"] {
   overflow-wrap: anywhere;
 }
 
-/* TARGET BERAT BADAN */
+/* =========================================
+   9. TARGET BERAT BADAN
+========================================= */
 
 .statistics-goal-card {
   margin-top: 20px;
@@ -301,6 +358,8 @@ html[data-theme="dark"] {
 .statistics-goal-header h3 {
   margin: 4px 0 0;
   color: var(--stat-text);
+  font-size: 17px;
+  font-weight: 800;
 }
 
 .statistics-goal-grid {
@@ -330,13 +389,15 @@ html[data-theme="dark"] {
   overflow-wrap: anywhere;
 }
 
-/* TARGET KALORI */
+/* =========================================
+   10. TARGET KALORI
+========================================= */
 
 .statistics-goal-calories {
   margin-top: 15px;
   padding: 15px;
   background: var(--stat-bg-highlight);
-  border: 1px solid var(--stat-border);
+  border: 1px solid var(--stat-primary-border);
   border-radius: 12px;
 }
 
@@ -351,6 +412,11 @@ html[data-theme="dark"] {
   display: block;
   margin: 6px 0;
   font-size: 22px;
+  color: #6da936;
+  font-weight: 850;
+}
+
+html[data-theme="dark"] .statistics-goal-calories strong {
   color: var(--stat-primary);
 }
 
@@ -367,7 +433,23 @@ html[data-theme="dark"] {
   line-height: 1.6;
 }
 
-/* RESPONSIVE */
+/* =========================================
+   11. INTERACTION & FOCUS
+========================================= */
+
+.statistics-period {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.statistics-period:focus-visible {
+  outline: 3px solid rgba(182, 243, 107, .45);
+  outline-offset: 3px;
+}
+
+/* =========================================
+   12. RESPONSIVE
+========================================= */
 
 @media (max-width: 380px) {
   .statistics-card {
@@ -392,5 +474,18 @@ html[data-theme="dark"] {
 
   .statistics-chart-bars {
     gap: 8px;
+  }
+}
+
+/* =========================================
+   13. REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .statistics-period,
+  .statistics-bar,
+  .statistics-card,
+  .statistics-nutrition > div {
+    transition: none !important;
   }
 }

@@ -1,64 +1,103 @@
 
 /* =========================================
    KALORISEHATKU - HALAMAN RIWAYAT
-   Modern Fitness | Light & Dark Mode
+   Nutrition Performance Design
 ========================================= */
 
 /* THEME VARIABLES */
 
 :root {
   --history-bg: #ffffff;
-  --history-bg-soft: #f5f9f6;
-  --history-bg-summary: #eaf6ee;
-  --history-border: #e3ebe5;
-  --history-text: #263b30;
+  --history-bg-soft: #f3f5f4;
+  --history-bg-summary: #111d19;
+  --history-border: #e1e8e4;
+  --history-text: #202c27;
   --history-text-secondary: #718078;
   --history-muted: #929e96;
-  --history-primary: #16865b;
-  --history-primary-soft: #e7f5ed;
-  --history-primary-border: #cce7d7;
+  --history-primary: #a8f05a;
+  --history-primary-soft: #edf8df;
+  --history-primary-border: #cce8a8;
   --history-input-bg: #ffffff;
-  --history-shadow: 0 3px 12px rgba(30, 75, 48, 0.04);
+  --history-shadow: 0 8px 24px rgba(20, 40, 30, 0.06);
+
+  --history-dark: #111d19;
+  --history-dark-soft: #1b2a24;
+  --history-lime: #b6f36b;
+  --history-blue: #64b5f6;
+  --history-orange: #ffad66;
+  --history-purple: #c5a1ff;
 }
 
 html[data-theme="dark"] {
   --history-bg: #19251f;
   --history-bg-soft: #202e26;
-  --history-bg-summary: #203b2d;
+  --history-bg-summary: #101a16;
   --history-border: #34463b;
   --history-text: #e5eee8;
   --history-text-secondary: #b0beb5;
   --history-muted: #899990;
-  --history-primary: #55c991;
-  --history-primary-soft: #263e31;
-  --history-primary-border: #3b624b;
+  --history-primary: #b6f36b;
+  --history-primary-soft: #293c2d;
+  --history-primary-border: #496344;
   --history-input-bg: #202e26;
-  --history-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+  --history-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
 }
 
 /* HALAMAN RIWAYAT */
 
 .history-page-section {
-  margin-top: 20px;
+  margin-top: 24px;
+}
+
+/* HEADER HALAMAN */
+
+#historyPage .welcome {
+  position: relative;
+  overflow: hidden;
+}
+
+#historyPage .welcome h2 {
+  letter-spacing: -1px;
+  font-weight: 700;
+}
+
+#historyPage .welcome > p:first-child {
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
 /* FILTER TANGGAL */
 
 .history-filter {
+  position: relative;
+  overflow: hidden;
   background: var(--history-bg);
   border: 1px solid var(--history-border);
-  border-radius: 16px;
-  padding: 16px;
-  margin-bottom: 20px;
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 24px;
   box-shadow: var(--history-shadow);
+}
+
+.history-filter::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: var(--history-primary);
 }
 
 .history-filter label {
   display: block;
-  font-size: 13px;
-  font-weight: 600;
-  margin-bottom: 10px;
-  color: var(--history-text);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  color: var(--history-text-secondary);
 }
 
 .history-filter-controls {
@@ -69,19 +108,20 @@ html[data-theme="dark"] {
 .history-filter-controls input {
   flex: 1;
   min-width: 0;
-  padding: 11px 12px;
+  padding: 12px 14px;
   border: 1px solid var(--history-border);
-  border-radius: 10px;
+  border-radius: 12px;
   background: var(--history-input-bg);
   color: var(--history-text);
   font-family: inherit;
   font-size: 14px;
+  font-weight: 600;
   outline: none;
 }
 
 .history-filter-controls input:focus {
-  border-color: var(--history-primary);
-  box-shadow: 0 0 0 3px rgba(22, 134, 91, 0.10);
+  border-color: #80c943;
+  box-shadow: 0 0 0 3px rgba(166, 229, 92, 0.15);
 }
 
 .history-filter-controls input::-webkit-calendar-picker-indicator {
@@ -91,21 +131,23 @@ html[data-theme="dark"] {
 .history-filter-controls button {
   flex-shrink: 0;
   border: none;
-  border-radius: 10px;
-  background: var(--history-primary-soft);
-  color: var(--history-primary);
-  padding: 0 16px;
+  border-radius: 12px;
+  background: var(--history-primary);
+  color: #172314;
+  padding: 0 18px;
   font-family: inherit;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 .history-filter-controls button:hover {
-  background: var(--history-primary-border);
+  filter: brightness(1.06);
+  transform: translateY(-2px);
 }
 
-/* HEADER RIWAYAT */
+/* HEADER DAFTAR RIWAYAT */
 
 .history-page-header,
 .history-day-header,
@@ -118,143 +160,330 @@ html[data-theme="dark"] {
 }
 
 .history-page-header {
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
-.history-page-header h3,
-.history-day-header h3 {
+.history-page-header h3 {
   margin: 0;
   color: var(--history-text);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
-.history-page-header span,
-.history-day-header span {
-  color: var(--history-primary);
-  font-size: 13px;
-  font-weight: 600;
+.history-page-header span {
+  color: var(--history-text-secondary);
+  background: var(--history-bg-soft);
+  border: 1px solid var(--history-border);
+  border-radius: 30px;
+  padding: 6px 11px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
 }
+
+/* KELOMPOK HARI */
 
 .history-day {
-  margin-bottom: 24px;
+  margin-bottom: 30px;
 }
 
 .history-day-header {
-  margin-bottom: 12px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--history-border);
+  margin-bottom: 14px;
+  padding: 0 2px 11px;
+  border-bottom: 2px solid var(--history-border);
+}
+
+.history-day-header h3 {
+  margin: 0;
+  color: var(--history-text);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.history-day-header span {
+  color: var(--history-text-secondary);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* RINGKASAN NUTRISI HARIAN */
+
+.history-daily-summary {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(182, 243, 107, 0.16),
+      transparent 38%
+    ),
+    linear-gradient(145deg, #172720 0%, #101a16 65%, #17251e 100%);
+  border: 1px solid rgba(182, 243, 107, 0.22);
+  border-radius: 22px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 12px 30px rgba(8, 25, 16, 0.16);
+}
+
+.history-daily-summary::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  right: -90px;
+  bottom: -110px;
+  border: 1px solid rgba(182, 243, 107, 0.12);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 18px rgba(182, 243, 107, 0.025),
+    0 0 0 38px rgba(182, 243, 107, 0.02);
+  z-index: -1;
+}
+
+.history-summary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.history-summary-header div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.history-summary-header div span {
+  color: #a6b9ad;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.history-summary-header div strong {
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.history-meal-count {
+  color: #172314;
+  background: var(--history-lime);
+  border-radius: 30px;
+  padding: 7px 11px;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* KARTU ANGKA NUTRISI */
+
+.history-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.history-summary-item {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 15px;
+}
+
+.history-summary-item span {
+  color: #a6b9ad;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.history-summary-item strong {
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.history-summary-item.main-nutrient {
+  grid-column: 1 / -1;
+  position: relative;
+  overflow: hidden;
+  background: var(--history-lime);
+  border: none;
+  border-radius: 17px;
+  padding: 19px;
+}
+
+.history-summary-item.main-nutrient::after {
+  content: "";
+  position: absolute;
+  width: 115px;
+  height: 115px;
+  right: -30px;
+  top: -50px;
+  border: 15px solid rgba(23, 35, 20, 0.08);
+  border-radius: 50%;
+}
+
+.history-summary-item.main-nutrient span {
+  color: #354d27;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.history-summary-item.main-nutrient strong {
+  position: relative;
+  z-index: 1;
+  color: #172314;
+  font-size: 34px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+/* WARNA KHUSUS MAKRO */
+
+.history-summary-item:nth-child(2) strong {
+  color: var(--history-blue);
+}
+
+.history-summary-item:nth-child(3) strong {
+  color: var(--history-orange);
+}
+
+.history-summary-item:nth-child(4) strong {
+  color: var(--history-purple);
 }
 
 /* KARTU CATATAN MAKANAN */
 
 .history-record {
+  position: relative;
   background: var(--history-bg);
   border: 1px solid var(--history-border);
-  border-radius: 14px;
-  padding: 15px;
+  border-radius: 17px;
+  padding: 16px;
   margin-bottom: 12px;
   box-shadow: var(--history-shadow);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.history-record:hover {
+  transform: translateY(-2px);
+  border-color: var(--history-primary-border);
 }
 
 .history-record-header {
-  padding-bottom: 11px;
+  padding-bottom: 13px;
   border-bottom: 1px solid var(--history-border);
 }
 
 .history-record-header strong {
-  font-size: 14px;
   color: var(--history-text);
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .history-record-header b {
-  color: var(--history-primary);
+  color: #5eaa35;
+  background: var(--history-primary-soft);
+  border-radius: 8px;
+  padding: 6px 9px;
   white-space: nowrap;
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 900;
 }
+
+html[data-theme="dark"] .history-record-header b {
+  color: var(--history-primary);
+}
+
+/* DAFTAR MAKANAN */
 
 .history-food-list {
   padding-top: 8px;
 }
 
 .history-food-item {
-  padding: 8px 0;
+  padding: 11px 0;
   font-size: 13px;
+}
+
+.history-food-item + .history-food-item {
+  border-top: 1px dashed var(--history-border);
 }
 
 .history-food-item div {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
   min-width: 0;
 }
 
 .history-food-item div strong {
   color: var(--history-text);
+  font-size: 13px;
+  font-weight: 700;
   overflow-wrap: anywhere;
 }
 
 .history-food-item small {
   color: var(--history-muted);
+  font-size: 11px;
 }
 
 .history-food-item > span {
   white-space: nowrap;
   color: var(--history-text-secondary);
+  font-size: 12px;
+  font-weight: 700;
 }
 
-/* RIWAYAT KOSONG */
-
-.history-empty {
-  text-align: center;
-  padding: 45px 20px;
-  background: var(--history-bg);
-  border: 1px dashed var(--history-border);
-  border-radius: 16px;
-}
-
-.history-empty-icon {
-  font-size: 38px;
-  color: var(--history-primary);
-  margin-bottom: 12px;
-}
-
-.history-empty h3 {
-  margin: 0 0 8px;
-  color: var(--history-text);
-}
-
-.history-empty p {
-  margin: 0;
-  color: var(--history-muted);
-  font-size: 13px;
-}
-
-/* INFO NUTRISI PADA RIWAYAT */
+/* TOMBOL INFO NUTRISI */
 
 .history-info-button {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 12px;
-  padding: 9px 13px;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 13px;
+  padding: 10px 14px;
   border: 1px solid var(--history-primary-border);
-  border-radius: 9px;
+  border-radius: 10px;
   background: var(--history-primary-soft);
-  color: var(--history-primary);
+  color: var(--history-text);
   font-family: inherit;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 800;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .history-info-button:hover {
-  background: var(--history-primary-border);
+  background: var(--history-primary);
+  border-color: var(--history-primary);
+  color: #172314;
+  transform: translateY(-1px);
 }
 
+/* DETAIL NUTRISI */
+
 .history-info-panel {
-  margin-top: 12px;
-  padding: 13px;
-  border-radius: 12px;
+  margin-top: 13px;
+  padding: 14px;
+  border-radius: 14px;
   background: var(--history-bg-soft);
   border: 1px solid var(--history-border);
 }
@@ -267,8 +496,9 @@ html[data-theme="dark"] {
 
 .history-food-nutrition > strong {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 11px;
   font-size: 13px;
+  font-weight: 800;
   color: var(--history-text);
 }
 
@@ -279,108 +509,63 @@ html[data-theme="dark"] {
 }
 
 .history-nutrition-item {
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  padding: 11px;
+  gap: 6px;
+  padding: 12px;
   background: var(--history-bg);
   border: 1px solid var(--history-border);
-  border-radius: 10px;
+  border-radius: 11px;
 }
 
 .history-nutrition-item span {
   color: var(--history-muted);
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: 700;
 }
 
 .history-nutrition-item strong {
-  color: var(--history-primary);
-  font-size: 13px;
+  color: var(--history-text);
+  font-size: 14px;
+  font-weight: 800;
 }
 
-/* RINGKASAN NUTRISI HARIAN */
+/* RIWAYAT KOSONG */
 
-.history-daily-summary {
-  background: var(--history-bg-summary);
-  border: 1px solid var(--history-border);
-  border-radius: 16px;
-  padding: 16px;
+.history-empty {
+  text-align: center;
+  padding: 48px 20px;
+  background: var(--history-bg);
+  border: 1px dashed var(--history-border);
+  border-radius: 20px;
+}
+
+.history-empty-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 66px;
+  height: 66px;
+  border-radius: 22px;
+  background: var(--history-primary-soft);
+  color: #5eaa35;
+  font-size: 30px;
   margin-bottom: 16px;
 }
 
-.history-summary-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-.history-summary-header div {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.history-summary-header div span {
-  font-size: 11px;
-  color: var(--history-text-secondary);
-}
-
-.history-summary-header div strong {
-  font-size: 15px;
+.history-empty h3 {
+  margin: 0 0 9px;
   color: var(--history-text);
+  font-size: 17px;
+  font-weight: 800;
 }
 
-.history-meal-count {
-  font-size: 11px;
-  color: var(--history-primary);
-  white-space: nowrap;
-  font-weight: 600;
-}
-
-.history-summary-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 9px;
-}
-
-.history-summary-item {
-  background: var(--history-bg);
-  border: 1px solid var(--history-border);
-  border-radius: 11px;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-width: 0;
-}
-
-.history-summary-item span {
-  font-size: 11px;
+.history-empty p {
+  margin: 0;
   color: var(--history-muted);
-}
-
-.history-summary-item strong {
-  font-size: 15px;
-  color: var(--history-text);
-  overflow-wrap: anywhere;
-}
-
-.history-summary-item.main-nutrient {
-  grid-column: 1 / -1;
-  background: var(--history-primary);
-  border-color: var(--history-primary);
-  padding: 16px;
-}
-
-.history-summary-item.main-nutrient span,
-.history-summary-item.main-nutrient strong {
-  color: #ffffff;
-}
-
-.history-summary-item.main-nutrient strong {
-  font-size: 27px;
+  font-size: 13px;
+  line-height: 1.6;
 }
 
 /* NAVIGASI BAWAH */
@@ -392,7 +577,7 @@ html[data-theme="dark"] {
   padding: 8px 4px;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE TABLET */
 
 @media (min-width: 600px) {
   .history-summary-grid {
@@ -402,11 +587,33 @@ html[data-theme="dark"] {
   .history-summary-item.main-nutrient {
     grid-column: 1 / -1;
   }
+
+  .history-nutrition-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .history-daily-summary {
+    padding: 24px;
+  }
 }
+
+/* RESPONSIVE DESKTOP */
+
+@media (min-width: 900px) {
+  .history-summary-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .history-summary-item.main-nutrient {
+    grid-column: 1 / -1;
+  }
+}
+
+/* RESPONSIVE MOBILE */
 
 @media (max-width: 420px) {
   .history-filter {
-    padding: 13px;
+    padding: 14px;
   }
 
   .history-filter-controls {
@@ -414,19 +621,331 @@ html[data-theme="dark"] {
   }
 
   .history-filter-controls button {
-    padding: 0 11px;
-    font-size: 12px;
+    padding: 0 12px;
+    font-size: 11px;
   }
 
-  .history-record {
-    padding: 12px;
+  .history-page-header h3 {
+    font-size: 17px;
   }
 
   .history-daily-summary {
-    padding: 13px;
+    padding: 15px;
+    border-radius: 18px;
   }
 
   .history-summary-item {
+    padding: 11px;
+  }
+
+  .history-summary-item.main-nutrient {
+    padding: 17px;
+  }
+
+  .history-summary-item.main-nutrient strong {
+    font-size: 30px;
+  }
+
+  .history-record {
+    padding: 13px;
+  }
+
+  .history-nutrition-grid {
+    gap: 7px;
+  }
+
+  .history-nutrition-item {
     padding: 10px;
+  }
+}
+
+
+
+/* =========================================
+   NUTRITION PERFORMANCE - DETAIL SUMMARY
+========================================= */
+
+/* PANEL KALORI */
+
+.history-calorie-panel {
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.065);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 17px;
+}
+
+.history-calorie-heading,
+.history-target-info,
+.history-progress-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.history-calorie-heading > span:first-child {
+  color: #b3c2b8;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.history-calorie-badge {
+  color: #172314;
+  background: var(--history-lime);
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.history-calorie-number {
+  margin: 12px 0 17px;
+}
+
+.history-calorie-number strong {
+  color: var(--history-lime);
+  font-size: clamp(29px, 7vw, 43px);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  overflow-wrap: anywhere;
+}
+
+.history-target-info {
+  padding-top: 13px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.history-target-info span {
+  color: #a6b9ad;
+  font-size: 11px;
+}
+
+.history-target-info strong {
+  color: #ffffff;
+  font-size: 12px;
+  text-align: right;
+}
+
+/* PROGRESS BAR */
+
+.history-progress-track {
+  height: 9px;
+  overflow: hidden;
+  margin-top: 15px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+}
+
+.history-progress-fill {
+  height: 100%;
+  background: var(--history-lime);
+  border-radius: inherit;
+  transition: width 0.4s ease;
+}
+
+.history-progress-caption {
+  margin-top: 9px;
+}
+
+.history-progress-caption strong {
+  color: var(--history-lime);
+  font-size: 11px;
+}
+
+.history-progress-caption span {
+  color: #b3c2b8;
+  font-size: 10px;
+  text-align: right;
+}
+
+.history-target-unavailable {
+  margin: 13px 0 0;
+  color: #b3c2b8;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* BAGIAN MAKRO */
+
+.history-macro-section {
+  margin-top: 22px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.history-macro-heading,
+.history-summary-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.history-macro-heading span,
+.history-summary-heading span {
+  color: #a6b9ad;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.history-macro-heading strong,
+.history-summary-heading strong {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.history-macro-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+}
+
+.history-macro-donut {
+  flex-shrink: 0;
+  width: 132px;
+  height: 132px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: relative;
+}
+
+.history-macro-donut::before {
+  content: "";
+  position: absolute;
+  width: 88px;
+  height: 88px;
+  background: #172720;
+  border-radius: 50%;
+}
+
+.history-macro-donut-center {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.history-macro-donut-center strong {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.history-macro-donut-center span {
+  color: #a6b9ad;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.history-macro-legend {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.history-macro-legend > div {
+  display: grid;
+  grid-template-columns: 9px 1fr auto;
+  align-items: center;
+  gap: 7px;
+}
+
+.history-macro-legend i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.history-macro-legend .protein-dot {
+  background: var(--history-blue);
+}
+
+.history-macro-legend .carbs-dot {
+  background: var(--history-orange);
+}
+
+.history-macro-legend .fat-dot {
+  background: var(--history-purple);
+}
+
+.history-macro-legend span {
+  color: #b3c2b8;
+  font-size: 10px;
+}
+
+.history-macro-legend strong {
+  color: #ffffff;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.history-macro-unavailable {
+  width: 100%;
+  color: #b3c2b8;
+  font-size: 11px;
+  line-height: 1.6;
+  text-align: center;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+}
+
+/* DETAIL NUTRISI */
+
+.history-summary-heading {
+  margin-top: 20px;
+}
+
+.history-summary-grid .history-summary-item {
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.history-summary-grid .history-summary-item strong {
+  color: #ffffff;
+}
+
+.history-summary-grid .history-summary-item:nth-child(1) strong {
+  color: var(--history-blue);
+}
+
+.history-summary-grid .history-summary-item:nth-child(2) strong {
+  color: var(--history-orange);
+}
+
+.history-summary-grid .history-summary-item:nth-child(3) strong {
+  color: var(--history-purple);
+}
+
+/* RESPONSIVE MAKRO */
+
+@media (max-width: 380px) {
+  .history-macro-content {
+    gap: 13px;
+  }
+
+  .history-macro-donut {
+    width: 112px;
+    height: 112px;
+  }
+
+  .history-macro-donut::before {
+    width: 74px;
+    height: 74px;
+  }
+
+  .history-macro-legend {
+    gap: 10px;
   }
 }
