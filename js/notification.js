@@ -14,19 +14,19 @@ const appModalBackdrop = appModal?.querySelector(".app-modal-backdrop");
 const modalTypes = {
   success: {
     icon: "✓",
-    title: "Berhasil"
+    title: () => window.t("modal.success")
   },
   error: {
     icon: "✕",
-    title: "Terjadi Kesalahan"
+    title: () => window.t("modal.error")
   },
   warning: {
     icon: "⚠",
-    title: "Perhatian"
+    title: () => window.t("modal.warning")
   },
   info: {
     icon: "i",
-    title: "Informasi"
+    title: () => window.t("modal.info")
   }
 };
 
@@ -58,7 +58,7 @@ export function showAppModal({
   type = "info",
   title,
   message = "",
-  confirmText = "OK",
+  confirmText,
   onConfirm
 } = {}) {
 
@@ -67,25 +67,23 @@ export function showAppModal({
     return;
   }
 
-  // Tutup konfirmasi sebelumnya jika masih aktif.
   closeAppModal(false);
 
   const modalType = modalTypes[type] || modalTypes.info;
 
   appModal.dataset.type = type;
   appModalIcon.textContent = modalType.icon;
-  appModalTitle.textContent = title || modalType.title;
+  appModalTitle.textContent = title || modalType.title();
   appModalMessage.textContent = message;
 
   appModalCancel.hidden = true;
-  appModalConfirm.textContent = confirmText;
+  appModalConfirm.textContent = confirmText || window.t("modal.ok");
 
   previousOverflow = document.body.style.overflow;
   document.body.style.overflow = "hidden";
 
   appModal.hidden = false;
 
-  // Simpan callback untuk tombol OK.
   appModalConfirm.onclick = () => {
     closeAppModal();
 
@@ -101,10 +99,10 @@ export function showAppModal({
 
 export function confirmAppModal({
   type = "warning",
-  title = "Konfirmasi",
+  title,
   message = "",
-  confirmText = "Ya",
-  cancelText = "Batal"
+  confirmText,
+  cancelText
 } = {}) {
 
   if (!appModal) {
@@ -112,19 +110,18 @@ export function confirmAppModal({
     return Promise.resolve(false);
   }
 
-  // Selesaikan konfirmasi sebelumnya.
   closeAppModal(false);
 
   const modalType = modalTypes[type] || modalTypes.warning;
 
   appModal.dataset.type = type;
   appModalIcon.textContent = modalType.icon;
-  appModalTitle.textContent = title || modalType.title;
+  appModalTitle.textContent = title || modalType.title();
   appModalMessage.textContent = message;
 
   appModalCancel.hidden = false;
-  appModalCancel.textContent = cancelText;
-  appModalConfirm.textContent = confirmText;
+  appModalCancel.textContent = cancelText || window.t("modal.cancel");
+  appModalConfirm.textContent = confirmText || window.t("modal.yes");
 
   previousOverflow = document.body.style.overflow;
   document.body.style.overflow = "hidden";
