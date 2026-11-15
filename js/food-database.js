@@ -383,52 +383,69 @@ export function findFood(name, database, aliases = {}) {
 // SARAN MAKANAN
 // ========================================
 
-export function findFoodSuggestions(name, database) {
 
+export function findFoodSuggestions(name, database) {
   const query = normalizeFoodName(name);
 
   if (!query) return [];
 
   const queryWords = query
     .split(" ")
-    .filter(word => word.length > 1);
+    .filter(Boolean);
 
   return Object.entries(database)
-
     .map(([foodName, food]) => {
-
+      // Semua kata wajib ada
       const containsAllWords = queryWords.every(word =>
         foodName.includes(word)
       );
 
-      if (!containsAllWords) {
-        return null;
-      }
+      if (!containsAllWords) return null;
 
       let score = 0;
 
-      if (foodName.includes(query)) {
-        score += 10;
+      // Nama sama persis
+      if (foodName === query) {
+        score += 1000;
       }
 
-      queryWords.forEach(word => {
+      // Nama diawali frasa pencarian
+      else if (foodName.startsWith(query)) {
+        score += 500;
+      }
 
-        if (foodName.includes(word)) {
-          score += 2;
+      // Frasa pencarian ditemukan utuh
+      else if (foodName.includes(query)) {
+        score += 300;
+      }
+
+      // Prioritaskan kecocokan kata yang berdekatan
+      const words = foodName.split(" ");
+      let consecutiveMatches = 0;
+
+      for (let i = 0; i <= words.length - queryWords.length; i++) {
+        if (
+          queryWords.every((word, index) =>
+            words[i + index].includes(word)
+          )
+        ) {
+          consecutiveMatches = 1;
+          break;
         }
+      }
 
-      });
+      if (consecutiveMatches) score += 100;
+
+      // Nama lebih pendek lebih diprioritaskan
+      score -= foodName.length * 0.1;
 
       return {
         name: foodName,
         food,
         score
       };
-
     })
-
-    .filter(item => item !== null)
-
+    .filter(Boolean)
     .sort((a, b) => b.score - a.score);
 }
 
