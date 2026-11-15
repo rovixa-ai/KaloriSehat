@@ -301,6 +301,48 @@ export const translations = {
         next: "Lanjut"
       },
 
+      identity: {
+        defaultName: "Nama Pengguna",
+        notLoggedIn: "Belum login",
+        emailUnavailable: "Email tidak tersedia"
+      },
+
+      wizardButtons: {
+        finish: "Selesai ✓",
+        next: "Lanjut →"
+      },
+
+      photo: {
+        fileNotSelected: "File Belum Dipilih",
+        selectImage: "Silakan pilih file gambar terlebih dahulu.",
+        updateSuccess: "Foto berhasil diperbarui.",
+        updateFailed: "Foto gagal diperbarui. Coba foto lain.",
+        failed: "Gagal"
+      },
+
+      reset: {
+        title: "Reset Semua Data?",
+        message: "Profil, riwayat makanan, dan target nutrisi akan dihapus dari perangkat dan cloud. Akun Google tetap login.",
+        confirm: "Ya, Reset",
+        cancel: "Batal",
+        successTitle: "Reset Berhasil",
+        successMessage: "Semua data pengguna berhasil dihapus. Akun Google Anda tetap login.",
+        failedTitle: "Reset Gagal",
+        failedMessage: "Data cloud belum berhasil dihapus seluruhnya. Data lokal tetap dipertahankan. Periksa koneksi internet dan izin Firestore, lalu coba reset kembali."
+      },
+
+      validation: {
+        incompleteTitle: "Data belum lengkap",
+        incompleteMessage: "Mohon lengkapi data profil pengguna.",
+        invalidNumberTitle: "Masukkan angka yang benar",
+        invalidNumberMessage: "Data yang dimasukkan tidak valid."
+      },
+
+      saveMessages: {
+        success: "Profil berhasil disimpan.",
+        failed: "Profil gagal disimpan."
+      },
+
       simulation: {
         title: "Simulasi Tujuan Berat Badan",
         message: "Lengkapi profil untuk melihat simulasi.",
@@ -380,7 +422,11 @@ export const translations = {
       changePhoto: "Klik untuk mengganti foto profil",
       photoAlt: "Foto profil",
       defaultName: "Nama Pengguna",
-      logout: "Keluar"
+      logout: "Keluar",
+      logoutTitle: "Keluar dari KaloriKu?",
+      logoutMessage: "Apakah kamu yakin ingin keluar? Data lokal KaloriKu pada perangkat ini akan dihapus.",
+      logoutCancel: "Batal",
+      logoutConfirm: "Ya, Keluar"
     },
 
     modal: {
@@ -713,6 +759,48 @@ export const translations = {
         next: "Next"
       },
 
+      identity: {
+        defaultName: "User Name",
+        notLoggedIn: "Not logged in",
+        emailUnavailable: "Email unavailable"
+      },
+
+      wizardButtons: {
+        finish: "Finish ✓",
+        next: "Next →"
+      },
+
+      photo: {
+        fileNotSelected: "No File Selected",
+        selectImage: "Please select an image file first.",
+        updateSuccess: "Profile photo updated successfully.",
+        updateFailed: "Failed to update the profile photo. Please try another photo.",
+        failed: "Failed"
+      },
+
+      reset: {
+        title: "Reset All Data?",
+        message: "Your profile, food history, and nutrition targets will be deleted from this device and the cloud. Your Google account will remain signed in.",
+        confirm: "Yes, Reset",
+        cancel: "Cancel",
+        successTitle: "Reset Successful",
+        successMessage: "All user data has been successfully deleted. Your Google account remains signed in.",
+        failedTitle: "Reset Failed",
+        failedMessage: "Some cloud data could not be deleted. Your local data has been kept. Check your internet connection and Firestore permissions, then try again."
+      },
+
+      validation: {
+        incompleteTitle: "Incomplete Data",
+        incompleteMessage: "Please complete your profile information.",
+        invalidNumberTitle: "Enter valid numbers",
+        invalidNumberMessage: "The entered data is invalid."
+      },
+
+      saveMessages: {
+        success: "Profile saved successfully.",
+        failed: "Failed to save profile."
+      },
+
       simulation: {
         title: "Weight Goal Simulation",
         message: "Complete your profile to view the simulation.",
@@ -795,7 +883,11 @@ export const translations = {
       changePhoto: "Click to change profile photo",
       photoAlt: "Profile photo",
       defaultName: "User Name",
-      logout: "Log Out"
+      logout: "Log Out",
+      logoutTitle: "Log out of KaloriKu?",
+      logoutMessage: "Are you sure you want to log out? Local KaloriKu data on this device will be deleted.",
+      logoutCancel: "Cancel",
+      logoutConfirm: "Yes, Log Out"
     },
 
     modal: {

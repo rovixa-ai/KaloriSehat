@@ -602,15 +602,19 @@ async function renderDetectedFoods(foodList) {
   cancelGroupButton.textContent = t("cancel");
   cancelGroupButton.className = "cancel-button";
 
-  cancelGroupButton.addEventListener("click", () => {
-    const confirmCancel = confirm(
-      t("cancelIdentification")
-    );
-
-    if (!confirmCancel) return;
-
-    resetFoodScanner();
+  cancelGroupButton.addEventListener("click", async () => {
+  const confirmCancel = await window.confirmAppModal({
+    type: "warning",
+    title: t("cancel"),
+    message: t("cancelIdentification"),
+    confirmText: t("yes"),
+    cancelText: t("cancel")
   });
+
+  if (!confirmCancel) return;
+
+  resetFoodScanner();
+});
 
   // Susun tombol dalam satu baris
   const groupActions = document.createElement("div");
@@ -790,10 +794,14 @@ window.cariPanganku = function (kata) {
 // Reset seluruh isian
 const resetMealButton = $("resetMeal");
 
-resetMealButton?.addEventListener("click", () => {
-  const confirmReset = confirm(
-    t("resetAll")
-  );
+resetMealButton?.addEventListener("click", async () => {
+  const confirmReset = await window.confirmAppModal({
+    type: "warning",
+    title: t("resetAll"),
+    message: t("resetAll"),
+    confirmText: t("yes"),
+    cancelText: t("cancel")
+  });
 
   if (!confirmReset) return;
 

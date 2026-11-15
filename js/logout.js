@@ -1,10 +1,17 @@
 
 import { auth } from "./firebase-config.js";
+
 import {
   signOut
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
+// =========================================
+// TERJEMAHAN
+// =========================================
 
+function tr(key) {
+  return window.t ? window.t(key) : key;
+}
 
 // =========================================
 // ELEMEN LOGOUT
@@ -34,40 +41,43 @@ function clearKaloriKuLocalData() {
 
 logoutButton?.addEventListener("click", async () => {
 
-  const confirmation = await confirmAppModal({
+  // Konfirmasi logout menggunakan bahasa aktif
+  const confirmation = await window.confirmAppModal({
     type: "warning",
-    title: "Keluar dari KaloriKu?",
-    message: "Apakah kamu yakin ingin keluar? Data lokal KaloriKu pada perangkat ini akan dihapus.",
-    confirmText: "Ya, Keluar",
-    cancelText: "Batal"
+    title: tr("identity.logoutTitle"),
+    message: tr("identity.logoutMessage"),
+    confirmText: tr("identity.logoutConfirm"),
+    cancelText: tr("identity.logoutCancel")
   });
 
   if (!confirmation) return;
 
   try {
     logoutButton.disabled = true;
-    logoutButton.textContent = "Keluar...";
+    logoutButton.textContent = tr("identity.logoutLoading");
 
-    // Akhiri sesi Firebase.
+    // Akhiri sesi Firebase
     await signOut(auth);
 
-    // Hapus seluruh data lokal KaloriKu.
+    // Hapus seluruh data lokal KaloriKu
     clearKaloriKuLocalData();
 
-    // Kembali ke halaman login.
+    // Kembali ke halaman login
     window.location.replace("./login.html");
 
   } catch (error) {
     console.error("Logout gagal:", error);
 
-    showAppModal({
+    window.showAppModal({
       type: "error",
-      title: "Logout Gagal",
-      message: "Gagal keluar. Silakan coba kembali."
+      title: tr("identity.logoutFailedTitle"),
+      message: tr("identity.logoutFailedMessage")
     });
 
     logoutButton.disabled = false;
+
     logoutButton.innerHTML =
-      '<span aria-hidden="true">↪</span> Keluar';
+      '<span aria-hidden="true">↪</span> ' +
+      tr("identity.logout");
   }
 });
