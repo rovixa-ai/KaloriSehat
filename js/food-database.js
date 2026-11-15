@@ -5,21 +5,7 @@
 export const foods = {};
 
 export const foodAliases = {
-  "nasi": "nasi putih",
-  "nasi putih matang": "nasi putih",
-  "dada ayam": "ayam dada",
-  "telur ayam rebus": "telur rebus",
-  "telur rebus kupas": "telur rebus",
-  "tahu putih": "tahu",
-  "ayam goreng kentucky": "ayam goreng kentucky dada",
-  "sayur sop bening": "sayur sop",
-  "jengkol semur": "semur jengkol",
-  "bayam santan": "tumis bayam bersantan",
-  "telur dadar daun bawang": "telur ayam dadar masakan",
-  "telur dadar": "telur ayam dadar masakan",
-  "tempe goreng": "tempe kedelai murni goreng",
-  "tumis buncis wortel": "tumis buncis dan wortel",
-  "buncis wortel tumis": "tumis buncis dan wortel"
+  
 };
 
 

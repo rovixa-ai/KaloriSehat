@@ -307,3 +307,231 @@ footer small {
   }
 }
 
+
+
+
+
+
+/* ==========================================
+   KALORIKU — PREMIUM PAGE TRANSITIONS
+========================================== */
+
+/* Pastikan halaman tersembunyi tidak muncul */
+main[hidden] {
+  display: none !important;
+}
+
+/* Animasi perpindahan halaman */
+.page-enter {
+  animation: pageReveal 650ms
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes pageReveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0) scale(0.985);
+    filter: blur(10px);
+  }
+
+  65% {
+    filter: blur(1px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* ==========================================
+   HOME DASHBOARD — DRAMATIC ENTRANCE
+========================================== */
+
+.dashboard-page.page-enter {
+  animation-duration: 800ms;
+}
+
+/* Sambutan dashboard */
+.dashboard-page.page-enter .dashboard-welcome,
+.dashboard-page.page-enter .welcome {
+  animation: homeElementReveal 850ms
+    cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 80ms;
+}
+
+/* Kartu kalori utama */
+.dashboard-page.page-enter .dashboard-calorie,
+.dashboard-page.page-enter .calorie-card {
+  animation: calorieReveal 950ms
+    cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 160ms;
+}
+
+/* Kartu nutrisi */
+.dashboard-page.page-enter .nutrition-grid {
+  animation: homeElementReveal 850ms
+    cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 260ms;
+}
+
+/* Bagian scanner makanan */
+.dashboard-page.page-enter .scan-section {
+  animation: homeElementReveal 850ms
+    cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 360ms;
+}
+
+@keyframes homeElementReveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes calorieReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(35px) scale(0.94);
+    filter: blur(8px);
+  }
+
+  70% {
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==========================================
+   CALORIE CARD — PREMIUM GLOW
+========================================== */
+
+.dashboard-calorie,
+.calorie-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.dashboard-calorie::after,
+.calorie-card::after {
+  content: "";
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  right: -90px;
+  top: -100px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(182, 243, 107, 0.20),
+    rgba(182, 243, 107, 0) 70%
+  );
+  pointer-events: none;
+  z-index: -1;
+  animation: calorieGlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes calorieGlow {
+  from {
+    transform: scale(0.85);
+    opacity: 0.55;
+  }
+
+  to {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* ==========================================
+   NUTRITION CARDS — INTERACTION
+========================================== */
+
+.nutrition-card {
+  transition:
+    transform 350ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 350ms ease,
+    border-color 350ms ease;
+}
+
+@media (hover: hover) {
+  .nutrition-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* ==========================================
+   LIQUID NAVIGATION
+========================================== */
+
+.bottom-nav {
+  isolation: isolate;
+}
+
+.bottom-nav .nav-indicator {
+  transition:
+    transform 550ms cubic-bezier(0.22, 1, 0.36, 1),
+    width 550ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bottom-nav.is-moving .nav-indicator {
+  filter: brightness(1.15);
+}
+
+.nav-item {
+  transition:
+    color 250ms ease,
+    transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nav-item.active {
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   DARK MODE GLOW
+========================================== */
+
+[data-theme="dark"] .dashboard-calorie::after,
+[data-theme="dark"] .calorie-card::after {
+  background: radial-gradient(
+    circle,
+    rgba(182, 243, 107, 0.24),
+    rgba(182, 243, 107, 0) 70%
+  );
+}
+
+/* ==========================================
+   ACCESSIBILITY
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter,
+  .dashboard-page.page-enter,
+  .dashboard-page.page-enter *,
+  .dashboard-calorie::after,
+  .calorie-card::after {
+    animation: none !important;
+    transition: none !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  .nutrition-card,
+  .nav-item,
+  .bottom-nav .nav-indicator {
+    transition: none !important;
+  }
+}

@@ -1,3 +1,4 @@
+
 import { getDashboardData } from "./dashboard.js";
 
 import {
@@ -8,6 +9,9 @@ import {
 
 const $ = id => document.getElementById(id);
 
+// Menyimpan animasi angka yang sedang berjalan.
+const numberAnimations = new Map();
+
 function escapeHTML(value) {
   return String(value).replace(/[&<>"']/g, char => ({
     "&": "&amp;",
@@ -17,6 +21,70 @@ function escapeHTML(value) {
     "'": "&#39;"
   })[char]);
 }
+
+// ==========================================
+// ANIMASI ANGKA
+// ==========================================
+
+function animateNumber(element, targetValue, suffix = "", decimals = 0) {
+  if (!element) return;
+
+  const target = Number(targetValue) || 0;
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  const previousAnimation = numberAnimations.get(element);
+
+  if (previousAnimation) {
+    cancelAnimationFrame(previousAnimation);
+  }
+
+  const previousValue = Number(element.dataset.currentValue);
+
+  const startValue = Number.isFinite(previousValue)
+    ? previousValue
+    : 0;
+
+  if (reducedMotion || startValue === target) {
+    element.textContent = target.toFixed(decimals) + suffix;
+    element.dataset.currentValue = target;
+    return;
+  }
+
+  const duration = 750;
+  const startTime = performance.now();
+
+  function animate(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+
+    // Ease-out cubic.
+    const eased = 1 - Math.pow(1 - progress, 3);
+
+    const currentValue =
+      startValue + (target - startValue) * eased;
+
+    element.textContent =
+      currentValue.toFixed(decimals) + suffix;
+
+    if (progress < 1) {
+      const frame = requestAnimationFrame(animate);
+      numberAnimations.set(element, frame);
+    } else {
+      element.textContent = target.toFixed(decimals) + suffix;
+      element.dataset.currentValue = target;
+      numberAnimations.delete(element);
+    }
+  }
+
+  const frame = requestAnimationFrame(animate);
+  numberAnimations.set(element, frame);
+}
+
+// ==========================================
+// TANGGAL HARI INI
+// ==========================================
 
 function renderToday() {
   const element = $("today");
@@ -30,11 +98,15 @@ function renderToday() {
   });
 }
 
+// ==========================================
+// RIWAYAT MAKANAN HARI INI
+// ==========================================
+
 function renderHistory(meals) {
   const container = $("historyList");
   if (!container) return;
 
-  if (!meals.length) {
+  if (!meals || !meals.length) {
     container.innerHTML =
       '<div class="empty-history">Belum ada makanan hari ini.</div>';
     return;
@@ -56,7 +128,7 @@ function renderHistory(meals) {
               `).join("")}
             </div>
           </div>
-          <strong>${Math.round(meal.kcal)} kkal</strong>
+          <strong>${Math.round(Number(meal.kcal) || 0)} kkal</strong>
         </div>
       `;
     }
@@ -65,13 +137,52 @@ function renderHistory(meals) {
       <div class="history-item">
         <div>
           <b>${escapeHTML(meal.name)}</b>
-          <div>${meal.weight} gram</div>
+          <div>${Number(meal.weight) || 0} gram</div>
         </div>
-        <strong>${Math.round(meal.kcal)} kkal</strong>
+        <strong>${Math.round(Number(meal.kcal) || 0)} kkal</strong>
       </div>
     `;
   }).join("");
 }
+
+// ==========================================
+// CIRCULAR NUTRITION PROGRESS
+// ==========================================
+
+function setNutritionProgress(id, consumed, target) {
+  const ring = $(id);
+  if (!ring) return;
+
+  const circle = ring.querySelector(".ring-fill");
+  const percentage = ring.querySelector(".ring-percent");
+
+  if (!circle || !percentage) return;
+
+  const current = Number(consumed) || 0;
+  const goal = Number(target) || 0;
+
+  const progress = goal > 0
+    ? Math.min(100, Math.max(0, (current / goal) * 100))
+    : 0;
+
+  const radius = 42;
+  const circumference = 2 * Math.PI * radius;
+
+  circle.style.strokeDasharray = circumference;
+  circle.style.strokeDashoffset =
+    circumference - (progress / 100) * circumference;
+
+  animateNumber(
+    percentage,
+    Math.round(progress),
+    "%",
+    0
+  );
+}
+
+// ==========================================
+// UPDATE DASHBOARD
+// ==========================================
 
 export function updateDashboard() {
   const {
@@ -81,107 +192,115 @@ export function updateDashboard() {
     remaining
   } = getDashboardData();
 
-    const nutritionTargets = getNutritionTargets();
+  const nutritionTargets = getNutritionTargets();
 
-  if ($("totalCalories")) {
-    $("totalCalories").textContent = Math.round(total.kcal);
-  }
+  // Pastikan angka selalu numerik.
+  const kcal = Number(total.kcal) || 0;
+  const protein = Number(total.protein) || 0;
+  const carbs = Number(total.carbs) || 0;
+  const fat = Number(total.fat) || 0;
+
+  const calorieTarget = Number(target) || 0;
+  const remainingCalories = Number(remaining) || 0;
+
+  // ------------------------------------------
+  // KALORI
+  // ------------------------------------------
+
+  animateNumber(
+    $("totalCalories"),
+    Math.round(kcal)
+  );
 
   if ($("targetText")) {
-    $("targetText").textContent = target;
+    $("targetText").textContent = calorieTarget;
   }
 
-  if ($("remainingCalories")) {
-    $("remainingCalories").textContent = Math.round(remaining);
+  animateNumber(
+    $("remainingCalories"),
+    Math.round(remainingCalories)
+  );
+
+  // Progress kalori.
+  const progress = calorieTarget > 0
+    ? Math.min(100, Math.max(0, (kcal / calorieTarget) * 100))
+    : 0;
+
+  const progressBar = $("progressBar");
+
+  if (progressBar) {
+    progressBar.style.width = progress + "%";
+    progressBar.setAttribute(
+      "aria-valuenow",
+      Math.round(progress)
+    );
   }
 
-  if ($("progressBar")) {
-    const progress = target > 0
-  ? Math.min(100, total.kcal / target * 100)
-  : 0;
+  // ------------------------------------------
+  // MAKRO NUTRISI
+  // ------------------------------------------
 
-    $("progressBar").style.width = progress + "%";
-  }
+  animateNumber($("totalProtein"), protein, " g", 1);
+  animateNumber($("totalCarbs"), carbs, " g", 1);
+  animateNumber($("totalFat"), fat, " g", 1);
 
-  if ($("totalProtein")) {
-    $("totalProtein").textContent =
-      total.protein.toFixed(1) + " g";
-  }
+  // ------------------------------------------
+  // TARGET NUTRISI
+  // ------------------------------------------
 
-  if ($("totalCarbs")) {
-    $("totalCarbs").textContent =
-      total.carbs.toFixed(1) + " g";
-  }
-
-  if ($("totalFat")) {
-    $("totalFat").textContent =
-      total.fat.toFixed(1) + " g";
-  }
-
-    // Menampilkan target nutrisi.
   if ($("proteinTargetText")) {
-    $("proteinTargetText").textContent = nutritionTargets.protein;
+    $("proteinTargetText").textContent =
+      nutritionTargets.protein;
   }
 
   if ($("carbsTargetText")) {
-    $("carbsTargetText").textContent = nutritionTargets.carbs;
+    $("carbsTargetText").textContent =
+      nutritionTargets.carbs;
   }
 
   if ($("fatTargetText")) {
-    $("fatTargetText").textContent = nutritionTargets.fat;
+    $("fatTargetText").textContent =
+      nutritionTargets.fat;
   }
 
- 
-// Mengatur circular nutrition progress.
-const setNutritionProgress = (id, consumed, target) => {
-  const ring = $(id);
-  if (!ring) return;
-
-  const progress = target > 0
-    ? Math.min(100, Math.max(0, (consumed / target) * 100))
-    : 0;
-
-  const circle = ring.querySelector(".ring-fill");
-  const percentage = ring.querySelector(".ring-percent");
-
-  if (!circle || !percentage) return;
-
-  const radius = 42;
-  const circumference = 2 * Math.PI * radius;
-
-  const offset = circumference - (progress / 100) * circumference;
-
-  circle.style.strokeDasharray = circumference;
-  circle.style.strokeDashoffset = offset;
-
-  percentage.textContent = Math.round(progress) + "%";
-};
-
+  // ------------------------------------------
+  // CIRCULAR PROGRESS
+  // ------------------------------------------
 
   setNutritionProgress(
     "proteinProgress",
-    total.protein,
+    protein,
     nutritionTargets.protein
   );
 
   setNutritionProgress(
     "carbsProgress",
-    total.carbs,
+    carbs,
     nutritionTargets.carbs
   );
 
   setNutritionProgress(
     "fatProgress",
-    total.fat,
+    fat,
     nutritionTargets.fat
   );
+
+  // ------------------------------------------
+  // RIWAYAT
+  // ------------------------------------------
 
   renderHistory(meals);
 }
 
+// ==========================================
+// EDIT TARGET KALORI
+// ==========================================
+
 function setupTargetButton() {
   const button = $("editTarget");
-  if (!button) return;
+  if (!button || button.dataset.initialized === "true") return;
+
+  button.dataset.initialized = "true";
 
   button.addEventListener("click", () => {
     const value = prompt(
@@ -195,10 +314,11 @@ function setupTargetButton() {
 
     if (!Number.isFinite(target) || target <= 0) {
       showAppModal({
-  type: "warning",
-  title: "Error",
-  message: "Target harus berupa angka positif."
-});
+        type: "warning",
+        title: "Error",
+        message: "Target harus berupa angka positif."
+      });
+
       return;
     }
 
@@ -207,18 +327,27 @@ function setupTargetButton() {
   });
 }
 
+// ==========================================
+// INITIALIZATION
+// ==========================================
+
 function initializeDashboard() {
   renderToday();
+  setupTargetButton();
   updateDashboard();
 
-  // Memperbarui Dashboard ketika target Profil berubah.
-  window.addEventListener("profileTargetUpdated", updateDashboard);
+  // Memperbarui dashboard ketika target profil berubah.
+  window.addEventListener(
+    "profileTargetUpdated",
+    updateDashboard
+  );
 }
 
 if (document.readyState === "loading") {
   document.addEventListener(
     "DOMContentLoaded",
-    initializeDashboard
+    initializeDashboard,
+    { once: true }
   );
 } else {
   initializeDashboard();
