@@ -674,7 +674,7 @@ html[data-theme="dark"] {
   margin: 0 0 5px;
   color: var(--dashboard-text);
   font-size: clamp(12px, 3.5vw, 20px);
-  font-weight: 850;
+  font-weight: 750;
   letter-spacing: -.4px;
   overflow-wrap: anywhere;
   text-align: center;
