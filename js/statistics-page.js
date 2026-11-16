@@ -35,6 +35,178 @@ function escapeHTML(value) {
   })[char]);
 }
 
+
+// =========================================
+// STATISTICS ANIMATION ENGINE
+// =========================================
+
+function animateStatNumber(element, target, suffix = "", digits = 0, duration = 1800) {
+  if (!element) return;
+
+  const value = Number(target);
+
+  if (!Number.isFinite(value)) return;
+
+  const formatter = new Intl.NumberFormat(getLocale(), {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits
+  });
+
+  const startTime = performance.now();
+
+  element.textContent = `${formatter.format(0)}${suffix}`;
+
+  function update(now) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 4);
+
+    const currentValue = value * eased;
+
+    element.textContent =
+      `${formatter.format(currentValue)}${suffix}`;
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      element.textContent =
+        `${formatter.format(value)}${suffix}`;
+    }
+  }
+
+  requestAnimationFrame(update);
+}
+
+
+function animateStatisticsPage(stats) {
+  const sections = document.querySelectorAll(
+    "#statisticsPage .statistics-section"
+  );
+
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  // Reset animasi seluruh section
+  sections.forEach((section, index) => {
+    section.classList.remove("statistics-animated");
+
+    section.style.setProperty(
+      "--stat-delay",
+      `${index * 120}ms`
+    );
+  });
+
+  // Atur jeda animasi setiap kartu ringkasan
+  const summaryCards = document.querySelectorAll(
+    "#statisticsPage .statistics-summary .statistics-card"
+  );
+
+  summaryCards.forEach((card, index) => {
+    card.style.transitionDelay = `${index * 150}ms`;
+  });
+
+  // Animasi langsung jika pengguna memilih reduced motion
+  if (reducedMotion) {
+    sections.forEach(section => {
+      section.classList.add("statistics-animated");
+    });
+
+    animateStatisticsNumbers(stats);
+    return;
+  }
+
+  // Paksa browser membaca kondisi awal animasi
+  sections.forEach(section => {
+    section.getBoundingClientRect();
+  });
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+
+      // Aktifkan animasi seluruh section
+      sections.forEach(section => {
+        section.classList.add("statistics-animated");
+      });
+
+      // Jalankan animasi angka
+      animateStatisticsNumbers(stats);
+
+    });
+  });
+}
+
+
+// =========================================
+// ANIMASI ANGKA STATISTIK
+// =========================================
+
+function animateStatisticsNumbers(stats) {
+
+  // Ringkasan utama
+  animateStatNumber(
+    $("statTotalCalories"),
+    Math.round(stats.total.kcal)
+  );
+
+  animateStatNumber(
+    $("statAverageCalories"),
+    Math.round(stats.average)
+  );
+
+  animateStatNumber(
+    $("statTotalMeals"),
+    stats.mealCount
+  );
+
+  animateStatNumber(
+    $("statRecordedDays"),
+    stats.recordedDays
+  );
+
+  // Rincian nutrisi
+  animateStatNumber(
+    $("statProtein"),
+    stats.total.protein,
+    " g",
+    1
+  );
+
+  animateStatNumber(
+    $("statCarbs"),
+    stats.total.carbs,
+    " g",
+    1
+  );
+
+  animateStatNumber(
+    $("statFat"),
+    stats.total.fat,
+    " g",
+    1
+  );
+
+  // Angka pada grafik kalori
+  const chart = $("calorieChart");
+
+  if (chart) {
+    chart.querySelectorAll(
+      ".statistics-chart-column strong"
+    ).forEach(element => {
+
+      const target = Number(
+        element.dataset.chartValue
+      );
+
+      if (Number.isFinite(target)) {
+        animateStatNumber(element, target);
+      }
+
+    });
+  }
+}
+
+
+
 // =========================================
 // MENGAMBIL DATA MAKANAN
 // =========================================
@@ -245,6 +417,7 @@ function calculateStatistics(meals) {
 // MENAMPILKAN STATISTIK
 // =========================================
 
+
 function renderStatistics() {
   const meals = getFilteredMeals();
   const stats = calculateStatistics(meals);
@@ -308,7 +481,14 @@ function renderStatistics() {
 
   // Grafik kalori
   renderCalorieChart(stats.dailyData);
+
+  // Jalankan animasi setelah seluruh elemen dirender
+  animateStatisticsPage({
+    ...stats,
+    mealCount: meals.length
+  });
 }
+
 
 // =========================================
 // TREN KALORI
@@ -473,6 +653,7 @@ function renderGoalProgress(stats) {
 // GRAFIK KALORI
 // =========================================
 
+
 function renderCalorieChart(dailyData) {
   const container = $("calorieChart");
 
@@ -480,6 +661,8 @@ function renderCalorieChart(dailyData) {
 
   const dates = Object.keys(dailyData).sort();
   const target = Number(getTarget()) || 0;
+
+  container.classList.remove("is-animated");
 
   if (!dates.length) {
     container.innerHTML = `
@@ -557,7 +740,7 @@ function renderCalorieChart(dailyData) {
           return `
             <div class="statistics-chart-column">
 
-              <strong>
+              <strong data-chart-value="${item.kcal}">
                 ${formatNumber(Math.round(item.kcal))}
               </strong>
 
@@ -590,7 +773,17 @@ function renderCalorieChart(dailyData) {
       </div>
     </div>
   `;
+
+  // Aktifkan animasi grafik setelah DOM selesai dibuat
+  container.getBoundingClientRect();
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      container.classList.add("is-animated");
+    });
+  });
 }
+
 
 // =========================================
 // FILTER PERIODE DAN EVENT

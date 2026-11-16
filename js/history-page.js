@@ -176,7 +176,6 @@ function calculateDailyNutrition(dailyMeals) {
     }
   ];
 
-  // Ambil isi makanan tanpa menjumlahkan total kelompok dua kali
   const foods = dailyMeals.flatMap(meal =>
     Array.isArray(meal.foods) && meal.foods.length
       ? meal.foods
@@ -327,8 +326,6 @@ function renderDailySummary(dailyMeals) {
         </span>
       </div>
 
-      <!-- KALORI UTAMA -->
-
       <div class="history-calorie-panel">
         <div class="history-calorie-heading">
           <span>${escapeHTML(t("historyDynamic.totalCalories"))}</span>
@@ -356,7 +353,7 @@ function renderDailySummary(dailyMeals) {
               <div class="history-progress-track">
                 <div
                   class="history-progress-fill"
-                  style="width: ${progressWidth}%"
+                  style="--history-progress-width: ${progressWidth}%"
                 ></div>
               </div>
 
@@ -385,8 +382,6 @@ function renderDailySummary(dailyMeals) {
         }
       </div>
 
-      <!-- GRAFIK MAKRO -->
-
       <div class="history-macro-section">
         <div class="history-macro-heading">
           <div>
@@ -400,8 +395,6 @@ function renderDailySummary(dailyMeals) {
         </div>
       </div>
 
-      <!-- NUTRISI LAINNYA -->
-
       <div class="history-summary-heading">
         <span>${escapeHTML(t("historyDynamic.nutritionDetails"))}</span>
         <strong>${escapeHTML(t("historyDynamic.totalIntake"))}</strong>
@@ -414,6 +407,143 @@ function renderDailySummary(dailyMeals) {
     </div>
   `;
 }
+
+
+
+
+
+
+function animateHistoryNumber(element, duration = 1800) {
+  if (!element) return;
+
+  const targetText =
+    element.dataset.countTarget || element.textContent.trim();
+
+  const match = targetText.match(/-?[\d.,]+/);
+  if (!match) return;
+
+  let numberText = match[0];
+
+  if (numberText.includes(".") && numberText.includes(",")) {
+    numberText = numberText.replace(/\./g, "").replace(",", ".");
+  } else if (numberText.includes(".")) {
+    numberText = numberText.replace(/\./g, "");
+  } else {
+    numberText = numberText.replace(",", ".");
+  }
+
+  const targetValue = Number(numberText);
+  if (!Number.isFinite(targetValue)) return;
+
+  const prefix = targetText.slice(0, match.index);
+  const suffix = targetText.slice(match.index + match[0].length);
+
+  const formatter = new Intl.NumberFormat(getLocale(), {
+    maximumFractionDigits: 2
+  });
+
+  element.dataset.countTarget = targetText;
+
+  const startTime = performance.now();
+
+  function update(now) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 4);
+
+    element.textContent =
+      `${prefix}${formatter.format(targetValue * eased)}${suffix}`;
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      element.textContent = targetText;
+    }
+  }
+
+  element.textContent = `${prefix}0${suffix}`;
+  requestAnimationFrame(update);
+}
+
+
+
+
+
+// ==========================================
+// HISTORY — ANIMATION ENGINE
+// ==========================================
+
+function animateHistoryPage() {
+  const container = $("fullHistoryList");
+  if (!container) return;
+
+  const days = container.querySelectorAll(".history-day");
+  if (!days.length) return;
+
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (reducedMotion) {
+    days.forEach(day => day.classList.add("history-animated"));
+    return;
+  }
+
+  days.forEach(day => {
+    day.classList.remove("history-animated");
+
+    // Ambil semua angka nutrisi di ringkasan harian
+    day.querySelectorAll(
+      ".history-calorie-number strong, " +
+      ".history-target-info strong, " +
+      ".history-progress-caption strong, " +
+      ".history-progress-caption span, " +
+      ".history-summary-grid .history-summary-item strong, " +
+      ".history-macro-legend strong"
+    ).forEach(element => {
+      // Simpan teks asli sebelum animasi
+      if (!element.dataset.countTarget) {
+        element.dataset.countTarget = element.textContent.trim();
+      }
+
+      // Kembalikan teks asli agar bisa dianimasikan ulang
+      element.textContent = element.dataset.countTarget;
+    });
+
+    // Atur jeda animasi catatan makanan
+    day.querySelectorAll(".history-record").forEach((record, index) => {
+      record.style.setProperty(
+        "--history-delay",
+        `${300 + index * 120}ms`
+      );
+    });
+  });
+
+  container.getBoundingClientRect();
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      days.forEach((day, dayIndex) => {
+        setTimeout(() => {
+          day.classList.add("history-animated");
+
+          // Animasi semua angka ringkasan nutrisi
+          day.querySelectorAll(
+            ".history-calorie-number strong, " +
+            ".history-target-info strong, " +
+            ".history-progress-caption strong, " +
+            ".history-progress-caption span, " +
+            ".history-summary-grid .history-summary-item strong, " +
+            ".history-macro-legend strong"
+          ).forEach(element => {
+            animateHistoryNumber(element, 1800);
+          });
+
+        }, dayIndex * 250);
+      });
+    });
+  });
+}
+
 
 // =========================================
 // HALAMAN RIWAYAT MAKANAN
@@ -483,6 +613,7 @@ function renderHistoryPage(selectedDate = "") {
     groupedMeals[date].push(meal);
   });
 
+  // Render seluruh riwayat
   container.innerHTML = Object.entries(groupedMeals)
     .map(([date, dailyMeals], dayIndex) => {
 
@@ -492,6 +623,7 @@ function renderHistoryPage(selectedDate = "") {
           ? meal.foods
           : [meal];
 
+        // Daftar makanan
         const foodList = foods.map(food => {
           const name = escapeHTML(
             food.name || t("historyDynamic.food")
@@ -520,8 +652,10 @@ function renderHistoryPage(selectedDate = "") {
           `;
         }).join("");
 
+        // ID detail nutrisi
         const infoId = `history-info-${dayIndex}-${mealIndex}`;
 
+        // Detail nutrisi makanan
         const nutritionDetails = foods.map(food => `
           <div class="history-food-nutrition">
             <strong>
@@ -570,6 +704,7 @@ function renderHistoryPage(selectedDate = "") {
         `;
       }).join("");
 
+      // Kartu harian
       return `
         <section class="history-day">
 
@@ -584,6 +719,9 @@ function renderHistoryPage(selectedDate = "") {
         </section>
       `;
     }).join("");
+
+  // Jalankan animasi setelah DOM selesai dirender
+  animateHistoryPage();
 }
 
 // =========================================
@@ -608,11 +746,11 @@ function initializeHistoryPage() {
     renderHistoryPage();
   });
 
-  // Ketika halaman riwayat dibuka
+  // Setiap kali halaman History dibuka
   document.addEventListener("kaloriku:pagechange", (event) => {
-    if (event.detail?.pageId === "historyPage") {
-      renderHistoryPage(dateInput?.value || "");
-    }
+    if (event.detail?.pageId !== "historyPage") return;
+
+    renderHistoryPage(dateInput?.value || "");
   });
 
   // Ketika bahasa diganti
