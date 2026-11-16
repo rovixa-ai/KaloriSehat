@@ -169,7 +169,6 @@ function renderHistory(meals) {
 // KALORIKU — SYNCHRONIZED ANIMATION
 // ==========================================
 
-
 function setNutritionProgress(
   id,
   consumed,
@@ -200,10 +199,18 @@ function setNutritionProgress(
     circumference - (progress / 100) * circumference;
 
   if (restartFromZero) {
+    circle.style.transition = "none";
     circle.style.strokeDashoffset = circumference;
 
+    circle.getBoundingClientRect();
+
     requestAnimationFrame(() => {
-      circle.style.strokeDashoffset = targetOffset;
+      requestAnimationFrame(() => {
+        circle.style.transition =
+          "stroke-dashoffset 1200ms cubic-bezier(0.22, 1, 0.36, 1)";
+
+        circle.style.strokeDashoffset = targetOffset;
+      });
     });
   } else {
     circle.style.strokeDashoffset = targetOffset;
@@ -225,6 +232,7 @@ function setNutritionProgress(
     restartFromZero
   );
 }
+
 
 
 
@@ -279,6 +287,7 @@ export function updateDashboard(restartFromZero = false) {
   );
 
   // CALORIE PROGRESS
+ 
   const calorieProgress = calorieTarget > 0
     ? Math.min(100, Math.max(0, (kcal / calorieTarget) * 100))
     : 0;
@@ -286,12 +295,20 @@ export function updateDashboard(restartFromZero = false) {
   const progressBar = $("progressBar");
 
   if (progressBar) {
-
     if (restartFromZero) {
+      progressBar.style.transition = "none";
       progressBar.style.width = "0%";
 
+      // Paksa browser membaca kondisi awal
+      progressBar.getBoundingClientRect();
+
       requestAnimationFrame(() => {
-        progressBar.style.width = calorieProgress + "%";
+        requestAnimationFrame(() => {
+          progressBar.style.transition =
+            "width 900ms cubic-bezier(0.22, 1, 0.36, 1)";
+
+          progressBar.style.width = calorieProgress + "%";
+        });
       });
     } else {
       progressBar.style.width = calorieProgress + "%";
@@ -308,6 +325,7 @@ export function updateDashboard(restartFromZero = false) {
     progressBar.dataset.reached =
       calorieProgress >= 100 ? "true" : "false";
   }
+
 
   // TOTAL MAKRO NUTRISI
   animateNumber(
