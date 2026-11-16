@@ -53,6 +53,65 @@ function saveProfile(profile) {
   syncProfileToCloud(profile);
 }
 
+
+
+// =====================================
+// ANIMASI HALAMAN PROFIL
+// =====================================
+
+let profileAnimationFrame = null;
+
+function animateProfilePage() {
+  const profilePage = document.getElementById("profilePage");
+
+  if (!profilePage || profilePage.hidden) return;
+
+  // Hentikan animasi sebelumnya jika masih berjalan.
+  if (profileAnimationFrame) {
+    cancelAnimationFrame(profileAnimationFrame);
+  }
+
+  // Reset animasi agar bisa diputar ulang.
+  profilePage.classList.remove("profile-page-animated");
+
+  // Atur jeda animasi setiap elemen.
+  const animatedElements = profilePage.querySelectorAll(
+    ":scope > .welcome, " +
+    ":scope > .language-setting, " +
+    ":scope > .profile-identity, " +
+    ":scope > .profile-form-start, " +
+    ":scope > #profileWizard, " +
+    ":scope > .goal-simulation-card, " +
+    ":scope > .profile-section:not(.language-setting), " +
+    ":scope > .profile-actions"
+  );
+
+  animatedElements.forEach((element, index) => {
+    element.style.setProperty(
+      "--profile-animation-delay",
+      `${index * 90}ms`
+    );
+  });
+
+  // Paksa browser membaca ulang layout.
+  void profilePage.offsetWidth;
+
+  // Jalankan animasi.
+  profileAnimationFrame = requestAnimationFrame(() => {
+    profileAnimationFrame = requestAnimationFrame(() => {
+      profilePage.classList.add("profile-page-animated");
+    });
+  });
+}
+
+// Jalankan ulang setiap kali halaman Profil dibuka.
+document.addEventListener("kaloriku:pagechange", (event) => {
+  if (event.detail?.pageId === "profilePage") {
+    animateProfilePage();
+  }
+});
+
+
 // =====================================
 // INISIALISASI HALAMAN PROFIL
 // =====================================

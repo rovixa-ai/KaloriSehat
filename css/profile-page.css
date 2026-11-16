@@ -1149,3 +1149,128 @@ html[data-theme="dark"] .profile-wizard-header > span {
     transition: none !important;
   }
 }
+
+
+
+/* ==========================================
+   KALORIKU — PROFILE PAGE ANIMATION
+========================================== */
+
+#profilePage > .welcome,
+#profilePage > .language-setting,
+#profilePage > .profile-identity,
+#profilePage > .profile-form-start,
+#profilePage > #profileWizard,
+#profilePage > .goal-simulation-card,
+#profilePage > .profile-section:not(.language-setting),
+#profilePage > .profile-actions {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 650ms ease,
+    transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--profile-animation-delay, 0ms);
+}
+
+#profilePage.profile-page-animated > .welcome,
+#profilePage.profile-page-animated > .language-setting,
+#profilePage.profile-page-animated > .profile-identity,
+#profilePage.profile-page-animated > .profile-form-start,
+#profilePage.profile-page-animated > #profileWizard,
+#profilePage.profile-page-animated > .goal-simulation-card,
+#profilePage.profile-page-animated > .profile-section:not(.language-setting),
+#profilePage.profile-page-animated > .profile-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Foto profil */
+#profilePage .profile-avatar {
+  transition:
+    transform 450ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 450ms ease;
+}
+
+#profilePage.profile-page-animated .profile-avatar {
+  animation: profileAvatarEnter 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes profileAvatarEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+
+  70% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Isi kartu simulasi */
+#profilePage .goal-simulation-results {
+  transition:
+    opacity 450ms ease,
+    transform 450ms ease;
+}
+
+#profilePage .goal-simulation-results:not([hidden]) {
+  animation: profileResultEnter 550ms ease both;
+}
+
+@keyframes profileResultEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Wizard */
+#profilePage .profile-wizard:not([hidden]) {
+  animation: profileWizardEnter 450ms ease both;
+}
+
+@keyframes profileWizardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Progress wizard */
+#profileWizardProgress {
+  transition: width 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Aksesibilitas */
+@media (prefers-reduced-motion: reduce) {
+  #profilePage > .welcome,
+  #profilePage > .language-setting,
+  #profilePage > .profile-identity,
+  #profilePage > .profile-form-start,
+  #profilePage > #profileWizard,
+  #profilePage > .goal-simulation-card,
+  #profilePage > .profile-section:not(.language-setting),
+  #profilePage > .profile-actions,
+  #profilePage .goal-simulation-results,
+  #profilePage .profile-wizard:not([hidden]) {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}
