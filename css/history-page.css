@@ -49,11 +49,14 @@ html[data-theme="dark"] {
   margin-top: 24px;
 }
 
-/* HEADER HALAMAN */
+
+/* ========================================
+   HEADER HALAMAN RIWAYAT
+======================================== */
 
 #historyPage .welcome {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 #historyPage .welcome h2 {
@@ -67,84 +70,82 @@ html[data-theme="dark"] {
   text-transform: uppercase;
 }
 
-/* FILTER TANGGAL */
+/* ========================================
+   WELCOME + CALENDAR BUTTON
+======================================== */
 
-.history-filter {
-  position: relative;
-  overflow: hidden;
-  background: var(--history-bg);
-  border: 1px solid var(--history-border);
-  border-radius: 18px;
-  padding: 18px;
-  margin-bottom: 24px;
-  box-shadow: var(--history-shadow);
-}
-
-.history-filter::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 5px;
-  height: 100%;
-  background: var(--history-primary);
-}
-
-.history-filter label {
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-  color: var(--history-text-secondary);
-}
-
-.history-filter-controls {
+#historyPage .history-welcome {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.history-filter-controls input {
+#historyPage .history-welcome-content {
   flex: 1;
   min-width: 0;
-  padding: 12px 14px;
-  border: 1px solid var(--history-border);
-  border-radius: 12px;
-  background: var(--history-input-bg);
-  color: var(--history-text);
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  outline: none;
 }
 
-.history-filter-controls input:focus {
-  border-color: #80c943;
-  box-shadow: 0 0 0 3px rgba(166, 229, 92, 0.15);
-}
-
-.history-filter-controls input::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-}
-
-.history-filter-controls button {
+#historyPage .history-calendar-wrapper {
+  position: relative;
   flex-shrink: 0;
-  border: none;
-  border-radius: 12px;
-  background: var(--history-primary);
-  color: #172314;
-  padding: 0 18px;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
-.history-filter-controls button:hover {
-  filter: brightness(1.06);
-  transform: translateY(-2px);
+#historyPage .history-calendar-button {
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--history-border);
+  border-radius: 14px;
+
+  background: var(--history-bg);
+  color: var(--history-primary);
+
+  box-shadow: var(--history-shadow);
+
+  cursor: pointer;
+
+  transition:
+    background 250ms ease,
+    transform 250ms ease,
+    color 250ms ease;
+}
+
+#historyPage .history-calendar-button:active {
+  transform: scale(.94);
+}
+
+@media (hover: hover) {
+  #historyPage .history-calendar-button:hover {
+    background: var(--history-input-bg);
+    transform: translateY(-2px);
+  }
+}
+
+/* INPUT DATE TERSEMBUNYI */
+
+#historyPage .history-date-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* ========================================
+   HISTORY PAGE HEADER
+======================================== */
+
+#historyPage .history-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 /* HEADER DAFTAR RIWAYAT */

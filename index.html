@@ -333,44 +333,73 @@
 
 
   
+
 <!-- HALAMAN RIWAYAT -->
 <main id="historyPage" hidden>
-  <section class="welcome">
-  <p data-i18n="foodHistory.eyebrow">Catatan makananmu</p>
 
-  <h2 data-i18n="foodHistory.title">Riwayat Makanan</h2>
+  <section class="welcome history-welcome">
 
-  <p data-i18n="foodHistory.description">
-    Lihat kembali makanan dan kalori yang sudah dicatat.
-  </p>
-</section>
+    <div class="history-welcome-content">
+      <p data-i18n="foodHistory.eyebrow">Catatan makananmu</p>
+
+      <h2 data-i18n="foodHistory.title">Riwayat Makanan</h2>
+
+      <p data-i18n="foodHistory.description">
+        Lihat kembali makanan dan kalori yang sudah dicatat.
+      </p>
+    </div>
+
+    <!-- FILTER KALENDER -->
+    <div class="history-calendar-wrapper">
+
+      <button
+        type="button"
+        id="historyCalendarButton"
+        class="history-calendar-button"
+        aria-label="Pilih tanggal riwayat"
+        title="Pilih tanggal"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          width="22"
+          height="22"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <rect x="3" y="5" width="18" height="16" rx="2"/>
+          <path d="M16 3v4M8 3v4M3 10h18"/>
+          <path d="M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/>
+        </svg>
+      </button>
+
+      <input
+        type="date"
+        id="historyDate"
+        class="history-date-hidden"
+        aria-label="Pilih tanggal riwayat"
+      >
+
+    </div>
+
+  </section>
 
   <section class="history-page-section">
 
-  <div class="history-filter">
-    <label for="historyDate" data-i18n="historyPage.dateLabel">
-      Pilih tanggal riwayat
-    </label>
-
-    <div class="history-filter-controls">
-      <input type="date" id="historyDate">
-
-      <button type="button" id="resetHistoryFilter"
-        data-i18n="historyPage.reset">
-        Reset
-      </button>
+    <div class="history-page-header">
+      <h3 data-i18n="historyPage.allHistory">Semua riwayat</h3>
+      <span id="historyCount">0 catatan</span>
     </div>
-  </div>
 
-  <div class="history-page-header">
-    <h3 data-i18n="historyPage.allHistory">Semua riwayat</h3>
-    <span id="historyCount">0 catatan</span>
-  </div>
+    <div id="fullHistoryList"></div>
 
-  <div id="fullHistoryList"></div>
+  </section>
 
-</section>
 </main>
+
 
 
 <!-- HALAMAN STATISTIK -->
