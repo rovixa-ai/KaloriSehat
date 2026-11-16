@@ -25,7 +25,7 @@ export const translations = {
     nutritionOverview: {
       title: "Asupan Nutrisi",
       protein: "Protein",
-      carbs: "Karbohidrat",
+      carbs: "Karbo",
       fat: "Lemak",
       water: "Air",
       waterUnit: "ml",
