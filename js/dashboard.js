@@ -14,6 +14,7 @@ export function getTodayMeals() {
   return meals.filter(meal => meal.date === today);
 }
 
+
 export function calculateDailyNutrition(meals) {
   return meals.reduce((total, meal) => {
     total.kcal += Number(meal.kcal) || 0;
@@ -21,14 +22,19 @@ export function calculateDailyNutrition(meals) {
     total.carbs += Number(meal.carbs) || 0;
     total.fat += Number(meal.fat) || 0;
 
+    // Total kandungan air (gram ≈ ml)
+    total.water += Number(meal.water) || 0;
+
     return total;
   }, {
     kcal: 0,
     protein: 0,
     carbs: 0,
-    fat: 0
+    fat: 0,
+    water: 0
   });
 }
+
 
 export function getDashboardData() {
   const meals = getTodayMeals();

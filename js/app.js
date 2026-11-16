@@ -274,11 +274,12 @@ async function renderDetectedFoods(foodList) {
   container.innerHTML = "";
 
   const total = {
-    kcal: 0,
-    protein: 0,
-    carbs: 0,
-    fat: 0
-  };
+  kcal: 0,
+  protein: 0,
+  carbs: 0,
+  fat: 0,
+  water: 0
+};
 
   foodList.forEach(food => {
     const item = document.createElement("div");
@@ -341,10 +342,15 @@ async function renderDetectedFoods(foodList) {
       const carbs = nutrition.carbs * factor;
       const fat = nutrition.fat * factor;
 
+      const water = nutrition.water === null
+        ? 0
+        : (Number(nutrition.water) || 0) * factor;
+
       total.kcal += kcal;
       total.protein += protein;
       total.carbs += carbs;
       total.fat += fat;
+      total.water += water;
 
       nutritionInfo.textContent =
         `${Math.round(kcal)} ${t("calories")} | ` +
@@ -481,10 +487,11 @@ async function renderDetectedFoods(foodList) {
 
   const totalText = document.createElement("p");
   totalText.textContent =
-    `${Math.round(total.kcal)} ${t("calories")} | ` +
-    `${t("protein")} ${total.protein.toFixed(1)} g | ` +
-    `${t("carbohydrates")} ${total.carbs.toFixed(1)} g | ` +
-    `${t("fat")} ${total.fat.toFixed(1)} g`;
+  `${Math.round(total.kcal)} ${t("calories")} | ` +
+  `${t("protein")} ${total.protein.toFixed(1)} g | ` +
+  `${t("carbohydrates")} ${total.carbs.toFixed(1)} g | ` +
+  `${t("fat")} ${total.fat.toFixed(1)} g | ` +
+  `${Math.round(total.water)} ml ${t("water")}`;
 
   totalInfo.append(totalTitle, totalText);
   totalBox.appendChild(totalInfo);
@@ -549,18 +556,20 @@ async function renderDetectedFoods(foodList) {
     }
 
     const groupTotal = foodsToSave.reduce((sum, food) => {
-      sum.kcal += food.kcal;
-      sum.protein += food.protein || 0;
-      sum.carbs += food.carbs || 0;
-      sum.fat += food.fat || 0;
+  sum.kcal += Number(food.kcal) || 0;
+  sum.protein += Number(food.protein) || 0;
+  sum.carbs += Number(food.carbs) || 0;
+  sum.fat += Number(food.fat) || 0;
+  sum.water += Number(food.water) || 0;
 
-      return sum;
-    }, {
-      kcal: 0,
-      protein: 0,
-      carbs: 0,
-      fat: 0
-    });
+  return sum;
+}, {
+  kcal: 0,
+  protein: 0,
+  carbs: 0,
+  fat: 0,
+  water: 0
+});
 
     const meals = getMeals();
 
@@ -720,25 +729,31 @@ $("calculateButton").addEventListener("click", async () => {
 
   const factor = weight / 100;
 
-  currentResult = {
-    name,
-    weight,
-    kcal: food.kcal * factor,
-    protein: food.protein * factor,
-    carbs: food.carbs * factor,
-    fat: food.fat * factor,
-    fiber: food.fiber,
-    sodium: food.sodium,
-    water: food.water,
-    source: food.source,
-    code: food.code
-  };
+ currentResult = {
+  name,
+  weight,
+  kcal: food.kcal * factor,
+  protein: food.protein * factor,
+  carbs: food.carbs * factor,
+  fat: food.fat * factor,
+  fiber: food.fiber,
+  sodium: food.sodium,
+
+  // Kandungan air disesuaikan dengan berat makanan
+  water: food.water === null
+    ? null
+    : (Number(food.water) || 0) * factor,
+
+  source: food.source,
+  code: food.code
+};
 
   $("resultDetails").textContent =
     `${Math.round(currentResult.kcal)} ${t("calories")} | ` +
     `${t("protein")} ${currentResult.protein.toFixed(1)} g | ` +
     `${t("carbohydrates")} ${currentResult.carbs.toFixed(1)} g | ` +
-    `${t("fat")} ${currentResult.fat.toFixed(1)} g`;
+    `${t("fat")} ${currentResult.fat.toFixed(1)} g | ` +
+    `${Math.round(currentResult.water)} ml ${t("water")} `;
 
   $("result").hidden = false;
 });

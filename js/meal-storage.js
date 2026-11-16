@@ -34,6 +34,7 @@ export function getTarget() {
   }
 }
 
+
 export function getNutritionTargets() {
   try {
     const profile = JSON.parse(
@@ -43,7 +44,10 @@ export function getNutritionTargets() {
     return {
       protein: Number(profile.dailyProteinTarget) || 0,
       carbs: Number(profile.dailyCarbTarget) || 0,
-      fat: Number(profile.dailyFatTarget) || 0
+      fat: Number(profile.dailyFatTarget) || 0,
+
+      // Target air harian (ml)
+      water: Number(profile.dailyWaterTarget) || 2000
     };
 
   } catch (error) {
@@ -52,10 +56,12 @@ export function getNutritionTargets() {
     return {
       protein: 0,
       carbs: 0,
-      fat: 0
+      fat: 0,
+      water: 2000
     };
   }
 }
+
 
 export function saveTarget(target) {
   localStorage.setItem(

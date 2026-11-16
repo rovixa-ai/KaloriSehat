@@ -135,7 +135,7 @@
     <div class="nutrition-card carbs-card">
       <div class="nutrition-card-top">
         <span class="nutrition-icon">🌾</span>
-        <span class="nutrition-label" data-i18n="nutritionOverview.carbs">Karbohidrat</span>
+        <span class="nutrition-label" data-i18n="nutritionOverview.carbs">Carbs</span>
       </div>
 
       <div class="nutrition-ring" id="carbsProgress">
@@ -180,6 +180,32 @@
         <span data-i18n="nutritionOverview.target">Target</span>:
         <b id="fatTargetText">0</b>
         <span data-i18n="nutritionOverview.unit">g</span>
+      </small>
+    </div>
+
+    <!-- AIR -->
+    <div class="nutrition-card water-card">
+      <div class="nutrition-card-top">
+        <span class="nutrition-icon">💧</span>
+        <span class="nutrition-label" data-i18n="nutritionOverview.water">Air</span>
+      </div>
+
+      <div class="nutrition-ring" id="waterProgress">
+        <svg viewBox="0 0 100 100">
+          <circle class="ring-bg" cx="50" cy="50" r="42"/>
+          <circle class="ring-fill" cx="50" cy="50" r="42"/>
+        </svg>
+        <div class="ring-content">
+          <strong class="ring-percent">0%</strong>
+          <span data-i18n="nutritionOverview.target">Target</span>
+        </div>
+      </div>
+
+      <strong id="totalWater">0 ml</strong>
+      <small>
+        <span data-i18n="nutritionOverview.target">Target</span>:
+        <b id="waterTargetText">0</b>
+        <span data-i18n="nutritionOverview.waterUnit">ml</span>
       </small>
     </div>
 

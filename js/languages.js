@@ -27,6 +27,8 @@ export const translations = {
       protein: "Protein",
       carbs: "Karbohidrat",
       fat: "Lemak",
+      water: "Air",
+      waterUnit: "ml",
       target: "Target",
       unit: "g"
     },
@@ -483,8 +485,10 @@ export const translations = {
     nutritionOverview: {
       title: "Nutrition Intake",
       protein: "Protein",
-      carbs: "Carbohydrates",
+      carbs: "Carbs",
       fat: "Fat",
+      water: "Water",
+      waterUnit: "ml",
       target: "Target",
       unit: "g"
     },

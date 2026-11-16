@@ -304,18 +304,16 @@ export async function loadPangankuDatabase() {
 }
 
 
+
 // ========================================
 // ALIAS MAKANAN
 // ========================================
 
-function getAliasTarget(name, aliases) {
-
+function getAliasTarget(name, aliases = {}) {
   const normalizedAliases = {};
 
   Object.entries(aliases).forEach(([key, value]) => {
-
     normalizedAliases[normalizeFoodName(key)] = value;
-
   });
 
   return normalizedAliases[name];
@@ -323,21 +321,317 @@ function getAliasTarget(name, aliases) {
 
 
 // ========================================
-// PENCARIAN MAKANAN
+// NORMALISASI KATA MAKANAN
 // ========================================
 
-export function findFood(name, database, aliases = {}) {
+const foodWordAliases = {
+  "toge": "tauge",
+  "taoge": "tauge",
+  "telor": "telur",
+  "gorengan": "goreng",
+  "digoreng": "goreng",
+  "menggoreng": "goreng",
+  "dibakar": "bakar",
+  "panggang": "bakar",
+  "dipanggang": "bakar",
+  "direbus": "rebus",
+  "merebus": "rebus",
+  "dikukus": "kukus",
+  "ditumis": "tumis",
+  "menumis": "tumis",
+  "bertepung": "tepung"
+};
+
+function normalizeFoodWords(name) {
+  return normalizeFoodName(name)
+    .split(" ")
+    .filter(Boolean)
+    .map(word => foodWordAliases[word] || word);
+}
+
+
+// ========================================
+// KATEGORI KATA MAKANAN
+// ========================================
+
+// Kata yang menjelaskan cara pengolahan
+const cookingMethods = [
+  "goreng",
+  "bakar",
+  "rebus",
+  "kukus",
+  "tumis",
+  "panggang",
+  "pepes"
+];
+
+// Kata yang dapat mengubah karakteristik makanan
+const importantModifiers = [
+  "tepung",
+  "santan",
+  "crispy",
+  "kering",
+  "basah",
+  "asin",
+  "manis",
+  "pedas",
+  "sambal"
+];
+
+const ignoredWords = [
+  "dan",
+  "dengan",
+  "atau",
+  "yang",
+  "masakan",
+  "makanan"
+];
+
+function getImportantWords(words) {
+  return words.filter(word =>
+    cookingMethods.includes(word) ||
+    importantModifiers.includes(word)
+  );
+}
+
+function getWordWeight(word) {
+  if (cookingMethods.includes(word)) return 1.8;
+  if (importantModifiers.includes(word)) return 1.6;
+  return 1.3;
+}
+
+
+// ========================================
+// SKOR KEC0COKAN MAKANAN
+// ========================================
+
+
+function calculateFoodMatchScore(query, candidate) {
+
+  const queryWords = [
+    ...new Set(
+      normalizeFoodWords(query)
+        .filter(word => !ignoredWords.includes(word))
+    )
+  ];
+
+  const candidateWords = [
+    ...new Set(
+      normalizeFoodWords(candidate)
+        .filter(word => !ignoredWords.includes(word))
+    )
+  ];
+
+  if (!queryWords.length || !candidateWords.length) {
+    return 0;
+  }
+
+  // Nama sama persis
+  if (queryWords.join(" ") === candidateWords.join(" ")) {
+    return 100;
+  }
+
+  // Pisahkan kata bahan, pengolahan, dan karakter tambahan
+  const queryIngredients = queryWords.filter(word =>
+    !cookingMethods.includes(word) &&
+    !importantModifiers.includes(word)
+  );
+
+  const candidateIngredients = candidateWords.filter(word =>
+    !cookingMethods.includes(word) &&
+    !importantModifiers.includes(word)
+  );
+
+  // --------------------------------------
+  // 1. KECOCOKAN BAHAN UTAMA
+  // --------------------------------------
+
+  const matchedIngredients = queryIngredients.filter(word =>
+    candidateIngredients.includes(word)
+  );
+
+  // Tidak boleh cocok hanya karena kata goreng,
+  // tepung, rebus, atau kata pengolahan lainnya.
+  if (
+    queryIngredients.length > 0 &&
+    matchedIngredients.length === 0
+  ) {
+    return 0;
+  }
+
+  const ingredientRecall = queryIngredients.length
+    ? matchedIngredients.length / queryIngredients.length
+    : 0;
+
+  const ingredientPrecision = candidateIngredients.length
+    ? matchedIngredients.length / candidateIngredients.length
+    : 0;
+
+  // --------------------------------------
+  // 2. HITUNG JUMLAH KATA YANG COCOK
+  // --------------------------------------
+
+  const matchedWords = queryWords.filter(word =>
+    candidateWords.includes(word)
+  );
+
+  const wordRecall = matchedWords.length / queryWords.length;
+
+  // --------------------------------------
+  // 3. KECOCOKAN CARA PENGOLAHAN
+  // --------------------------------------
+
+  const queryMethods = queryWords.filter(word =>
+    cookingMethods.includes(word)
+  );
+
+  const candidateMethods = candidateWords.filter(word =>
+    cookingMethods.includes(word)
+  );
+
+  let methodScore = 0;
+
+  if (queryMethods.length > 0) {
+
+    const matchedMethods = queryMethods.filter(method =>
+      candidateMethods.includes(method)
+    );
+
+    methodScore =
+      (matchedMethods.length / queryMethods.length) * 15;
+
+    // Penalti jika cara pengolahan berbeda
+    if (matchedMethods.length === 0) {
+      methodScore = -15;
+    }
+
+  }
+
+  // --------------------------------------
+  // 4. KECOCOKAN KATA TAMBAHAN
+  // --------------------------------------
+
+  const queryModifiers = queryWords.filter(word =>
+    importantModifiers.includes(word)
+  );
+
+  const candidateModifiers = candidateWords.filter(word =>
+    importantModifiers.includes(word)
+  );
+
+  let modifierScore = 0;
+
+  if (queryModifiers.length > 0) {
+
+    const matchedModifiers = queryModifiers.filter(word =>
+      candidateModifiers.includes(word)
+    );
+
+    modifierScore =
+      (matchedModifiers.length / queryModifiers.length) * 10;
+
+  }
+
+  // --------------------------------------
+  // 5. HITUNG SKOR AKHIR
+  // --------------------------------------
+
+  let score =
+    (ingredientRecall * 35) +
+    (ingredientPrecision * 25) +
+    (wordRecall * 15) +
+    methodScore +
+    modifierScore;
+
+  // Kandidat dengan terlalu banyak kata tambahan
+  // mendapat sedikit penalti.
+  const extraWords = candidateWords.filter(word =>
+    !queryWords.includes(word)
+  );
+
+  score -= extraWords.length * 3;
+
+  return Math.max(0, Math.min(100, Math.round(score)));
+}
+
+
+
+
+// ========================================
+// PENCARIAN KANDIDAT TERBAIK
+// ========================================
+
+export function findFoodSuggestions(name, database) {
+
+  const query = normalizeFoodName(name);
+
+  if (!query || !database) return [];
+
+  // --------------------------------------
+  // 1. CARI NAMA PERSIS
+  // --------------------------------------
+
+  if (database[query]) {
+    return [{
+      name: query,
+      food: database[query],
+      score: 100,
+      matchType: "exact"
+    }];
+  }
+
+  // --------------------------------------
+  // 2. CARI BERDASARKAN SKOR
+  // --------------------------------------
+
+  const matches = Object.entries(database)
+    .map(([foodName, food]) => {
+
+      const score = calculateFoodMatchScore(
+        query,
+        foodName
+      );
+
+      return {
+        name: foodName,
+        food,
+        score: Math.round(score),
+        matchType: "similar"
+      };
+
+    })
+    .filter(item => item.score >= 30)
+    .sort((a, b) => b.score - a.score);
+
+  return matches;
+}
+
+
+// ========================================
+// PENCARIAN MAKANAN TERBAIK
+// ========================================
+
+export function findBestFoodMatch(
+  name,
+  database,
+  aliases = {}
+) {
 
   const normalizedName = normalizeFoodName(name);
 
-  if (!normalizedName) return null;
+  if (!normalizedName || !database) return null;
 
   // 1. Nama persis
   if (database[normalizedName]) {
-    return database[normalizedName];
+    return {
+      name: normalizedName,
+      food: database[normalizedName],
+      score: 100,
+      matchType: "exact"
+    };
   }
 
-  // 2. Alias
+  // 2. Alias yang sudah disimpan pengguna
   const alias = getAliasTarget(normalizedName, aliases);
 
   if (alias) {
@@ -345,94 +639,49 @@ export function findFood(name, database, aliases = {}) {
     const normalizedAlias = normalizeFoodName(alias);
 
     if (database[normalizedAlias]) {
-      return database[normalizedAlias];
+      return {
+        name: normalizedAlias,
+        food: database[normalizedAlias],
+        score: 100,
+        matchType: "alias"
+      };
     }
 
   }
 
-  // 3. Nama yang mirip
-  const matches = Object.entries(database)
-    .filter(([foodName]) =>
-      foodName.includes(normalizedName) ||
-      normalizedName.includes(foodName)
-    );
+  // 3. Pencocokan berdasarkan skor
+  const suggestions = findFoodSuggestions(
+    normalizedName,
+    database
+  );
 
-  if (matches.length === 1) {
-    return matches[0][1];
+  if (!suggestions.length) return null;
+
+  const bestMatch = suggestions[0];
+
+  // Batas minimal untuk pencocokan otomatis.
+  // Kandidat di bawah nilai ini perlu dipilih manual.
+  if (bestMatch.score < 70) {
+    return null;
   }
 
-  return null;
+  return bestMatch;
 }
 
 
 // ========================================
-// SARAN MAKANAN
+// FUNGSI LAMA - TETAP KOMPATIBEL
 // ========================================
 
+export function findFood(name, database, aliases = {}) {
 
-export function findFoodSuggestions(name, database) {
-  const query = normalizeFoodName(name);
+  const result = findBestFoodMatch(
+    name,
+    database,
+    aliases
+  );
 
-  if (!query) return [];
-
-  const queryWords = query
-    .split(" ")
-    .filter(Boolean);
-
-  return Object.entries(database)
-    .map(([foodName, food]) => {
-      // Semua kata wajib ada
-      const containsAllWords = queryWords.every(word =>
-        foodName.includes(word)
-      );
-
-      if (!containsAllWords) return null;
-
-      let score = 0;
-
-      // Nama sama persis
-      if (foodName === query) {
-        score += 1000;
-      }
-
-      // Nama diawali frasa pencarian
-      else if (foodName.startsWith(query)) {
-        score += 500;
-      }
-
-      // Frasa pencarian ditemukan utuh
-      else if (foodName.includes(query)) {
-        score += 300;
-      }
-
-      // Prioritaskan kecocokan kata yang berdekatan
-      const words = foodName.split(" ");
-      let consecutiveMatches = 0;
-
-      for (let i = 0; i <= words.length - queryWords.length; i++) {
-        if (
-          queryWords.every((word, index) =>
-            words[i + index].includes(word)
-          )
-        ) {
-          consecutiveMatches = 1;
-          break;
-        }
-      }
-
-      if (consecutiveMatches) score += 100;
-
-      // Nama lebih pendek lebih diprioritaskan
-      score -= foodName.length * 0.1;
-
-      return {
-        name: foodName,
-        food,
-        score
-      };
-    })
-    .filter(Boolean)
-    .sort((a, b) => b.score - a.score);
+  return result ? result.food : null;
 }
 
 

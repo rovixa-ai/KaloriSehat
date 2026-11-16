@@ -257,6 +257,7 @@ export function updateDashboard(restartFromZero = false) {
   const protein = Number(total.protein) || 0;
   const carbs = Number(total.carbs) || 0;
   const fat = Number(total.fat) || 0;
+  const water = Number(total.water) || 0;
 
   const calorieTarget = Number(target) || 0;
   const remainingCalories = Number(remaining) || 0;
@@ -264,6 +265,7 @@ export function updateDashboard(restartFromZero = false) {
   const proteinTarget = Number(nutritionTargets.protein) || 0;
   const carbsTarget = Number(nutritionTargets.carbs) || 0;
   const fatTarget = Number(nutritionTargets.fat) || 0;
+  const waterTarget = Number(nutritionTargets.water) || 0;
 
   // KALORI
   animateNumber(
@@ -352,6 +354,16 @@ export function updateDashboard(restartFromZero = false) {
     restartFromZero
   );
 
+  // TOTAL AIR
+animateNumber(
+  $("totalWater"),
+  water,
+  " ml",
+  0,
+  restartFromZero
+);
+
+
   // TARGET NUTRISI
   if ($("proteinTargetText")) {
     $("proteinTargetText").textContent = proteinTarget;
@@ -364,6 +376,10 @@ export function updateDashboard(restartFromZero = false) {
   if ($("fatTargetText")) {
     $("fatTargetText").textContent = fatTarget;
   }
+
+  if ($("waterTargetText")) {
+  $("waterTargetText").textContent = Math.round(waterTarget);
+}
 
   // CIRCULAR NUTRITION PROGRESS
   setNutritionProgress(
@@ -386,6 +402,13 @@ export function updateDashboard(restartFromZero = false) {
     fatTarget,
     restartFromZero
   );
+
+  setNutritionProgress(
+  "waterProgress",
+  water,
+  waterTarget,
+  restartFromZero
+);
 
   // RIWAYAT MAKANAN
   renderHistory(meals);
