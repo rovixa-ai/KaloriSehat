@@ -145,11 +145,14 @@ function renderHistory(meals) {
   }).join("");
 }
 
+
 // ==========================================
 // CIRCULAR NUTRITION PROGRESS
+// KALORIKU — SYNCHRONIZED ANIMATION
 // ==========================================
 
 function setNutritionProgress(id, consumed, target) {
+
   const ring = $(id);
   if (!ring) return;
 
@@ -158,19 +161,59 @@ function setNutritionProgress(id, consumed, target) {
 
   if (!circle || !percentage) return;
 
-  const current = Number(consumed) || 0;
-  const goal = Number(target) || 0;
+  // ------------------------------------------
+  // NORMALISASI NILAI
+  // ------------------------------------------
+
+  const current = Math.max(0, Number(consumed) || 0);
+  const goal = Math.max(0, Number(target) || 0);
+
+  // ------------------------------------------
+  // HITUNG PROGRESS
+  // ------------------------------------------
 
   const progress = goal > 0
-    ? Math.min(100, Math.max(0, (current / goal) * 100))
+    ? Math.min(100, (current / goal) * 100)
     : 0;
+
+  // ------------------------------------------
+  // CIRCULAR SVG
+  // ------------------------------------------
 
   const radius = 42;
   const circumference = 2 * Math.PI * radius;
 
   circle.style.strokeDasharray = circumference;
+
   circle.style.strokeDashoffset =
     circumference - (progress / 100) * circumference;
+
+  // ------------------------------------------
+  // ACCESSIBILITY
+  // ------------------------------------------
+
+  ring.setAttribute("role", "progressbar");
+
+  ring.setAttribute("aria-valuemin", "0");
+  ring.setAttribute("aria-valuemax", "100");
+
+  ring.setAttribute(
+    "aria-valuenow",
+    Math.round(progress)
+  );
+
+  // ------------------------------------------
+  // PROGRESS STATUS
+  // ------------------------------------------
+
+  ring.dataset.progress = Math.round(progress);
+
+  ring.dataset.reached =
+    progress >= 100 ? "true" : "false";
+
+  // ------------------------------------------
+  // ANIMATED PERCENTAGE
+  // ------------------------------------------
 
   animateNumber(
     percentage,
@@ -180,11 +223,19 @@ function setNutritionProgress(id, consumed, target) {
   );
 }
 
+
 // ==========================================
 // UPDATE DASHBOARD
 // ==========================================
 
+
+// ==========================================
+// UPDATE DASHBOARD
+// KALORIKU — SYNCHRONIZED ANIMATION
+// ==========================================
+
 export function updateDashboard() {
+
   const {
     meals,
     total,
@@ -194,7 +245,10 @@ export function updateDashboard() {
 
   const nutritionTargets = getNutritionTargets();
 
-  // Pastikan angka selalu numerik.
+  // ------------------------------------------
+  // NORMALISASI ANGKA
+  // ------------------------------------------
+
   const kcal = Number(total.kcal) || 0;
   const protein = Number(total.protein) || 0;
   const carbs = Number(total.carbs) || 0;
@@ -202,6 +256,10 @@ export function updateDashboard() {
 
   const calorieTarget = Number(target) || 0;
   const remainingCalories = Number(remaining) || 0;
+
+  const proteinTarget = Number(nutritionTargets.protein) || 0;
+  const carbsTarget = Number(nutritionTargets.carbs) || 0;
+  const fatTarget = Number(nutritionTargets.fat) || 0;
 
   // ------------------------------------------
   // KALORI
@@ -213,7 +271,8 @@ export function updateDashboard() {
   );
 
   if ($("targetText")) {
-    $("targetText").textContent = calorieTarget;
+    $("targetText").textContent =
+      Math.round(calorieTarget);
   }
 
   animateNumber(
@@ -221,28 +280,67 @@ export function updateDashboard() {
     Math.round(remainingCalories)
   );
 
-  // Progress kalori.
-  const progress = calorieTarget > 0
-    ? Math.min(100, Math.max(0, (kcal / calorieTarget) * 100))
+  // ------------------------------------------
+  // CALORIE PROGRESS
+  // ------------------------------------------
+
+  const calorieProgress = calorieTarget > 0
+    ? Math.min(100, Math.max(0,
+        (kcal / calorieTarget) * 100
+      ))
     : 0;
 
   const progressBar = $("progressBar");
 
   if (progressBar) {
-    progressBar.style.width = progress + "%";
+
+    progressBar.style.width =
+      calorieProgress + "%";
+
     progressBar.setAttribute(
       "aria-valuenow",
-      Math.round(progress)
+      Math.round(calorieProgress)
     );
+
+    // Status target kalori
+    progressBar.setAttribute(
+      "aria-valuemin",
+      "0"
+    );
+
+    progressBar.setAttribute(
+      "aria-valuemax",
+      "100"
+    );
+
+    progressBar.dataset.reached =
+      calorieProgress >= 100 ? "true" : "false";
   }
 
   // ------------------------------------------
-  // MAKRO NUTRISI
+  // TOTAL MAKRO NUTRISI
   // ------------------------------------------
 
-  animateNumber($("totalProtein"), protein, " g", 1);
-  animateNumber($("totalCarbs"), carbs, " g", 1);
-  animateNumber($("totalFat"), fat, " g", 1);
+  animateNumber(
+    $("totalProtein"),
+    protein,
+    " g",
+    1
+  );
+
+  animateNumber(
+    $("totalCarbs"),
+    carbs,
+    " g",
+    1
+  );
+
+  animateNumber(
+    $("totalFat"),
+    fat,
+    " g",
+    1
+  );
 
   // ------------------------------------------
   // TARGET NUTRISI
@@ -250,47 +348,48 @@ export function updateDashboard() {
 
   if ($("proteinTargetText")) {
     $("proteinTargetText").textContent =
-      nutritionTargets.protein;
+      proteinTarget;
   }
 
   if ($("carbsTargetText")) {
     $("carbsTargetText").textContent =
-      nutritionTargets.carbs;
+      carbsTarget;
   }
 
   if ($("fatTargetText")) {
     $("fatTargetText").textContent =
-      nutritionTargets.fat;
+      fatTarget;
   }
 
   // ------------------------------------------
-  // CIRCULAR PROGRESS
+  // CIRCULAR NUTRITION PROGRESS
   // ------------------------------------------
 
   setNutritionProgress(
     "proteinProgress",
     protein,
-    nutritionTargets.protein
+    proteinTarget
   );
 
   setNutritionProgress(
     "carbsProgress",
     carbs,
-    nutritionTargets.carbs
+    carbsTarget
   );
 
   setNutritionProgress(
     "fatProgress",
     fat,
-    nutritionTargets.fat
+    fatTarget
   );
 
   // ------------------------------------------
-  // RIWAYAT
+  // RIWAYAT MAKANAN
   // ------------------------------------------
 
   renderHistory(meals);
 }
+
 
 // ==========================================
 // EDIT TARGET KALORI
