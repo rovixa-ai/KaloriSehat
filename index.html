@@ -360,20 +360,58 @@
         title="Pilih tanggal"
       >
         <svg
-          viewBox="0 0 24 24"
-          width="22"
-          height="22"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.8"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <rect x="3" y="5" width="18" height="16" rx="2"/>
-          <path d="M16 3v4M8 3v4M3 10h18"/>
-          <path d="M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/>
-        </svg>
+  viewBox="0 0 48 48"
+  width="38"
+  height="38"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+>
+  <defs>
+    <linearGradient id="calendarGradient" x1="8" y1="5" x2="40" y2="43">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="50%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="calendarTop" x1="12" y1="5" x2="36" y2="17">
+      <stop offset="0%" stop-color="#93C5FD"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Body kalender -->
+  <rect
+    x="5" y="9" width="38" height="34"
+    rx="9"
+    fill="url(#calendarGradient)"
+  />
+
+  <!-- Bagian header -->
+  <path
+    d="M5 17C5 12.58 8.58 9 13 9H35C39.42 9 43 12.58 43 17V19H5V17Z"
+    fill="url(#calendarTop)"
+  />
+
+  <!-- Pengait kalender -->
+  <rect x="14" y="4" width="4" height="12" rx="2" fill="#6366F1"/>
+  <rect x="30" y="4" width="4" height="12" rx="2" fill="#6366F1"/>
+
+  <!-- Tanggal besar -->
+  <text
+    x="24" y="36"
+    text-anchor="middle"
+    font-size="18"
+    font-weight="800"
+    fill="white"
+    font-family="Arial, sans-serif"
+  >16</text>
+
+  <!-- Kilau -->
+  <path
+    d="M36 23L37 25.5L39.5 26.5L37 27.5L36 30L35 27.5L32.5 26.5L35 25.5L36 23Z"
+    fill="#DBEAFE"
+  />
+</svg>
       </button>
 
       <input
