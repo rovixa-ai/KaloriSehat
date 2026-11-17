@@ -117,38 +117,110 @@ html[data-theme="dark"] {
   font-size: 13px;
 }
 
-/* Tombol Logout */
+
+
+/* =========================================
+   PROFILE — PREMIUM LOGOUT BUTTON
+========================================= */
 
 .profile-logout-button {
   flex-shrink: 0;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
-  padding: 10px 14px;
-  background: transparent;
-  color: var(--profile-danger);
-  border: 1px solid var(--profile-danger);
-  border-radius: 10px;
+  gap: 9px;
+
+  min-height: 42px;
+  padding: 10px 17px;
+
+  background: linear-gradient(
+    135deg,
+    #e75a65,
+    #ce3546
+  );
+
+  color: #ffffff;
+
+  border: 1px solid rgba(206, 53, 70, 0.35);
+  border-radius: 12px;
+
   font-family: inherit;
   font-size: 13px;
   font-weight: 700;
+  letter-spacing: 0.15px;
+
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  box-shadow:
+    0 4px 10px rgba(206, 53, 70, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    background 200ms ease,
+    filter 200ms ease;
 }
 
-.profile-logout-button:hover {
-  background: var(--profile-danger-soft, rgba(220, 65, 78, .09));
+/* Ikon */
+.profile-logout-button svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.2;
+  transition: transform 200ms ease;
 }
 
+/* Hover */
+@media (hover: hover) {
+  .profile-logout-button:hover {
+    background: linear-gradient(
+      135deg,
+      #ed6570,
+      #bd293b
+    );
+
+    transform: translateY(-2px);
+
+    box-shadow:
+      0 7px 16px rgba(206, 53, 70, 0.25);
+  }
+
+  .profile-logout-button:hover svg {
+    transform: translateX(2px);
+  }
+}
+
+/* Active */
 .profile-logout-button:active {
-  transform: scale(0.96);
+  transform: scale(0.95);
+
+  box-shadow:
+    0 2px 5px rgba(206, 53, 70, 0.18);
+
+  filter: brightness(0.95);
+}
+
+/* Focus */
+.profile-logout-button:focus {
+  outline: none;
 }
 
 .profile-logout-button:focus-visible {
-  outline: 3px solid rgba(220, 65, 78, 0.3);
+  outline: 2px solid #D94350;
   outline-offset: 3px;
 }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .profile-logout-button,
+  .profile-logout-button svg {
+    transition: none;
+  }
+}
+
 
 /* =========================================
    2. PROFILE AVATAR / FOTO PENGGUNA
@@ -733,22 +805,101 @@ html[data-theme="dark"] .goal-info-example strong {
   transform: scale(0.99);
 }
 
+
+
+/* =========================================
+   PROFILE — PREMIUM RESET BUTTON
+========================================= */
+
 .profile-reset-button {
   width: 100%;
-  padding: 13px 16px;
-  border: 1px solid var(--profile-danger);
-  border-radius: 10px;
-  background: transparent;
+  min-height: 46px;
+  padding: 12px 16px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  border: 1px solid rgba(206, 53, 70, 0.25);
+  border-radius: 12px;
+
+  background: rgba(220, 65, 78, 0.07);
   color: var(--profile-danger);
+
   font-family: inherit;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 14px;
+  letter-spacing: 0.1px;
+
   cursor: pointer;
-  transition: background 0.2s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  box-shadow:
+    0 2px 5px rgba(220, 65, 78, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+  transition:
+    background 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    transform 180ms cubic-bezier(.2, .8, .2, 1),
+    box-shadow 220ms ease;
 }
 
-.profile-reset-button:hover {
-  background: var(--profile-bg-soft);
+/* IKON */
+.profile-reset-button svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  stroke-width: 2;
+  transition: transform 350ms ease;
+}
+
+/* HOVER */
+@media (hover: hover) {
+  .profile-reset-button:hover {
+    background: rgba(220, 65, 78, 0.13);
+    border-color: rgba(220, 65, 78, 0.45);
+
+    box-shadow:
+      0 4px 10px rgba(220, 65, 78, 0.10);
+
+    transform: translateY(-1px);
+  }
+
+  .profile-reset-button:hover svg {
+    transform: rotate(-45deg);
+  }
+}
+
+/* ACTIVE / PRESS */
+.profile-reset-button:active {
+  transform: scale(0.97);
+
+  background: rgba(220, 65, 78, 0.16);
+
+  box-shadow:
+    0 1px 3px rgba(220, 65, 78, 0.08);
+}
+
+/* FOCUS */
+.profile-reset-button:focus {
+  outline: none;
+}
+
+.profile-reset-button:focus-visible {
+  outline: 2px solid var(--profile-danger);
+  outline-offset: 3px;
+}
+
+/* REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  .profile-reset-button,
+  .profile-reset-button svg {
+    transition: none;
+  }
 }
 
 /* =========================================
@@ -1053,7 +1204,7 @@ html[data-theme="dark"] .profile-wizard-header > span {
 
   .profile-logout-button {
     padding: 9px 11px;
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .profile-avatar {

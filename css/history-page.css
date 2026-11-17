@@ -91,6 +91,12 @@ html[data-theme="dark"] {
   flex-shrink: 0;
 }
 
+
+/* =========================================
+   HISTORY — CALENDAR BUTTON
+   PREMIUM INTERACTION
+========================================= */
+
 #historyPage .history-calendar-button {
   width: 52px;
   height: 52px;
@@ -111,55 +117,66 @@ html[data-theme="dark"] {
   color: #ffffff;
 
   box-shadow:
-    0 5px 14px rgba(99, 102, 241, 0.28),
+    0 5px 14px rgba(0, 0, 0, 0.16),
     inset 0 1px 1px rgba(255, 255, 255, 0.35);
 
   cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 
   transition:
-    transform 250ms ease,
-    box-shadow 250ms ease,
-    filter 250ms ease;
+    transform 220ms cubic-bezier(.2, .8, .2, 1),
+    box-shadow 220ms ease,
+    filter 220ms ease,
+    background 220ms ease;
 }
 
 #historyPage .history-calendar-button svg {
   width: 38px;
   height: 38px;
 
-  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12));
+  filter: drop-shadow(
+    0 2px 2px rgba(0, 0, 0, 0.12)
+  );
+
+  pointer-events: none;
 }
 
-#historyPage .history-calendar-button:active {
-  transform: scale(0.92);
-  box-shadow:
-    0 2px 7px rgba(99, 102, 241, 0.2);
-}
-
+/* HOVER */
 @media (hover: hover) {
   #historyPage .history-calendar-button:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
 
     box-shadow:
-      0 9px 20px rgba(99, 102, 241, 0.35),
+      0 8px 16px rgba(0, 0, 0, 0.20),
       inset 0 1px 1px rgba(255, 255, 255, 0.4);
 
     filter: brightness(1.08);
   }
 }
 
+/* CLICK / PRESS */
 #historyPage .history-calendar-button:active {
-  transform: scale(.94);
+  transform: scale(0.93);
+
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.18),
+    inset 0 2px 4px rgba(0, 0, 0, 0.12);
+
+  filter: brightness(0.95);
 }
 
-@media (hover: hover) {
-  #historyPage .history-calendar-button:hover {
-    background: var(--history-input-bg);
-    transform: translateY(-2px);
-  }
+/* FOCUS */
+#historyPage .history-calendar-button:focus {
+  outline: none;
+}
+
+#historyPage .history-calendar-button:focus-visible {
+  outline: 2px solid var(--history-primary);
+  outline-offset: 3px;
 }
 
 /* INPUT DATE TERSEMBUNYI */
-
 #historyPage .history-date-hidden {
   position: absolute;
   width: 1px;
@@ -169,6 +186,14 @@ html[data-theme="dark"] {
   pointer-events: none;
   overflow: hidden;
 }
+
+/* REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  #historyPage .history-calendar-button {
+    transition: none;
+  }
+}
+
 
 /* ========================================
    HISTORY PAGE HEADER

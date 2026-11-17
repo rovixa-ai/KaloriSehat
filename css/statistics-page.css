@@ -71,8 +71,9 @@ html[data-theme="dark"] {
   margin-top: 24px;
 }
 
+
 /* =========================================
-   2. FILTER PERIODE
+   2. FILTER PERIODE — PREMIUM INTERACTION
 ========================================= */
 
 .statistics-filter {
@@ -85,28 +86,79 @@ html[data-theme="dark"] {
   flex: 1;
   min-width: 0;
   padding: 11px 8px;
+
   border: 1px solid var(--stat-border);
   border-radius: 11px;
+
   background: var(--stat-bg);
   color: var(--stat-secondary);
+
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
+
   cursor: pointer;
-  transition: all 0.2s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    background 220ms ease,
+    color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 180ms cubic-bezier(.2, .8, .2, 1);
 }
 
+/* Hover */
 .statistics-period:hover {
   border-color: var(--stat-primary);
   color: var(--stat-text);
+  transform: translateY(-1px);
 }
 
+/* Saat ditekan */
+.statistics-period:active {
+  transform: scale(0.94);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Tombol aktif */
 .statistics-period.active {
   background: var(--stat-primary);
   border-color: var(--stat-primary);
   color: #172314;
-  box-shadow: 0 4px 10px rgba(20, 40, 30, .08);
+
+  box-shadow:
+    0 3px 8px rgba(20, 40, 30, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+  transform: scale(1);
 }
+
+/* Hover tombol aktif */
+.statistics-period.active:hover {
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+}
+
+/* Saat tombol aktif ditekan */
+.statistics-period.active:active {
+  transform: scale(0.94);
+}
+
+/* Fokus keyboard */
+.statistics-period:focus-visible {
+  outline: 2px solid var(--stat-primary);
+  outline-offset: 3px;
+}
+
+/* Menghormati pengaturan motion pengguna */
+@media (prefers-reduced-motion: reduce) {
+  .statistics-period {
+    transition: none;
+  }
+}
+
 
 /* =========================================
    3. RINGKASAN STATISTIK
@@ -238,7 +290,7 @@ html[data-theme="dark"] .statistics-card strong {
   position: absolute;
   right: 0;
   bottom: 4px;
-  padding: 3px 7px;
+  
   border-radius: 5px;
   background: var(--stat-danger);
   color: #ffffff;
