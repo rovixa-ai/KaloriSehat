@@ -268,6 +268,203 @@ $("analyzeButton").addEventListener("click", async () => {
   }
 });
 
+
+/* ========================================
+   KALORIKU — AI NUTRITION FALLBACK
+======================================== */
+
+const NUTRITION_API_URL =
+  "https://kalori-sehat.vercel.app";
+
+const AI_FOOD_CACHE_KEY = "kaloriku_ai_food_cache";
+
+// Cache selama sesi aplikasi.
+const aiFoodMemoryCache = new Map();
+
+// Normalisasi nama untuk cache.
+function normalizeAIFoodName(name) {
+  return String(name || "")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, " dan ")
+    .replace(/[.,;:()[\]{}'"`]/g, " ")
+    .replace(/[-/\\]/g, " ")
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+// Membaca cache dari localStorage.
+function getAIFoodLocalCache() {
+  try {
+    return JSON.parse(
+      localStorage.getItem(AI_FOOD_CACHE_KEY) || "{}"
+    );
+  } catch {
+    return {};
+  }
+}
+
+// Menyimpan hasil AI ke localStorage.
+function saveAIFoodLocalCache(name, nutrition) {
+  try {
+    const cache = getAIFoodLocalCache();
+    const key = normalizeAIFoodName(name);
+
+    cache[key] = {
+      ...nutrition,
+      cachedAt: Date.now()
+    };
+
+    localStorage.setItem(
+      AI_FOOD_CACHE_KEY,
+      JSON.stringify(cache)
+    );
+  } catch (error) {
+    console.warn("Gagal menyimpan cache nutrisi AI:", error);
+  }
+}
+
+// ========================================
+// PENCARIAN NUTRISI UTAMA
+// ========================================
+
+async function findFoodWithAI(foodName) {
+  const normalizedName = normalizeAIFoodName(foodName);
+
+  if (!normalizedName) return null;
+
+  // 1. Cari database lokal Panganku + USDA.
+  const localNutrition = findFood(
+    foodName,
+    pangankuFoods,
+    getFoodAliases()
+  );
+
+  if (localNutrition) {
+    return localNutrition;
+  }
+
+  // 2. Periksa cache memori.
+  if (aiFoodMemoryCache.has(normalizedName)) {
+    return aiFoodMemoryCache.get(normalizedName);
+  }
+
+  // 3. Periksa cache localStorage.
+  const localCache = getAIFoodLocalCache();
+  const cached = localCache[normalizedName];
+
+  // Cache lokal berlaku selama 30 hari.
+  if (
+    cached &&
+    Date.now() - Number(cached.cachedAt || 0) <
+      30 * 24 * 60 * 60 * 1000
+  ) {
+    aiFoodMemoryCache.set(normalizedName, cached);
+    return cached;
+  }
+
+  // 4. Cari Firestore atau Gemini melalui backend.
+  try {
+    const response = await fetch(
+      `${NUTRITION_API_URL}/find-nutrition`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: foodName
+        })
+      }
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+
+      throw new Error(
+        errorData.error || `HTTP ${response.status}`
+      );
+    }
+
+    const result = await response.json();
+
+    if (!result.found || !result.food) {
+      return null;
+    }
+
+    const nutrition = result.food;
+
+    // Pastikan bentuk data sesuai database lokal.
+    const normalizedNutrition = {
+      name: nutrition.name || foodName,
+
+      kcal: Number(nutrition.kcal),
+      protein: Number(nutrition.protein),
+      carbs: Number(nutrition.carbs),
+      fat: Number(nutrition.fat),
+
+      fiber: nutrition.fiber == null
+        ? null
+        : Number(nutrition.fiber),
+
+      sodium: nutrition.sodium == null
+        ? null
+        : Number(nutrition.sodium),
+
+      water: nutrition.water == null
+        ? null
+        : Number(nutrition.water),
+
+      code: nutrition.code || null,
+      source: nutrition.source || "AI",
+      category: nutrition.category || "Makanan",
+      type: nutrition.type || "food",
+      basis: "100 g",
+
+      sourceUrls: nutrition.sourceUrls || [],
+      sourceNames: nutrition.sourceNames || [],
+
+      validationStatus:
+        nutrition.validationStatus || "auto_validated"
+    };
+
+    // Validasi ulang sebelum dipakai.
+    if (
+      !Number.isFinite(normalizedNutrition.kcal) ||
+      !Number.isFinite(normalizedNutrition.protein) ||
+      !Number.isFinite(normalizedNutrition.carbs) ||
+      !Number.isFinite(normalizedNutrition.fat)
+    ) {
+      return null;
+    }
+
+    // 5. Simpan ke cache.
+    aiFoodMemoryCache.set(
+      normalizedName,
+      normalizedNutrition
+    );
+
+    saveAIFoodLocalCache(
+      normalizedName,
+      normalizedNutrition
+    );
+
+    return normalizedNutrition;
+
+  } catch (error) {
+    console.error(
+      `Gagal mencari nutrisi "${foodName}":`,
+      error
+    );
+
+    return null;
+  }
+}
+
+
 // Menampilkan makanan hasil identifikasi AI
 async function renderDetectedFoods(foodList) {
     await pangankuDatabasePromise;
@@ -285,7 +482,7 @@ async function renderDetectedFoods(foodList) {
     water: 0
   };
 
-  foodList.forEach(food => {
+  for (const food of foodList) {
     const item = document.createElement("div");
     item.className = "detected-food-item";
 
@@ -313,11 +510,7 @@ async function renderDetectedFoods(foodList) {
       `${t("aiConfidence")} ${food.confidence || t("unknown")}`;
 
     // Cari nutrisi di database Panganku
-    const nutrition = findFood(
-      food.name,
-      pangankuFoods,
-      getFoodAliases()
-    );
+   const nutrition = await findFoodWithAI(food.name);
 
     // Jika ditemukan melalui alias, gunakan nama Panganku
     if (nutrition) {
@@ -443,7 +636,7 @@ async function renderDetectedFoods(foodList) {
 
     item.append(info, editButton);
     container.appendChild(item);
-  });
+  }
 
   // Tombol Tambah Makanan
   const addFoodButton = document.createElement("button");
@@ -507,16 +700,12 @@ async function renderDetectedFoods(foodList) {
   saveGroupButton.textContent = t("saveFood");
   saveGroupButton.className = "save-group-button";
 
-  saveGroupButton.addEventListener("click", () => {
-    const foodsToSave = foodList
-      .map(food => {
+  saveGroupButton.addEventListener("click", async () => {
+    const foodsToSave = await Promise.all(
+  foodList.map(async food => {
         const weight = Number(food.estimatedWeight) || 0;
 
-        const nutrition = findFood(
-          food.name,
-          pangankuFoods,
-          getFoodAliases()
-        );
+        const nutrition = await findFoodWithAI(food.name);
 
         if (
           !nutrition ||
@@ -547,10 +736,12 @@ async function renderDetectedFoods(foodList) {
           source: nutrition.source,
           code: nutrition.code
         };
-      })
-      .filter(Boolean);
+        })
+);
 
-    if (!foodsToSave.length) {
+const validFoodsToSave = foodsToSave.filter(Boolean);
+
+    if (!validFoodsToSave.length) {
       showAppModal({
         type: "warning",
         title: t("noData"),
@@ -560,7 +751,7 @@ async function renderDetectedFoods(foodList) {
       return;
     }
 
-    const groupTotal = foodsToSave.reduce((sum, food) => {
+    const groupTotal = validFoodsToSave.reduce((sum, food) => {
   sum.kcal += Number(food.kcal) || 0;
   sum.protein += Number(food.protein) || 0;
   sum.carbs += Number(food.carbs) || 0;
@@ -581,8 +772,8 @@ async function renderDetectedFoods(foodList) {
     meals.push({
       id: createMealId(),
       name: t("photoMenu"),
-      foods: foodsToSave,
-      foodCount: foodsToSave.length,
+      foods: validFoodsToSave,
+      foodCount: validFoodsToSave.length,
       ...groupTotal,
       date: new Date().toLocaleDateString("sv-SE"),
       createdAt: Date.now()
