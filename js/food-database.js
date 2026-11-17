@@ -1,21 +1,19 @@
 
 // ========================================
 // KALORIKU — FOOD DATABASE
-// Sumber: Panganku, TKPI, USDA
+// Sumber: Panganku dan USDA
 //
 // Prioritas:
 // 1. Panganku
-// 2. TKPI
-// 3. USDA
+// 2. USDA
 //
 // Alias:
-// Panganku + TKPI saja
-// USDA belum menggunakan alias
+// Panganku dan alias manual
 // ========================================
 
 export const foods = {};
 
-// Menggunakan let karena alias dimuat dari JSON
+// Alias dimuat dari JSON
 export let foodAliases = {};
 
 
@@ -61,78 +59,85 @@ function getValue(value) {
 // ========================================
 
 function convertPanganku(item) {
-  if (!item.nama || !item.nutrisi) return null;
 
-  const n = item.nutrisi;
+  if (!item) return null;
+
+  // Mendukung dua format:
+  // 1. Format bertingkat: nama + nutrisi
+  // 2. Format datar: name + energy_kcal
+
+  const isNested = Boolean(item.nama && item.nutrisi);
+
+  const name = isNested
+    ? item.nama
+    : item.name;
+
+  const n = isNested
+    ? item.nutrisi
+    : item;
+
+  if (!name || !n) return null;
+
   const air = getValue(n.air_g);
 
   return {
-    name: item.nama,
+    name,
 
-    kcal: getValue(n.energi_kcal),
+    kcal: getValue(
+      n.energi_kcal ?? n.energy_kcal
+    ),
+
     protein: getValue(n.protein_g),
-    carbs: getValue(n.karbohidrat_g),
-    fat: getValue(n.lemak_g),
-    fiber: getValue(n.serat_g),
-    sodium: getValue(n.natrium_mg),
 
-    water: air !== null && air >= 0 ? air : null,
+    carbs: getValue(
+      n.karbohidrat_g ?? n.carb_g
+    ),
 
-    code: item.kode ?? null,
-    source: item.sumber ?? "Panganku",
-    category: item.kategori ?? null,
-    type: item.tipe ?? null,
-    basis: item.basis ?? "100 g"
+    fat: getValue(
+      n.lemak_g ?? n.fat_g
+    ),
+
+    fiber: getValue(
+      n.serat_g ?? n.fiber_g
+    ),
+
+    sodium: getValue(n.natrium_mg ?? n.sodium_mg),
+
+    water: air !== null && air >= 0
+      ? air
+      : null,
+
+    code: item.kode ?? item.code ?? null,
+
+    source:
+      item.sumber ??
+      item.source ??
+      "Panganku",
+
+    category: item.kategori ?? item.category ?? null,
+
+    type: item.tipe ?? item.section ?? null,
+
+    basis: item.basis ?? "100 g",
+
+    calcium: getValue(n.kalsium_mg ?? n.calcium_mg),
+    phosphorus: getValue(n.fosfor_mg ?? n.phosphorus_mg),
+    iron: getValue(n.besi_mg ?? n.iron_mg),
+    potassium: getValue(n.kalium_mg ?? n.potassium_mg),
+    copper: getValue(n.tembaga_mg ?? n.copper_mg),
+    zinc: getValue(n.seng_mg ?? n.zinc_mg),
+
+    retinol: getValue(n.retinol_mcg),
+    beta_carotene: getValue(n.beta_karoten_mcg ?? n.beta_carotene_mcg),
+    carotene_total: getValue(n.total_karoten_mcg ?? n.carotene_total_mcg),
+
+    thiamin: getValue(n.tiamin_mg ?? n.thiamin_mg),
+    riboflavin: getValue(n.riboflavin_mg),
+    niacin: getValue(n.niasin_mg ?? n.niacin_mg),
+    vitamin_c: getValue(n.vitamin_c_mg)
   };
 }
 
-
-// ========================================
-// KONVERSI TKPI
-// ========================================
-
-function convertTKPI(item) {
-  if (!item.name) return null;
-
-  const air = getValue(item.air_g);
-
-  return {
-    name: item.name,
-
-    kcal: getValue(item.energy_kcal),
-    protein: getValue(item.protein_g),
-    carbs: getValue(item.carb_g),
-    fat: getValue(item.fat_g),
-    fiber: getValue(item.fiber_g),
-    sodium: getValue(item.sodium_mg),
-
-    water: air !== null && air >= 0 ? air : null,
-
-    code: item.code ?? null,
-    source: item.source ?? "TKPI",
-    category: item.category ?? null,
-    type: item.section ?? null,
-    basis: "100 g",
-
-    bdd_percent: getValue(item.bdd_percent),
-
-    calcium: getValue(item.calcium_mg),
-    phosphorus: getValue(item.phosphorus_mg),
-    iron: getValue(item.iron_mg),
-    potassium: getValue(item.potassium_mg),
-    copper: getValue(item.copper_mg),
-    zinc: getValue(item.zinc_mg),
-
-    retinol: getValue(item.retinol_mcg),
-    beta_carotene: getValue(item.beta_carotene_mcg),
-    carotene_total: getValue(item.carotene_total_mcg),
-
-    thiamin: getValue(item.thiamin_mg),
-    riboflavin: getValue(item.riboflavin_mg),
-    niacin: getValue(item.niacin_mg),
-    vitamin_c: getValue(item.vitamin_c_mg)
-  };
-}
 
 
 // ========================================
@@ -167,18 +172,13 @@ function convertUSDA(item) {
 
 
 // ========================================
-// MEMUAT SEMUA DATABASE
+// MEMUAT DATABASE PANGANKU DAN USDA
 // ========================================
 
 export async function loadPangankuDatabase() {
 
   const pangankuUrl = new URL(
     "../data/panganku/panganku-nutrisi.json",
-    import.meta.url
-  );
-
-  const tkpiUrl = new URL(
-    "../data/tkpi/tkpi.json",
     import.meta.url
   );
 
@@ -192,28 +192,23 @@ export async function loadPangankuDatabase() {
     import.meta.url
   );
 
+
   // --------------------------------------
   // MUAT SEMUA FILE
   // --------------------------------------
 
   const [
     pangankuResponse,
-    tkpiResponse,
     usdaResponse,
     aliasResponse
   ] = await Promise.all([
     fetch(pangankuUrl),
-    fetch(tkpiUrl),
     fetch(usdaUrl),
     fetch(aliasUrl)
   ]);
 
   if (!pangankuResponse.ok) {
     throw new Error("Database Panganku gagal dimuat.");
-  }
-
-  if (!tkpiResponse.ok) {
-    throw new Error("Database TKPI gagal dimuat.");
   }
 
   if (!usdaResponse.ok) {
@@ -224,21 +219,21 @@ export async function loadPangankuDatabase() {
     throw new Error("File alias makanan gagal dimuat.");
   }
 
+
   // --------------------------------------
   // PARSING JSON
   // --------------------------------------
 
   const [
     pangankuRecords,
-    tkpiRecords,
     usdaRecords,
     aliasRecords
   ] = await Promise.all([
     pangankuResponse.json(),
-    tkpiResponse.json(),
     usdaResponse.json(),
     aliasResponse.json()
   ]);
+
 
   // --------------------------------------
   // VALIDASI FORMAT DATABASE
@@ -246,10 +241,6 @@ export async function loadPangankuDatabase() {
 
   if (!Array.isArray(pangankuRecords)) {
     throw new Error("Format database Panganku tidak valid.");
-  }
-
-  if (!Array.isArray(tkpiRecords)) {
-    throw new Error("Format database TKPI tidak valid.");
   }
 
   if (!Array.isArray(usdaRecords)) {
@@ -264,6 +255,7 @@ export async function loadPangankuDatabase() {
     throw new Error("Format file food-aliases.json tidak valid.");
   }
 
+
   // --------------------------------------
   // PRIORITAS DATABASE
   // --------------------------------------
@@ -271,7 +263,6 @@ export async function loadPangankuDatabase() {
   const database = {};
 
   let pangankuCount = 0;
-  let tkpiCount = 0;
   let usdaCount = 0;
   let duplicateCount = 0;
 
@@ -281,8 +272,8 @@ export async function loadPangankuDatabase() {
 
     if (!normalizedName || !food) return;
 
-    // Nama yang sudah tersedia dari sumber
-    // prioritas lebih tinggi tidak ditimpa.
+    // Data sumber prioritas lebih tinggi
+    // tidak akan ditimpa.
     if (database[normalizedName]) {
       duplicateCount++;
       return;
@@ -292,8 +283,6 @@ export async function loadPangankuDatabase() {
 
     if (sourceType === "Panganku") {
       pangankuCount++;
-    } else if (sourceType === "TKPI") {
-      tkpiCount++;
     } else if (sourceType === "USDA") {
       usdaCount++;
     }
@@ -316,22 +305,7 @@ export async function loadPangankuDatabase() {
 
 
   // --------------------------------------
-  // 2. TKPI
-  // --------------------------------------
-
-  tkpiRecords.forEach(item => {
-
-    const food = convertTKPI(item);
-
-    if (!food) return;
-
-    addFood(item.name, food, "TKPI");
-
-  });
-
-
-  // --------------------------------------
-  // 3. USDA
+  // 2. USDA
   // --------------------------------------
 
   usdaRecords.forEach(item => {
@@ -346,7 +320,7 @@ export async function loadPangankuDatabase() {
 
 
   // ======================================
-  // MEMUAT ALIAS PANGANKU + TKPI
+  // MEMUAT ALIAS MAKANAN
   // ======================================
 
   const validAliases = {};
@@ -358,7 +332,7 @@ export async function loadPangankuDatabase() {
 
     if (!aliasKey || !targetKey) return;
 
-    // Target alias wajib sudah tersedia
+    // Target alias wajib tersedia
     // dalam database gabungan.
     if (!database[targetKey]) return;
 
@@ -369,7 +343,6 @@ export async function loadPangankuDatabase() {
 
   });
 
-  // Mengganti isi alias setelah proses pemuatan selesai.
   foodAliases = validAliases;
 
 
@@ -382,7 +355,6 @@ export async function loadPangankuDatabase() {
   console.log("====================================");
 
   console.log("Panganku :", pangankuCount);
-  console.log("TKPI     :", tkpiCount);
   console.log("USDA     :", usdaCount);
 
   console.log("------------------------------------");
@@ -420,12 +392,10 @@ function getAliasTarget(name, aliases = foodAliases) {
     return null;
   }
 
-  // Pencarian langsung
   if (aliases[normalizedName]) {
     return aliases[normalizedName];
   }
 
-  // Kompatibilitas jika key alias belum dinormalisasi
   const key = Object.keys(aliases).find(item =>
     normalizeFoodName(item) === normalizedName
   );
@@ -556,12 +526,10 @@ function calculateFoodMatchScore(query, candidate) {
     return 0;
   }
 
-  // Nama sama persis
   if (queryWords.join(" ") === candidateWords.join(" ")) {
     return 100;
   }
 
-  // Pisahkan kata bahan dan pengolahan
   const queryIngredients = queryWords.filter(word =>
     !cookingMethods.includes(word) &&
     !importantModifiers.includes(word)
@@ -571,11 +539,6 @@ function calculateFoodMatchScore(query, candidate) {
     !cookingMethods.includes(word) &&
     !importantModifiers.includes(word)
   );
-
-
-  // --------------------------------------
-  // 1. KECOCOKAN BAHAN UTAMA
-  // --------------------------------------
 
   const matchedIngredients = queryIngredients.filter(word =>
     candidateIngredients.includes(word)
@@ -596,21 +559,11 @@ function calculateFoodMatchScore(query, candidate) {
     ? matchedIngredients.length / candidateIngredients.length
     : 0;
 
-
-  // --------------------------------------
-  // 2. JUMLAH KATA YANG COCOK
-  // --------------------------------------
-
   const matchedWords = queryWords.filter(word =>
     candidateWords.includes(word)
   );
 
   const wordRecall = matchedWords.length / queryWords.length;
-
-
-  // --------------------------------------
-  // 3. KECOCOKAN CARA PENGOLAHAN
-  // --------------------------------------
 
   const queryMethods = queryWords.filter(word =>
     cookingMethods.includes(word)
@@ -637,11 +590,6 @@ function calculateFoodMatchScore(query, candidate) {
 
   }
 
-
-  // --------------------------------------
-  // 4. KECOCOKAN KATA TAMBAHAN
-  // --------------------------------------
-
   const queryModifiers = queryWords.filter(word =>
     importantModifiers.includes(word)
   );
@@ -662,11 +610,6 @@ function calculateFoodMatchScore(query, candidate) {
       (matchedModifiers.length / queryModifiers.length) * 10;
 
   }
-
-
-  // --------------------------------------
-  // 5. SKOR AKHIR
-  // --------------------------------------
 
   let score =
     (ingredientRecall * 35) +
@@ -699,10 +642,7 @@ export function findFoodSuggestions(
 
   if (!query || !database) return [];
 
-
-  // --------------------------------------
   // 1. NAMA PERSIS
-  // --------------------------------------
 
   if (database[query]) {
 
@@ -715,10 +655,7 @@ export function findFoodSuggestions(
 
   }
 
-
-  // --------------------------------------
-  // 2. ALIAS PANGANKU / TKPI
-  // --------------------------------------
+  // 2. ALIAS
 
   const alias = getAliasTarget(query, aliases);
 
@@ -739,10 +676,7 @@ export function findFoodSuggestions(
 
   }
 
-
-  // --------------------------------------
   // 3. PENCOCOKAN FUZZY
-  // --------------------------------------
 
   const matches = Object.entries(database)
     .map(([foodName, food]) => {
@@ -781,10 +715,7 @@ export function findBestFoodMatch(
 
   if (!normalizedName || !database) return null;
 
-
-  // --------------------------------------
   // 1. NAMA PERSIS
-  // --------------------------------------
 
   if (database[normalizedName]) {
 
@@ -797,10 +728,7 @@ export function findBestFoodMatch(
 
   }
 
-
-  // --------------------------------------
   // 2. ALIAS
-  // --------------------------------------
 
   const alias = getAliasTarget(
     normalizedName,
@@ -824,10 +752,7 @@ export function findBestFoodMatch(
 
   }
 
-
-  // --------------------------------------
   // 3. PENCOCOKAN BERDASARKAN SKOR
-  // --------------------------------------
 
   const suggestions = findFoodSuggestions(
     normalizedName,
@@ -878,10 +803,8 @@ export function createCompositeFood(database, ingredients) {
 
     const name = normalizeFoodName(item.name);
 
-    // Cari nama asli terlebih dahulu
     let matchedName = name;
 
-    // Jika tidak ditemukan, coba alias
     if (!database[matchedName]) {
 
       const alias = getAliasTarget(name);
@@ -922,9 +845,7 @@ export function createCompositeFood(database, ingredients) {
   });
 
 
-  // --------------------------------------
   // TOTAL BERAT
-  // --------------------------------------
 
   const totalWeight = selectedFoods.reduce(
     (sum, item) => sum + item.weight,
@@ -932,9 +853,7 @@ export function createCompositeFood(database, ingredients) {
   );
 
 
-  // --------------------------------------
   // HITUNG NUTRISI
-  // --------------------------------------
 
   const calculateNutrient = key => {
 
@@ -942,7 +861,6 @@ export function createCompositeFood(database, ingredients) {
       item => item.food[key]
     );
 
-    // Nilai tidak tersedia bukan berarti nol
     if (
       values.some(value =>
         value === null ||
@@ -962,9 +880,7 @@ export function createCompositeFood(database, ingredients) {
   };
 
 
-  // --------------------------------------
   // HASIL MAKANAN GABUNGAN
-  // --------------------------------------
 
   return {
 
