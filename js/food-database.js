@@ -265,6 +265,7 @@ export async function loadPangankuDatabase() {
   let pangankuCount = 0;
   let usdaCount = 0;
   let duplicateCount = 0;
+const duplicateDetails = [];
 
   function addFood(name, food, sourceType) {
 
@@ -289,19 +290,29 @@ export async function loadPangankuDatabase() {
   }
 
 
+ 
   // --------------------------------------
   // 1. PANGANKU
   // --------------------------------------
 
-  pangankuRecords.forEach(item => {
+  // Mendukung format:
+  // 1. Array biasa: [...]
+  // 2. Array bertingkat: [[...]]
+
+  const pangankuItems = pangankuRecords.flat(Infinity);
+
+  pangankuItems.forEach(item => {
 
     const food = convertPanganku(item);
 
     if (!food) return;
 
-    addFood(item.nama, food, "Panganku");
+    // Gunakan nama hasil konversi agar format
+    // "nama" dan "name" sama-sama terbaca.
+    addFood(food.name, food, "Panganku");
 
   });
+
 
 
   // --------------------------------------
