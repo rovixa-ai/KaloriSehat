@@ -30,6 +30,10 @@ import {
   analyzeFoodPhoto
 } from "./food-analysis.js";
 
+import {
+  maybeStartFoodEditTour
+} from "./food-edit-tour.js";
+
 const $ = id => document.getElementById(id);
 
 // Sistem terjemahan
@@ -266,20 +270,20 @@ $("analyzeButton").addEventListener("click", async () => {
 
 // Menampilkan makanan hasil identifikasi AI
 async function renderDetectedFoods(foodList) {
-  await pangankuDatabasePromise;
+    await pangankuDatabasePromise;
 
-  latestDetectedFoods = foodList;
+    latestDetectedFoods = foodList;
 
-  const container = $("detectedFoods");
-  container.innerHTML = "";
+    const container = $("detectedFoods");
+    container.innerHTML = "";
 
-  const total = {
-  kcal: 0,
-  protein: 0,
-  carbs: 0,
-  fat: 0,
-  water: 0
-};
+    const total = {
+    kcal: 0,
+    protein: 0,
+    carbs: 0,
+    fat: 0,
+    water: 0
+  };
 
   foodList.forEach(food => {
     const item = document.createElement("div");
@@ -380,6 +384,7 @@ async function renderDetectedFoods(foodList) {
     editButton.type = "button";
     editButton.textContent = t("edit");
     editButton.className = "small-select-button";
+    editButton.dataset.foodEditTour = "trigger";
 
     editButton.addEventListener("click", () => {
       openFoodEditModal({
@@ -636,6 +641,10 @@ async function renderDetectedFoods(foodList) {
 
   totalBox.appendChild(groupActions);
   container.appendChild(totalBox);
+  // Jalankan petunjuk edit makanan jika belum pernah selesai.
+setTimeout(() => {
+  void maybeStartFoodEditTour();
+}, 700);
 }
 
 // Menampilkan sugesti makanan untuk input manual
