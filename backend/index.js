@@ -592,17 +592,20 @@ Jika data tidak dapat ditemukan, gunakan:
 
   
 } catch (error) {
-  console.error("===== DETAIL ERROR GEMINI / NUTRITION =====");
+  console.error("===== GEMINI ERROR RAW =====");
 
-  console.error("Status:", error.status);
-  console.error("Code:", error.code);
-  console.error("Message:", error.message);
-  console.error(
-    "Details:",
-    JSON.stringify(error.error || {}, null, 2)
-  );
+  console.dir(error, {
+    depth: null,
+    colors: false
+  });
 
-  console.error("============================================");
+  console.error("STATUS:", error.status);
+  console.error("CODE:", error.code);
+  console.error("MESSAGE:", error.message);
+  console.error("ERROR OBJECT:", error.error);
+  console.error("CAUSE:", error.cause);
+
+  console.error("============================");
 
   const status = Number(error.status || error.statusCode);
 
