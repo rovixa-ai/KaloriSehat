@@ -37,6 +37,59 @@ export function normalizeFoodName(name) {
 
 
 // ========================================
+// MEMBACA VARIASI NAMA DARI PANGANKU
+// ========================================
+
+function extractFoodNameAliases(originalName) {
+  const aliases = new Set();
+
+  const parts = String(originalName || "")
+    .split(",")
+    .map(part => normalizeFoodName(part))
+    .filter(Boolean);
+
+  if (parts.length <= 1) return [];
+
+  // Simpan nama lengkap setiap bagian.
+  parts.forEach(part => aliases.add(part));
+
+  // Ambil konteks nama dari bagian pertama
+  // dan bagian berikutnya.
+  const prefixes = new Set();
+
+  for (const part of parts) {
+    const words = part.split(" ");
+
+    // Cari konteks bahan utama sebelum metode memasak.
+    const methodIndex = words.findIndex(word =>
+      cookingMethods.includes(word)
+    );
+
+    if (methodIndex > 0) {
+      prefixes.add(words.slice(0, methodIndex).join(" "));
+    } else if (words.length > 1) {
+      prefixes.add(words.slice(0, -1).join(" "));
+    }
+  }
+
+  // Gabungkan konteks dengan variasi nama pendek.
+  for (const part of parts) {
+    if (part.split(" ").length > 2) continue;
+
+    for (const prefix of prefixes) {
+      if (prefix && !part.startsWith(prefix + " ")) {
+        aliases.add(`${prefix} ${part}`);
+      }
+    }
+  }
+
+  return [...aliases].filter(alias =>
+    alias !== normalizeFoodName(originalName)
+  );
+}
+
+
+// ========================================
 // HELPER: KONVERSI NILAI NUTRISI
 // ========================================
 
@@ -261,33 +314,46 @@ export async function loadPangankuDatabase() {
   // --------------------------------------
 
   const database = {};
-
+  const generatedAliases = {};
   let pangankuCount = 0;
   let usdaCount = 0;
   let duplicateCount = 0;
 const duplicateDetails = [];
 
-  function addFood(name, food, sourceType) {
+  
+function addFood(name, food, sourceType) {
+  const normalizedName = normalizeFoodName(name);
 
-    const normalizedName = normalizeFoodName(name);
+  if (!normalizedName || !food) return;
 
-    if (!normalizedName || !food) return;
-
-    // Data sumber prioritas lebih tinggi
-    // tidak akan ditimpa.
-    if (database[normalizedName]) {
-      duplicateCount++;
-      return;
-    }
-
-    database[normalizedName] = food;
-
-    if (sourceType === "Panganku") {
-      pangankuCount++;
-    } else if (sourceType === "USDA") {
-      usdaCount++;
-    }
+  if (database[normalizedName]) {
+    duplicateCount++;
+    return;
   }
+
+  database[normalizedName] = food;
+
+  if (sourceType === "Panganku") {
+    pangankuCount++;
+
+    // Buat alias otomatis dari nama
+    // yang memiliki pemisah koma.
+    const aliases = extractFoodNameAliases(name);
+
+    aliases.forEach(alias => {
+      if (
+        !database[alias] &&
+        !generatedAliases[alias]
+      ) {
+        generatedAliases[alias] = normalizedName;
+      }
+    });
+
+  } else if (sourceType === "USDA") {
+    usdaCount++;
+  }
+}
+
 
 
  
@@ -334,27 +400,41 @@ const duplicateDetails = [];
   // MEMUAT ALIAS MAKANAN
   // ======================================
 
-  const validAliases = {};
+  
+const validAliases = {};
 
-  Object.entries(aliasRecords).forEach(([alias, target]) => {
+// 1. Masukkan alias otomatis dari Panganku.
+Object.entries(generatedAliases).forEach(
+  ([alias, target]) => {
+    if (
+      database[target] &&
+      !database[alias]
+    ) {
+      validAliases[alias] = target;
+    }
+  }
+);
 
+// 2. Masukkan alias manual.
+// Alias manual memiliki prioritas lebih tinggi.
+Object.entries(aliasRecords).forEach(
+  ([alias, target]) => {
     const aliasKey = normalizeFoodName(alias);
     const targetKey = normalizeFoodName(target);
 
     if (!aliasKey || !targetKey) return;
 
-    // Target alias wajib tersedia
-    // dalam database gabungan.
     if (!database[targetKey]) return;
 
     // Jangan menimpa nama makanan asli.
     if (database[aliasKey]) return;
 
     validAliases[aliasKey] = target;
+  }
+);
 
-  });
+foodAliases = validAliases;
 
-  foodAliases = validAliases;
 
 
   // ======================================
@@ -415,18 +495,20 @@ function getAliasTarget(name, aliases = foodAliases) {
 }
 
 
+
 // ========================================
 // NORMALISASI KATA MAKANAN
 // ========================================
 
+// Sinonim dan variasi penulisan kata
 const foodWordAliases = {
   "toge": "tauge",
   "taoge": "tauge",
   "telor": "telur",
 
-  "gorengan": "goreng",
   "digoreng": "goreng",
   "menggoreng": "goreng",
+  "gorengan": "goreng",
 
   "dibakar": "bakar",
   "panggang": "bakar",
@@ -436,21 +518,42 @@ const foodWordAliases = {
   "merebus": "rebus",
 
   "dikukus": "kukus",
-
   "ditumis": "tumis",
   "menumis": "tumis",
 
   "bertepung": "tepung"
 };
 
+// Sinonim berupa gabungan kata.
+// Hanya gunakan padanan yang cukup spesifik.
+const foodPhraseAliases = {
+  "telur ceplok": "telur mata sapi",
+  "telor ceplok": "telur mata sapi",
+  "telor mata sapi": "telur mata sapi",
+
+  "ayam goreng crispy": "ayam goreng tepung",
+  "ayam crispy goreng": "ayam goreng tepung",
+
+  "kentang goreng french fries": "kentang goreng"
+};
 
 function normalizeFoodWords(name) {
+  let normalized = normalizeFoodName(name);
 
-  return normalizeFoodName(name)
+  // Normalisasi frasa sebelum kata per kata
+  for (const [alias, target] of Object.entries(foodPhraseAliases)) {
+    const pattern = new RegExp(
+      `\\b${alias.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`,
+      "g"
+    );
+
+    normalized = normalized.replace(pattern, target);
+  }
+
+  return normalized
     .split(" ")
     .filter(Boolean)
     .map(word => foodWordAliases[word] || word);
-
 }
 
 
@@ -464,10 +567,8 @@ const cookingMethods = [
   "rebus",
   "kukus",
   "tumis",
-  "panggang",
   "pepes"
 ];
-
 
 const importantModifiers = [
   "tepung",
@@ -481,35 +582,60 @@ const importantModifiers = [
   "sambal"
 ];
 
+// Kata umum yang tidak cukup untuk menentukan
+// identitas bahan makanan.
+const genericFoodWords = [
+  "sayur",
+  "sayuran",
+  "masakan",
+  "makanan",
+  "hidangan",
+  "lauk",
+  "menu"
+];
 
 const ignoredWords = [
   "dan",
   "dengan",
   "atau",
-  "yang",
-  "masakan",
-  "makanan"
+  "yang"
 ];
 
+function isCookingMethod(word) {
+  return cookingMethods.includes(word);
+}
 
-function getImportantWords(words) {
+function isImportantModifier(word) {
+  return importantModifiers.includes(word);
+}
 
-  return words.filter(word =>
-    cookingMethods.includes(word) ||
-    importantModifiers.includes(word)
-  );
+function isGenericFoodWord(word) {
+  return genericFoodWords.includes(word);
+}
 
+function getUniqueWords(words) {
+  return [...new Set(words)];
 }
 
 
-function getWordWeight(word) {
+// ========================================
+// NORMALISASI KATA UNTUK PENCOCOKAN
+// ========================================
 
-  if (cookingMethods.includes(word)) return 1.8;
+function getFoodTokens(name) {
+  return getUniqueWords(
+    normalizeFoodWords(name).filter(word =>
+      !ignoredWords.includes(word)
+    )
+  );
+}
 
-  if (importantModifiers.includes(word)) return 1.6;
-
-  return 1.3;
-
+function getIngredientTokens(words) {
+  return words.filter(word =>
+    !isCookingMethod(word) &&
+    !isImportantModifier(word) &&
+    !isGenericFoodWord(word)
+  );
 }
 
 
@@ -518,46 +644,54 @@ function getWordWeight(word) {
 // ========================================
 
 function calculateFoodMatchScore(query, candidate) {
-
-  const queryWords = [
-    ...new Set(
-      normalizeFoodWords(query)
-        .filter(word => !ignoredWords.includes(word))
-    )
-  ];
-
-  const candidateWords = [
-    ...new Set(
-      normalizeFoodWords(candidate)
-        .filter(word => !ignoredWords.includes(word))
-    )
-  ];
+  const queryWords = getFoodTokens(query);
+  const candidateWords = getFoodTokens(candidate);
 
   if (!queryWords.length || !candidateWords.length) {
     return 0;
   }
 
+  // Nama setelah normalisasi sama
   if (queryWords.join(" ") === candidateWords.join(" ")) {
     return 100;
   }
 
-  const queryIngredients = queryWords.filter(word =>
-    !cookingMethods.includes(word) &&
-    !importantModifiers.includes(word)
-  );
+  const queryIngredients = getIngredientTokens(queryWords);
+  const candidateIngredients = getIngredientTokens(candidateWords);
 
-  const candidateIngredients = candidateWords.filter(word =>
-    !cookingMethods.includes(word) &&
-    !importantModifiers.includes(word)
-  );
+  // Metode memasak
+  const queryMethods = queryWords.filter(isCookingMethod);
+  const candidateMethods = candidateWords.filter(isCookingMethod);
 
+  // Jika keduanya menyebut metode berbeda,
+  // jangan menganggapnya makanan yang sama.
+  if (
+    queryMethods.length &&
+    candidateMethods.length &&
+    !queryMethods.some(method =>
+      candidateMethods.includes(method)
+    )
+  ) {
+    return 0;
+  }
+
+  // Bahan utama harus memiliki kecocokan.
   const matchedIngredients = queryIngredients.filter(word =>
     candidateIngredients.includes(word)
   );
 
   if (
-    queryIngredients.length > 0 &&
+    queryIngredients.length &&
     matchedIngredients.length === 0
+  ) {
+    return 0;
+  }
+
+  // Jika nama AI terlalu umum, jangan memberikan
+  // skor tinggi hanya karena metode memasaknya sama.
+  if (
+    queryIngredients.length === 0 &&
+    candidateIngredients.length > 0
   ) {
     return 0;
   }
@@ -576,66 +710,62 @@ function calculateFoodMatchScore(query, candidate) {
 
   const wordRecall = matchedWords.length / queryWords.length;
 
-  const queryMethods = queryWords.filter(word =>
-    cookingMethods.includes(word)
-  );
-
-  const candidateMethods = candidateWords.filter(word =>
-    cookingMethods.includes(word)
-  );
-
+  // Skor metode memasak
   let methodScore = 0;
 
-  if (queryMethods.length > 0) {
-
+  if (queryMethods.length) {
     const matchedMethods = queryMethods.filter(method =>
       candidateMethods.includes(method)
     );
 
-    methodScore =
-      (matchedMethods.length / queryMethods.length) * 15;
-
-    if (matchedMethods.length === 0) {
-      methodScore = -15;
-    }
-
+    methodScore = matchedMethods.length
+      ? (matchedMethods.length / queryMethods.length) * 15
+      : -15;
   }
 
-  const queryModifiers = queryWords.filter(word =>
-    importantModifiers.includes(word)
-  );
-
-  const candidateModifiers = candidateWords.filter(word =>
-    importantModifiers.includes(word)
-  );
+  // Skor modifier
+  const queryModifiers = queryWords.filter(isImportantModifier);
+  const candidateModifiers = candidateWords.filter(isImportantModifier);
 
   let modifierScore = 0;
 
-  if (queryModifiers.length > 0) {
-
+  if (queryModifiers.length) {
     const matchedModifiers = queryModifiers.filter(word =>
       candidateModifiers.includes(word)
     );
 
     modifierScore =
       (matchedModifiers.length / queryModifiers.length) * 10;
-
   }
 
+  // Bobot bahan dibuat lebih besar daripada
+  // kesamaan kata umum.
   let score =
-    (ingredientRecall * 35) +
-    (ingredientPrecision * 25) +
-    (wordRecall * 15) +
+    ingredientRecall * 35 +
+    ingredientPrecision * 25 +
+    wordRecall * 15 +
     methodScore +
     modifierScore;
 
-  const extraWords = candidateWords.filter(word =>
+  // Kurangi skor jika kandidat memiliki
+  // bahan tambahan yang tidak disebut AI.
+  const extraIngredients = candidateIngredients.filter(word =>
+    !queryIngredients.includes(word)
+  );
+
+  score -= extraIngredients.length * 5;
+
+  // Kurangi skor untuk modifier yang tidak sesuai.
+  const extraModifiers = candidateModifiers.filter(word =>
     !queryWords.includes(word)
   );
 
-  score -= extraWords.length * 3;
+  score -= extraModifiers.length * 3;
 
-  return Math.max(0, Math.min(100, Math.round(score)));
+  return Math.max(
+    0,
+    Math.min(100, Math.round(score))
+  );
 }
 
 
@@ -648,50 +778,39 @@ export function findFoodSuggestions(
   database,
   aliases = foodAliases
 ) {
-
   const query = normalizeFoodName(name);
 
   if (!query || !database) return [];
 
-  // 1. NAMA PERSIS
-
+  // 1. Nama persis
   if (database[query]) {
-
     return [{
       name: query,
       food: database[query],
       score: 100,
       matchType: "exact"
     }];
-
   }
 
-  // 2. ALIAS
-
+  // 2. Alias
   const alias = getAliasTarget(query, aliases);
 
   if (alias) {
-
     const normalizedAlias = normalizeFoodName(alias);
 
     if (database[normalizedAlias]) {
-
       return [{
         name: normalizedAlias,
         food: database[normalizedAlias],
         score: 100,
         matchType: "alias"
       }];
-
     }
-
   }
 
-  // 3. PENCOCOKAN FUZZY
-
+  // 3. Pencocokan variasi kata
   const matches = Object.entries(database)
     .map(([foodName, food]) => {
-
       const score = calculateFoodMatchScore(
         query,
         foodName
@@ -700,12 +819,11 @@ export function findFoodSuggestions(
       return {
         name: foodName,
         food,
-        score: Math.round(score),
+        score,
         matchType: "similar"
       };
-
     })
-    .filter(item => item.score >= 30)
+    .filter(item => item.score >= 25)
     .sort((a, b) => b.score - a.score);
 
   return matches;
@@ -721,50 +839,40 @@ export function findBestFoodMatch(
   database,
   aliases = foodAliases
 ) {
-
   const normalizedName = normalizeFoodName(name);
 
   if (!normalizedName || !database) return null;
 
-  // 1. NAMA PERSIS
-
+  // 1. Nama persis
   if (database[normalizedName]) {
-
     return {
       name: normalizedName,
       food: database[normalizedName],
       score: 100,
       matchType: "exact"
     };
-
   }
 
-  // 2. ALIAS
-
+  // 2. Alias
   const alias = getAliasTarget(
     normalizedName,
     aliases
   );
 
   if (alias) {
-
     const normalizedAlias = normalizeFoodName(alias);
 
     if (database[normalizedAlias]) {
-
       return {
         name: normalizedAlias,
         food: database[normalizedAlias],
         score: 100,
         matchType: "alias"
       };
-
     }
-
   }
 
-  // 3. PENCOCOKAN BERDASARKAN SKOR
-
+  // 3. Pencocokan berdasarkan skor
   const suggestions = findFoodSuggestions(
     normalizedName,
     database,
@@ -774,9 +882,19 @@ export function findBestFoodMatch(
   if (!suggestions.length) return null;
 
   const bestMatch = suggestions[0];
+  const secondMatch = suggestions[1];
 
-  // Minimal skor pencocokan otomatis
+  // Ambang otomatis
   if (bestMatch.score < 70) {
+    return null;
+  }
+
+  // Jika dua kandidat memiliki skor hampir sama,
+  // jangan memilih secara otomatis.
+  if (
+    secondMatch &&
+    bestMatch.score - secondMatch.score < 8
+  ) {
     return null;
   }
 
@@ -793,7 +911,6 @@ export function findFood(
   database,
   aliases = foodAliases
 ) {
-
   const result = findBestFoodMatch(
     name,
     database,
@@ -802,6 +919,7 @@ export function findFood(
 
   return result ? result.food : null;
 }
+
 
 
 // ========================================

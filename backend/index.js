@@ -3,42 +3,141 @@ import express from "express";
 import cors from "cors";
 import multer from "multer";
 import dotenv from "dotenv";
+
 import { GoogleGenAI } from "@google/genai";
+import { initializeApp, getApps, cert } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
 
 dotenv.config();
 
+// ========================================
+// EXPRESS
+// ========================================
+
 const app = express();
+
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 5 * 1024 * 1024 },
 });
 
+app.use(express.json());
+
+// ========================================
+// GEMINI AI
+// ========================================
+
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
 
+// ========================================
+// FIREBASE ADMIN SDK
+// ========================================
+
+let db = null;
+
+try {
+  const serviceAccountText = process.env.FIREBASE_SERVICE_ACCOUNT;
+
+  if (!serviceAccountText) {
+    console.warn(
+      "FIREBASE_SERVICE_ACCOUNT belum dikonfigurasi."
+    );
+  } else {
+    const serviceAccount = JSON.parse(serviceAccountText);
+
+    // Memperbaiki format private key jika newline
+    // tersimpan sebagai karakter \n.
+    serviceAccount.private_key =
+      serviceAccount.private_key?.replace(/\\n/g, "\n");
+
+    const firebaseApp =
+      getApps().length > 0
+        ? getApps()[0]
+        : initializeApp({
+            credential: cert(serviceAccount),
+          });
+
+    db = getFirestore(firebaseApp);
+
+    console.log("Firebase Admin SDK berhasil diinisialisasi.");
+  }
+} catch (error) {
+  console.error(
+    "Firebase initialization error:",
+    error.message
+  );
+}
+
+// ========================================
+// CORS
+// ========================================
+
 const allowedOrigins = [
   "https://rovixa-ai.github.io",
-  "https://kalorisehatku.rovixa.web.id"
+  "https://kalorisehatku.rovixa.web.id",
 ];
 
-app.use(cors({
-  origin: function (origin, callback) {
-    // Izinkan request tanpa Origin, misalnya dari server atau alat pengujian.
-    if (!origin || allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
 
-    return callback(
-      new Error("Origin tidak diizinkan oleh CORS: " + origin)
-    );
-  }
-}));
-app.use(express.json());
+      return callback(
+        new Error("Origin tidak diizinkan oleh CORS: " + origin)
+      );
+    },
+  })
+);
+
+// ========================================
+// HOME
+// ========================================
 
 app.get("/", (req, res) => {
-  res.json({ status: "KaloriKu AI aktif" });
+  res.json({
+    status: "KaloriKu AI aktif",
+    firestore: db ? "initialized" : "not_initialized",
+  });
 });
+
+// ========================================
+// FIRESTORE CONNECTION TEST
+// ========================================
+
+app.get("/firestore-health", async (req, res) => {
+  try {
+    if (!db) {
+      return res.status(503).json({
+        status: "error",
+        message: "Firebase Admin SDK belum terinisialisasi.",
+      });
+    }
+
+    // Menguji akses ke Firestore.
+    await db.listCollections();
+
+    return res.json({
+      status: "connected",
+      database: "(default)",
+      message: "Koneksi Firestore KaloriKu berhasil.",
+    });
+  } catch (error) {
+    console.error("Firestore health error:", error);
+
+    return res.status(503).json({
+      status: "error",
+      message: "Tidak dapat terhubung ke Firestore.",
+    });
+  }
+});
+
+// ========================================
+// ANALYZE FOOD — TETAP SEPERTI SEMULA
+// ========================================
 
 app.post("/analyze-food", upload.single("photo"), async (req, res) => {
   try {
@@ -94,17 +193,25 @@ app.post("/analyze-food", upload.single("photo"), async (req, res) => {
     });
 
     const responseText = result.text;
+    const data = JSON.parse(responseText);
 
-const data = JSON.parse(responseText);
+    // Informasi pemakaian token Gemini
+    const usage = result.usageMetadata;
 
-// Informasi pemakaian token Gemini
-const usage = result.usageMetadata;
-
-console.log("===== PEMAKAIAN TOKEN KALORIKU =====");
-console.log("Token input:", usage?.promptTokenCount ?? "Tidak tersedia");
-console.log("Token output:", usage?.candidatesTokenCount ?? "Tidak tersedia");
-console.log("Total token:", usage?.totalTokenCount ?? "Tidak tersedia");
-console.log("====================================");
+    console.log("===== PEMAKAIAN TOKEN KALORIKU =====");
+    console.log(
+      "Token input:",
+      usage?.promptTokenCount ?? "Tidak tersedia"
+    );
+    console.log(
+      "Token output:",
+      usage?.candidatesTokenCount ?? "Tidak tersedia"
+    );
+    console.log(
+      "Total token:",
+      usage?.totalTokenCount ?? "Tidak tersedia"
+    );
+    console.log("====================================");
 
     res.json(data);
 
@@ -116,6 +223,10 @@ console.log("====================================");
     });
   }
 });
+
+// ========================================
+// SERVER
+// ========================================
 
 const PORT = process.env.PORT || 3000;
 

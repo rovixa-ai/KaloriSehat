@@ -62544,7 +62544,7 @@
     },
     {
         "kode":  "AP0001",
-        "nama":  "Nasi",
+        "nama":  "Nasi, Nasi putih",
         "kategori":  "Serealia",
         "tipe":  "Olahan",
         "basis":  "100 g",
@@ -82281,7 +82281,7 @@
     },
     {
         "kode":  "HP0021",
-        "nama":  "Telur ayam ras, goreng",
+        "nama":  "Telur goreng, Telur ayam Goreng, ceplok, matasapi, dadar",
         "kategori":  "Telur",
         "tipe":  "Olahan",
         "basis":  "100 g",
@@ -82298,7 +82298,7 @@
     },
     {
         "kode":  "HP0022",
-        "nama":  "Telur ayam ras, rebus",
+        "nama":  "Telur ayam ras, telur rebus",
         "kategori":  "Telur",
         "tipe":  "Olahan",
         "basis":  "100 g",
