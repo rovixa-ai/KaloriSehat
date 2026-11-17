@@ -458,7 +458,60 @@ export const translations = {
       title: "Informasi",
       cancel: "Batal",
       confirm: "OK"
+    },
+
+
+    onboarding: {
+      slides: {
+        welcomeTitle: "Hidup lebih sehat dimulai dari sini.",
+        welcomeDescription: "Kenali pola makanmu, pantau nutrisi, dan capai target kesehatan bersama KaloriKu.",
+
+        foodTitle: "Catat makanan dengan mudah.",
+        foodDescription: "Simpan makanan yang kamu konsumsi dan ketahui kandungan nutrisinya.",
+
+        aiTitle: "Kenali makanan dengan AI.",
+        aiDescription: "Ambil foto makanan dan biarkan AI membantu mengenali makanan serta memperkirakan porsinya.",
+
+        goalTitle: "Pantau progres kesehatanmu.",
+        goalDescription: "Tetapkan target kalori dan nutrisi, lalu pantau perkembanganmu setiap hari.",
+
+        next: "Lanjutkan",
+        back: "Kembali",
+        skip: "Lewati",
+        start: "Mulai Sekarang",
+        slide: "Slide"
+      },
+
+
+      tour: {
+        calorieTitle: "Pantau kalori harianmu",
+        calorieDescription: "Di sini kamu dapat melihat jumlah kalori yang sudah dikonsumsi, target harian, dan sisa kalori yang tersedia.",
+
+        nutritionTitle: "Kenali asupan nutrisimu",
+        nutritionDescription: "Pantau protein, karbohidrat, lemak, dan air untuk memahami keseimbangan nutrisi harianmu.",
+
+        scanTitle: "Catat makanan dengan mudah",
+        scanDescription: "Gunakan AI untuk mengenali makanan melalui foto, atau masukkan makanan secara manual untuk menghitung nutrisinya.",
+
+        historyTitle: "Lihat riwayat makanan",
+        historyDescription: "Semua makanan yang sudah kamu catat dapat dilihat kembali di halaman riwayat.",
+
+        statisticsTitle: "Pantau perkembanganmu",
+        statisticsDescription: "Lihat grafik dan ringkasan konsumsi kalori untuk memahami perkembangan pola makanmu.",
+
+        profileTitle: "Atur profil dan targetmu",
+        profileDescription: "Lengkapi data tubuh dan atur target kalori serta nutrisi harian agar sesuai dengan kebutuhanmu.",
+
+        step: "Langkah",
+        of: "dari",
+        next: "Lanjutkan",
+        back: "Kembali",
+        finish: "Selesai",
+        skip: "Lewati"
+      }
+
     }
+
   },
 
   en: {
@@ -921,7 +974,60 @@ export const translations = {
       title: "Information",
       cancel: "Cancel",
       confirm: "OK"
+    },
+
+
+    onboarding: {
+      slides: {
+        welcomeTitle: "A healthier life starts here.",
+        welcomeDescription: "Understand your eating habits, track nutrition, and reach your health goals with KaloriKu.",
+
+        foodTitle: "Track your meals easily.",
+        foodDescription: "Save the foods you eat and discover their nutritional information.",
+
+        aiTitle: "Recognize food with AI.",
+        aiDescription: "Take a food photo and let AI help identify the food and estimate its portion.",
+
+        goalTitle: "Track your health progress.",
+        goalDescription: "Set calorie and nutrition goals, then monitor your progress every day.",
+
+        next: "Continue",
+        back: "Back",
+        skip: "Skip",
+        start: "Get Started",
+        slide: "Slide"
+      },
+
+      tour: {
+        calorieTitle: "Track your daily calories",
+        calorieDescription: "See how many calories you have consumed, your daily target, and how many calories remain.",
+
+        nutritionTitle: "Understand your nutrition",
+        nutritionDescription: "Track protein, carbohydrates, fat, and water to understand your daily nutritional balance.",
+
+        scanTitle: "Track your meals easily",
+        scanDescription: "Use AI to recognize food from a photo, or enter food manually to calculate its nutrition.",
+
+        historyTitle: "View your food history",
+        historyDescription: "All the meals you have recorded can be reviewed on your history page.",
+
+        statisticsTitle: "Monitor your progress",
+        statisticsDescription: "View charts and calorie summaries to understand how your eating habits are developing.",
+
+        profileTitle: "Set up your profile and goals",
+        profileDescription: "Complete your body information and set daily calorie and nutrition targets based on your needs.",
+
+        step: "Step",
+        of: "of",
+        next: "Continue",
+        back: "Back",
+        finish: "Finish",
+        skip: "Skip"
+      }
+
+
     }
+
 
   }
 
