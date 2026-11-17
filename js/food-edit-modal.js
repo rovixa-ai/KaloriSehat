@@ -188,14 +188,19 @@ export function openFoodEditModal({
     }
   });
 
+ 
   // Fungsi hapus makanan
   if (isEdit) {
     const deleteButton = modal.querySelector(".food-edit-delete");
 
-    deleteButton.addEventListener("click", () => {
-      const confirmed = confirm(
-        `${t("confirmDelete")} "${food.name}" ${t("fromAnalysis")}`
-      );
+    deleteButton.addEventListener("click", async () => {
+      const confirmed = await window.confirmAppModal({
+        type: "warning",
+        title: t("delete"),
+        message: `${t("confirmDelete")} "${food.name}" ${t("fromAnalysis")}`,
+        confirmText: t("yes"),
+        cancelText: t("cancel")
+      });
 
       if (!confirmed) return;
 
@@ -206,6 +211,7 @@ export function openFoodEditModal({
       closeModal();
     });
   }
+
 
   // Fungsi simpan
   saveButton.addEventListener("click", () => {
