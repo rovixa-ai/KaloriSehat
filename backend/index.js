@@ -207,6 +207,11 @@ function formatFoodData(data, requestedName) {
 
     validationStatus: data.validationStatus || "auto_validated",
 
+    // Informasi kualitas dan tingkat keyakinan data.
+    isEstimation: data.isEstimation === true,
+    confidence: data.confidence || null,
+    estimationNotes: data.estimationNotes || "",
+
     sourceUrls: data.sourceUrls || [],
     sourceNames: data.sourceNames || [],
   };
@@ -248,6 +253,7 @@ app.get("/", (req, res) => {
   res.json({
     status: "KaloriKu AI aktif",
     firestore: db ? "initialized" : "not_initialized",
+    nutritionSearch: "Gemini AI without Google Search grounding",
   });
 });
 
@@ -283,18 +289,21 @@ app.get("/firestore-health", async (req, res) => {
 
 // ========================================
 // FIND NUTRITION — FIRESTORE + GEMINI
+// TANPA GOOGLE SEARCH GROUNDING
 // ========================================
 
 app.post("/find-nutrition", async (req, res) => {
   try {
     if (!db) {
       return res.status(503).json({
+        found: false,
         error: "Firestore belum terhubung.",
       });
     }
 
     if (!process.env.GEMINI_API_KEY) {
       return res.status(503).json({
+        found: false,
         error: "Gemini API belum dikonfigurasi.",
       });
     }
@@ -303,6 +312,7 @@ app.post("/find-nutrition", async (req, res) => {
 
     if (!requestedName || requestedName.length > 150) {
       return res.status(400).json({
+        found: false,
         error: "Nama makanan tidak valid.",
       });
     }
@@ -311,6 +321,7 @@ app.post("/find-nutrition", async (req, res) => {
 
     if (!normalizedName) {
       return res.status(400).json({
+        found: false,
         error: "Nama makanan tidak valid.",
       });
     }
@@ -336,43 +347,72 @@ app.post("/find-nutrition", async (req, res) => {
     }
 
     console.log("Makanan belum ditemukan di Firestore.");
-    console.log("Melakukan pencarian melalui Gemini...");
+    console.log("Melakukan estimasi nutrisi melalui Gemini...");
+    console.log("Google Search grounding: NONAKTIF");
 
     // ------------------------------------
-    // 2. GEMINI + GOOGLE SEARCH
+    // 2. PROMPT GEMINI TANPA GROUNDING
     // ------------------------------------
 
     const prompt = `
-Kamu adalah asisten pencarian data nutrisi makanan untuk aplikasi KaloriKu.
+Kamu adalah asisten estimasi data nutrisi makanan
+untuk aplikasi KaloriKu.
 
-Cari data nutrisi makanan berikut:
+Tugas:
+Berikan estimasi kandungan nutrisi makanan berikut:
 
 "${requestedName}"
 
-Gunakan Google Search untuk mencari informasi nutrisi dari sumber yang dapat dipercaya.
+ATURAN IDENTIFIKASI:
 
-Prioritaskan sumber:
-1. Database resmi komposisi pangan Indonesia seperti TKPI atau Panganku.
-2. USDA FoodData Central.
-3. Situs resmi lembaga kesehatan atau institusi penelitian.
-4. Sumber nutrisi lain yang kredibel jika sumber utama tidak tersedia.
+1. Identifikasi makanan berdasarkan nama yang diberikan.
+2. Utamakan makanan khas Indonesia jika nama makanan berasal
+   dari konteks kuliner Indonesia.
+3. Perhatikan cara pengolahan dan penyajian makanan.
+4. Jangan menyamakan makanan mentah, rebus, kukus, goreng,
+   panggang, dan olahan.
+5. Jika nama makanan terlalu ambigu dan tidak dapat
+   diidentifikasi dengan cukup yakin, gunakan found false.
 
-ATURAN:
+ATURAN NUTRISI:
 
-- Identifikasi makanan yang paling sesuai dengan nama yang diminta.
-- Gunakan makanan dalam bentuk penyajian yang disebutkan.
-- Jangan menyamakan makanan mentah, rebus, goreng, dan olahan.
-- Semua nilai nutrisi harus berdasarkan 100 gram bagian yang dapat dimakan.
-- Energi menggunakan kcal.
-- Protein, karbohidrat, lemak, dan serat menggunakan gram.
-- Sodium menggunakan mg.
-- Air menggunakan gram atau ml per 100 gram.
-- Jangan mengarang nilai nutrisi.
-- Jika suatu nutrisi tidak ditemukan, gunakan null.
-- Jangan menggunakan nilai nutrisi per porsi atau per sajian.
-- Jika makanan tidak dapat diidentifikasi dengan cukup yakin, kembalikan found false.
+1. Semua nilai harus berdasarkan 100 gram bagian yang dapat dimakan.
+2. Energi menggunakan kcal.
+3. Protein, karbohidrat, lemak, dan serat menggunakan gram.
+4. Sodium menggunakan mg.
+5. Air menggunakan gram per 100 gram.
+6. Gunakan estimasi yang masuk akal berdasarkan komposisi
+   dan cara pengolahan makanan.
+7. Jangan mengarang seolah-olah angka berasal dari database resmi.
+8. Jika suatu nutrisi tidak dapat diperkirakan, gunakan null.
+9. Jangan menggunakan nilai nutrisi per porsi atau per sajian.
 
-Jawab hanya dengan JSON menggunakan format:
+ATURAN KONSISTENSI:
+
+1. Pastikan kalori masuk akal terhadap kandungan protein,
+   karbohidrat, dan lemak.
+2. Secara umum, periksa kesesuaian dengan rumus:
+   protein x 4 + karbohidrat x 4 + lemak x 9.
+3. Perbedaan dapat terjadi karena faktor komposisi makanan,
+   serat, dan pembulatan, tetapi hindari selisih yang tidak wajar.
+4. Jangan memberikan angka yang terlalu presisi jika hanya
+   berupa perkiraan.
+
+TINGKAT KEYAKINAN:
+
+- high: makanan dikenal luas dan estimasi komposisinya cukup jelas.
+- medium: makanan dapat dikenali, tetapi resep atau komposisinya
+  dapat bervariasi.
+- low: estimasi memiliki ketidakpastian yang cukup besar.
+
+PENTING:
+
+- Ini adalah estimasi AI tanpa pencarian internet.
+- Jangan mengklaim menggunakan TKPI, Panganku, USDA,
+  atau sumber resmi lainnya.
+- is_estimation harus selalu true.
+
+Jawab hanya dengan JSON valid menggunakan format:
 
 {
   "found": true,
@@ -385,10 +425,13 @@ Jawab hanya dengan JSON menggunakan format:
   "sodium": 250,
   "water": 60,
   "category": "Makanan jadi",
-  "description": "Keterangan singkat"
+  "confidence": "medium",
+  "is_estimation": true,
+  "estimation_notes": "Estimasi berdasarkan komposisi umum makanan."
 }
 
-Jika data tidak dapat ditemukan, gunakan:
+Jika makanan tidak dapat diidentifikasi dengan cukup yakin,
+jawab:
 
 {
   "found": false
@@ -407,12 +450,7 @@ Jika data tidak dapat ditemukan, gunakan:
       config: {
         responseMimeType: "application/json",
 
-        // Mengaktifkan Google Search grounding.
-        tools: [
-          {
-            googleSearch: {},
-          },
-        ],
+        // Tidak menggunakan Google Search grounding.
       },
     });
 
@@ -445,6 +483,7 @@ Jika data tidak dapat ditemukan, gunakan:
 
     if (!responseText) {
       return res.status(502).json({
+        found: false,
         error: "Gemini tidak memberikan hasil.",
       });
     }
@@ -457,6 +496,7 @@ Jika data tidak dapat ditemukan, gunakan:
       console.error("JSON Gemini tidak valid:", responseText);
 
       return res.status(502).json({
+        found: false,
         error: "Format data nutrisi dari Gemini tidak valid.",
       });
     }
@@ -465,45 +505,26 @@ Jika data tidak dapat ditemukan, gunakan:
       return res.json({
         found: false,
         source: "gemini",
-        message: "Data nutrisi makanan belum ditemukan.",
+        message: "Makanan tidak dapat diidentifikasi dengan cukup yakin.",
       });
     }
 
     // ------------------------------------
-    // 5. AMBIL SUMBER GOOGLE SEARCH
-    // ------------------------------------
-
-    const groundingChunks =
-      result.candidates?.[0]?.groundingMetadata?.groundingChunks || [];
-
-    const sources = groundingChunks
-      .filter(chunk => chunk.web?.uri)
-      .map(chunk => ({
-        title: chunk.web.title || "",
-        url: chunk.web.uri,
-      }));
-
-    // Jangan menyimpan data tanpa sumber pencarian.
-    if (!sources.length) {
-      return res.status(422).json({
-        error: "Gemini tidak memberikan sumber referensi yang dapat diverifikasi.",
-      });
-    }
-
-    // ------------------------------------
-    // 6. VALIDASI NUTRISI
+    // 5. VALIDASI NUTRISI
     // ------------------------------------
 
     if (!validateNutrition(aiData)) {
       return res.status(422).json({
+        found: false,
         error: "Data nutrisi tidak lolos validasi otomatis.",
       });
     }
 
     const foodName = String(aiData.name || requestedName).trim();
 
-    if (!foodName) {
+    if (!foodName || foodName.length > 150) {
       return res.status(422).json({
+        found: false,
         error: "Nama makanan dari Gemini tidak valid.",
       });
     }
@@ -516,8 +537,16 @@ Jika data tidak dapat ditemukan, gunakan:
     const foodDocument = foodCollection.doc(foodDocumentId);
 
     // ------------------------------------
-    // 7. SIAPKAN DATA UNTUK FIRESTORE
+    // 6. SIAPKAN DATA UNTUK FIRESTORE
     // ------------------------------------
+
+    const allowedConfidence = ["low", "medium", "high"];
+
+    const confidence = allowedConfidence.includes(
+      String(aiData.confidence || "").toLowerCase()
+    )
+      ? String(aiData.confidence).toLowerCase()
+      : "low";
 
     const foodData = {
       name: foodName,
@@ -540,26 +569,32 @@ Jika data tidak dapat ditemukan, gunakan:
       water: parseNutrient(aiData.water),
 
       code: null,
-      source: "AI (Google Search)",
+
+      // Menandai bahwa data berasal dari estimasi AI.
+      source: "Gemini AI Estimation",
       category: aiData.category || "Makanan",
       type: "food",
       basis: "100 g",
 
       description: aiData.description || "",
+      estimationNotes: aiData.estimation_notes || "",
 
-      sourceUrls: sources.map(source => source.url),
-      sourceNames: sources.map(source => source.title),
+      isEstimation: true,
+      confidence,
 
-      // Ini berarti lolos validasi teknis otomatis,
-      // bukan verifikasi oleh ahli gizi.
-      validationStatus: "auto_validated",
+      // Bukan data resmi atau verifikasi ahli gizi.
+      validationStatus: "ai_estimated",
+
+      // Tidak ada sumber web karena grounding dinonaktifkan.
+      sourceUrls: [],
+      sourceNames: [],
 
       createdAt: new Date(),
       updatedAt: new Date(),
     };
 
     // ------------------------------------
-    // 8. SIMPAN DENGAN TRANSAKSI
+    // 7. SIMPAN DENGAN TRANSAKSI
     // ------------------------------------
 
     const savedFood = await db.runTransaction(async transaction => {
@@ -578,10 +613,12 @@ Jika data tidak dapat ditemukan, gunakan:
 
     console.log("Makanan berhasil disimpan ke Firestore.");
     console.log("Nama:", savedFood.name);
+    console.log("Status:", savedFood.validationStatus);
+    console.log("Confidence:", savedFood.confidence);
     console.log("=============================");
 
     // ------------------------------------
-    // 9. KEMBALIKAN HASIL KE APLIKASI
+    // 8. KEMBALIKAN HASIL KE APLIKASI
     // ------------------------------------
 
     return res.json({
@@ -590,40 +627,34 @@ Jika data tidak dapat ditemukan, gunakan:
       food: formatFoodData(savedFood, requestedName),
     });
 
-  
-} catch (error) {
-  console.error("===== GEMINI ERROR RAW =====");
+  } catch (error) {
+    console.error("===== GEMINI / NUTRITION ERROR =====");
+    console.error("STATUS:", error.status);
+    console.error("CODE:", error.code);
+    console.error("MESSAGE:", error.message);
+    console.dir(error.error, {
+      depth: null,
+      colors: false,
+    });
+    console.error("====================================");
 
-  console.dir(error, {
-    depth: null,
-    colors: false
-  });
+    const status = Number(error.status || error.statusCode);
 
-  console.error("STATUS:", error.status);
-  console.error("CODE:", error.code);
-  console.error("MESSAGE:", error.message);
-  console.error("ERROR OBJECT:", error.error);
-  console.error("CAUSE:", error.cause);
+    if (status === 429) {
+      return res.status(429).json({
+        found: false,
+        error: "Gemini sedang mencapai batas penggunaan.",
+        code: "GEMINI_QUOTA_EXCEEDED",
+        message: "Silakan coba kembali beberapa saat lagi.",
+      });
+    }
 
-  console.error("============================");
-
-  const status = Number(error.status || error.statusCode);
-
-  if (status === 429) {
-    return res.status(429).json({
+    return res.status(500).json({
       found: false,
-      error: "Gemini sedang mencapai batas penggunaan.",
-      code: "GEMINI_QUOTA_EXCEEDED",
-      message: "Silakan coba kembali beberapa saat lagi."
+      error: "Gagal mencari data nutrisi makanan.",
+      code: "NUTRITION_SEARCH_ERROR",
     });
   }
-
-  return res.status(500).json({
-    found: false,
-    error: "Gagal mencari data nutrisi makanan.",
-    code: "NUTRITION_SEARCH_ERROR"
-  });
-}
 });
 
 // ========================================
