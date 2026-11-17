@@ -699,6 +699,12 @@ async function initializeProfilePage() {
 
       const carbs = carbCalories / 4;
 
+      // TARGET AIR HARIAN OTOMATIS
+const waterTarget = calculateDailyWaterTarget(
+  age,
+  gender
+);
+
       // Simpan target hanya jika ada perubahan data.
       if (saveNutritionChanges) {
         const savedProfile = loadProfile();
@@ -707,6 +713,7 @@ async function initializeProfilePage() {
         savedProfile.dailyProteinTarget = Math.round(protein);
         savedProfile.dailyCarbTarget = Math.max(0, Math.round(carbs));
         savedProfile.dailyFatTarget = Math.round(fat);
+        savedProfile.dailyWaterTarget = waterTarget;
 
         saveProfile(savedProfile);
 
@@ -1014,6 +1021,35 @@ if (!confirmed) return;
   });
 
 }
+function calculateDailyWaterTarget(age, gender) {
+  age = Number(age);
+
+  if (!Number.isFinite(age) || age <= 0) {
+    return 0;
+  }
+
+  // Anak usia 1–8 tahun
+  if (age >= 1 && age <= 3) return 1300;
+  if (age >= 4 && age <= 8) return 1700;
+
+  // Usia 9–13 tahun
+  if (age >= 9 && age <= 13) {
+    return gender === "male" ? 2400 : 2100;
+  }
+
+  // Usia 14–18 tahun
+  if (age >= 14 && age <= 18) {
+    return gender === "male" ? 3300 : 2300;
+  }
+
+  // Dewasa 19 tahun ke atas
+  if (age >= 19) {
+    return gender === "male" ? 3700 : 2700;
+  }
+
+  return 0;
+}
+
 
 // =====================================
 // JALANKAN INISIALISASI HALAMAN PROFIL

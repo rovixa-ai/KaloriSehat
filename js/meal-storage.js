@@ -47,7 +47,7 @@ export function getNutritionTargets() {
       fat: Number(profile.dailyFatTarget) || 0,
 
       // Target air harian (ml)
-      water: Number(profile.dailyWaterTarget) || 2000
+      water: Number(profile.dailyWaterTarget) || 2750
     };
 
   } catch (error) {
@@ -57,7 +57,7 @@ export function getNutritionTargets() {
       protein: 0,
       carbs: 0,
       fat: 0,
-      water: 2000
+      water: 2750
     };
   }
 }
