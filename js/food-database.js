@@ -287,18 +287,7 @@ export async function loadPangankuDatabase() {
   // STATISTIK DATABASE
   // --------------------------------------
 
-  console.log("================================");
-  console.log("       DATABASE KALORIKU");
-  console.log("================================");
-
-  console.log("Panganku :", pangankuCount);
-  console.log("TKPI     :", tkpiCount);
-  console.log("USDA     :", usdaCount);
-
-  console.log("Total    :", Object.keys(database).length);
-  console.log("Duplikat :", duplicateCount);
-
-  console.log("================================");
+ 
 
   return database;
 }
