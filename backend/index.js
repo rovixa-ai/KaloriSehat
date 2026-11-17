@@ -590,8 +590,35 @@ Jika data tidak dapat ditemukan, gunakan:
       food: formatFoodData(savedFood, requestedName),
     });
 
-  } catch (error) {
-    console.error("Find nutrition error:", error);
+  
+} catch (error) {
+  console.error("===== DETAIL ERROR GEMINI / NUTRITION =====");
+
+  console.error("Status:", error.status);
+  console.error("Code:", error.code);
+  console.error("Message:", error.message);
+  console.error("Details:", JSON.stringify(error.error || {}, null, 2));
+
+  console.error("============================================");
+
+  const status = Number(error.status || error.code);
+
+  if (status === 429) {
+    return res.status(429).json({
+      found: false,
+      error: "Gemini sedang mencapai batas penggunaan.",
+      code: "GEMINI_QUOTA_EXCEEDED",
+      message: "Silakan coba kembali beberapa saat lagi."
+    });
+  }
+
+  return res.status(500).json({
+    found: false,
+    error: "Gagal mencari data nutrisi makanan.",
+    code: "NUTRITION_SEARCH_ERROR"
+  });
+}
+
 
     return res.status(500).json({
       error: "Gagal mencari data nutrisi makanan.",
