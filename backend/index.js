@@ -597,11 +597,14 @@ Jika data tidak dapat ditemukan, gunakan:
   console.error("Status:", error.status);
   console.error("Code:", error.code);
   console.error("Message:", error.message);
-  console.error("Details:", JSON.stringify(error.error || {}, null, 2));
+  console.error(
+    "Details:",
+    JSON.stringify(error.error || {}, null, 2)
+  );
 
   console.error("============================================");
 
-  const status = Number(error.status || error.code);
+  const status = Number(error.status || error.statusCode);
 
   if (status === 429) {
     return res.status(429).json({
@@ -618,12 +621,6 @@ Jika data tidak dapat ditemukan, gunakan:
     code: "NUTRITION_SEARCH_ERROR"
   });
 }
-
-
-    return res.status(500).json({
-      error: "Gagal mencari data nutrisi makanan.",
-    });
-  }
 });
 
 // ========================================
