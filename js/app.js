@@ -797,7 +797,11 @@ async function findFoodsWithAI(foodNames) {
 // RENDER HASIL ANALISIS FOTO
 // ========================================
 
-async function renderDetectedFoods(foodList) {
+
+async function renderDetectedFoods(
+  foodList,
+  { showAnalysisLoading = true } = {}
+) {
   await pangankuDatabasePromise;
 
   latestDetectedFoods = foodList;
@@ -939,29 +943,30 @@ async function renderDetectedFoods(foodList) {
     // ========================================
     // EDIT
     // ========================================
-const editButton = document.createElement("button");
-editButton.type = "button";
-editButton.className = "detected-food-edit-icon";
-editButton.dataset.foodEditTour = "trigger";
-editButton.setAttribute("aria-label", t("edit"));
-editButton.title = t("edit");
 
-editButton.innerHTML = `
-  <svg
-    viewBox="0 0 24 24"
-    width="17"
-    height="17"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="1.8"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    aria-hidden="true"
-  >
-    <path d="M12 20h9"/>
-    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/>
-  </svg>
-`;
+    const editButton = document.createElement("button");
+    editButton.type = "button";
+    editButton.className = "detected-food-edit-icon";
+    editButton.dataset.foodEditTour = "trigger";
+    editButton.setAttribute("aria-label", t("edit"));
+    editButton.title = t("edit");
+
+    editButton.innerHTML = `
+      <svg
+        viewBox="0 0 24 24"
+        width="17"
+        height="17"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 20h9"/>
+        <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/>
+      </svg>
+    `;
 
     editButton.addEventListener("click", () => {
       openFoodEditModal({
@@ -997,7 +1002,9 @@ editButton.innerHTML = `
           currentResult = null;
           selectedSuggestedFood = null;
 
-          void renderDetectedFoods(foodList);
+          void renderDetectedFoods(foodList, {
+            showAnalysisLoading: false
+          });
         },
 
         onDelete: deletedFood => {
@@ -1011,7 +1018,9 @@ editButton.innerHTML = `
           currentResult = null;
           selectedSuggestedFood = null;
 
-          void renderDetectedFoods(foodList);
+          void renderDetectedFoods(foodList, {
+            showAnalysisLoading: false
+          });
         }
       });
     });
@@ -1061,7 +1070,9 @@ editButton.innerHTML = `
         currentResult = null;
         selectedSuggestedFood = null;
 
-        void renderDetectedFoods(foodList);
+        void renderDetectedFoods(foodList, {
+          showAnalysisLoading: false
+        });
       }
     });
   });
@@ -1109,8 +1120,8 @@ editButton.innerHTML = `
           // Gunakan nutrisi yang sudah diperoleh.
           // Tidak memanggil AI ulang jika sudah ada.
           const nutrition = nutritionMap.has(food)
-  ? nutritionMap.get(food)
-  : await findFoodWithAI(food.name);
+            ? nutritionMap.get(food)
+            : await findFoodWithAI(food.name);
 
           if (
             !nutrition ||
@@ -1237,8 +1248,7 @@ editButton.innerHTML = `
       title: t("cancel"),
       message: t("cancelIdentification"),
       confirmText: t("yes"),
-      cancelText: t("cancel"
-      )
+      cancelText: t("cancel")
     });
 
     if (!confirmCancel) return;
@@ -1266,7 +1276,11 @@ editButton.innerHTML = `
   const namesToFind = foodList.map(food => food.name);
 
   try {
-    setAnalysisStatus("calculating");
+    // Overlay hanya digunakan untuk analisis foto awal.
+    if (showAnalysisLoading) {
+      setAnalysisStatus("calculating");
+    }
+
     const batchResults =
       await findFoodsWithAI(namesToFind);
 
@@ -1315,6 +1329,7 @@ editButton.innerHTML = `
     }
   }, 700);
 }
+
 
 // ========================================
 // SUGESTI MAKANAN MANUAL
