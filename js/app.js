@@ -467,90 +467,212 @@ function storeAIFoodCache(name, nutrition) {
 // LOOKUP SINGLE FOOD
 // ========================================
 
-async function findFoodWithAI(foodName) {
-  const key = normalizeAIFoodName(foodName);
+async function findFoodsWithAI(foodNames) {
+  await pangankuDatabasePromise;
 
-  if (!key) return null;
+  // Hilangkan nama duplikat
+  const uniqueNames = [
+    ...new Map(
+      foodNames
+        .map(name => [normalizeAIFoodName(name), name])
+        .filter(([key]) => key)
+    ).values()
+  ];
 
-  // 1. Database lokal
-  const localNutrition = findFood(
-    foodName,
-    pangankuFoods,
-    getFoodAliases()
-  );
+  const results = new Map();
+  const missingNames = [];
 
-  if (localNutrition) {
-    return localNutrition;
+  const localCache = getAIFoodLocalCache();
+  const pendingEntries = [];
+
+  // ========================================
+  // 1. DATABASE LOKAL + CACHE
+  // ========================================
+
+  for (const name of uniqueNames) {
+    const key = normalizeAIFoodName(name);
+
+    const localNutrition = findFood(
+      name,
+      pangankuFoods,
+      getFoodAliases()
+    );
+
+    if (localNutrition) {
+      results.set(key, localNutrition);
+      continue;
+    }
+
+    const cached = getCachedAIFood(name, localCache);
+
+    if (cached) {
+      results.set(key, cached);
+      continue;
+    }
+
+    // Gunakan request yang sudah berjalan
+    if (aiFoodPendingRequests.has(key)) {
+      pendingEntries.push({
+        key,
+        promise: aiFoodPendingRequests.get(key)
+      });
+      continue;
+    }
+
+    missingNames.push(name);
   }
 
-  // 2. Cache
-  const cached = getCachedAIFood(foodName);
+  // ========================================
+  // 2. TUNGGU REQUEST YANG SUDAH BERJALAN
+  // ========================================
 
-  if (cached) return cached;
+  if (pendingEntries.length) {
+    const pendingResults = await Promise.all(
+      pendingEntries.map(async entry => ({
+        key: entry.key,
+        nutrition: await entry.promise
+      }))
+    );
 
-  // 3. Request yang sedang berjalan
-  if (aiFoodPendingRequests.has(key)) {
-    return aiFoodPendingRequests.get(key);
+    for (const item of pendingResults) {
+      results.set(item.key, item.nutrition);
+    }
   }
 
-  // 4. Request backend lama
-  const request = (async () => {
-    try {
-      const response = await fetch(
-        `${NUTRITION_API_URL}/find-nutrition`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            name: foodName
-          })
-        }
+  // Semua sudah ditemukan secara lokal/cache
+  if (!missingNames.length) {
+    return results;
+  }
+
+  // ========================================
+  // 3. KIRIM SATU REQUEST BATCH
+  // ========================================
+
+  try {
+    const response = await fetch(
+      `${NUTRITION_API_URL}/find-nutrition-batch`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          names: missingNames
+        })
+      }
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+
+      const error = new Error(
+        errorData.error || `Batch HTTP ${response.status}`
       );
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
+      error.status = response.status;
+      throw error;
+    }
 
-        throw new Error(
-          errorData.error || `HTTP ${response.status}`
-        );
+    const data = await response.json();
+
+    if (!data.success || !Array.isArray(data.foods)) {
+      throw new Error("Format respons batch tidak valid.");
+    }
+
+    // ========================================
+    // 4. BACA HASIL BACKEND
+    // ========================================
+
+    const batchMap = new Map();
+
+    for (const item of data.foods) {
+      const name = item.name || item.requestedName;
+
+      if (!name) continue;
+
+      const key = normalizeAIFoodName(name);
+
+      if (!key) continue;
+
+      if (item.found !== true || !item.food) {
+        batchMap.set(key, null);
+        continue;
       }
 
-      const result = await response.json();
+      batchMap.set(key, item.food);
+    }
 
-      if (!result.found || !result.food) {
-        return null;
-      }
+    // ========================================
+    // 5. NORMALISASI + CACHE
+    // ========================================
+
+    for (const name of missingNames) {
+      const key = normalizeAIFoodName(name);
+
+      const rawNutrition = batchMap.get(key);
 
       const nutrition = normalizeNutritionData(
-        result.food,
-        foodName
+        rawNutrition,
+        name
       );
 
-      if (!nutrition) return null;
-
-      storeAIFoodCache(foodName, nutrition);
-
-      return nutrition;
-
-    } catch (error) {
-      console.error(
-        `Gagal mencari nutrisi "${foodName}":`,
-        error
-      );
-
-      return null;
-
-    } finally {
-      aiFoodPendingRequests.delete(key);
+      if (nutrition) {
+        storeAIFoodCache(name, nutrition);
+        results.set(key, nutrition);
+      } else {
+        // Simpan null agar tidak memicu AI lagi
+        // ketika tombol Simpan ditekan.
+        results.set(key, null);
+      }
     }
-  })();
 
-  aiFoodPendingRequests.set(key, request);
+    console.log("===== KALORIKU BATCH =====");
+    console.log("Jumlah permintaan:", missingNames.length);
+    console.log("Firestore hits:", data.firestoreHits);
+    console.log("AI generated:", data.aiGenerated);
+    console.log("Failed:", data.failed);
+    console.log("==========================");
 
-  return request;
+  } catch (error) {
+    console.error("Batch nutrition error:", error);
+
+    // Jangan fallback ke banyak request satuan
+    // jika server membalas 429 atau 5xx.
+    const shouldUseLegacyFallback =
+      error.status === 404 ||
+      error.status === 405;
+
+    if (shouldUseLegacyFallback) {
+      console.warn(
+        "Endpoint batch belum tersedia. Menggunakan endpoint lama."
+      );
+
+      const fallbackResults = await Promise.all(
+        missingNames.map(async name => ({
+          key: normalizeAIFoodName(name),
+          nutrition: await findFoodWithAI(name)
+        }))
+      );
+
+      for (const item of fallbackResults) {
+        results.set(item.key, item.nutrition);
+      }
+
+    } else {
+      // Jangan membuat request AI tambahan
+      // ketika batch mengalami masalah kuota/server.
+      for (const name of missingNames) {
+        results.set(
+          normalizeAIFoodName(name),
+          null
+        );
+      }
+    }
+  }
+
+  return results;
 }
+
 
 // ========================================
 // LOOKUP BATCH FOOD
@@ -1036,9 +1158,9 @@ async function renderDetectedFoods(foodList) {
 
           // Gunakan nutrisi yang sudah diperoleh.
           // Tidak memanggil AI ulang jika sudah ada.
-          const nutrition =
-            nutritionMap.get(food) ||
-            await findFoodWithAI(food.name);
+          const nutrition = nutritionMap.has(food)
+  ? nutritionMap.get(food)
+  : await findFoodWithAI(food.name);
 
           if (
             !nutrition ||
