@@ -325,17 +325,20 @@ function createEstimatedFoodRecord(aiData, requestedName) {
 // TRANSAKSI UNTUK MENCEGAH DUPLIKASI
 // ========================================
 
-async function saveEstimatedFood(aiData, requestedName) {
-  const foodName = String(aiData.name || requestedName).trim();
-  const normalizedFoodName = normalizeFoodName(foodName);
 
-  if (!normalizedFoodName) {
+async function saveEstimatedFood(aiData, requestedName) {
+  const normalizedRequestedName =
+    normalizeFoodName(requestedName);
+
+  if (!normalizedRequestedName) {
     throw new Error("Nama makanan tidak valid.");
   }
 
   const foodCollection = db.collection("foods");
+
+  // Gunakan nama permintaan sebagai ID dokumen.
   const foodDocument = foodCollection.doc(
-    createFoodDocumentId(normalizedFoodName)
+    createFoodDocumentId(normalizedRequestedName)
   );
 
   const foodData = createEstimatedFoodRecord(
@@ -355,6 +358,7 @@ async function saveEstimatedFood(aiData, requestedName) {
     return foodData;
   });
 }
+
 
 // ========================================
 // TOKEN USAGE LOGGER
