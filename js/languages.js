@@ -47,6 +47,7 @@ export const translations = {
       foodWeight: "Berat makanan",
       gram: "gram",
       calculate: "Hitung Nutrisi",
+      searchingDatabase: "Mencari database...",
 
       suggestions: "Makanan yang mungkin Anda maksud:",
 
@@ -562,6 +563,7 @@ export const translations = {
       foodWeight: "Food Weight",
       gram: "grams",
       calculate: "Calculate Nutrition",
+      searchingDatabase: "Searching nutritions...",
 
       suggestions: "Foods you may be referring to:",
 
