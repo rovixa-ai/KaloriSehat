@@ -1195,23 +1195,79 @@ html[data-theme="dark"] {
   margin-top: 12px;
 }
 
+
 .detected-food-item {
   position: relative;
   display: grid;
-  gap: 10px;
-  padding: 14px;
-  background: var(--dashboard-bg);
+  gap: 12px;
+
+  padding: 17px 15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--dashboard-bg) 0%,
+      var(--dashboard-primary-soft) 180%
+    );
+
   border: 1px solid var(--dashboard-border);
-  border-radius: 15px;
-  box-shadow: var(--dashboard-shadow);
+  border-radius: 18px;
+
+  box-shadow:
+    0 2px 5px rgba(20, 40, 30, .025),
+    0 7px 20px rgba(20, 40, 30, .045);
+
+  overflow: hidden;
+
   transition:
-    transform .2s ease,
-    border-color .2s ease;
+    transform .25s cubic-bezier(.2, .8, .2, 1),
+    box-shadow .25s ease,
+    border-color .25s ease,
+    background .25s ease;
 }
 
+/* Aksen dekoratif di bagian atas kartu */
+.detected-food-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 16px;
+
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--dashboard-primary),
+    transparent
+  );
+
+  opacity: .45;
+  border-radius: 0 0 10px 10px;
+}
+
+/* Efek hover */
+@media (hover: hover) {
+  .detected-food-item:hover {
+    transform: translateY(-2px);
+
+    border-color: var(--dashboard-primary-border);
+
+    box-shadow:
+      0 5px 12px rgba(20, 40, 30, .04),
+      0 12px 28px rgba(20, 40, 30, .075);
+  }
+}
+
+/* Efek saat ditekan */
 .detected-food-item:active {
   transform: scale(.99);
+  box-shadow:
+    0 2px 8px rgba(20, 40, 30, .05);
 }
+
+
 
 .detected-food-item strong {
   color: var(--dashboard-text);
