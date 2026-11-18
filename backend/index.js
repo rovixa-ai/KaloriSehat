@@ -1083,6 +1083,59 @@ Perkiraan berat adalah estimasi visual, bukan pengukuran pasti.
   }
 });
 
+
+
+app.get("/debug-food", async (req, res) => {
+  try {
+    const name = String(req.query.name || "").trim();
+    const normalized = normalizeFoodName(name);
+
+    if (!normalized) {
+      return res.status(400).json({
+        success: false,
+        error: "Nama makanan wajib diisi."
+      });
+    }
+
+    const documentId = createFoodDocumentId(normalized);
+
+    const doc = await db
+      .collection("foods")
+      .doc(documentId)
+      .get();
+
+    const aliasQuery = await db
+      .collection("foods")
+      .where("aliases", "array-contains", normalized)
+      .limit(5)
+      .get();
+
+    return res.json({
+      success: true,
+      requestedName: name,
+      normalizedName: normalized,
+      documentId,
+      directDocumentFound: doc.exists,
+      aliasDocumentsFound: aliasQuery.size,
+      directDocumentName: doc.exists
+        ? doc.data().name
+        : null,
+      aliasDocumentNames: aliasQuery.docs.map(
+        item => item.data().name
+      )
+    });
+
+  } catch (error) {
+    console.error("Debug food error:", error);
+
+    return res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+
 // ========================================
 // SERVER
 // ========================================
