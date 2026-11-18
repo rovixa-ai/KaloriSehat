@@ -746,6 +746,19 @@ app.post("/find-nutrition-batch", async (req, res) => {
 
     console.log("Firestore ditemukan:", foundFoods.size);
     console.log("Belum ditemukan:", missingFoods.length);
+    console.log("===== DETAIL FIRESTORE LOOKUP =====");
+
+for (const item of lookupResults) {
+  console.log({
+    name: item.name,
+    normalized: item.normalized,
+    found: Boolean(item.food),
+    lookupError: item.lookupError === true,
+    source: item.food?.source || null,
+  });
+}
+
+console.log("===================================");
 
     // ------------------------------------
     // 4. GEMINI SEKALI UNTUK SEMUA
@@ -930,11 +943,7 @@ PENTING:
       };
     });
 
-    const firestoreHits = foods.filter(item => {
-      if (!item.found) return false;
-
-      return item.food.source !== "Gemini AI Estimation";
-    }).length;
+    const firestoreHits = foundFoods.size;
 
     console.log("===== BATCH SELESAI =====");
     console.log("Total:", requestedNames.length);
