@@ -122,7 +122,24 @@ export const translations = {
       menuFromPhoto: "Menu dari foto",
       searchingDatabase: "Mencari database...",
       nutritionResult: "Hasil nutrisi",
-      deleteConfirm: "Apakah Anda yakin ingin menghapus seluruh isian dan hasil analisis makanan?"
+      deleteConfirm: "Apakah Anda yakin ingin menghapus seluruh isian dan hasil analisis makanan?",
+      preparingPhoto: "Menyiapkan foto...",
+      preparingPhotoDescription: "Mengoptimalkan gambar makanan",
+
+      recognizingFood: "Mengenali makanan...",
+      recognizingFoodDescription: "Mengidentifikasi makanan pada foto",
+
+      identifyingComposition: "Mengidentifikasi komposisi makanan...",
+      identifyingCompositionDescription: "Menyusun daftar makanan yang ditemukan",
+
+      calculatingNutrition: "Menghitung kandungan nutrisi...",
+      calculatingNutritionDescription: "Memeriksa data dan menghitung nilai nutrisi",
+
+      preparingResults: "Menyiapkan hasil analisis...",
+      preparingResultsDescription: "Menyelesaikan rincian kandungan nutrisi",
+
+      analysisComplete: "Analisis selesai!",
+      analysisCompleteDescription: "Hasil makanan siap diperiksa"
     },
 
     
@@ -643,7 +660,24 @@ export const translations = {
       menuFromPhoto: "Meal from photo",
       searchingDatabase: "Searching database...",
       nutritionResult: "Nutrition results",
-      deleteConfirm: "Are you sure you want to reset all food entries and analysis results?"
+      deleteConfirm: "Are you sure you want to reset all food entries and analysis results?",
+      preparingPhoto: "Preparing photo...",
+      preparingPhotoDescription: "Optimizing the food image",
+
+      recognizingFood: "Recognizing food...",
+      recognizingFoodDescription: "Identifying food in the photo",
+
+      identifyingComposition: "Identifying food composition...",
+      identifyingCompositionDescription: "Organizing the detected food items",
+
+      calculatingNutrition: "Calculating nutritional values...",
+      calculatingNutritionDescription: "Checking data and calculating nutrition",
+
+      preparingResults: "Preparing results...",
+      preparingResultsDescription: "Finalizing nutritional details",
+
+      analysisComplete: "Analysis complete!",
+      analysisCompleteDescription: "Your food results are ready to review"
     },
 
     foodHistory: {

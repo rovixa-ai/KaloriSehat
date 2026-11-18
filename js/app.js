@@ -70,6 +70,45 @@ let detectedFoodRenderVersion = 0;
 // STATUS ANALISIS
 // ========================================
 
+const analysisStages = {
+  preparing: {
+    step: 1,
+    progress: 8,
+    title: "preparingPhoto",
+    subtitle: "preparingPhotoDescription"
+  },
+  recognizing: {
+    step: 2,
+    progress: 30,
+    title: "recognizingFood",
+    subtitle: "recognizingFoodDescription"
+  },
+  identifying: {
+    step: 3,
+    progress: 52,
+    title: "identifyingComposition",
+    subtitle: "identifyingCompositionDescription"
+  },
+  calculating: {
+    step: 4,
+    progress: 75,
+    title: "calculatingNutrition",
+    subtitle: "calculatingNutritionDescription"
+  },
+  preparingResults: {
+    step: 5,
+    progress: 92,
+    title: "preparingResults",
+    subtitle: "preparingResultsDescription"
+  },
+  complete: {
+    step: 5,
+    progress: 100,
+    title: "analysisComplete",
+    subtitle: "analysisCompleteDescription"
+  }
+};
+
 function setAnalysisStatus(type = "", value = null) {
   analysisStatusType = type;
   analysisStatusValue = value;
@@ -77,23 +116,45 @@ function setAnalysisStatus(type = "", value = null) {
   const status = $("analysisStatus");
   if (!status) return;
 
-  switch (type) {
-    case "analyzing":
-      status.textContent = t("analyzing");
-      break;
+  if (!type || type === "error") {
+    status.hidden = true;
+    status.classList.remove("is-complete");
 
-    case "found":
-      status.textContent =
-        `${t("foundFoods")} ${value} ${t("foods")}`;
-      break;
+    if (type === "error") {
+      showAppModal({
+        type: "error",
+        title: t("analysisError"),
+        message: value || t("analysisError")
+      });
+    }
 
-    case "error":
-      status.textContent = value || t("analysisError");
-      break;
-
-    default:
-      status.textContent = "";
+    return;
   }
+
+  const stage = analysisStages[type];
+  if (!stage) return;
+
+  status.hidden = false;
+  status.classList.toggle("is-complete", type === "complete");
+
+  $("analysisStageTitle").textContent = t(stage.title);
+  $("analysisStageSubtitle").textContent = t(stage.subtitle);
+  $("analysisProgressBar").style.width = `${stage.progress}%`;
+
+  status.querySelectorAll(".analysis-step").forEach(step => {
+    const stepNumber = Number(step.dataset.step);
+
+    step.classList.toggle(
+      "is-active",
+      stepNumber === stage.step && type !== "complete"
+    );
+
+    step.classList.toggle(
+      "is-complete",
+      stepNumber < stage.step ||
+      type === "complete"
+    );
+  });
 }
 
 // ========================================
@@ -270,25 +331,36 @@ $("analyzeButton").addEventListener("click", async () => {
       title: t("fileNotSelected"),
       message: t("selectFoodPhoto")
     });
-
     return;
   }
 
   $("analyzeButton").disabled = true;
-  setAnalysisStatus("analyzing");
   $("analysisResults").hidden = true;
 
   try {
-    const foods = await analyzeFoodPhoto(file);
+    // Tahap 1 dan 2 diperbarui dari food-analysis.js
+    const foods = await analyzeFoodPhoto(file, stage => {
+      setAnalysisStatus(stage);
+    });
 
     if (!Array.isArray(foods) || !foods.length) {
       throw new Error(t("analysisError"));
     }
 
+    // Tahap 3: menyiapkan komposisi makanan yang terdeteksi
+    setAnalysisStatus("identifying");
+
+    // Tahap 4: pencarian dan perhitungan nutrisi dilakukan
+    // di dalam renderDetectedFoods()
     await renderDetectedFoods(foods);
 
-    setAnalysisStatus("found", foods.length);
+    // Tahap 5: hasil sudah selesai dirender
+    setAnalysisStatus("preparingResults");
+
     $("analysisResults").hidden = false;
+
+    // Tampilkan status selesai
+    setAnalysisStatus("complete");
 
   } catch (error) {
     console.error(error);
@@ -1133,6 +1205,7 @@ async function renderDetectedFoods(foodList) {
   const namesToFind = foodList.map(food => food.name);
 
   try {
+    setAnalysisStatus("calculating");
     const batchResults =
       await findFoodsWithAI(namesToFind);
 

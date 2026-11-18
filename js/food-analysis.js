@@ -52,23 +52,26 @@ async function compressFoodPhoto(file) {
 }
 
 // Menganalisis foto makanan menggunakan backend Gemini AI
-export async function analyzeFoodPhoto(file) {
+export async function analyzeFoodPhoto(file, onStage = () => {}) {
   if (!file) {
     throw new Error("Pilih foto makanan terlebih dahulu.");
   }
 
- const compressedPhoto = await compressFoodPhoto(file);
+  // Tahap 1: kompresi dan persiapan foto
+  onStage("preparing");
 
-const formData = new FormData();
-formData.append("photo", compressedPhoto);
+  const compressedPhoto = await compressFoodPhoto(file);
 
-  const response = await fetch(
-    `${API_URL}/analyze-food`,
-    {
-      method: "POST",
-      body: formData
-    }
-  );
+  const formData = new FormData();
+  formData.append("photo", compressedPhoto);
+
+  // Tahap 2: mengirim foto untuk dikenali
+  onStage("recognizing");
+
+  const response = await fetch(`${API_URL}/analyze-food`, {
+    method: "POST",
+    body: formData
+  });
 
   let data;
 
@@ -79,9 +82,7 @@ formData.append("photo", compressedPhoto);
   }
 
   if (!response.ok) {
-    throw new Error(
-      data.error || "Gagal menganalisis foto."
-    );
+    throw new Error(data.error || "Gagal menganalisis foto.");
   }
 
   if (!Array.isArray(data.foods) || data.foods.length === 0) {
