@@ -1274,7 +1274,7 @@ $("calculateButton").addEventListener("click", async () => {
     // ========================================
 
     if (!food) {
-      button.innerHTML = t("searchingDatabase");
+      button.innerHTML = t("foodscanner.searchingDatabase");
 
       const response = await fetch(
         `${NUTRITION_API_URL}/lookup-food`,

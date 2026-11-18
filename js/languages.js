@@ -120,6 +120,7 @@ export const translations = {
       calories: "kkal",
       per100g: "100 g",
       menuFromPhoto: "Menu dari foto",
+      searchingDatabase: "Mencari database...",
       nutritionResult: "Hasil nutrisi",
       deleteConfirm: "Apakah Anda yakin ingin menghapus seluruh isian dan hasil analisis makanan?"
     },
@@ -563,7 +564,7 @@ export const translations = {
       foodWeight: "Food Weight",
       gram: "grams",
       calculate: "Calculate Nutrition",
-      searchingDatabase: "Searching nutritions...",
+      
 
       suggestions: "Foods you may be referring to:",
 
@@ -571,6 +572,8 @@ export const translations = {
       cancel: "Cancel",
       save: "Save Food"
     },
+
+   
 
     foodEditModal: {
       editTitle: "Edit Food",
@@ -636,6 +639,7 @@ export const translations = {
       calories: "kcal",
       per100g: "100 g",
       menuFromPhoto: "Meal from photo",
+      searchingDatabase: "Searching nutritions...",
       nutritionResult: "Nutrition results",
       deleteConfirm: "Are you sure you want to reset all food entries and analysis results?"
     },
