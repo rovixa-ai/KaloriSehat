@@ -463,9 +463,13 @@ function storeAIFoodCache(name, nutrition) {
   saveAIFoodLocalCache(name, data);
 }
 
+
+
+
 // ========================================
-// LOOKUP SINGLE FOOD
+// LOOKUP BATCH FOOD
 // ========================================
+
 
 async function findFoodsWithAI(foodNames) {
   await pangankuDatabasePromise;
@@ -667,193 +671,6 @@ async function findFoodsWithAI(foodNames) {
           null
         );
       }
-    }
-  }
-
-  return results;
-}
-
-
-// ========================================
-// LOOKUP BATCH FOOD
-// ========================================
-
-async function findFoodsWithAI(foodNames) {
-  await pangankuDatabasePromise;
-
-  // Hilangkan nama duplikat
-  const uniqueNames = [
-    ...new Map(
-      foodNames
-        .map(name => [normalizeAIFoodName(name), name])
-        .filter(([key]) => key)
-    ).values()
-  ];
-
-  const results = new Map();
-  const missingNames = [];
-
-  const localCache = getAIFoodLocalCache();
-
-  // 1. Database lokal + cache
-  for (const name of uniqueNames) {
-    const key = normalizeAIFoodName(name);
-
-    const localNutrition = findFood(
-      name,
-      pangankuFoods,
-      getFoodAliases()
-    );
-
-    if (localNutrition) {
-      results.set(key, localNutrition);
-      continue;
-    }
-
-    const cached = getCachedAIFood(name, localCache);
-
-    if (cached) {
-      results.set(key, cached);
-      continue;
-    }
-
-    if (aiFoodPendingRequests.has(key)) {
-      results.set(key, aiFoodPendingRequests.get(key));
-      continue;
-    }
-
-    missingNames.push(name);
-  }
-
-  // Jika semua makanan ditemukan lokal/cache/request berjalan
-  if (!missingNames.length) {
-    for (const [key, value] of results) {
-      if (value instanceof Promise) {
-        results.set(key, await value);
-      }
-    }
-
-    return results;
-  }
-
-  // 2. Batch endpoint
-  try {
-    const response = await fetch(
-      `${NUTRITION_API_URL}/find-nutrition-batch`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          names: missingNames
-        })
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`Batch HTTP ${response.status}`);
-    }
-
-    const data = await response.json();
-
-    const batchMap = new Map();
-
-    // Format:
-    // foods: [{ name, found, food }]
-    if (Array.isArray(data.foods)) {
-      for (const item of data.foods) {
-        const name = item.name || item.requestedName;
-
-        if (!name) continue;
-
-        batchMap.set(
-          normalizeAIFoodName(name),
-          item.found === false
-            ? null
-            : (item.food || item.nutrition || item)
-        );
-      }
-    }
-
-    // Format:
-    // foods: { "nama": { nutrisi } }
-    else if (
-      data.foods &&
-      typeof data.foods === "object"
-    ) {
-      for (const [name, item] of Object.entries(data.foods)) {
-        batchMap.set(
-          normalizeAIFoodName(name),
-          item?.found === false
-            ? null
-            : (item?.food || item?.nutrition || item)
-        );
-      }
-    }
-
-    // Format:
-    // results: [{ name, found, food }]
-    else if (Array.isArray(data.results)) {
-      for (const item of data.results) {
-        const name = item.name || item.requestedName;
-
-        if (!name) continue;
-
-        batchMap.set(
-          normalizeAIFoodName(name),
-          item.found === false
-            ? null
-            : (item.food || item.nutrition || item)
-        );
-      }
-    }
-
-    // 3. Normalisasi dan cache hasil batch
-    for (const name of missingNames) {
-      const key = normalizeAIFoodName(name);
-      const rawNutrition = batchMap.get(key);
-
-      const nutrition = normalizeNutritionData(
-        rawNutrition,
-        name
-      );
-
-      if (nutrition) {
-        storeAIFoodCache(name, nutrition);
-        results.set(key, nutrition);
-      } else {
-        results.set(key, null);
-      }
-    }
-
-  } catch (batchError) {
-    console.warn(
-      "Batch lookup gagal, menggunakan fallback:",
-      batchError
-    );
-
-    // 4. Fallback ke endpoint lama secara paralel
-    const fallbackResults = await Promise.all(
-      missingNames.map(async name => {
-        const nutrition = await findFoodWithAI(name);
-
-        return [
-          normalizeAIFoodName(name),
-          nutrition
-        ];
-      })
-    );
-
-    for (const [key, nutrition] of fallbackResults) {
-      results.set(key, nutrition);
-    }
-  }
-
-  // Tunggu request cache yang masih pending
-  for (const [key, value] of results) {
-    if (value instanceof Promise) {
-      results.set(key, await value);
     }
   }
 
