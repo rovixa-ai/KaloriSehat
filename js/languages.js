@@ -47,7 +47,7 @@ export const translations = {
       foodWeight: "Berat makanan",
       gram: "gram",
       calculate: "Hitung Nutrisi",
-      searchingDatabase: "Mencari database...",
+      
 
       suggestions: "Makanan yang mungkin Anda maksud:",
 
@@ -120,7 +120,7 @@ export const translations = {
       calories: "kkal",
       per100g: "100 g",
       menuFromPhoto: "Menu dari foto",
-      searchingDatabase: "Mencari nutrisi...",
+      searchingDatabase: "Mencari database...",
       nutritionResult: "Hasil nutrisi",
       deleteConfirm: "Apakah Anda yakin ingin menghapus seluruh isian dan hasil analisis makanan?"
     },
@@ -641,7 +641,7 @@ export const translations = {
       calories: "kcal",
       per100g: "100 g",
       menuFromPhoto: "Meal from photo",
-      searchingDatabase: "Searching nutritions...",
+      searchingDatabase: "Searching database...",
       nutritionResult: "Nutrition results",
       deleteConfirm: "Are you sure you want to reset all food entries and analysis results?"
     },
