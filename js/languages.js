@@ -120,14 +120,12 @@ export const translations = {
       calories: "kkal",
       per100g: "100 g",
       menuFromPhoto: "Menu dari foto",
-      
+      searchingDatabase: "Mencari nutrisi...",
       nutritionResult: "Hasil nutrisi",
       deleteConfirm: "Apakah Anda yakin ingin menghapus seluruh isian dan hasil analisis makanan?"
     },
 
-    foodscanner: {
-      searchingDatabase: "Mencari database..."
-    },
+    
 
     foodHistory: {
       eyebrow: "Catatan makananmu",
@@ -643,14 +641,11 @@ export const translations = {
       calories: "kcal",
       per100g: "100 g",
       menuFromPhoto: "Meal from photo",
-      
+      searchingDatabase: "Searching nutritions...",
       nutritionResult: "Nutrition results",
       deleteConfirm: "Are you sure you want to reset all food entries and analysis results?"
     },
 
-    foodscanner: {
-      searchingDatabase: "Searching database..."
-    },
     foodHistory: {
       eyebrow: "Your food records",
       title: "Food History",
