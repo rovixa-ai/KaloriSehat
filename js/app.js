@@ -1238,11 +1238,16 @@ function showFoodSuggestions(query) {
 // HITUNG MAKANAN MANUAL
 // ========================================
 
+
 $("calculateButton").addEventListener("click", async () => {
   await pangankuDatabasePromise;
 
   const name = $("foodName").value.trim();
   const weight = Number($("foodWeight").value);
+
+  // ========================================
+  // 1. VALIDASI INPUT
+  // ========================================
 
   if (!name || !weight || weight <= 0) {
     showAppModal({
@@ -1250,65 +1255,149 @@ $("calculateButton").addEventListener("click", async () => {
       title: t("enterFoodData"),
       message: t("enterValidFood")
     });
-
     return;
   }
 
-  const food = selectedSuggestedFood ||
-    findFood(name, pangankuFoods, getFoodAliases());
+  const button = $("calculateButton");
+  const buttonContent = button.innerHTML;
 
-  selectedSuggestedFood = null;
+  button.disabled = true;
 
-  if (!food) {
-    showFoodSuggestions(name);
-    return;
-  }
+  try {
+    let food = selectedSuggestedFood ||
+      findFood(name, pangankuFoods, getFoodAliases());
 
-  if (food.kcal === null) {
+    selectedSuggestedFood = null;
+
+    // ========================================
+    // 2. CARI FIRESTORE JIKA TIDAK ADA DI LOKAL
+    // ========================================
+
+    if (!food) {
+      button.innerHTML = "Mencari database...";
+
+      const response = await fetch(
+        `${NUTRITION_API_URL}/lookup-food`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name
+          })
+        }
+      );
+
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        throw new Error(
+          data?.error || `HTTP ${response.status}`
+        );
+      }
+
+      if (!data || data.success !== true) {
+        throw new Error(
+          data?.error || "Respons database tidak valid."
+        );
+      }
+
+      if (data.found === true && data.food) {
+        food = data.food;
+      }
+    }
+
+    // ========================================
+    // 3. JIKA TIDAK DITEMUKAN
+    // ========================================
+
+    if (!food) {
+      $("result").hidden = true;
+
+      showFoodSuggestions(name);
+      return;
+    }
+
+    // ========================================
+    // 4. VALIDASI DATA NUTRISI
+    // ========================================
+
+    if (
+      food.kcal === null ||
+      food.kcal === undefined ||
+      !Number.isFinite(Number(food.kcal))
+    ) {
+      showAppModal({
+        type: "warning",
+        title: t("emptyData"),
+        message: t("dataUnavailable")
+      });
+      return;
+    }
+
+    // ========================================
+    // 5. HITUNG BERDASARKAN BERAT
+    // ========================================
+
+    $("foodSuggestions").hidden = true;
+
+    const factor = weight / 100;
+
+    currentResult = {
+      name,
+      weight,
+
+      kcal: Number(food.kcal) * factor,
+      protein: Number(food.protein || 0) * factor,
+      carbs: Number(food.carbs || 0) * factor,
+      fat: Number(food.fat || 0) * factor,
+
+      fiber: food.fiber == null
+        ? null
+        : Number(food.fiber) * factor,
+
+      sodium: food.sodium == null
+        ? null
+        : Number(food.sodium) * factor,
+
+      water: food.water == null
+        ? null
+        : Number(food.water) * factor,
+
+      source: food.source || "Firestore",
+      code: food.code || null
+    };
+
+    // ========================================
+    // 6. TAMPILKAN HASIL
+    // ========================================
+
+    $("resultDetails").textContent =
+      `${Math.round(currentResult.kcal)} ${t("calories")} | ` +
+      `${t("protein")} ${currentResult.protein.toFixed(1)} g | ` +
+      `${t("carbohydrates")} ${currentResult.carbs.toFixed(1)} g | ` +
+      `${t("fat")} ${currentResult.fat.toFixed(1)} g | ` +
+      `${Math.round(currentResult.water || 0)} ml ${t("water")}`;
+
+    $("result").hidden = false;
+
+  } catch (error) {
+    console.error("Manual food lookup error:", error);
+
     showAppModal({
-      type: "warning",
-      title: t("emptyData"),
-      message: t("dataUnavailable")
+      type: "error",
+      title: "Gagal mencari makanan",
+      message: error.message ||
+        "Tidak dapat terhubung ke database. Silakan coba lagi."
     });
 
-    return;
+  } finally {
+    button.disabled = false;
+    button.innerHTML = buttonContent;
   }
-
-  $("foodSuggestions").hidden = true;
-
-  const factor = weight / 100;
-
-  currentResult = {
-    name,
-    weight,
-    kcal: food.kcal * factor,
-    protein: food.protein * factor,
-    carbs: food.carbs * factor,
-    fat: food.fat * factor,
-    fiber: food.fiber == null
-      ? null
-      : food.fiber * factor,
-    sodium: food.sodium == null
-      ? null
-      : food.sodium * factor,
-
-    water: food.water == null
-      ? null
-      : (Number(food.water) || 0) * factor,
-
-    source: food.source,
-    code: food.code
-  };
-
-  $("resultDetails").textContent =
-    `${Math.round(currentResult.kcal)} ${t("calories")} | ` +
-    `${t("protein")} ${currentResult.protein.toFixed(1)} g | ` +
-    `${t("carbohydrates")} ${currentResult.carbs.toFixed(1)} g | ` +
-    `${t("fat")} ${currentResult.fat.toFixed(1)} g | ` +
-    `${Math.round(currentResult.water || 0)} ml ${t("water")}`;
-
-  $("result").hidden = false;
 });
+
 
 // ========================================
 // SIMPAN MAKANAN MANUAL

@@ -441,6 +441,98 @@ app.get("/firestore-health", async (req, res) => {
   }
 });
 
+
+// ========================================
+// LOOKUP FOOD — FIRESTORE READ ONLY
+// KHUSUS INPUT MANUAL KALORIKU
+// TIDAK MEMANGGIL GEMINI
+// TIDAK MENYIMPAN DATA BARU
+// ========================================
+
+app.post("/lookup-food", async (req, res) => {
+  try {
+    if (!db) {
+      return res.status(503).json({
+        success: false,
+        found: false,
+        error: "Firestore belum terhubung.",
+      });
+    }
+
+    const requestedName = String(
+      req.body?.name || ""
+    ).trim();
+
+    if (
+      !requestedName ||
+      requestedName.length > 150
+    ) {
+      return res.status(400).json({
+        success: false,
+        found: false,
+        error: "Nama makanan tidak valid.",
+      });
+    }
+
+    const normalizedName =
+      normalizeFoodName(requestedName);
+
+    if (!normalizedName) {
+      return res.status(400).json({
+        success: false,
+        found: false,
+        error: "Nama makanan tidak valid.",
+      });
+    }
+
+    console.log("===== MANUAL FOOD LOOKUP =====");
+    console.log("Nama:", requestedName);
+
+    // HANYA MEMBACA FIRESTORE
+    const existingFood =
+      await findFoodInFirestore(normalizedName);
+
+    if (!existingFood) {
+      console.log("Hasil: Tidak ditemukan");
+      console.log("==============================");
+
+      return res.json({
+        success: true,
+        found: false,
+        food: null,
+        message: "Makanan belum tersedia di database.",
+      });
+    }
+
+    console.log("Hasil: Ditemukan");
+    console.log("Sumber:", existingFood.source || "Firestore");
+    console.log("==============================");
+
+    return res.json({
+      success: true,
+      found: true,
+      source: "firestore",
+      food: formatFoodData(
+        existingFood,
+        requestedName
+      ),
+    });
+
+  } catch (error) {
+    console.error(
+      "Manual food lookup error:",
+      error.message
+    );
+
+    return res.status(500).json({
+      success: false,
+      found: false,
+      error: "Gagal mencari makanan di database.",
+    });
+  }
+});
+
+
 // ========================================
 // FIND NUTRITION
 // FIRESTORE + GEMINI SINGLE
