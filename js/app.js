@@ -118,7 +118,6 @@ function setAnalysisStatus(type = "", value = null) {
 
   if (!type || type === "error") {
     status.hidden = true;
-    status.classList.remove("is-complete");
 
     if (type === "error") {
       showAppModal({
@@ -131,30 +130,75 @@ function setAnalysisStatus(type = "", value = null) {
     return;
   }
 
-  const stage = analysisStages[type];
+  const stages = {
+    preparing: {
+      step: 1,
+      progress: 8,
+      title: "preparingPhoto",
+      subtitle: "preparingPhotoDescription"
+    },
+    recognizing: {
+      step: 2,
+      progress: 30,
+      title: "recognizingFood",
+      subtitle: "recognizingFoodDescription"
+    },
+    identifying: {
+      step: 3,
+      progress: 52,
+      title: "identifyingComposition",
+      subtitle: "identifyingCompositionDescription"
+    },
+    calculating: {
+      step: 4,
+      progress: 75,
+      title: "calculatingNutrition",
+      subtitle: "calculatingNutritionDescription"
+    },
+    preparingResults: {
+      step: 5,
+      progress: 92,
+      title: "preparingResults",
+      subtitle: "preparingResultsDescription"
+    },
+    complete: {
+      step: 5,
+      progress: 100,
+      title: "analysisComplete",
+      subtitle: "analysisCompleteDescription"
+    }
+  };
+
+  const stage = stages[type];
   if (!stage) return;
 
   status.hidden = false;
-  status.classList.toggle("is-complete", type === "complete");
 
   $("analysisStageTitle").textContent = t(stage.title);
   $("analysisStageSubtitle").textContent = t(stage.subtitle);
-  $("analysisProgressBar").style.width = `${stage.progress}%`;
 
-  status.querySelectorAll(".analysis-step").forEach(step => {
-    const stepNumber = Number(step.dataset.step);
+  $("analysisProgressBar").style.width =
+    `${stage.progress}%`;
 
-    step.classList.toggle(
+  status.querySelectorAll(".analysis-step").forEach(element => {
+    const number = Number(element.dataset.step);
+
+    element.classList.toggle(
       "is-active",
-      stepNumber === stage.step && type !== "complete"
+      number === stage.step && type !== "complete"
     );
 
-    step.classList.toggle(
+    element.classList.toggle(
       "is-complete",
-      stepNumber < stage.step ||
-      type === "complete"
+      number < stage.step || type === "complete"
     );
   });
+
+  if (type === "complete") {
+    setTimeout(() => {
+      status.hidden = true;
+    }, 1100);
+  }
 }
 
 // ========================================

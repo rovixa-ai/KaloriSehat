@@ -964,182 +964,223 @@ html[data-theme="dark"] {
   font-weight: 800;
 }
 /* =====================================================
-   KALORIKU — PREMIUM FOOD ANALYSIS LOADING
+   KALORIKU — FULL SCREEN ANALYSIS LOADING
 ===================================================== */
 
-#analysisStatus.analysis-progress {
-  --progress-accent: var(--dashboard-primary, #79bd45);
+.analysis-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
 
-  margin-top: 14px;
-  padding: 17px;
-  overflow: hidden;
-  background:
-    linear-gradient(
-      145deg,
-      var(--dashboard-bg),
-      var(--dashboard-bg-soft)
-    );
-  border: 1px solid var(--dashboard-border);
-  border-radius: 17px;
-  animation: analysisPanelReveal .45s cubic-bezier(.2,.8,.2,1) both;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  min-height: 100dvh;
+  padding: 24px;
+
+  background: rgba(12, 20, 14, .58);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  animation: overlayFadeIn .35s ease both;
 }
 
-#analysisStatus[hidden] {
+.analysis-overlay[hidden] {
   display: none !important;
 }
 
-.analysis-progress-header {
-  display: flex;
-  align-items: center;
-  gap: 13px;
+.analysis-loading-card {
+  width: 100%;
+  max-width: 350px;
+  padding: 32px 25px;
+
+  text-align: center;
+
+  background: var(--dashboard-bg);
+  border: 1px solid var(--dashboard-border);
+  border-radius: 25px;
+
+  box-shadow: 0 25px 80px rgba(0, 0, 0, .22);
+
+  animation: loadingCardReveal .55s cubic-bezier(.2,.8,.2,1) both;
 }
 
-.analysis-progress-icon {
+/* ANIMATION */
+
+.analysis-animation {
   position: relative;
+
   display: grid;
   place-items: center;
-  flex-shrink: 0;
-  width: 43px;
-  height: 43px;
-  color: var(--progress-accent);
-  background: var(--dashboard-primary-soft);
-  border-radius: 14px;
+
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 25px;
 }
 
-.analysis-sparkle {
-  font-size: 23px;
-  animation: analysisSparkle 1.8s ease-in-out infinite;
+.analysis-center {
+  display: grid;
+  place-items: center;
+
+  width: 58px;
+  height: 58px;
+
+  color: var(--dashboard-primary);
+  background: var(--dashboard-primary-soft);
+  border: 1px solid var(--dashboard-border);
+  border-radius: 20px;
+
+  font-size: 31px;
+
+  box-shadow: 0 0 35px rgba(130, 200, 80, .18);
+
+  animation: centerPulse 2s ease-in-out infinite;
 }
 
 .analysis-orbit {
   position: absolute;
-  inset: 4px;
-  border: 1px solid var(--progress-accent);
-  border-radius: 11px;
-  opacity: .35;
-  animation: analysisOrbit 3s linear infinite;
+  inset: 0;
+
+  border: 1px solid var(--dashboard-primary);
+  border-radius: 50%;
+
+  opacity: .3;
 }
 
-.analysis-progress-copy {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 4px;
-  min-width: 0;
+.orbit-one {
+  animation: orbitRotate 5s linear infinite;
 }
 
-.analysis-progress-copy strong {
+.orbit-two {
+  inset: 12px;
+  border-style: dashed;
+  opacity: .55;
+  animation: orbitRotate 8s linear infinite reverse;
+}
+
+/* TEXT */
+
+.analysis-eyebrow {
+  display: block;
+  margin-bottom: 10px;
+
+  color: var(--dashboard-primary);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.analysis-loading-content h3 {
+  margin: 0;
+
   color: var(--dashboard-text);
-  font-size: 13px;
+  font-size: 19px;
   font-weight: 850;
+  line-height: 1.4;
 }
 
-.analysis-progress-copy span {
+.analysis-loading-content p {
+  min-height: 34px;
+  margin: 9px 0 0;
+
   color: var(--dashboard-secondary);
-  font-size: 11px;
-  line-height: 1.5;
+  font-size: 12px;
+  line-height: 1.6;
 }
+
+/* PROGRESS */
 
 .analysis-progress-track {
+  width: 100%;
   height: 5px;
-  margin-top: 17px;
+  margin-top: 25px;
+
   overflow: hidden;
+
   background: var(--dashboard-border);
   border-radius: 20px;
 }
 
-.analysis-progress-track > span {
+.analysis-progress-track span {
   display: block;
   width: 0;
   height: 100%;
+
   background: linear-gradient(
     90deg,
-    var(--progress-accent),
+    var(--dashboard-primary),
     #b4e66b
   );
+
   border-radius: inherit;
+
   transition: width .55s cubic-bezier(.2,.8,.2,1);
 }
 
+/* STEPS */
+
 .analysis-steps {
   display: flex;
-  gap: 5px;
-  margin-top: 12px;
+  gap: 6px;
+  margin-top: 13px;
 }
 
 .analysis-step {
   flex: 1;
-  height: 3px;
+  height: 4px;
+
   background: var(--dashboard-border);
   border-radius: 10px;
-  transition: background .35s ease, transform .35s ease;
+
+  transition: background .35s ease;
 }
 
 .analysis-step.is-active,
 .analysis-step.is-complete {
-  background: var(--progress-accent);
+  background: var(--dashboard-primary);
 }
 
-.analysis-step.is-active {
-  transform: scaleY(1.8);
+/* ANIMATIONS */
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-#analysisStatus.is-complete .analysis-progress-icon {
-  animation: analysisComplete .45s ease both;
-}
-
-#analysisStatus.is-complete .analysis-sparkle {
-  animation: none;
-}
-
-#analysisStatus.is-complete .analysis-progress-track > span {
-  background: var(--progress-accent);
-}
-
-@keyframes analysisPanelReveal {
+@keyframes loadingCardReveal {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(15px) scale(.96);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
-@keyframes analysisSparkle {
+@keyframes centerPulse {
   0%, 100% {
-    transform: scale(.85) rotate(-12deg);
-    opacity: .7;
+    transform: scale(1);
   }
   50% {
-    transform: scale(1.12) rotate(12deg);
-    opacity: 1;
+    transform: scale(1.08);
   }
 }
 
-@keyframes analysisOrbit {
+@keyframes orbitRotate {
   to {
     transform: rotate(360deg);
   }
 }
 
-@keyframes analysisComplete {
-  50% {
-    transform: scale(1.12);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .analysis-sparkle,
-  .analysis-orbit,
-  #analysisStatus.analysis-progress {
+  .analysis-overlay,
+  .analysis-loading-card,
+  .analysis-center,
+  .analysis-orbit {
     animation: none !important;
-  }
-
-  .analysis-progress-track > span,
-  .analysis-step {
-    transition: none;
   }
 }
 
