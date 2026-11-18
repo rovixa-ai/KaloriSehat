@@ -939,12 +939,29 @@ async function renderDetectedFoods(foodList) {
     // ========================================
     // EDIT
     // ========================================
+const editButton = document.createElement("button");
+editButton.type = "button";
+editButton.className = "detected-food-edit-icon";
+editButton.dataset.foodEditTour = "trigger";
+editButton.setAttribute("aria-label", t("edit"));
+editButton.title = t("edit");
 
-    const editButton = document.createElement("button");
-    editButton.type = "button";
-    editButton.textContent = t("edit");
-    editButton.className = "small-select-button";
-    editButton.dataset.foodEditTour = "trigger";
+editButton.innerHTML = `
+  <svg
+    viewBox="0 0 24 24"
+    width="17"
+    height="17"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M12 20h9"/>
+    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/>
+  </svg>
+`;
 
     editButton.addEventListener("click", () => {
       openFoodEditModal({
