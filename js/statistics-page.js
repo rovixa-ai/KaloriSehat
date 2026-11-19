@@ -656,125 +656,540 @@ function renderGoalProgress(stats) {
 
 function renderCalorieChart(dailyData) {
   const container = $("calorieChart");
-
   if (!container) return;
 
-  const dates = Object.keys(dailyData).sort();
   const target = Number(getTarget()) || 0;
+  const period = selectedPeriod;
 
   container.classList.remove("is-animated");
 
-  if (!dates.length) {
+  // ========================================
+  // HELPER TANGGAL
+  // ========================================
+
+  function formatDateKey(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  }
+
+  function addDays(date, amount) {
+    const result = new Date(date);
+    result.setDate(result.getDate() + amount);
+    return result;
+  }
+
+  function getDateLabel(dateKey, options = {}) {
+    const date = new Date(`${dateKey}T00:00:00`);
+
+    return date.toLocaleDateString(getLocale(), {
+      day: "numeric",
+      month: "short",
+      ...options
+    });
+  }
+
+  // ========================================
+  // AMBIL TANGGAL SESUAI PERIODE
+  // ========================================
+
+  const recordedDates = Object.keys(dailyData).sort();
+
+  if (!recordedDates.length) {
     container.innerHTML = `
       <p>${escapeHTML(t("statisticsDynamic.noData"))}</p>
     `;
     return;
   }
 
-  const values = dates.map(date => ({
-    date,
-    kcal: dailyData[date].kcal
-  }));
+  let dates = [];
+
+  if (period === "7") {
+    // 7 hari terakhir, termasuk hari ini
+    const today = new Date();
+
+    for (let i = 6; i >= 0; i--) {
+      dates.push(formatDateKey(addDays(today, -i)));
+    }
+
+  } else if (period === "30") {
+    // 30 hari terakhir, termasuk hari ini
+    const today = new Date();
+
+    for (let i = 29; i >= 0; i--) {
+      dates.push(formatDateKey(addDays(today, -i)));
+    }
+
+  } else {
+    // Semua tanggal dari catatan pertama sampai terakhir
+    const firstDate = new Date(`${recordedDates[0]}T00:00:00`);
+    const lastDate = new Date(
+      `${recordedDates[recordedDates.length - 1]}T00:00:00`
+    );
+
+    let current = new Date(firstDate);
+
+    while (current <= lastDate) {
+      dates.push(formatDateKey(current));
+      current = addDays(current, 1);
+    }
+  }
+
+  const values = dates.map(date => {
+    const hasData = Object.prototype.hasOwnProperty.call(
+      dailyData,
+      date
+    );
+
+    return {
+      date,
+      kcal: hasData
+        ? Number(dailyData[date].kcal) || 0
+        : null,
+      hasData
+    };
+  });
+
+  const recordedValues = values
+    .filter(item => item.hasData)
+    .map(item => item.kcal);
 
   const maxCalories = Math.max(
-    ...values.map(item => item.kcal),
+    ...recordedValues,
     target,
     1
   );
 
-  const targetPosition = target > 0
-    ? (target / maxCalories) * 100
-    : 0;
+  // ========================================
+  // GRAFIK 7 HARI: BAR CHART
+  // ========================================
 
-  container.innerHTML = `
-    <div class="statistics-chart-wrapper">
+  if (period === "7") {
+    const chartMax = maxCalories * 1.12;
+    const targetPosition = target > 0
+      ? (target / chartMax) * 100
+      : 0;
 
-      ${target > 0 ? `
-        <div
-          class="statistics-target-line"
-          style="bottom: ${targetPosition}%"
-        >
-          <span>
-            ${escapeHTML(t("statisticsDynamic.targetLabel"))}
-            ${formatNumber(Math.round(target))} kcal
-          </span>
-        </div>
-      ` : ""}
+    container.innerHTML = `
+      <div class="statistics-chart-wrapper statistics-bar-view">
 
-      <div class="statistics-chart-bars">
+        ${target > 0 ? `
+          <div
+            class="statistics-target-line"
+            style="bottom: ${targetPosition}%"
+          >
+            <span>
+              ${escapeHTML(t("statisticsDynamic.targetLabel"))}
+              ${formatNumber(Math.round(target))} kcal
+            </span>
+          </div>
+        ` : ""}
 
-        ${values.map(item => {
-          const height = Math.max(
-            4,
-            (item.kcal / maxCalories) * 100
-          );
+        <div class="statistics-chart-bars">
+          ${values.map(item => {
+            const kcal = item.kcal ?? 0;
 
-          const date = new Date(
-            `${item.date}T00:00:00`
-          );
+            const height = item.hasData
+              ? Math.max(0, (kcal / chartMax) * 100)
+              : 0;
 
-          const isSuccess =
-            target > 0 && item.kcal <= target;
+            const isSuccess = target > 0 &&
+              item.hasData &&
+              kcal <= target;
 
-          const isOverTarget =
-            target > 0 && item.kcal > target;
+            const isOverTarget = target > 0 &&
+              item.hasData &&
+              kcal > target;
 
-          let statusClass = "";
+            let statusClass = "";
 
-          if (isSuccess) {
-            statusClass = "success";
-          } else if (isOverTarget) {
-            statusClass = "over-target";
-          }
+            if (isSuccess) statusClass = "success";
+            else if (isOverTarget) statusClass = "over-target";
 
-          const statusText = isSuccess
-            ? t("statisticsDynamic.according")
-            : t("statisticsDynamic.exceeded");
+            const statusText = isSuccess
+              ? t("statisticsDynamic.according")
+              : t("statisticsDynamic.exceeded");
 
-          const titleText = isSuccess
-            ? t("statisticsDynamic.successful")
-            : isOverTarget
-              ? t("statisticsDynamic.exceededTarget")
-              : "";
+            const titleText = !item.hasData
+              ? "Belum ada catatan"
+              : isSuccess
+                ? t("statisticsDynamic.successful")
+                : isOverTarget
+                  ? t("statisticsDynamic.exceededTarget")
+                  : "";
 
-          return `
-            <div class="statistics-chart-column">
+            return `
+              <div class="statistics-chart-column">
 
-              <strong data-chart-value="${item.kcal}">
-                ${formatNumber(Math.round(item.kcal))}
-              </strong>
+                <strong
+                  data-chart-value="${kcal}"
+                  class="${item.hasData ? "" : "no-data"}"
+                >
+                  ${item.hasData
+                    ? formatNumber(Math.round(kcal))
+                    : "—"}
+                </strong>
 
-              <div class="statistics-bar-track">
-                <div
-                  class="statistics-bar ${statusClass}"
-                  style="height: ${height}%"
-                  title="${escapeHTML(titleText)}"
-                ></div>
+                <div class="statistics-bar-track">
+                  <div
+                    class="statistics-bar ${statusClass}"
+                    style="height: ${height}%"
+                    title="${escapeHTML(titleText)}"
+                  ></div>
+                </div>
+
+                <small>${getDateLabel(item.date)}</small>
+
+                ${target > 0 ? `
+                  <span class="statistics-day-status">
+                    ${!item.hasData
+                      ? "—"
+                      : isSuccess
+                        ? "✓"
+                        : "↑"}
+                    ${item.hasData
+                      ? escapeHTML(statusText)
+                      : "—"}
+                  </span>
+                ` : ""}
+
               </div>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    `;
 
-              <small>
-                ${date.toLocaleDateString(getLocale(), {
-                  day: "numeric",
-                  month: "short"
-                })}
-              </small>
+  // ========================================
+  // GRAFIK 30 HARI & SEMUA: LINE CHART
+  // ========================================
 
-              ${target > 0 ? `
-                <span class="statistics-day-status">
-                  ${isSuccess ? "✓" : "↑"}
-                  ${escapeHTML(statusText)}
-                </span>
-              ` : ""}
+  } else {
+    const chartHeight = 240;
+const paddingTop = 25;
+const paddingBottom = 38;
+const paddingLeft = 48;
+const paddingRight = 16;
 
-            </div>
-          `;
-        }).join("")}
+// Grafik 30 hari mengikuti lebar kontainer.
+// Grafik semua menyesuaikan jumlah tanggal.
+const chartWidth = period === "30"
+  ? 720
+  : Math.max(720, values.length * 22);
+
+    const innerWidth = chartWidth - paddingLeft - paddingRight;
+    const innerHeight = chartHeight - paddingTop - paddingBottom;
+
+    const chartMax = maxCalories * 1.15;
+
+    function getX(index) {
+      if (values.length <= 1) return paddingLeft;
+
+      return paddingLeft +
+        (index / (values.length - 1)) * innerWidth;
+    }
+
+    function getY(kcal) {
+      return paddingTop +
+        innerHeight -
+        (kcal / chartMax) * innerHeight;
+    }
+
+    // Garis grafik hanya menghubungkan tanggal yang memiliki data.
+    // Tanggal tanpa data membuat garis terputus.
+    const segments = [];
+    let currentSegment = [];
+
+    values.forEach((item, index) => {
+      if (item.hasData) {
+        currentSegment.push({
+          x: getX(index),
+          y: getY(item.kcal),
+          item
+        });
+      } else if (currentSegment.length) {
+        segments.push(currentSegment);
+        currentSegment = [];
+      }
+    });
+
+    if (currentSegment.length) {
+      segments.push(currentSegment);
+    }
+
+   
+function createSmoothPath(segment) {
+  if (!segment.length) return "";
+
+  if (segment.length === 1) {
+    const point = segment[0];
+    return `M ${point.x} ${point.y}`;
+  }
+
+  let path = `M ${segment[0].x} ${segment[0].y}`;
+
+  for (let i = 0; i < segment.length - 1; i++) {
+    const current = segment[i];
+    const next = segment[i + 1];
+
+    const controlX = (current.x + next.x) / 2;
+
+    path += `
+      C ${controlX} ${current.y},
+        ${controlX} ${next.y},
+        ${next.x} ${next.y}
+    `;
+  }
+
+  return path;
+}
+
+const linePaths = segments.map(segment => ({
+  line: createSmoothPath(segment),
+  area: `
+    ${createSmoothPath(segment)}
+    L ${segment[segment.length - 1].x} ${chartHeight - paddingBottom}
+    L ${segment[0].x} ${chartHeight - paddingBottom}
+    Z
+  `
+}));
+
+
+    // Titik untuk setiap hari yang memiliki catatan
+    const points = values
+      .map((item, index) => {
+        if (!item.hasData) return "";
+
+        const x = getX(index);
+        const y = getY(item.kcal);
+
+        return `
+          <circle
+            class="statistics-line-point"
+            cx="${x}"
+            cy="${y}"
+            r="4"
+          >
+            <title>
+              ${escapeHTML(getDateLabel(item.date, {
+                year: "numeric"
+              }))}
+              — ${formatNumber(Math.round(item.kcal))} kcal
+            </title>
+          </circle>
+        `;
+      })
+      .join("");
+
+    // Label tanggal dibuat lebih renggang agar tidak bertumpuk
+    const labelStep = period === "30"
+      ? 5
+      : Math.max(1, Math.ceil(values.length / 12));
+
+    const dateLabels = values
+      .map((item, index) => {
+        const isLast = index === values.length - 1;
+
+        if (index % labelStep !== 0 && !isLast) return "";
+
+        return `
+          <text
+            class="statistics-line-date"
+            x="${getX(index)}"
+            y="${chartHeight - 12}"
+            text-anchor="middle"
+          >
+            ${escapeHTML(getDateLabel(item.date))}
+          </text>
+        `;
+      })
+      .join("");
+
+    const gridLines = [0, 0.5, 1].map(ratio => {
+      const y = paddingTop + innerHeight * (1 - ratio);
+      const value = chartMax * ratio;
+
+      return `
+        <line
+          class="statistics-line-grid"
+          x1="${paddingLeft}"
+          y1="${y}"
+          x2="${chartWidth - paddingRight}"
+          y2="${y}"
+        />
+
+        <text
+          class="statistics-line-axis"
+          x="${paddingLeft - 10}"
+          y="${y + 4}"
+          text-anchor="end"
+        >
+          ${formatNumber(Math.round(value))}
+        </text>
+      `;
+    }).join("");
+
+    const targetLine = target > 0
+      ? `
+        <line
+          class="statistics-line-target"
+          x1="${paddingLeft}"
+          y1="${getY(target)}"
+          x2="${chartWidth - paddingRight}"
+          y2="${getY(target)}"
+        />
+        <text
+          class="statistics-line-target-label"
+          x="${chartWidth - paddingRight - 4}"
+          y="${getY(target) - 8}"
+          text-anchor="end"
+        >
+          Target ${formatNumber(Math.round(target))} kcal
+        </text>
+      `
+      : "";
+
+    container.innerHTML = `
+      <div class="statistics-line-wrapper">
+
+        <div class="statistics-line-scroll">
+          
+<svg
+  class="statistics-line-chart"
+  viewBox="0 0 ${chartWidth} ${chartHeight}"
+  style="width: ${period === "30" ? "100%" : `${chartWidth}px`}; height: auto;"
+  role="img"
+  aria-label="Grafik tren konsumsi kalori"
+>
+  <defs>
+    <!-- Gradasi area -->
+    <linearGradient
+      id="calorieAreaGradient"
+      x1="0"
+      y1="0"
+      x2="0"
+      y2="1"
+    >
+      <stop
+        offset="0%"
+        stop-color="#16A085"
+        stop-opacity="0.32"
+      />
+      <stop
+        offset="65%"
+        stop-color="#16A085"
+        stop-opacity="0.10"
+      />
+      <stop
+        offset="100%"
+        stop-color="#16A085"
+        stop-opacity="0.01"
+      />
+    </linearGradient>
+
+    <!-- Efek glow -->
+    <filter
+      id="calorieLineGlow"
+      x="-30%"
+      y="-30%"
+      width="160%"
+      height="160%"
+    >
+      <feGaussianBlur
+        stdDeviation="3"
+        result="blur"
+      />
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Grid -->
+  ${gridLines}
+
+  <!-- Target -->
+  ${targetLine}
+
+  <!-- Area gradient -->
+  ${linePaths.map(item => `
+    <path
+      class="statistics-line-area"
+      d="${item.area}"
+      fill="url(#calorieAreaGradient)"
+    />
+  `).join("")}
+
+  <!-- Garis utama -->
+  ${linePaths.map(item => `
+    <path
+      class="statistics-line-path"
+      d="${item.line}"
+      filter="url(#calorieLineGlow)"
+    />
+  `).join("")}
+
+  <!-- Titik data -->
+  ${values.map((item, index) => {
+    if (!item.hasData) return "";
+
+    const x = getX(index);
+    const y = getY(item.kcal);
+
+    return `
+      <g class="statistics-line-marker">
+        <circle
+          class="statistics-line-point-halo"
+          cx="${x}"
+          cy="${y}"
+          r="10"
+        />
+
+        <circle
+          class="statistics-line-point"
+          cx="${x}"
+          cy="${y}"
+          r="4.5"
+        >
+          <title>
+            ${escapeHTML(getDateLabel(item.date, {
+              year: "numeric"
+            }))}
+            — ${formatNumber(Math.round(item.kcal))} kcal
+          </title>
+        </circle>
+      </g>
+    `;
+  }).join("")}
+
+  <!-- Tanggal -->
+  ${dateLabels}
+</svg>
+
+        </div>
+
+        <div class="statistics-line-legend">
+          <span>
+            <i class="statistics-legend-dot"></i>
+            Kalori harian
+          </span>
+
+          ${target > 0 ? `
+            <span>
+              <i class="statistics-legend-target"></i>
+              Target kalori
+            </span>
+          ` : ""}
+        </div>
 
       </div>
-    </div>
-  `;
+    `;
+  }
 
-  // Aktifkan animasi grafik setelah DOM selesai dibuat
+  // Jalankan animasi setelah elemen grafik selesai dibuat
   container.getBoundingClientRect();
 
   requestAnimationFrame(() => {
@@ -783,6 +1198,7 @@ function renderCalorieChart(dailyData) {
     });
   });
 }
+
 
 
 // =========================================
