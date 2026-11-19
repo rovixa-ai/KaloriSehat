@@ -691,23 +691,19 @@ function renderCalorieChart(dailyData) {
     });
   }
 
+  
   // ========================================
   // AMBIL TANGGAL SESUAI PERIODE
   // ========================================
 
-  const recordedDates = Object.keys(dailyData).sort();
-
-  if (!recordedDates.length) {
-    container.innerHTML = `
-      <p>${escapeHTML(t("statisticsDynamic.noData"))}</p>
-    `;
-    return;
-  }
+  const recordedDates = Object.keys(dailyData)
+    .filter(date => Number(dailyData[date]?.kcal) > 0)
+    .sort();
 
   let dates = [];
 
   if (period === "7") {
-    // 7 hari terakhir, termasuk hari ini
+    // 7 hari terakhir: selalu tampilkan 7 batang
     const today = new Date();
 
     for (let i = 6; i >= 0; i--) {
@@ -715,27 +711,22 @@ function renderCalorieChart(dailyData) {
     }
 
   } else if (period === "30") {
-    // 30 hari terakhir, termasuk hari ini
+    // 30 hari terakhir: hanya tanggal yang memiliki kalori
     const today = new Date();
+    const startDate = formatDateKey(addDays(today, -29));
 
-    for (let i = 29; i >= 0; i--) {
-      dates.push(formatDateKey(addDays(today, -i)));
-    }
+    dates = recordedDates
+      .filter(date => date >= startDate)
+      .slice(-30);
 
   } else {
-    // Semua tanggal dari catatan pertama sampai terakhir
-    const firstDate = new Date(`${recordedDates[0]}T00:00:00`);
-    const lastDate = new Date(
-      `${recordedDates[recordedDates.length - 1]}T00:00:00`
-    );
-
-    let current = new Date(firstDate);
-
-    while (current <= lastDate) {
-      dates.push(formatDateKey(current));
-      current = addDays(current, 1);
-    }
+    // Semua: maksimal 30 tanggal terbaru yang memiliki kalori
+    dates = recordedDates.slice(-30);
   }
+
+  // ========================================
+  // DATA GRAFIK
+  // ========================================
 
   const values = dates.map(date => {
     const hasData = Object.prototype.hasOwnProperty.call(
@@ -747,10 +738,22 @@ function renderCalorieChart(dailyData) {
       date,
       kcal: hasData
         ? Number(dailyData[date].kcal) || 0
-        : null,
+        : 0,
       hasData
     };
   });
+
+  // Jika tidak ada data, hanya grafik garis yang kosong
+  if (period !== "7" && !values.length) {
+    container.innerHTML = `
+      <p>${escapeHTML(t("statisticsDynamic.noData"))}</p>
+    `;
+    return;
+  }
+
+  // ========================================
+  // SKALA GRAFIK
+  // ========================================
 
   const recordedValues = values
     .filter(item => item.hasData)
