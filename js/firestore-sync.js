@@ -1,8 +1,10 @@
 
+
 import { auth, db } from "./firebase-config.js";
 
-import { onAuthStateChanged } from
-  "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {
+  onAuthStateChanged
+} from "firebase/auth";
 
 import {
   doc,
@@ -10,8 +12,8 @@ import {
   setDoc,
   deleteDoc,
   serverTimestamp
-} from
-  "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+} from "firebase/firestore";
+
 
 let profileWriteQueue = Promise.resolve();
 let profileResetInProgress = false;

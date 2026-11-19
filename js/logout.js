@@ -3,7 +3,7 @@ import { auth } from "./firebase-config.js";
 
 import {
   signOut
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+} from "firebase/auth";
 
 // =========================================
 // TERJEMAHAN

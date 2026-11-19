@@ -3,7 +3,7 @@ import { auth } from "./firebase-config.js";
 
 import {
   onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+} from "firebase/auth";
 
 
 /* ==========================================
@@ -43,8 +43,6 @@ function notifyAuthReady(type, user) {
     user
   };
 
-  // Simpan status agar onboarding tetap bisa
-  // mendeteksi autentikasi meskipun event terlewat.
   window.__kalorikuAuthState = state;
 
   window.dispatchEvent(
@@ -108,7 +106,6 @@ if (
           loginMethod: "google"
         };
 
-        // Perbarui data pengguna lokal.
         localStorage.setItem(
           "kaloriku_user",
           JSON.stringify(userData)
@@ -123,7 +120,6 @@ if (
 
       } else {
 
-        // Tidak ada sesi Google dan bukan Guest.
         redirectToLogin();
 
       }

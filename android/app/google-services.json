@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "541073457264",
+    "project_id": "gen-lang-client-0589900687",
+    "storage_bucket": "gen-lang-client-0589900687.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541073457264:android:cb89a0031d8e6eb6afb4b5",
+        "android_client_info": {
+          "package_name": "id.kaloriku.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "541073457264-ct6hsv2j2e8d30u14hdj2if1k4a80nvl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.kaloriku.app",
+            "certificate_hash": "bf8eb92d33dcc95c5fb33d7ed404ff9118182298"
+          }
+        },
+        {
+          "client_id": "541073457264-el6uvl38mtt684ici5kkluoeu6fkqj6m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFH16jow5z6FfIfos5lCVCs8XDdkreuWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "541073457264-el6uvl38mtt684ici5kkluoeu6fkqj6m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

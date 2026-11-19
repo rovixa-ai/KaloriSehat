@@ -1,5 +1,11 @@
+
 {
   "appId": "id.kaloriku.app",
   "appName": "KaloriKu",
-  "webDir": "dist"
+  "webDir": "dist",
+  "plugins": {
+    "FirebaseAuthentication": {
+      "providers": ["google.com"]
+    }
+  }
 }

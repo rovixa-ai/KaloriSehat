@@ -1,4 +1,5 @@
 
+
 import { auth, db } from "./firebase-config.js";
 
 import {
@@ -13,11 +14,12 @@ import {
   setDoc,
   writeBatch,
   serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+} from "firebase/firestore";
 
 import {
   onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+} from "firebase/auth";
+
 
 // =========================================
 // PENGATURAN SINKRONISASI

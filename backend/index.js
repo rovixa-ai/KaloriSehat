@@ -74,6 +74,9 @@ try {
 const allowedOrigins = [
   "https://rovixa-ai.github.io",
   "https://kalorisehatku.rovixa.web.id",
+
+  // Capacitor Android
+  "https://localhost",
 ];
 
 app.use(
