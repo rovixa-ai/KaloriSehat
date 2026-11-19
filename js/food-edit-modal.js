@@ -1,3 +1,4 @@
+
 export function openFoodEditModal({
   mode = "edit",
   food = null,
@@ -94,8 +95,14 @@ export function openFoodEditModal({
 
   const saveButton = modal.querySelector(".food-edit-save");
 
+  let suggestionTimer = null;
+
   nameInput.value = selectedFoodName || (food?.name || "");
   weightInput.value = Number(food?.estimatedWeight) || 100;
+
+  // ========================================
+  // VALIDASI TOMBOL SIMPAN
+  // ========================================
 
   function updateSaveButton() {
     const weight = Number(weightInput.value);
@@ -108,13 +115,19 @@ export function openFoodEditModal({
     );
   }
 
+  // ========================================
+  // RENDER SUGESTI MAKANAN
+  // ========================================
+
   function renderSuggestions(query) {
     suggestionsBox.innerHTML = "";
 
-    if (!query.trim()) return;
+    const searchQuery = query.trim();
+
+    if (!searchQuery) return;
 
     const suggestions = findFoodSuggestions(
-      query,
+      searchQuery,
       pangankuFoods,
       10
     );
@@ -138,6 +151,8 @@ export function openFoodEditModal({
         `${suggestion.name} — ${suggestion.food.kcal ?? "—"} ${t("calories")} / ${t("per100g")}`;
 
       button.addEventListener("click", () => {
+        clearTimeout(suggestionTimer);
+
         selectedFood = suggestion.food;
         selectedFoodName = suggestion.name;
 
@@ -158,21 +173,64 @@ export function openFoodEditModal({
     });
   }
 
+  // ========================================
+  // INPUT NAMA MAKANAN
+  // ========================================
+
   nameInput.addEventListener("input", () => {
     selectedFood = null;
     selectedFoodName = "";
 
+    clearTimeout(suggestionTimer);
+
+    suggestionsBox.innerHTML = "";
+
     updateSaveButton();
+
+    const query = nameInput.value.trim();
+
+    if (!query) return;
+
+    // Sugesti otomatis setelah berhenti mengetik 500 ms
+    suggestionTimer = setTimeout(() => {
+      renderSuggestions(nameInput.value);
+    }, 500);
+  });
+
+  // ========================================
+  // PENCARIAN LANGSUNG DENGAN ENTER
+  // ========================================
+
+  nameInput.addEventListener("keydown", event => {
+    if (event.key !== "Enter") return;
+
+    event.preventDefault();
+
+    clearTimeout(suggestionTimer);
+
     renderSuggestions(nameInput.value);
   });
 
+  // ========================================
+  // INPUT BERAT MAKANAN
+  // ========================================
+
   weightInput.addEventListener("input", updateSaveButton);
+
+  // ========================================
+  // SUGESTI AWAL UNTUK MAKANAN YANG BELUM DIPILIH
+  // ========================================
 
   if (!selectedFood) {
     renderSuggestions(nameInput.value);
   }
 
+  // ========================================
+  // TUTUP MODAL
+  // ========================================
+
   function closeModal() {
+    clearTimeout(suggestionTimer);
     overlay.remove();
   }
 
@@ -188,8 +246,10 @@ export function openFoodEditModal({
     }
   });
 
- 
-  // Fungsi hapus makanan
+  // ========================================
+  // HAPUS MAKANAN
+  // ========================================
+
   if (isEdit) {
     const deleteButton = modal.querySelector(".food-edit-delete");
 
@@ -212,8 +272,10 @@ export function openFoodEditModal({
     });
   }
 
+  // ========================================
+  // SIMPAN MAKANAN
+  // ========================================
 
-  // Fungsi simpan
   saveButton.addEventListener("click", () => {
     const weight = Number(weightInput.value);
 
