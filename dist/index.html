@@ -1,0 +1,1311 @@
+
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#16865b">
+  <title>KaloriSehatKu</title>
+  <script type="module" crossorigin src="/assets/index-BYlKypPm.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-D6unW4XK.css">
+</head>
+<body>
+  
+<header class="topbar dashboard-header">
+  <div class="brand">
+    <div class="brand-mark">
+  <img src="/assets/rovixa-icon-D-yceGUP.png" alt="Rovixa" />
+</div>
+    <div>
+      <h1>Kalori<span>SehatKu</span></h1>
+      <p>Healthy habits, better you.</p>
+    </div>
+  </div>
+  <div class="avatar" id="dashboardAvatar" aria-label="Profil pengguna">
+  <span id="dashboardAvatarInitial">K</span>
+  <img id="dashboardAvatarPhoto" alt="Foto pengguna" hidden>
+</div>
+</header>
+
+<main id="homePage" class="dashboard-page">
+
+  <!-- SAPAAN -->
+<section class="welcome dashboard-welcome">
+  <div>
+    <p id="today" class="dashboard-date"></p>
+    
+    <h2 id="welcomeGreeting" data-i18n="dashboard.welcomeGreeting">
+      Halo, selamat datang! 👋
+    </h2>
+    
+    <p data-i18n="dashboard.welcomeDescription">
+      Yuk, pantau asupan nutrisi dan jaga kesehatanmu hari ini.
+    </p>
+  </div>
+  <span class="welcome-decoration"></span>
+</section>
+
+  <!-- KARTU KALORI UTAMA -->
+<section class="calorie-card dashboard-calorie">
+  <div class="calorie-card-heading">
+    <div>
+      <span class="eyebrow" data-i18n="calorieCard.dailyIntake">
+        ASUPAN KALORI HARIAN
+      </span>
+      <p data-i18n="calorieCard.consumed">
+        Kalori yang sudah dikonsumsi
+      </p>
+    </div>
+    <span class="calorie-icon">🔥</span>
+  </div>
+
+  <div class="calorie-number">
+    <strong id="totalCalories">0</strong>
+    <span data-i18n="calorieCard.kcal">kkal</span>
+  </div>
+
+  <div class="progress-info">
+    <span data-i18n="calorieCard.dailyProgress">Progress harian</span>
+    <span>
+      <span data-i18n="calorieCard.target">Target</span>:
+      <b id="targetText">0</b>
+      <span data-i18n="calorieCard.kcal">kkal</span>
+    </span>
+  </div>
+
+  <div class="progress-track">
+    <div id="progressBar"></div>
+  </div>
+
+  <div class="calorie-footer">
+    <span>
+      <span class="footer-dot consumed-dot"></span>
+      <span data-i18n="calorieCard.alreadyConsumed">
+        Sudah dikonsumsi
+      </span>
+    </span>
+    <span>
+      <span data-i18n="calorieCard.remaining">Sisa</span>
+      <b id="remainingCalories">0</b>
+      <span data-i18n="calorieCard.kcal">kkal</span>
+    </span>
+  </div>
+</section>
+
+  
+<!-- RINGKASAN NUTRISI -->
+<section class="nutrition-section dashboard-nutrition">
+  <div class="section-heading">
+    <div>
+      <span class="eyebrow">NUTRITION OVERVIEW</span>
+      <h3 data-i18n="nutritionOverview.title">Asupan Nutrisi</h3>
+    </div>
+    <span class="section-symbol">◈</span>
+  </div>
+
+  <div class="nutrition-grid">
+
+    <!-- PROTEIN -->
+    <div class="nutrition-card protein-card">
+      <div class="nutrition-card-top">
+        <span class="nutrition-icon">🥩</span>
+        <span class="nutrition-label" data-i18n="nutritionOverview.protein">Protein</span>
+      </div>
+
+      <div class="nutrition-ring" id="proteinProgress">
+        <svg viewBox="0 0 100 100">
+          <circle class="ring-bg" cx="50" cy="50" r="42"/>
+          <circle class="ring-fill" cx="50" cy="50" r="42"/>
+        </svg>
+        <div class="ring-content">
+          <strong class="ring-percent">0%</strong>
+          <span data-i18n="nutritionOverview.target">Target</span>
+        </div>
+      </div>
+
+      <strong id="totalProtein">0 g</strong>
+      <small>
+        <span data-i18n="nutritionOverview.target">Target</span>:
+        <b id="proteinTargetText">0</b>
+        <span data-i18n="nutritionOverview.unit">g</span>
+      </small>
+    </div>
+
+    <!-- KARBOHIDRAT -->
+    <div class="nutrition-card carbs-card">
+      <div class="nutrition-card-top">
+        <span class="nutrition-icon">🌾</span>
+        <span class="nutrition-label" data-i18n="nutritionOverview.carbs">Carbs</span>
+      </div>
+
+      <div class="nutrition-ring" id="carbsProgress">
+        <svg viewBox="0 0 100 100">
+          <circle class="ring-bg" cx="50" cy="50" r="42"/>
+          <circle class="ring-fill" cx="50" cy="50" r="42"/>
+        </svg>
+        <div class="ring-content">
+          <strong class="ring-percent">0%</strong>
+          <span data-i18n="nutritionOverview.target">Target</span>
+        </div>
+      </div>
+
+      <strong id="totalCarbs">0 g</strong>
+      <small>
+        <span data-i18n="nutritionOverview.target">Target</span>:
+        <b id="carbsTargetText">0</b>
+        <span data-i18n="nutritionOverview.unit">g</span>
+      </small>
+    </div>
+
+    <!-- LEMAK -->
+    <div class="nutrition-card fat-card">
+      <div class="nutrition-card-top">
+        <span class="nutrition-icon">🥑</span>
+        <span class="nutrition-label" data-i18n="nutritionOverview.fat">Lemak</span>
+      </div>
+
+      <div class="nutrition-ring" id="fatProgress">
+        <svg viewBox="0 0 100 100">
+          <circle class="ring-bg" cx="50" cy="50" r="42"/>
+          <circle class="ring-fill" cx="50" cy="50" r="42"/>
+        </svg>
+        <div class="ring-content">
+          <strong class="ring-percent">0%</strong>
+          <span data-i18n="nutritionOverview.target">Target</span>
+        </div>
+      </div>
+
+      <strong id="totalFat">0 g</strong>
+      <small>
+        <span data-i18n="nutritionOverview.target">Target</span>:
+        <b id="fatTargetText">0</b>
+        <span data-i18n="nutritionOverview.unit">g</span>
+      </small>
+    </div>
+
+    <!-- AIR -->
+    <div class="nutrition-card water-card">
+      <div class="nutrition-card-top">
+        <span class="nutrition-icon">💧</span>
+        <span class="nutrition-label" data-i18n="nutritionOverview.water">Air</span>
+      </div>
+
+      <div class="nutrition-ring" id="waterProgress">
+        <svg viewBox="0 0 100 100">
+          <circle class="ring-bg" cx="50" cy="50" r="42"/>
+          <circle class="ring-fill" cx="50" cy="50" r="42"/>
+        </svg>
+        <div class="ring-content">
+          <strong class="ring-percent">0%</strong>
+          <span data-i18n="nutritionOverview.target">Target</span>
+        </div>
+      </div>
+
+      <strong id="totalWater">0 ml</strong>
+      <small>
+        <span data-i18n="nutritionOverview.target">Target</span>:
+        <b id="waterTargetText">0</b>
+        <span data-i18n="nutritionOverview.waterUnit">ml</span>
+      </small>
+    </div>
+
+  </div>
+</section>
+
+
+  
+<!-- CATAT MAKANAN -->
+<section class="scan-section dashboard-scan">
+
+  <div class="section-heading">
+    <div>
+      <span class="eyebrow">FOOD TRACKER</span>
+      <h3 data-i18n="foodTracker.title">Catat Makanan</h3>
+    </div>
+  </div>
+
+  <!-- UPLOAD FOTO AI -->
+  <div class="scan-upload-area">
+
+    <label for="foodPhoto" class="photo-button">
+      <span class="camera-icon">📷</span>
+      <span data-i18n="foodTracker.addPhoto">Tambah Foto Makanan</span>
+    </label>
+
+    <input type="file" id="foodPhoto"
+      accept="image/*" capture="environment" hidden>
+
+    <img id="preview"
+      data-i18n-alt="foodTracker.previewAlt"
+      alt="Pratinjau makanan" hidden>
+
+    <button id="analyzeButton" class="calculate-button" disabled>
+      <span data-i18n="foodTracker.analyze">Analisis Makanan</span>
+    </button>
+
+  </div>
+
+  <!-- HASIL IDENTIFIKASI AI -->
+  <div id="analysisResults" class="analysis-results" hidden>
+    <h4 data-i18n="foodTracker.aiResult">Hasil Identifikasi AI</h4>
+    <div id="detectedFoods"></div>
+  </div>
+
+  <!-- INPUT MANUAL -->
+  <div class="food-manual-card">
+
+    <div class="food-manual-heading">
+      <span class="manual-icon">✎</span>
+      <div>
+        <h4 data-i18n="foodTracker.manualTitle">Input Manual</h4>
+        <p data-i18n="foodTracker.manualDescription">
+          Catat makanan tanpa menggunakan foto.
+        </p>
+      </div>
+    </div>
+
+    <div class="food-form">
+
+      <label for="foodName" data-i18n="foodTracker.foodName">
+        Nama makanan
+      </label>
+
+      <input id="foodName" type="text"
+        data-i18n-placeholder="foodTracker.foodNamePlaceholder"
+        placeholder="Contoh: Nasi putih">
+
+      <label for="foodWeight" data-i18n="foodTracker.foodWeight">
+        Berat makanan
+      </label>
+
+      <div class="weight-input-wrap">
+        <input id="foodWeight" type="number"
+          min="1" value="100">
+        <span data-i18n="foodTracker.gram">gram</span>
+      </div>
+
+      <button id="calculateButton" class="calculate-button">
+        <span data-i18n="foodTracker.calculate">Hitung Nutrisi</span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- SARAN MAKANAN -->
+  <div id="foodSuggestions" class="food-suggestions" hidden>
+    <p class="suggestion-title"
+      data-i18n="foodTracker.suggestions">
+      Makanan yang mungkin Anda maksud:
+    </p>
+    <div id="suggestionList"></div>
+  </div>
+
+  <!-- HASIL PERHITUNGAN -->
+  <div id="result" class="result-card" hidden>
+
+    <div class="result-heading">
+      <span>✓</span>
+      <h3 data-i18n="foodTracker.resultTitle">Estimasi Nutrisi</h3>
+    </div>
+
+    <p id="resultDetails"></p>
+
+    <div class="result-actions">
+      <button id="cancelMeal" type="button" class="cancel-button"
+        data-i18n="foodTracker.cancel">
+        Batal
+      </button>
+
+      <button id="saveMeal" type="button" class="save-button"
+        data-i18n="foodTracker.save">
+        Simpan Makanan
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
+
+</main>
+
+
+  
+
+<!-- HALAMAN RIWAYAT -->
+<main id="historyPage" hidden>
+
+  <section class="welcome history-welcome">
+
+    <div class="history-welcome-content">
+      <p data-i18n="foodHistory.eyebrow">Catatan makananmu</p>
+
+      <h2 data-i18n="foodHistory.title">Riwayat Makanan</h2>
+
+      <p data-i18n="foodHistory.description">
+        Lihat kembali makanan dan kalori yang sudah dicatat.
+      </p>
+    </div>
+
+    <!-- FILTER KALENDER -->
+    <div class="history-calendar-wrapper">
+
+      <button
+        type="button"
+        id="historyCalendarButton"
+        class="history-calendar-button"
+        aria-label="Pilih tanggal riwayat"
+        title="Pilih tanggal"
+      >
+        <svg
+  viewBox="0 0 48 48"
+  width="38"
+  height="38"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+>
+  <defs>
+    <linearGradient id="calendarGradient" x1="8" y1="5" x2="40" y2="43">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="50%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="calendarTop" x1="12" y1="5" x2="36" y2="17">
+      <stop offset="0%" stop-color="#93C5FD"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Body kalender -->
+  <rect
+    x="5" y="9" width="38" height="34"
+    rx="9"
+    fill="url(#calendarGradient)"
+  />
+
+  <!-- Bagian header -->
+  <path
+    d="M5 17C5 12.58 8.58 9 13 9H35C39.42 9 43 12.58 43 17V19H5V17Z"
+    fill="url(#calendarTop)"
+  />
+
+  <!-- Pengait kalender -->
+  <rect x="14" y="4" width="4" height="12" rx="2" fill="#6366F1"/>
+  <rect x="30" y="4" width="4" height="12" rx="2" fill="#6366F1"/>
+
+  <!-- Tanggal besar -->
+  <text
+    x="24" y="36"
+    text-anchor="middle"
+    font-size="18"
+    font-weight="800"
+    fill="white"
+    font-family="Arial, sans-serif"
+  >16</text>
+
+  <!-- Kilau -->
+  <path
+    d="M36 23L37 25.5L39.5 26.5L37 27.5L36 30L35 27.5L32.5 26.5L35 25.5L36 23Z"
+    fill="#DBEAFE"
+  />
+</svg>
+      </button>
+
+      <input
+        type="date"
+        id="historyDate"
+        class="history-date-hidden"
+        aria-label="Pilih tanggal riwayat"
+      >
+
+    </div>
+
+  </section>
+
+  <section class="history-page-section">
+
+    <div class="history-page-header">
+      <h3 data-i18n="historyPage.allHistory">Semua riwayat</h3>
+      <span id="historyCount">0 catatan</span>
+    </div>
+
+    <div id="fullHistoryList"></div>
+
+  </section>
+
+</main>
+
+
+
+<!-- HALAMAN STATISTIK -->
+<main id="statisticsPage" hidden>
+
+ 
+<!-- HEADER STATISTIK -->
+<section class="welcome statistics-welcome">
+
+  <div class="statistics-welcome-content">
+    <p data-i18n="statisticsPage.eyebrow">
+      Perkembangan kesehatanmu
+    </p>
+
+    <h2 data-i18n="statisticsPage.title">
+      Statistik
+    </h2>
+
+    <p data-i18n="statisticsPage.description">
+      Pantau pola konsumsi kalori dan nutrisi.
+    </p>
+  </div>
+
+  <!-- DROPDOWN PERIODE -->
+  <div class="statistics-period-dropdown">
+    <select
+      id="statisticsPeriodSelect"
+      aria-label="Pilih periode statistik"
+    >
+      <option
+        value="7"
+        data-i18n="statisticsFilter.days7"
+      >7 Hari</option>
+
+      <option
+        value="30"
+        data-i18n="statisticsFilter.days30"
+      >30 Hari</option>
+
+      <option
+        value="all"
+        data-i18n="statisticsFilter.all"
+      >Semua</option>
+    </select>
+
+    <svg
+      viewBox="0 0 24 24"
+      width="16"
+      height="16"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m7 10 5 5 5-5"/>
+    </svg>
+  </div>
+
+</section>
+
+
+  <!-- RINGKASAN -->
+<section class="statistics-section">
+  <h3 data-i18n="statisticsSummary.title">
+    Ringkasan Konsumsi
+  </h3>
+
+  <div class="statistics-summary">
+
+    <div class="statistics-card">
+      <span data-i18n="statisticsSummary.totalCalories">
+        Total Kalori
+      </span>
+      <strong id="statTotalCalories">0</strong>
+      <small data-i18n="statisticsSummary.kcal">kkal</small>
+    </div>
+
+    <div class="statistics-card">
+      <span data-i18n="statisticsSummary.averageCalories">
+        Rata-rata Kalori
+      </span>
+      <strong id="statAverageCalories">0</strong>
+      <div id="statCalorieTrend"></div>
+      <small data-i18n="statisticsSummary.kcalPerDay">
+        kkal/hari
+      </small>
+    </div>
+
+    <div class="statistics-card">
+      <span data-i18n="statisticsSummary.totalMeals">
+        Total Makanan
+      </span>
+      <strong id="statTotalMeals">0</strong>
+      <small data-i18n="statisticsSummary.records">catatan</small>
+    </div>
+
+    <div class="statistics-card">
+      <span data-i18n="statisticsSummary.recordedDays">
+        Hari Tercatat
+      </span>
+      <strong id="statRecordedDays">0</strong>
+      <small data-i18n="statisticsSummary.days">hari</small>
+    </div>
+
+  </div>
+</section>
+
+  <!-- GRAFIK KALORI -->
+<section class="statistics-section">
+  <h3 data-i18n="statisticsChart.calorieTitle">
+    Grafik Kalori Harian
+  </h3>
+
+  <div class="statistics-chart" id="calorieChart">
+    <p data-i18n="statisticsChart.noData">
+      Belum ada data statistik.
+    </p>
+  </div>
+</section>
+
+  <section class="statistics-goal-card">
+  <div class="statistics-goal-header">
+    <div>
+      <span data-i18n="statisticsGoal.journey">
+        Perjalanan Anda
+      </span>
+
+      <h3 data-i18n="statisticsGoal.title">
+        Menuju Berat Badan Tujuan
+      </h3>
+    </div>
+  </div>
+
+  <div id="goalProgressContent">
+    <p
+      class="statistics-empty-goal"
+      data-i18n="statisticsGoal.empty"
+    >
+      Lengkapi profil dan tujuan berat badan untuk
+      melihat progres Anda.
+    </p>
+  </div>
+</section>
+
+  <!-- RINCIAN NUTRISI -->
+<section class="statistics-section">
+  <h3 data-i18n="statisticsNutrition.title">
+    Total Asupan Nutrisi
+  </h3>
+
+  <div class="statistics-nutrition">
+    <div>
+      <span data-i18n="statisticsNutrition.protein">
+        Protein
+      </span>
+      <strong id="statProtein">0 g</strong>
+    </div>
+
+    <div>
+      <span data-i18n="statisticsNutrition.carbohydrates">
+        Karbohidrat
+      </span>
+      <strong id="statCarbs">0 g</strong>
+    </div>
+
+    <div>
+      <span data-i18n="statisticsNutrition.fat">
+        Lemak
+      </span>
+      <strong id="statFat">0 g</strong>
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+
+<!-- HALAMAN PROFIL -->
+<main id="profilePage" hidden>
+
+  <!-- HEADER -->
+  <section class="welcome">
+  <p data-i18n="profile.settingsTitle">Pengaturan akun</p>
+  <h2 data-i18n="profile.title">Profil Saya</h2>
+  <p data-i18n="profile.description">
+    Kelola informasi tubuh dan target nutrisi harianmu.
+  </p>
+</section>
+
+
+<!-- PENGATURAN BAHASA -->
+<section class="profile-section language-setting">
+  <div class="profile-field">
+    <label for="languageSelect" data-i18n="language.label">
+      Bahasa / Language
+    </label>
+
+    <select id="languageSelect">
+      <option value="id">Bahasa Indonesia</option>
+      <option value="en">English</option>
+    </select>
+  </div>
+</section>
+
+
+  <!-- IDENTITAS PROFIL -->
+<section class="profile-identity">
+
+  <button
+    type="button"
+    class="profile-avatar"
+    id="profilePhotoButton"
+    aria-label="Unggah foto profil"
+    data-i18n-aria-label="identity.uploadPhoto"
+    title="Klik untuk mengganti foto profil"
+    data-i18n-title="identity.changePhoto"
+  >
+    <span id="profileAvatarInitial">K</span>
+    <img
+      id="profilePhotoPreview"
+      alt="Foto profil"
+      data-i18n-alt="identity.photoAlt"
+      hidden
+    >
+    <span class="profile-avatar-edit">📷</span>
+  </button>
+
+  <input
+    type="file"
+    id="profilePhotoInput"
+    accept="image/*"
+    hidden
+  >
+
+  <div class="profile-identity-info">
+    <h3
+      id="profileDisplayName"
+      data-i18n="identity.defaultName"
+    >Nama Pengguna</h3>
+    <p id="profileDisplayEmail">email@pengguna.com</p>
+  </div>
+
+  
+<button
+  type="button"
+  class="profile-logout-button"
+  id="logoutButton"
+>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M10 17l5-5-5-5"/>
+    <path d="M15 12H3"/>
+    <path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/>
+  </svg>
+
+  <span data-i18n="identity.logout">Keluar</span>
+</button>
+
+
+</section>
+
+  
+<!-- TOMBOL MULAI PENGISIAN -->
+<button
+  type="button"
+  class="profile-form-start"
+  id="profileFormStart"
+>
+  <span>
+    <strong data-i18n="profile.wizard.startTitle">Data Diri</strong>
+    <small data-i18n="profile.wizard.startDescription">Lengkapi informasi dan target tubuhmu</small>
+  </span>
+  <span aria-hidden="true">→</span>
+</button>
+
+<!-- PROFILE WIZARD -->
+<div class="profile-wizard" id="profileWizard" hidden>
+
+  <!-- PROGRESS -->
+  <div class="profile-wizard-header">
+    <span id="profileStepLabel" data-i18n="profile.wizard.stepLabel">LANGKAH 1 DARI 4</span>
+
+    <div class="profile-wizard-progress">
+      <div id="profileWizardProgress"></div>
+    </div>
+  </div>
+
+  <!-- SATU KARTU FORM -->
+  <div class="profile-form-card">
+
+    <!-- SLIDE 1: DATA DIRI -->
+    <section class="profile-section profile-step" data-step="0">
+      <h3 data-i18n="profile.wizard.personalTitle">Data Diri</h3>
+
+      <p class="profile-note" data-i18n="profile.wizard.personalNote">
+        Mulai dengan melengkapi informasi dasar dirimu.
+      </p>
+
+      <div class="profile-form-grid">
+
+        <div class="profile-field">
+          <label for="profileName" data-i18n="profile.wizard.name">Nama</label>
+          <input type="text" id="profileName" placeholder="Masukkan nama" data-i18n-placeholder="profile.wizard.namePlaceholder">
+        </div>
+
+        <div class="profile-field">
+          <label for="profileAge" data-i18n="profile.wizard.age">Usia</label>
+          <input type="number" id="profileAge" placeholder="Contoh: 30" data-i18n-placeholder="profile.wizard.agePlaceholder">
+        </div>
+
+        <div class="profile-field">
+          <label for="profileGender" data-i18n="profile.wizard.gender">Jenis kelamin</label>
+          <select id="profileGender">
+            <option value="" data-i18n="profile.wizard.genderPlaceholder">Pilih jenis kelamin</option>
+            <option value="male" data-i18n="profile.wizard.male">Laki-laki</option>
+            <option value="female" data-i18n="profile.wizard.female">Perempuan</option>
+          </select>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SLIDE 2: DATA TUBUH -->
+    <section class="profile-section profile-step" data-step="1" hidden>
+      <h3 data-i18n="profile.wizard.bodyTitle">Data Tubuh</h3>
+
+      <p class="profile-note" data-i18n="profile.wizard.bodyNote">
+        Masukkan ukuran tubuhmu saat ini.
+      </p>
+
+      <div class="profile-form-grid">
+
+        <div class="profile-field">
+          <label for="profileWeight" data-i18n="profile.wizard.weight">Berat badan</label>
+          <div class="profile-input-unit">
+            <input type="number" id="profileWeight" placeholder="Contoh: 70" data-i18n-placeholder="profile.wizard.weightPlaceholder">
+            <span>kg</span>
+          </div>
+        </div>
+
+        <div class="profile-field">
+          <label for="profileHeight" data-i18n="profile.wizard.height">Tinggi badan</label>
+          <div class="profile-input-unit">
+            <input type="number" id="profileHeight" placeholder="Contoh: 170" data-i18n-placeholder="profile.wizard.heightPlaceholder">
+            <span>cm</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SLIDE 3: AKTIVITAS HARIAN -->
+    <section class="profile-section profile-step" data-step="2" hidden>
+      <h3 data-i18n="profile.wizard.activityTitle">Aktivitas Harian</h3>
+
+      <p class="profile-note" data-i18n="profile.wizard.activityNote">
+        Pilih tingkat aktivitas yang paling menggambarkan keseharianmu.
+      </p>
+
+      <div class="profile-field">
+        <label for="profileActivity" data-i18n="profile.wizard.activity">Tingkat aktivitas</label>
+
+        <select id="profileActivity">
+          <option value="" data-i18n="profile.wizard.activityPlaceholder">Pilih aktivitas</option>
+          <option value="sedentary" data-i18n="profile.wizard.sedentary">Sangat ringan</option>
+          <option value="light" data-i18n="profile.wizard.light">Ringan</option>
+          <option value="moderate" data-i18n="profile.wizard.moderate">Sedang</option>
+          <option value="active" data-i18n="profile.wizard.active">Aktif</option>
+          <option value="very_active" data-i18n="profile.wizard.veryActive">Sangat aktif</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: TUJUAN BERAT BADAN -->
+    <section class="profile-section profile-step" data-step="3" hidden>
+      <h3 data-i18n="profile.wizard.goalTitle">Tujuan Berat Badan</h3>
+
+      <p class="profile-note" data-i18n="profile.wizard.goalNote">
+        Tentukan berat badan yang ingin dicapai dan waktu pencapaiannya.
+      </p>
+
+      <div class="profile-form-grid">
+
+        <div class="profile-field">
+          <label for="profileGoalWeight" data-i18n="profile.wizard.goalWeight">Berat badan tujuan</label>
+          <div class="profile-input-unit">
+            <input type="number" id="profileGoalWeight" min="1" step="0.1" placeholder="Contoh: 80" data-i18n-placeholder="profile.wizard.goalWeightPlaceholder">
+            <span>kg</span>
+          </div>
+        </div>
+
+        <div class="profile-field">
+          <label for="profileGoalDuration" data-i18n="profile.wizard.duration">Target waktu</label>
+          <div class="profile-input-unit">
+            <select id="profileGoalDuration">
+              <option value="" data-i18n="profile.wizard.durationPlaceholder">Pilih target waktu</option>
+              <option value="1">1 bulan</option>
+              <option value="2">2 bulan</option>
+              <option value="3">3 bulan</option>
+              <option value="4">4 bulan</option>
+              <option value="5">5 bulan</option>
+              <option value="6">6 bulan</option>
+              <option value="9">9 bulan</option>
+              <option value="12">12 bulan</option>
+              <option value="18">18 bulan</option>
+              <option value="24">24 bulan</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- NAVIGASI SLIDE -->
+    <div class="profile-wizard-actions">
+
+      <button type="button" id="profileStepBack" hidden>
+        ← <span data-i18n="profile.wizard.back">Kembali</span>
+      </button>
+
+      <button type="button" id="profileStepNext">
+        <span data-i18n="profile.wizard.next">Lanjut</span> →
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+
+  
+<!-- SIMULASI TUJUAN BERAT BADAN -->
+<section
+  class="goal-simulation-card"
+  id="goalSimulation"
+>
+  <h3 data-i18n="profile.simulation.title">
+    Simulasi Tujuan Berat Badan
+  </h3>
+
+  <p id="goalSimulationMessage" data-i18n="profile.simulation.message">
+    Lengkapi profil untuk melihat simulasi.
+  </p>
+
+  <div class="goal-simulation-results" hidden>
+
+    <div class="goal-result-grid">
+
+      <div>
+        <span data-i18n="profile.simulation.currentWeight">Berat saat ini</span>
+        <strong id="simCurrentWeight">-</strong>
+      </div>
+
+      <div>
+        <span data-i18n="profile.simulation.goalWeight">Berat tujuan</span>
+        <strong id="simGoalWeight">-</strong>
+      </div>
+
+      <div>
+        <span data-i18n="profile.simulation.weightDifference">Selisih berat</span>
+        <strong id="simWeightDifference">-</strong>
+      </div>
+
+      <div>
+        <span data-i18n="profile.simulation.duration">Target waktu</span>
+        <strong id="simDuration">-</strong>
+      </div>
+
+    </div>
+
+    <div class="goal-result-divider"></div>
+
+    <h4 data-i18n="profile.simulation.energyNeeds">Kebutuhan Energi</h4>
+
+    <div class="goal-result-row">
+      <span>BMR</span>
+      <strong id="simBMR">-</strong>
+    </div>
+
+    <div class="goal-result-row">
+      <span>TDEE</span>
+      <strong id="simTDEE">-</strong>
+    </div>
+
+    <div class="goal-result-divider"></div>
+
+    <h4 data-i18n="profile.simulation.calorieSimulation">Simulasi Kalori</h4>
+
+    <div class="goal-result-row">
+      <span data-i18n="profile.simulation.weeklyChange">Perubahan berat/minggu</span>
+      <strong id="simWeeklyChange">-</strong>
+    </div>
+
+    <div class="goal-result-row">
+      <span data-i18n="profile.simulation.dailyAdjustment">Defisit / surplus harian</span>
+      <strong id="simAdjustment">-</strong>
+    </div>
+
+    <div class="goal-calorie-target">
+      <span data-i18n="profile.simulation.dailyCalorieTarget">Target konsumsi kalori harian</span>
+      <strong id="simCalorieTarget">-</strong>
+    </div>
+
+    <div id="simGoalStatus" class="goal-status"></div>
+
+    <p id="simGoalWarning" class="goal-warning"></p>
+
+  </div>
+
+  <!-- INFORMASI BMR DAN TDEE -->
+  <div class="goal-info-action">
+    <button
+      type="button"
+      id="goalInfoButton"
+      class="goal-info-button"
+      aria-label="Informasi BMR dan TDEE"
+      data-i18n-aria-label="profile.simulation.infoButtonLabel"
+    >
+      <span data-i18n="profile.simulation.infoButton">Informasi BMR & TDEE</span>
+      <span class="goal-info-icon">i</span>
+    </button>
+  </div>
+
+  <!-- MODAL INFORMASI -->
+  <div
+    class="goal-info-modal"
+    id="goalInfoModal"
+    hidden
+  >
+    <div class="goal-info-content">
+
+      <button
+        type="button"
+        class="goal-info-close"
+        id="goalInfoClose"
+        aria-label="Tutup informasi"
+        data-i18n-aria-label="profile.info.close"
+      >
+        &times;
+      </button>
+
+      <h3 data-i18n="profile.info.title">Mengenal BMR dan TDEE</h3>
+
+      <h4 data-i18n="profile.info.bmrTitle">1. BMR (Basal Metabolic Rate)</h4>
+
+      <p data-i18n="profile.info.bmrDescription">
+        BMR adalah jumlah kalori yang dibutuhkan tubuh saat istirahat untuk menjalankan fungsi dasar, seperti bernapas, memompa darah, menjaga suhu tubuh, dan menjalankan fungsi organ.
+      </p>
+
+      <h4 data-i18n="profile.info.tdeeTitle">2. TDEE (Total Daily Energy Expenditure)</h4>
+
+      <p data-i18n="profile.info.tdeeDescription">
+        TDEE adalah perkiraan total kalori yang dibakar tubuh dalam sehari, termasuk aktivitas harian dan olahraga.
+      </p>
+
+      <div class="goal-info-example">
+        <strong data-i18n="profile.info.exampleTitle">Contoh perhitungan</strong>
+        <p data-i18n="profile.info.bmrExample">BMR: 1.800 kkal/hari</p>
+        <p data-i18n="profile.info.activityExample">Faktor aktivitas: 1,55</p>
+        <p data-i18n="profile.info.tdeeExample">TDEE: 1.800 × 1,55 = 2.790 kkal/hari</p>
+      </div>
+
+      <h4 data-i18n="profile.info.relationshipTitle">3. Hubungannya dengan berat badan</h4>
+
+      <ul>
+        <li data-i18n="profile.info.maintain">Kalori sesuai TDEE: membantu mempertahankan berat badan.</li>
+        <li data-i18n="profile.info.deficit">Kalori di bawah TDEE: menciptakan defisit energi.</li>
+        <li data-i18n="profile.info.surplus">Kalori di atas TDEE: menciptakan surplus energi.</li>
+      </ul>
+
+      <p class="goal-info-note" data-i18n="profile.info.note">
+        Angka BMR dan TDEE merupakan estimasi. Kebutuhan energi sebenarnya dapat berbeda pada setiap orang.
+      </p>
+
+    </div>
+  </div>
+
+</section>
+
+
+ 
+<!-- TARGET NUTRISI -->
+<section class="profile-section">
+  <h3 data-i18n="profile.nutrition.title">Target Harian</h3>
+
+  <div class="profile-form-grid">
+
+    <div class="profile-field">
+      <label data-i18n="profile.nutrition.calories">Target kalori</label>
+      <div class="profile-input-unit">
+        <strong id="dailyCalorieTarget">—</strong>
+        <span data-i18n="profile.nutrition.kcal">kkal</span>
+      </div>
+    </div>
+
+    <div class="profile-field">
+      <label data-i18n="profile.nutrition.protein">Target protein</label>
+      <div class="profile-input-unit">
+        <strong id="dailyProteinTarget">—</strong>
+        <span data-i18n="profile.nutrition.gram">gram</span>
+      </div>
+    </div>
+
+    <div class="profile-field">
+      <label data-i18n="profile.nutrition.carbs">Target karbohidrat</label>
+      <div class="profile-input-unit">
+        <strong id="dailyCarbTarget">—</strong>
+        <span data-i18n="profile.nutrition.gram">gram</span>
+      </div>
+    </div>
+
+    <div class="profile-field">
+      <label data-i18n="profile.nutrition.fat">Target lemak</label>
+      <div class="profile-input-unit">
+        <strong id="dailyFatTarget">—</strong>
+        <span data-i18n="profile.nutrition.gram">gram</span>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="profile-note"
+     data-i18n="profile.nutrition.note">
+    Target nutrisi dihitung otomatis berdasarkan data tubuh,
+    aktivitas harian, dan tujuan berat badan.
+  </p>
+</section>
+
+
+  
+<!-- AKSI PROFIL -->
+<div class="profile-actions">
+
+  <button
+    type="button"
+    class="profile-save-button"
+    data-i18n="profile.actions.save"
+  >
+    Simpan Profil
+  </button>
+
+  
+
+<button
+  type="button"
+  id="resetDataButton"
+  class="profile-reset-button"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="18"
+    height="18"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M3 12a9 9 0 1 0 3-6.7L3 8"/>
+    <path d="M3 3v5h5"/>
+  </svg>
+
+  <span data-i18n="profile.actions.reset">
+    Reset Semua Data
+  </span>
+</button>
+
+
+
+</div>
+
+
+</main>
+
+
+
+
+ <footer>
+  <p data-i18n="footer.copyright">Kalori SehatKu © 2026</p>
+  <small data-i18n="footer.disclaimer">Hasil perhitungan merupakan estimasi.</small>
+</footer>
+
+
+
+<!-- MENU NAVIGASI BAWAH -->
+<nav class="bottom-nav" aria-label="Menu utama">
+
+  <span class="nav-indicator" aria-hidden="true"></span>
+
+  <!-- BERANDA -->
+  <button type="button"
+    class="nav-item active"
+    data-page="homePage"
+    aria-current="page">
+
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round"
+        aria-hidden="true">
+        <path d="m3 10 9-7 9 7"/>
+        <path d="M5 9v11h14V9"/>
+        <path d="M9 20v-6h6v6"/>
+      </svg>
+    </span>
+    <span class="nav-label" data-i18n="navigation.home">Beranda</span>
+  </button>
+
+  <!-- RIWAYAT -->
+  <button type="button"
+    class="nav-item"
+    data-page="historyPage">
+
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round"
+        aria-hidden="true">
+        <path d="M3 5h18v16H3z"/>
+        <path d="M7 9h10"/>
+        <path d="M7 13h10"/>
+        <path d="M7 17h6"/>
+        <path d="M7 3v4"/>
+        <path d="M17 3v4"/>
+      </svg>
+    </span>
+    <span class="nav-label" data-i18n="navigation.history">Riwayat</span>
+  </button>
+
+  <!-- STATISTIK -->
+  <button type="button"
+    class="nav-item"
+    data-page="statisticsPage">
+
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round"
+        aria-hidden="true">
+        <path d="M4 20V10"/>
+        <path d="M10 20V4"/>
+        <path d="M16 20v-7"/>
+        <path d="M22 20H2"/>
+      </svg>
+    </span>
+    <span class="nav-label" data-i18n="navigation.statistics">Statistik</span>
+  </button>
+
+  <!-- PROFIL -->
+  <button type="button"
+    class="nav-item"
+    data-page="profilePage">
+
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round"
+        aria-hidden="true">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 21a8 8 0 0 1 16 0"/>
+      </svg>
+    </span>
+    <span class="nav-label" data-i18n="navigation.profile">Profil</span>
+  </button>
+
+</nav>
+
+
+<!-- =========================================
+     GLOBAL MODAL / NOTIFICATION
+========================================= -->
+<div
+  class="app-modal"
+  id="appModal"
+  hidden
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="appModalTitle"
+>
+  <div class="app-modal-backdrop"></div>
+
+  <div class="app-modal-card">
+    <div class="app-modal-icon" id="appModalIcon">
+      ℹ️
+    </div>
+
+    <h3 id="appModalTitle" data-i18n="appModal.title">
+      Informasi
+    </h3>
+
+    <p id="appModalMessage"></p>
+
+    <div class="app-modal-actions">
+      <button
+        type="button"
+        class="app-modal-button app-modal-cancel"
+        id="appModalCancel"
+        data-i18n="appModal.cancel"
+      >
+        Batal
+      </button>
+
+      <button
+        type="button"
+        class="app-modal-button app-modal-confirm"
+        id="appModalConfirm"
+        data-i18n="appModal.confirm"
+      >
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- FULL SCREEN FOOD ANALYSIS LOADING -->
+<div id="analysisStatus" class="analysis-overlay" hidden>
+  <div class="analysis-loading-card">
+
+    <div class="analysis-animation">
+      <div class="analysis-orbit orbit-one"></div>
+      <div class="analysis-orbit orbit-two"></div>
+
+      <div class="analysis-center">
+        <span>✦</span>
+      </div>
+    </div>
+
+    <div class="analysis-loading-content">
+      <span class="analysis-eyebrow">KALORI SEHATKU</span>
+
+      <h3 id="analysisStageTitle">
+        Menyiapkan foto...
+      </h3>
+
+      <p id="analysisStageSubtitle">
+        Mengoptimalkan gambar makanan
+      </p>
+    </div>
+
+    <div class="analysis-progress-track">
+      <span id="analysisProgressBar"></span>
+    </div>
+
+    <div class="analysis-steps">
+      <span class="analysis-step" data-step="1"></span>
+      <span class="analysis-step" data-step="2"></span>
+      <span class="analysis-step" data-step="3"></span>
+      <span class="analysis-step" data-step="4"></span>
+      <span class="analysis-step" data-step="5"></span>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+</body>
+</html>
