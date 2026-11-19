@@ -842,7 +842,7 @@ async function renderDetectedFoods(
       `${t("protein")} ${total.protein.toFixed(1)} g | ` +
       `${t("carbohydrates")} ${total.carbs.toFixed(1)} g | ` +
       `${t("fat")} ${total.fat.toFixed(1)} g | ` +
-      `${Math.round(total.water)} ml ${t("water")}`;
+      `${Math.round(total.water)} ml ${t("foodScanner.water")}`;
   }
 
   function applyNutrition(food, nutrition) {
