@@ -474,7 +474,7 @@ export const translations = {
     },
 
     footer: {
-      copyright: "KaloriKu © 2026",
+      copyright: "Kalori SehatKu © 2026",
       disclaimer: "Hasil perhitungan merupakan estimasi."
     },
 
@@ -1014,7 +1014,7 @@ export const translations = {
     },
 
     footer: {
-      copyright: "KaloriKu © 2026",
+      copyright: "Kalori SehatKu © 2026",
       disclaimer: "Calculation results are estimates."
     },
 
