@@ -838,11 +838,11 @@ async function renderDetectedFoods(
     if (!totalText) return;
 
     totalText.textContent =
-      `${Math.round(total.kcal)} ${t("calories")} | ` +
-      `${t("protein")} ${total.protein.toFixed(1)} g | ` +
-      `${t("carbohydrates")} ${total.carbs.toFixed(1)} g | ` +
-      `${t("fat")} ${total.fat.toFixed(1)} g | ` +
-      `${Math.round(total.water)} ml ${t("foodScanner.water")}`;
+  `${Math.round(total.kcal)} ${t("calories")} | ` +
+  `${t("protein")} ${total.protein.toFixed(1)} g | ` +
+  `${t("carbohydrates")} ${total.carbs.toFixed(1)} g | ` +
+  `${t("fat")} ${total.fat.toFixed(1)} g | ` +
+  `${Math.round(total.water)} ml ${t("water")}`;
   }
 
   function applyNutrition(food, nutrition) {
