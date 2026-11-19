@@ -1,17 +1,16 @@
-
 {
   "databaseVersion": 1,
   "schemaVersion": 1,
   "updatedAt": "2026-11-19T00:00:00.000Z",
   "files": {
     "panganku": {
-      "url": "/data/panganku/panganku-nutrisi.json"
+      "url": "https://raw.githubusercontent.com/rovixa-ai/KaloriSehat/main/data/panganku/panganku-nutrisi.json"
     },
     "usda": {
-      "url": "/data/usda/usda_foundation_kaloriku.json"
+      "url": "https://raw.githubusercontent.com/rovixa-ai/KaloriSehat/main/data/usda/usda_foundation_kaloriku.json"
     },
     "aliases": {
-      "url": "/data/food-aliases.json"
+      "url": "https://raw.githubusercontent.com/rovixa-ai/KaloriSehat/main/data/food-aliases.json"
     }
   }
 }
