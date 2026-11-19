@@ -76,88 +76,78 @@ html[data-theme="dark"] {
    2. FILTER PERIODE — PREMIUM INTERACTION
 ========================================= */
 
-.statistics-filter {
+/* ==========================================
+   STATISTICS HEADER & PERIOD DROPDOWN
+========================================== */
+
+.statistics-welcome {
   display: flex;
-  gap: 8px;
-  margin-bottom: 18px;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
 }
 
-.statistics-period {
+.statistics-welcome-content {
   flex: 1;
   min-width: 0;
-  padding: 11px 8px;
+}
 
-  border: 1px solid var(--stat-border);
-  border-radius: 11px;
+.statistics-period-dropdown {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
 
-  background: var(--stat-bg);
-  color: var(--stat-secondary);
+.statistics-period-dropdown select {
+  appearance: none;
+  -webkit-appearance: none;
+
+  min-width: 112px;
+  padding: 10px 34px 10px 13px;
+
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 12px;
+
+  background: var(--card-background, #ffffff);
+  color: var(--text-primary, #222222);
 
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
 
   cursor: pointer;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-
+  outline: none;
   transition:
-    background 220ms ease,
-    color 220ms ease,
-    border-color 220ms ease,
-    box-shadow 220ms ease,
-    transform 180ms cubic-bezier(.2, .8, .2, 1);
+    border-color 200ms ease,
+    box-shadow 200ms ease;
 }
 
-/* Hover */
-.statistics-period:hover {
-  border-color: var(--stat-primary);
-  color: var(--stat-text);
-  transform: translateY(-1px);
+.statistics-period-dropdown select:focus {
+  border-color: var(--primary-color, #16a085);
+  box-shadow: 0 0 0 3px rgba(22, 160, 133, 0.12);
 }
 
-/* Saat ditekan */
-.statistics-period:active {
-  transform: scale(0.94);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+.statistics-period-dropdown svg {
+  position: absolute;
+  right: 11px;
+  pointer-events: none;
+  color: var(--text-secondary, #9299a5);
 }
 
-/* Tombol aktif */
-.statistics-period.active {
-  background: var(--stat-primary);
-  border-color: var(--stat-primary);
-  color: #172314;
+@media (max-width: 380px) {
+  .statistics-welcome {
+    gap: 8px;
+  }
 
-  box-shadow:
-    0 3px 8px rgba(20, 40, 30, 0.10),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
-
-  transform: scale(1);
-}
-
-/* Hover tombol aktif */
-.statistics-period.active:hover {
-  filter: brightness(1.04);
-  transform: translateY(-1px);
-}
-
-/* Saat tombol aktif ditekan */
-.statistics-period.active:active {
-  transform: scale(0.94);
-}
-
-/* Fokus keyboard */
-.statistics-period:focus-visible {
-  outline: 2px solid var(--stat-primary);
-  outline-offset: 3px;
-}
-
-/* Menghormati pengaturan motion pengguna */
-@media (prefers-reduced-motion: reduce) {
-  .statistics-period {
-    transition: none;
+  .statistics-period-dropdown select {
+    min-width: 96px;
+    padding-left: 9px;
+    font-size: 12px;
   }
 }
+
 
 
 /* =========================================

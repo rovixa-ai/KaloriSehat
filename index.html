@@ -441,49 +441,63 @@
 <!-- HALAMAN STATISTIK -->
 <main id="statisticsPage" hidden>
 
- <section class="welcome">
-  <p data-i18n="statisticsPage.eyebrow">
-    Perkembangan kesehatanmu
-  </p>
+ 
+<!-- HEADER STATISTIK -->
+<section class="welcome statistics-welcome">
 
-  <h2 data-i18n="statisticsPage.title">
-    Statistik
-  </h2>
+  <div class="statistics-welcome-content">
+    <p data-i18n="statisticsPage.eyebrow">
+      Perkembangan kesehatanmu
+    </p>
 
-  <p data-i18n="statisticsPage.description">
-    Pantau pola konsumsi kalori dan nutrisi.
-  </p>
-</section>
+    <h2 data-i18n="statisticsPage.title">
+      Statistik
+    </h2>
 
-  <!-- FILTER PERIODE -->
-<section class="statistics-section">
-  <h3 data-i18n="statisticsFilter.title">
-    Periode Statistik
-  </h3>
-
-  <div class="statistics-filter">
-    <button
-      type="button"
-      class="statistics-period active"
-      data-period="7"
-      data-i18n="statisticsFilter.days7"
-    >7 Hari</button>
-
-    <button
-      type="button"
-      class="statistics-period"
-      data-period="30"
-      data-i18n="statisticsFilter.days30"
-    >30 Hari</button>
-
-    <button
-      type="button"
-      class="statistics-period"
-      data-period="all"
-      data-i18n="statisticsFilter.all"
-    >Semua</button>
+    <p data-i18n="statisticsPage.description">
+      Pantau pola konsumsi kalori dan nutrisi.
+    </p>
   </div>
+
+  <!-- DROPDOWN PERIODE -->
+  <div class="statistics-period-dropdown">
+    <select
+      id="statisticsPeriodSelect"
+      aria-label="Pilih periode statistik"
+    >
+      <option
+        value="7"
+        data-i18n="statisticsFilter.days7"
+      >7 Hari</option>
+
+      <option
+        value="30"
+        data-i18n="statisticsFilter.days30"
+      >30 Hari</option>
+
+      <option
+        value="all"
+        data-i18n="statisticsFilter.all"
+      >Semua</option>
+    </select>
+
+    <svg
+      viewBox="0 0 24 24"
+      width="16"
+      height="16"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m7 10 5 5 5-5"/>
+    </svg>
+  </div>
+
 </section>
+
 
   <!-- RINGKASAN -->
 <section class="statistics-section">

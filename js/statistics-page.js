@@ -1208,38 +1208,57 @@ const linePaths = segments.map(segment => ({
 // FILTER PERIODE DAN EVENT
 // =========================================
 
+
 function initializeStatistics() {
-  document.querySelectorAll(".statistics-period")
-    .forEach(button => {
-      button.addEventListener("click", () => {
-        selectedPeriod = button.dataset.period;
+  // ========================================
+  // FILTER PERIODE DROPDOWN
+  // ========================================
 
-        document.querySelectorAll(".statistics-period")
-          .forEach(item => {
-            item.classList.toggle(
-              "active",
-              item === button
-            );
-          });
+  const periodSelect = document.getElementById(
+    "statisticsPeriodSelect"
+  );
 
-        renderStatistics();
-      });
-    });
+  if (periodSelect) {
+    // Sesuaikan dropdown dengan periode aktif
+    periodSelect.value = selectedPeriod;
 
-  // Ketika halaman statistik dibuka
+    // Jalankan ulang statistik saat periode berubah
+    periodSelect.onchange = () => {
+      const newPeriod = periodSelect.value;
+
+      if (!["7", "30", "all"].includes(newPeriod)) {
+        return;
+      }
+
+      selectedPeriod = newPeriod;
+      renderStatistics();
+    };
+  }
+
+  // ========================================
+  // KETIKA HALAMAN STATISTIK DIBUKA
+  // ========================================
+
   document.addEventListener("kaloriku:pagechange", event => {
     if (event.detail?.pageId === "statisticsPage") {
       renderStatistics();
     }
   });
 
-  // Ketika bahasa diganti
+  // ========================================
+  // KETIKA BAHASA DIGANTI
+  // ========================================
+
   window.addEventListener("languageChanged", () => {
     renderStatistics();
   });
 
-  // Render awal
+  // ========================================
+  // RENDER AWAL
+  // ========================================
+
   renderStatistics();
 }
+
 
 initializeStatistics();
