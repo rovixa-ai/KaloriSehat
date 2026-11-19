@@ -332,6 +332,7 @@ export async function loadPangankuDatabase() {
   const cachedSnapshot = await readFoodDatabaseCache();
 
   let manifest = null;
+  let remoteDatabaseLoaded = false;
   let pangankuResponse;
   let usdaResponse;
   let aliasResponse;
@@ -364,6 +365,7 @@ export async function loadPangankuDatabase() {
     }
 
     [pangankuResponse, usdaResponse, aliasResponse] = responses;
+    remoteDatabaseLoaded = true;
   } catch (error) {
     console.warn("Pembaruan database online gagal:", error);
 
@@ -575,9 +577,9 @@ foodAliases = validAliases;
   // Simpan snapshot baru setelah seluruh data berhasil diparsing dan dinormalisasi.
   // Satu record menggantikan snapshot lama secara atomik.
   await saveFoodDatabaseCache({
-    databaseVersion: manifest?.databaseVersion ?? 0,
-    schemaVersion: manifest?.schemaVersion ?? 1,
-    updatedAt: manifest?.updatedAt ?? null,
+    databaseVersion: remoteDatabaseLoaded ? manifest.databaseVersion : 0,
+    schemaVersion: remoteDatabaseLoaded ? manifest.schemaVersion : 1,
+    updatedAt: remoteDatabaseLoaded ? manifest.updatedAt ?? null : null,
     database,
     aliases: foodAliases
   });
