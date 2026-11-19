@@ -224,41 +224,178 @@ function convertUSDA(item) {
 }
 
 
+
+// ========================================
+// KALORIKU — DATABASE CACHE (INDEXEDDB)
+// ========================================
+
+const FOOD_DB_NAME = "kaloriku-food-database";
+const FOOD_DB_STORE = "snapshots";
+const FOOD_MANIFEST_URL =
+  "https://raw.githubusercontent.com/rovixa-ai/KaloriSehat/main/database/manifest.json";
+
+function openFoodDatabaseCache() {
+  return new Promise((resolve, reject) => {
+    if (!("indexedDB" in globalThis)) {
+      reject(new Error("IndexedDB tidak tersedia."));
+      return;
+    }
+
+    const request = indexedDB.open(FOOD_DB_NAME, 1);
+
+    request.onupgradeneeded = () => {
+      const db = request.result;
+      if (!db.objectStoreNames.contains(FOOD_DB_STORE)) {
+        db.createObjectStore(FOOD_DB_STORE);
+      }
+    };
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function readFoodDatabaseCache() {
+  let db;
+
+  try {
+    db = await openFoodDatabaseCache();
+
+    return await new Promise((resolve, reject) => {
+      const transaction = db.transaction(FOOD_DB_STORE, "readonly");
+      const request = transaction.objectStore(FOOD_DB_STORE).get("current");
+
+      request.onsuccess = () => resolve(request.result || null);
+      request.onerror = () => reject(request.error);
+    });
+  } catch (error) {
+    console.warn("Cache database tidak dapat dibaca:", error);
+    return null;
+  } finally {
+    db?.close();
+  }
+}
+
+async function saveFoodDatabaseCache(snapshot) {
+  let db;
+
+  try {
+    db = await openFoodDatabaseCache();
+
+    await new Promise((resolve, reject) => {
+      const transaction = db.transaction(FOOD_DB_STORE, "readwrite");
+      transaction.objectStore(FOOD_DB_STORE).put(snapshot, "current");
+
+      transaction.oncomplete = () => resolve();
+      transaction.onerror = () => reject(transaction.error);
+      transaction.onabort = () => reject(transaction.error);
+    });
+  } catch (error) {
+    // Kegagalan cache tidak boleh menggagalkan pemuatan database.
+    console.warn("Database berhasil dimuat, tetapi cache gagal disimpan:", error);
+  } finally {
+    db?.close();
+  }
+}
+
+async function fetchFoodManifest() {
+  const response = await fetch(FOOD_MANIFEST_URL, {
+    cache: "no-store"
+  });
+
+  if (!response.ok) {
+    throw new Error("Manifest database tidak dapat diakses.");
+  }
+
+  const manifest = await response.json();
+
+  if (
+    !manifest ||
+    !Number.isInteger(manifest.databaseVersion) ||
+    !manifest.files?.panganku?.url ||
+    !manifest.files?.usda?.url ||
+    !manifest.files?.aliases?.url
+  ) {
+    throw new Error("Format manifest database tidak valid.");
+  }
+
+  return manifest;
+}
+
 // ========================================
 // MEMUAT DATABASE PANGANKU DAN USDA
 // ========================================
 
 export async function loadPangankuDatabase() {
 
-  const pangankuUrl = new URL(
-    "../data/panganku/panganku-nutrisi.json",
-    import.meta.url
-  );
+  // Ambil cache terlebih dahulu agar aplikasi tetap dapat berjalan offline.
+  const cachedSnapshot = await readFoodDatabaseCache();
 
-  const usdaUrl = new URL(
-    "../data/usda/usda_foundation_kaloriku.json",
-    import.meta.url
-  );
+  let manifest = null;
+  let pangankuResponse;
+  let usdaResponse;
+  let aliasResponse;
 
-  const aliasUrl = new URL(
-    "../data/food-aliases.json",
-    import.meta.url
-  );
+  // Periksa versi database dari GitHub.
+  try {
+    manifest = await fetchFoodManifest();
 
+    if (
+      cachedSnapshot &&
+      cachedSnapshot.databaseVersion === manifest.databaseVersion &&
+      cachedSnapshot.schemaVersion === manifest.schemaVersion &&
+      cachedSnapshot.database &&
+      cachedSnapshot.aliases
+    ) {
+      foodAliases = cachedSnapshot.aliases;
+      console.log("Database KaloriKu sudah versi terbaru:", manifest.databaseVersion);
+      return cachedSnapshot.database;
+    }
 
-  // --------------------------------------
-  // MUAT SEMUA FILE
-  // --------------------------------------
+    // Versi berubah: unduh seluruh file dari manifest.
+    const responses = await Promise.all([
+      fetch(manifest.files.panganku.url, { cache: "no-store" }),
+      fetch(manifest.files.usda.url, { cache: "no-store" }),
+      fetch(manifest.files.aliases.url, { cache: "no-store" })
+    ]);
 
-  const [
-    pangankuResponse,
-    usdaResponse,
-    aliasResponse
-  ] = await Promise.all([
-    fetch(pangankuUrl),
-    fetch(usdaUrl),
-    fetch(aliasUrl)
-  ]);
+    if (responses.some(response => !response.ok)) {
+      throw new Error("Salah satu file database terbaru gagal diunduh.");
+    }
+
+    [pangankuResponse, usdaResponse, aliasResponse] = responses;
+  } catch (error) {
+    console.warn("Pembaruan database online gagal:", error);
+
+    // Jika tersedia, gunakan cache lama. Jangan menghapus data yang masih valid.
+    if (cachedSnapshot?.database && cachedSnapshot?.aliases) {
+      foodAliases = cachedSnapshot.aliases;
+      console.warn("Menggunakan database cache versi:", cachedSnapshot.databaseVersion);
+      return cachedSnapshot.database;
+    }
+
+    // Instalasi pertama tanpa internet: gunakan file bawaan aplikasi.
+    const pangankuUrl = new URL(
+      "../data/panganku/panganku-nutrisi.json",
+      import.meta.url
+    );
+
+    const usdaUrl = new URL(
+      "../data/usda/usda_foundation_kaloriku.json",
+      import.meta.url
+    );
+
+    const aliasUrl = new URL(
+      "../data/food-aliases.json",
+      import.meta.url
+    );
+
+    [pangankuResponse, usdaResponse, aliasResponse] = await Promise.all([
+      fetch(pangankuUrl),
+      fetch(usdaUrl),
+      fetch(aliasUrl)
+    ]);
+  }
 
   if (!pangankuResponse.ok) {
     throw new Error("Database Panganku gagal dimuat.");
@@ -434,6 +571,16 @@ Object.entries(aliasRecords).forEach(
 );
 
 foodAliases = validAliases;
+
+  // Simpan snapshot baru setelah seluruh data berhasil diparsing dan dinormalisasi.
+  // Satu record menggantikan snapshot lama secara atomik.
+  await saveFoodDatabaseCache({
+    databaseVersion: manifest?.databaseVersion ?? 0,
+    schemaVersion: manifest?.schemaVersion ?? 1,
+    updatedAt: manifest?.updatedAt ?? null,
+    database,
+    aliases: foodAliases
+  });
 
 
 
