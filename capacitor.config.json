@@ -1,7 +1,7 @@
 
 {
   "appId": "id.kaloriku.app",
-  "appName": "KaloriKu",
+  "appName": "Kalori SehatKu",
   "webDir": "dist",
   "plugins": {
     "FirebaseAuthentication": {

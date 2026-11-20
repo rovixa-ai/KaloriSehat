@@ -1,7 +1,8 @@
+
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">KaloriKu</string>
-    <string name="title_activity_main">KaloriKu</string>
+    <string name="app_name">Kalori SehatKu</string>
+    <string name="title_activity_main">Kalori SehatKu</string>
     <string name="package_name">id.kaloriku.app</string>
     <string name="custom_url_scheme">id.kaloriku.app</string>
 </resources>
